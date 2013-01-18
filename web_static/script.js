@@ -75,11 +75,11 @@ function InitMap()
     var bmabru_json_url = 'http://www.bmabru.be/Public/json/';
     
     var Icon0 = L.icon({
-        iconUrl: 'images/build1.png',
+        iconUrl: 'http://bma.local/web_static/lib/build1.png',
         iconSize: [386 / 4, 370 / 4],
     });
     var Icon1 = L.icon({
-        iconUrl: 'images/build1red.png',
+        iconUrl: 'http://bma.local/web_static/lib/build1red.png',
         iconSize: [386 / 4, 370 / 4],
     });
     
