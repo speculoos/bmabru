@@ -1,0 +1,300 @@
+/*
+font-family:'NotCourierSans';
+font-family:'NotCourierSans-Bold';
+font-family:'Futura-Bold';
+font-family:'PLRU-UltraLight';
+font-family:'PLRR-Regular';
+font-family:'PLRB-SemiBold';
+font-family:'OSP_helvetica_serif';
+*/
+@font-face {
+    font-family: 'OSP_helvetica_serif';
+    src: url('fonts/osp_helvetica_serif02.eot');
+    src: url('fonts/osp_helvetica_serif02.eot?#iefix') format('embedded-opentype'),
+                                                              url('fonts/osp_helvetica_serif02.woff') format('woff'),
+                                                              url('fonts/osp_helvetica_serif02.ttf') format('truetype'),
+                                                              url('fonts/osp_helvetica_serif02.svg#osp_helvetica_serif02') format('svg');
+                                                              font-weight: normal;
+                                                              font-style: normal;
+}
+
+@font-face {
+    font-family: 'PLRB-SemiBold';
+    src: url('fonts/plrb-semibold.eot');
+    src: url('fonts/plrb-semibold.eot?#iefix') format('embedded-opentype'),
+                                                      url('fonts/plrb-semibold.woff') format('woff'),
+                                                      url('fonts/plrb-semibold.ttf') format('truetype'),
+                                                      url('fonts/plrb-semibold.svg#plrb-semibold') format('svg');
+                                                      font-weight: normal;
+                                                      font-style: normal;
+}
+
+@font-face {
+    font-family: 'PLRR-Regular';
+    src: url('fonts/plrr-regular.eot');
+    src: url('fonts/plrr-regular.eot?#iefix') format('embedded-opentype'),
+                                                     url('fonts/plrr-regular.woff') format('woff'),
+                                                     url('fonts/plrr-regular.ttf') format('truetype'),
+                                                     url('fonts/plrr-regular.svg#plrr-regular') format('svg');
+                                                     font-weight: normal;
+                                                     font-style: normal;
+}
+
+@font-face {
+    font-family: 'PLRU-UltraLight';
+    src: url('fonts/plru-ultralight.eot');
+    src: url('fonts/plru-ultralight.eot?#iefix') format('embedded-opentype'),
+                                                        url('fonts/plru-ultralight.woff') format('woff'),
+                                                        url('fonts/plru-ultralight.ttf') format('truetype'),
+                                                        url('fonts/plru-ultralight.svg#plru-ultralight') format('svg');
+                                                        font-weight: normal;
+                                                        font-style: normal;
+}
+
+@font-face {
+    font-family: 'Futura-Bold';
+    src: url('fonts/futurbol.eot');
+    src: url('fonts/futurbol.eot?#iefix') format('embedded-opentype'),
+                                                 url('fonts/futurbol.woff') format('woff'),
+                                                 url('fonts/futurbol.ttf') format('truetype'),
+                                                 url('fonts/futurbol.svg#futurbol') format('svg');
+                                                 font-weight: normal;
+                                                 font-style: normal;
+}
+
+@font-face {
+    font-family: 'NotCourierSans-Bold';
+    src: url('fonts/notcouriersansbma-bold.eot');
+    src: url('fonts/notcouriersansbma-bold.eot?#iefix') format('embedded-opentype'),
+                                                               url('fonts/notcouriersansbma-bold.woff') format('woff'),
+                                                               url('fonts/notcouriersansbma-bold.ttf') format('truetype'),
+                                                               url('fonts/notcouriersansbma-bold.svg#notcouriersansbma-bold') format('svg');
+                                                               font-weight: normal;
+                                                               font-style: normal;
+}
+
+@font-face {
+    font-family: 'NotCourierSans';
+    src: url('fonts/notcouriersansbma.eot');
+    src: url('fonts/notcouriersansbma.eot?#iefix') format('embedded-opentype'),
+                                                          url('fonts/notcouriersansbma.woff') format('woff'),
+                                                          url('fonts/notcouriersansbma.ttf') format('truetype'),
+                                                          url('fonts/notcouriersansbma.svg#notcouriersansbma') format('svg');
+                                                          font-weight: normal;
+                                                          font-style: normal;
+}
+
+/* debug */
+#map{background:white;}
+#debug{position:fixed; top:0; left:0; background:#ccc; width:200px; font-size:6px; }
+/* #console{background:yellow;} */
+/* vars */
+@saumon:#FFE3DE;
+@hred:#ec4941;
+@red:#EC4941;
+@blue:#78AEDE;
+@yellow:#FAF39F;
+@green:#B1CB92;
+@fontH:Helvetica, Arial;
+@topH:40px;
+@consoleW:200px;
+/* reset */
+*, p, div, ul, li, h1, h2, h3, h4, h5, h6{padding:0; margin:0;}
+body{font-family:Helvetica, Arial; text-align:left; margin:0px 0 10px;}
+a, .link{cursor:pointer;}
+/* basics */
+.break{height:0; border:none; width:0; clear:both; margin:0; padding:0; font-size:0; line-height:0;}
+.mRight{margin-right:20px;}
+.mLeft{margin-left:20px;}
+.mTop{margin-top:20px;}
+.mBottom{margin-bottom:20px;}
+.mHor{margin-right:20px; margin-left:20px;}
+.mVer{margin-top:20px; margin-bottom:20px;}
+.mAll{margin:20px;}
+/* basic class */
+.break, .cBoth{clear:both;}
+.cLeft{clear:left;}
+.cRight{clear:right;}
+.cNone{clear:none;}
+.fLeft{float:left;}
+.fRight{float:right;}
+.fNone{float:none;}
+/* position and dimensions */
+body{margin:0 10px 10px; width:100%; height:100%;}
+#container{width:100%; height:100%; position:relative;}
+#container>*{position:absolute; top:0; }
+#top{width:100%; height:@topH; left:0;}
+/* #content{width:35%; min-width:400px; left:40px; top:40px;} */
+#map-wrapper{position:absolute;width:88%; height:100%; left:0;}
+#map{width:100%; height:100%; left:0;}
+#content{position:absolute;width:232px; right:0; bottom:0;}
+#console{top:@topH; right:0px; width:@consoleW; position:absolute;}
+/* z-index */
+#top{z-index:100;}
+#content{z-index:80;}
+#console{z-index:70;}
+#map{z-index:50;}
+/* elements */
+#top {
+	font-size:11px; letter-spacing:0.05em;
+	ul{ list-style:none; 
+		li{
+			height:@topH;
+			background:white;
+			float:left;
+			position:relative;
+			padding:0px 10px;
+			a{text-transform:uppercase; position:relative; top:15px;}
+			ul{
+				display:none;
+				position:absolute;
+				top:@topH;
+				left:0;
+				text-align:center;
+				li{padding:0; margin-bottom:2px; float:none; height:auto;}
+				a{text-transform:none; position:static;
+					&:hover{color:@hred;}
+				}
+			}
+			&:hover{background:transparent;
+				ul{background:white; display:block;}
+				}
+			&:first-child{
+				a{top:5px;}
+			}
+			&:last-child{float:right; text-align:right;
+				a{text-transform:none; color:#ccc;}
+				&:hover{background:white;}
+			}
+		}
+	}
+	a{color:#000; padding:2px 4px 1px; text-decoration:none;}
+}
+
+#console{
+    background-color:white;
+}
+
+#content{
+    background-color:white;
+    padding:6px 0 0 6px;
+    .short-description{
+        padding:6px;
+        background-color:@yellow;
+        
+        .description-title{
+            display:inline-block;
+            background-color:black;
+            color:@yellow;
+	    font-size:11pt;
+	    font-family:'Futura-Bold';  
+	    text-transform:uppercase;
+	    padding:6px 6px 0px 6px;
+	    letter-spacing:2px;
+        }
+        .description-wrapper{
+            
+            
+            p{
+		    text-decoration:none;
+		    font-weight: 300;
+		    color:black;
+		    font-size:7pt;
+		    font-family:'Futura-Bold';    
+		    padding:10px 0 0 0;
+		    
+            }
+        }
+    }
+}
+
+div.console_item{
+    position:absolute;
+    width:80%;
+    min-height:3px;
+/*     border:1px solid red; */
+    font-size:8pt;
+    padding-left:10%;
+    
+    .item-project-name{
+        display:none;
+    }
+    
+    .builder{
+	    text-decoration:none;
+	    font-weight: 300;
+	    color:black;
+	    font-size:13pt;
+	    font-family:'PLRB-SemiBold';
+	    line-height:70%;
+/*	    background-color:white;*/
+/*	    padding: 0 10% 10% 10%;*/
+        a{
+		text-decoration:none;
+		font-weight: 300;
+		color:black;
+		font-size:13pt;
+		font-family:'PLRR-Regular';
+		line-height:70%;
+        }
+    }
+    
+    &.feature-visible{
+/*        font-weight:bold;*/
+        z-index:20;
+    }
+    &.feature-hidden{
+        display:none;
+/*        color:#aaa;
+        z-index:10;*/
+    }
+    &.clicked-feature{
+/*        color:@hred;*/
+        z-index:30;
+        font-size:10pt;
+        background-color:white;
+        padding: 10px 10px 5px 10px;
+        
+        .item-project-name{
+            display:block;
+        }
+    }
+}
+
+
+
+/************************
+ *  Zoom control
+ * 
+ ************************/
+
+.bma-control-zoom {
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+}
+.bma-control-zoom {
+    padding: 5px;
+    background-color: @red;
+}
+.bma-control-zoom a {
+    background-color: rgba(255, 255, 255, 0.75);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    display: block;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    width: 19px;
+    height: 19px;
+}
+.bma-control-zoom a:hover {
+    background-color: #fff;
+}
+.bma-control-zoom-in {
+    background-image: url('images/zoom-in.png');
+    margin-bottom: 5px;
+}
+.bma-control-zoom-out {
+    background-image: url('images/zoom-out.png');
+}
