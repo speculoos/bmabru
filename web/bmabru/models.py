@@ -37,6 +37,9 @@ class Builder(models.Model):
     """
     name = models.CharField(max_length=512)
     
+    def natural_key(self):
+        return (self.id, self.name)
+    
     def __unicode__(self):
         return self.name
         
@@ -90,6 +93,15 @@ class Project(models.Model):
     mpoly = models.MultiPolygonField(srid=4326)
     objects = models.GeoManager()
     
+    @property
+    def centroid(self):
+        return self.mpoly.centroid.geojson
+        
+    @property
+    def geojson(self):
+        return self.mpoly.geojson
+    
+        
     def __unicode__(self):
         return self.name
 

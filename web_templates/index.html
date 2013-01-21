@@ -1,12 +1,5 @@
 {% extends "base.html" %}
 
 {% block script_data %}
-var projects_data = [];
-{% for p in projects %}
 
-projects_data.push({name:'{{p.name}}',geom:'{{p.mpoly}}',
-                   builders:[{% for b in p.builders.all %}'{{b.name}}'{%if not forloop.last %},{%endif%}{% endfor %}]
-})
-
-{% endfor %}
 {% endblock %}
