@@ -28,6 +28,7 @@ window.bMa.Map = function(container){
             {
                 this.overlays[name] = L.layerGroup();
                 this.layers_control.addOverlay(this.overlays[name], name);
+                this.map.addLayer(this.overlays[name]);
             }
             var group = this.overlays[name];
             group.addLayer(overlay);

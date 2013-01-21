@@ -26,6 +26,7 @@ window.bMa.Console = function(container, map){
         add:function(project){
             this.projects[project.id] = project;
             var item = $('<div id="console_item_'+project.id+'" />');
+            item.addClass('console_item');
             item.html(project.get('builders')[0][1] // FIXME 
                 +'<div class="item-project-name">'
                 +project.get('name')
@@ -40,6 +41,7 @@ window.bMa.Console = function(container, map){
                 var i = this.items[id];
                 var lmap = this.map.map;
                 var center = p.get('centroid').coordinates;
+                console.log(center);
                 var ctll = new L.LatLng(center[1], center[0]);
                 var ctpos = lmap.latLngToContainerPoint(ctll);
                 var visible = false;
@@ -56,7 +58,7 @@ window.bMa.Console = function(container, map){
                     i.addClass('feature-hidden');
                 }
                 var map_offset = $(lmap._container).offset().top;
-                var new_pos = map_offset + ctpos - this.container.offset().top;
+                var new_pos = map_offset + ctpos.y - this.container.offset().top;
                 i.animate({top:new_pos + 'px'});
             }
         },
