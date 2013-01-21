@@ -62,6 +62,10 @@ window.bMa.Console = function(container, map){
                 i.animate({top:new_pos + 'px'});
             }
         },
+        highlight: function(id){
+            $('.console_item').removeClass('clicked-feature');
+            $('#console_item_'+this.pid).addClass('clicked-feature');
+        },
     };
 
     var ret = Object.create(proto);

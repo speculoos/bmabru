@@ -26,6 +26,10 @@ function InitMap()
             var ovl = new L.GeoJSON(geo);
             map.add_overlay('bMa', ovl);
             csl.add(p);
+            var pid = p.id;
+            ovl.on('click', function(evt){
+                csl.highlight(pid);
+            });
         }
     });
     
