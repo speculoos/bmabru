@@ -64,7 +64,7 @@ window.bMa.Console = function(container, map){
         },
         highlight: function(id){
             $('.console_item').removeClass('clicked-feature');
-            $('#console_item_'+this.pid).addClass('clicked-feature');
+            $('#console_item_'+id).addClass('clicked-feature');
         },
     };
 
