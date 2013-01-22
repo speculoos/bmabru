@@ -123,6 +123,7 @@ class Step(models.Model):
     """
     name = models.CharField(max_length=128)
     description = models.TextField(blank=True)
+    date = models.DateField(blank=True, null=True)
     
     def __unicode__(self):
         return self.name
@@ -146,6 +147,7 @@ class Project(models.Model):
     image = models.ManyToManyField('ProjectImage', blank=True)
     mission = models.ForeignKey('Mission', blank=True)
     
+    steps = models.ManyToManyField('Step')
     actions = models.ManyToManyField('Action')
     
     

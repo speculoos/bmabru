@@ -49,7 +49,17 @@ class StepAdmin(TabbedTr, TranslationAdmin):
     pass
 
 
-class GeoAdmin(geo_admin.GeoModelAdmin):
+class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
+    class Media:
+        js = (
+            'modeltranslation/js/force_jquery.js',
+            'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js',
+            'geo_tabbed_translation_fields.js',
+        )
+        css = {
+            'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+        }
+    filter_horizontal = ('partners', 'programs', 'functions', 'image', 'actions')
     def __init__(self, model, admin_site):
         super(GeoAdmin, self).__init__(model, admin_site)
         self.wms_url = 'http://bmawms.specgis.be/service'
@@ -65,6 +75,7 @@ class GeoAdmin(geo_admin.GeoModelAdmin):
         self.openlayers_url = 'http://bma.local/web_static/lib/OpenLayers-2.12/OpenLayers.js'
         self.map_width = 800
         self.map_height = 600
+        
 
 admin.site.register(PartnerType, PartnerTypeAdmin)
 admin.site.register(Partner, PartnerAdmin)
