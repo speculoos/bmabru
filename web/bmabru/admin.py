@@ -4,8 +4,49 @@ admin custom
 
 from django.contrib import admin
 from django.contrib.gis import admin as geo_admin
-from django.forms import ModelForm
+
+from modeltranslation.admin import TranslationAdmin
+
 from bmabru.models import *
+
+
+class TabbedTr:
+    class Media:
+        js = (
+            'modeltranslation/js/force_jquery.js',
+            'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js',
+            'modeltranslation/js/tabbed_translation_fields.js',
+        )
+        css = {
+            'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+        }
+
+class PartnerTypeAdmin(TabbedTr, TranslationAdmin):
+    pass
+    
+class PartnerAdmin(TabbedTr, TranslationAdmin):
+    pass
+    
+class ProgramAdmin(TabbedTr, TranslationAdmin):
+    pass
+    
+class ProcedureAdmin(TabbedTr, TranslationAdmin):
+    pass
+    
+class FunctionAdmin(TabbedTr, TranslationAdmin):
+    pass
+    
+class MissionAdmin(TabbedTr, TranslationAdmin):
+    pass
+    
+class ProjectStatusAdmin(TabbedTr, TranslationAdmin):
+    pass
+    
+class ActionAdmin(TabbedTr, TranslationAdmin):
+    pass
+    
+class StepAdmin(TabbedTr, TranslationAdmin):
+    pass
 
 
 class GeoAdmin(geo_admin.GeoModelAdmin):
@@ -25,12 +66,16 @@ class GeoAdmin(geo_admin.GeoModelAdmin):
         self.map_width = 800
         self.map_height = 600
 
-admin.site.register(PartnerType)
-admin.site.register(Partner)
-admin.site.register(Builder)
-admin.site.register(Program)
-admin.site.register(Procedure)
+admin.site.register(PartnerType, PartnerTypeAdmin)
+admin.site.register(Partner, PartnerAdmin)
+admin.site.register(Program, ProgramAdmin)
+admin.site.register(Procedure, ProcedureAdmin)
+admin.site.register(Function, FunctionAdmin)
+admin.site.register(Mission, MissionAdmin)
+admin.site.register(ProjectStatus, ProjectStatusAdmin)
+admin.site.register(Action, ActionAdmin)
+admin.site.register(Step, StepAdmin)
+
 admin.site.register(ProjectImage)
-#admin.site.register(Project, geo_admin.OSMGeoAdmin)
 admin.site.register(Project, GeoAdmin)
 

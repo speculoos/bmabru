@@ -11,7 +11,7 @@ from django.core import serializers
 from django.utils import six
 import json
 
-from bmabru.models import (Project, ProjectImage, Builder)
+from bmabru.models import *
 
 
 class GeoSerial(serializers.get_serializer("json")):
