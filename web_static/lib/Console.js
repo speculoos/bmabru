@@ -33,6 +33,7 @@ window.bMa.Console = function(container, map){
                 +'</div>');
             this.container.append(item)
             this.items[project.id] = item;
+            this.update();
         },
         update:function(){
             for(var id in this.projects)
@@ -63,8 +64,17 @@ window.bMa.Console = function(container, map){
             }
         },
         highlight: function(id){
-            $('.console_item').removeClass('clicked-feature');
-            $('#console_item_'+id).addClass('clicked-feature');
+            for(var pid in this.items)
+            {
+                this.items[pid].removeClass('clicked-feature');
+            }
+            this.items[id].addClass('clicked-feature');
+        },
+        dehighlight:function(){
+            for(var pid in this.items)
+            {
+                this.items[pid].removeClass('clicked-feature');
+            }
         },
     };
 

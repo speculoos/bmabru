@@ -16,6 +16,7 @@ function InitMap()
         attribution: "OpenStreetMap styled by Speculoos"
     });
     var csl = bMa.Console($('#console'), map);
+    var legend = bMa.Legend($('#content'));
     var ovl_options = {
         stroke:true,
         color: '#d43b2d',
@@ -35,10 +36,16 @@ function InitMap()
             var ovl = new L.GeoJSON(geo, {style:function(f){ return ovl_options;}});
             map.add_overlay('bMa', ovl);
             csl.add(p);
-            var pid = p.id;
-            ovl.on('click', function(evt){
-                csl.highlight(pid);
+            ovl.on('mouseover', function(evt){
+                csl.highlight(this.id);
+            }, p);
+            ovl.on('mouseout', function(evt){
+                csl.dehighlight();
             });
+            
+            ovl.on('click', function(evt){
+                legend.show(this);
+            }, p);
         }
     });
     
