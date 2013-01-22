@@ -58,7 +58,7 @@ window.bMa.Console = function(container, map){
                     i.removeClass('feature-visible');
                     i.addClass('feature-hidden');
                 }
-                var map_offset = $(lmap._container).offset().top;
+                var map_offset = $(lmap.getContainer()).offset().top;
                 var new_pos = map_offset + ctpos.y - this.container.offset().top;
                 i.animate({top:new_pos + 'px'});
             }

@@ -9,6 +9,7 @@ window.bMa.Legend = function(container)
     var proto = {
         init:function(container){
             this.container = container;
+            this.container.hide();
             this.wrapper = $('<div class="short-description"></div>');
             this.title = $('<div class="description-title"></div>');
             this.content = $('<div class="description-wrapper"></div>');

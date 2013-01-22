@@ -9,14 +9,27 @@ function InitMap()
     var bmabru_json_url = 'http://bma.local/projects/';
     
     var map = bMa.Map('map');
+    var csl = bMa.Console($('#console'), map);
+    var legend = bMa.Legend($('#content'));
+    var selector = bMa.LayerSelector($('#layer-selector'), map);
+    
+    
+    map.add_layer('CIRB WMS', 'http://geoserver.gis.irisnet.be/geoserver/wms', {
+        layers: 'urbis:URB_A_BU',
+        format: 'image/png',
+            transparent: true,
+            attribution: "Brugis GeoWebCache"
+    });
+    
     map.add_layer('bMa/OSM', WMS_URL, {
         layers: 'bMa',
         format: 'image/png',
-        transparent: true,
-        attribution: "OpenStreetMap styled by Speculoos"
+            transparent: true,
+            attribution: "OpenStreetMap styled by Speculoos"
     });
-    var csl = bMa.Console($('#console'), map);
-    var legend = bMa.Legend($('#content'));
+    
+    
+    
     var ovl_options = {
         stroke:true,
         color: '#d43b2d',
