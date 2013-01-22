@@ -140,6 +140,7 @@ class Project(models.Model):
     A project is the main item to present on the website,
     everything else is more or less related to a project
     """
+    published = models.BooleanField(default=False)
     name = models.CharField(max_length=1024)
     description = models.TextField(blank=True)
     address = models.TextField(blank=True)
