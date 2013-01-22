@@ -32,6 +32,9 @@ class ActionTrOptions(TranslationOptions):
 class StepTrOptions(TranslationOptions):
     fields = ('name', 'description')
     
+class CityTrOptions(TranslationOptions):
+    fields = ('name',)
+    
 class ProjectTrOptions(TranslationOptions):
     fields = ('name', 'description')
 
@@ -44,4 +47,5 @@ translator.register(Mission, MissionTrOptions)
 translator.register(ProjectStatus, ProjectStatusTrOptions)
 translator.register(Action, ActionTrOptions)
 translator.register(Step, StepTrOptions)
+translator.register(City, CityTrOptions)
 translator.register(Project, ProjectTrOptions)

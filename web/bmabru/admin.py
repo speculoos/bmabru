@@ -47,6 +47,9 @@ class ActionAdmin(TabbedTr, TranslationAdmin):
     
 class StepAdmin(TabbedTr, TranslationAdmin):
     pass
+    
+class CityAdmin(TabbedTr, TranslationAdmin):
+    pass
 
 
 class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
@@ -59,7 +62,7 @@ class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
         css = {
             'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
         }
-    filter_horizontal = ('partners', 'programs', 'functions', 'image', 'actions')
+    filter_horizontal = ('partners', 'programs', 'functions', 'image', 'actions', 'steps')
     def __init__(self, model, admin_site):
         super(GeoAdmin, self).__init__(model, admin_site)
         self.wms_url = 'http://bmawms.specgis.be/service'
@@ -86,7 +89,7 @@ admin.site.register(Mission, MissionAdmin)
 admin.site.register(ProjectStatus, ProjectStatusAdmin)
 admin.site.register(Action, ActionAdmin)
 admin.site.register(Step, StepAdmin)
-
+admin.site.register(City, CityAdmin)
 admin.site.register(ProjectImage)
 admin.site.register(Project, GeoAdmin)
 

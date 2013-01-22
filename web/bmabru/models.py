@@ -127,6 +127,13 @@ class Step(models.Model):
     
     def __unicode__(self):
         return self.name
+        
+class City(models.Model):
+    zipcode = models.CharField(max_length=32)
+    name = models.CharField(max_length=256)
+    
+    def __unicode__(self):
+        return self.name
     
 class Project(models.Model):
     """
@@ -135,11 +142,11 @@ class Project(models.Model):
     """
     name = models.CharField(max_length=1024)
     description = models.TextField(blank=True)
-    city = models.CharField(max_length=128)
     address = models.TextField(blank=True)
     surface = models.CommaSeparatedIntegerField(max_length=64,blank=True)
     budget = models.CommaSeparatedIntegerField(max_length=64,blank=True)
     
+    city = models.ForeignKey('City', blank=True)
     partners = models.ManyToManyField('Partner')
     programs = models.ManyToManyField('Program')
     procedure = models.ForeignKey('Procedure')
