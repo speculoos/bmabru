@@ -12,6 +12,7 @@ from django.utils import six
 import json
 
 from bmabru.models import *
+from media.models import *
 
 
 class GeoSerial(serializers.get_serializer("json")):
@@ -60,7 +61,7 @@ class GeoSerial(serializers.get_serializer("json")):
 
 
 def index(request):
-    data = {'projects':Project.objects.all()}
+    data = {'category':Category.objects.all()}
     return render_to_response("index.html", data, context_instance = RequestContext(request))
     
 def projects_json(request):

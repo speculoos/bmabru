@@ -164,7 +164,10 @@ class Project(models.Model):
     
     @property
     def centroid(self):
-        return self.mpoly.centroid.geojson
+        try:
+            return self.mpoly.centroid.geojson
+        except:
+            return  u'{ "type": "Point", "coordinates": [ 0, 0 ] }'
         
     @property
     def geojson(self):

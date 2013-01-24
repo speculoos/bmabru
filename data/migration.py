@@ -28,6 +28,7 @@ for d in sys.argv[1:]:
 
 import json
 from bmabru.models import *
+from django.db import connection
 
 fj = open('projects.json')
 pdata = json.load(fj)
@@ -39,7 +40,8 @@ def geom(pid):
     for g in gdata:
         if g['pid'] == pid:
             return g['geom']
-    raise Exception('No geom for %d'%pid)
+    return 'MULTIPOLYGON EMPTY'
+    #raise Exception('No geom for %d'%pid)
 
 
 builders = {}
@@ -73,8 +75,8 @@ for s in status:
 for p in pdata:
     for b in p['builder']:
         builders[b['ID']] = b
-        
-    cities[p['ZIP']['value']] = p['ZIP']  
+    if p['ZIP']['value'] != '':
+        cities[p['ZIP']['value']] = p['ZIP']
 
     for m in p['mission']:
         missions[m['value']] = m
@@ -109,13 +111,16 @@ for b in builders:
 ## import cities
 for c in cities:
     print 'Import City %s'%(c,)
-    city = cities[c]
-    zc = int(c)
-    nfr = ' '.join(city['fre'].split(' ')[1:])
-    nnl = ' '.join(city['dut'].split(' ')[1:])
-    co = City.objects.create(zipcode=zc, name_fr=nfr, name_nl=nnl)
-    co.save()
-    cities[c]['django_id'] = co
+    try:
+        city = cities[c]
+        zc = int(c)
+        nfr = ' '.join(city['fre'].split(' ')[1:])
+        nnl = ' '.join(city['dut'].split(' ')[1:])
+        co = City.objects.create(zipcode=zc, name_fr=nfr, name_nl=nnl)
+        co.save()
+        cities[c]['django_id'] = co
+    except Exception:
+        print 'FAILED to import city %s'%(c,)
 
 ## import missions
 for m in missions:
@@ -166,11 +171,17 @@ for p in pdata:
     new_p.published = p['PUBLISHED'] == '1'
     new_p.name_fr = ue(p['TITLE']['fre'])
     new_p.name_nl = ue(p['TITLE']['dut'])
-    new_p.description_fr = ue(p['BODY']['fre'])
-    new_p.description_nl = ue(p['BODY']['fre'])
+    try:
+        new_p.description_fr = ue(p['BODY']['fre'])
+        new_p.description_nl = ue(p['BODY']['dut'])
+    except Exception:
+        print 'No description for %s %s'%(p['ID'], ue(p['TITLE']['fre']))
     
-    new_p.city = cities[p['ZIP']['value']]['django_id']
-    
+    try:
+        new_p.city = cities[p['ZIP']['value']]['django_id']
+    except Exception:
+        pass
+
     if p['CONTRACTTYPE']['value'] == '':
         new_p.procedure = procedures['undefined']['django_id']
     else:
@@ -181,7 +192,13 @@ for p in pdata:
         
     new_p.mpoly = geom(int(p['ID']))
     
-    new_p.save()
+    try:
+        new_p.save()
+    except Exception as e:
+        print 'Failed to register %s %s => %s'%(p['ID'], ue(p['TITLE']['fre']), e)
+        connection._rollback()
+        continue
+        
     
     #print(dir(new_p.partners))
     

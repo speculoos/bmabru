@@ -16,7 +16,13 @@ window.bMa.Project = function(args){
             if(this.data[key] !== undefined)
                 return this.data[key]
             else
-                console.log('ERROR ['+this.id+']:Attempt to access inexistant key => '+key);
+            { 
+                throw new this.NoKeyException(key);
+            }
+        },
+        NoKeyException:function(key) {
+            this.message = 'Project ['+this.id+'] has no key: '+key;
+            this.name = "NoKeyException";
         },
     };
     

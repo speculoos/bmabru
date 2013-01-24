@@ -27,10 +27,17 @@ window.bMa.Console = function(container, map){
             this.projects[project.id] = project;
             var item = $('<div id="console_item_'+project.id+'" />');
             item.addClass('console_item');
-            item.html(project.get('builders')[0][1] // FIXME 
-                +'<div class="item-project-name">'
-                +project.get('name')
-                +'</div>');
+            try
+            {
+                item.html(project.get('partners')[0][1] // FIXME 
+                    +'<div class="item-project-name">'
+                    +project.get('name')
+                    +'</div>');
+            }
+            catch(e)
+            {
+                console.log(e.message, e.name);
+            }
             this.container.append(item)
             this.items[project.id] = item;
             this.update();
@@ -42,7 +49,7 @@ window.bMa.Console = function(container, map){
                 var i = this.items[id];
                 var lmap = this.map.map;
                 var center = p.get('centroid').coordinates;
-                console.log(center);
+//                 console.log(center);
                 var ctll = new L.LatLng(center[1], center[0]);
                 var ctpos = lmap.latLngToContainerPoint(ctll);
                 var visible = false;
