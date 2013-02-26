@@ -98,42 +98,30 @@ font-family:'OSP_helvetica_serif';
 @fontH:Helvetica, Arial;
 @topH:40px;
 @consoleW:200px;
+
 /* reset */
 *, p, div, ul, li, h1, h2, h3, h4, h5, h6{padding:0; margin:0;}
 body{font-family:Helvetica, Arial; text-align:left; margin:0px 0 10px;}
 a, .link{cursor:pointer;}
-/* basics */
-.break{height:0; border:none; width:0; clear:both; margin:0; padding:0; font-size:0; line-height:0;}
-.mRight{margin-right:20px;}
-.mLeft{margin-left:20px;}
-.mTop{margin-top:20px;}
-.mBottom{margin-bottom:20px;}
-.mHor{margin-right:20px; margin-left:20px;}
-.mVer{margin-top:20px; margin-bottom:20px;}
-.mAll{margin:20px;}
-/* basic class */
-.break, .cBoth{clear:both;}
-.cLeft{clear:left;}
-.cRight{clear:right;}
-.cNone{clear:none;}
-.fLeft{float:left;}
-.fRight{float:right;}
-.fNone{float:none;}
+
 /* position and dimensions */
 body{margin:0 10px 10px; width:100%; height:100%;}
 #container{width:100%; height:800px; position:relative;}
 #container>*{position:absolute; top:0; }
 #top{width:100%; height:@topH; left:0;}
+
 /* #content{width:35%; min-width:400px; left:40px; top:40px;} */
 #map-wrapper{position:absolute;width:88%; height:100%; left:0;}
 #map{width:100%; height:100%; left:0;}
 #bma-overlay-0{position:absolute;width:232px; right:0; bottom:0;}
 #console{top:@topH; right:0px; width:@consoleW; position:absolute;}
+
 /* z-index */
 #top{z-index:100;}
 #bma-overlay-0{z-index:80;}
 #console{z-index:70;}
 #map{z-index:50;}
+
 /* elements */
 #top {
 	font-size:11px; letter-spacing:0.05em;
