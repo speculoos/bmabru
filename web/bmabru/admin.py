@@ -8,7 +8,7 @@ from django.contrib.gis import admin as geo_admin
 from modeltranslation.admin import TranslationAdmin
 
 from bmabru.models import *
-import settings
+import bma.settings as settings
 
 
 class TabbedTr:
