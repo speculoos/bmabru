@@ -8,6 +8,7 @@ from django.contrib.gis import admin as geo_admin
 from modeltranslation.admin import TranslationAdmin
 
 from bmabru.models import *
+import settings
 
 
 class TabbedTr:
@@ -75,7 +76,7 @@ class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
         self.map_srid = 900913
         self.units = 'm'
         self.num_zoom = 20
-        self.openlayers_url = 'http://bma.local/web_static/lib/OpenLayers-2.12/OpenLayers.js'
+        self.openlayers_url = '/'.join([settings.STATIC_URL, 'lib/OpenLayers-2.12/OpenLayers.js'])
         self.map_width = 800
         self.map_height = 600
         

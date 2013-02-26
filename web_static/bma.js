@@ -2,7 +2,7 @@
 
 function InitMap()
 {
-    var bmabru_json_url = 'http://bma.local/projects/';
+    var bmabru_json_url = '/projects/';
     
     var map = bMa.Map('map');
     var csl = bMa.Console($('#console'), map);
