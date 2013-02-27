@@ -107,10 +107,9 @@ a, .link{cursor:pointer;}
 /* position and dimensions */
 html {width: 100%; height: 100%;}
 body{width: 100%; height: 100%;}
-#container{position: absolute; width:100%; height:100%;}
+#container{position: absolute; width:100%; height:100%; }
 #container>*{top:0; }
-#top{width:100%; height:0; left:0;}
-
+#top{position: absolute; width:100%; height:@topH;}
 /* #content{width:35%; min-width:400px; left:40px; top:40px;} */
 
 #bma-overlay-0{position:absolute;width:232px; right:0; bottom:0;}
@@ -150,19 +149,19 @@ body{width: 100%; height: 100%;}
 				border: 1px solid #000;
 				margin-left: 13px;
 				padding: 5px 0px;
-				
-				
+
+
 				li{
         				padding:0; 
         				margin-bottom:2px; 
         				float:none; 
         				height:auto;
         			}
-				
+
 				a{
       				text-transform:none; 
       				position:static;
-					
+
 					&:hover{color:@hred;}
 				}
 			}
@@ -179,8 +178,9 @@ body{width: 100%; height: 100%;}
 }
 
 #map-wrapper {
-    padding: 40px 10px 0px 10px;
+    padding: 0px 10px 0px 10px;
     height: 100%;
+    margin-top: -10px;
     /*border: 2px solid red ; */
 }
 
@@ -224,7 +224,7 @@ body{width: 100%; height: 100%;}
 		    font-size:7pt;
 		    font-family:'Futura-Bold';    
 		    padding:10px 0 0 0;
-		    
+
             }
         }
     }
