@@ -8,6 +8,7 @@ font-family:'PLRB-SemiBold';
 font-family:'OSP_helvetica_serif';
 */
 
+
 @font-face {
     font-family: 'OSP_helvetica_serif';
     src: url('fonts/osp_helvetica_serif02.eot');
@@ -89,6 +90,7 @@ font-family:'OSP_helvetica_serif';
 #map{background:white;}
 #debug{position:fixed; top:0; left:0; background:#ccc; width:200px; font-size:6px; }
 /* #console{background:yellow;} */
+
 /* vars */
 @saumon:#FFE3DE;
 @hred:#ec4941;
@@ -99,6 +101,9 @@ font-family:'OSP_helvetica_serif';
 @fontH:Helvetica, Arial;
 @topH:40px;
 @consoleW:200px;
+@externalmargin : 10px;
+@internalmargin : 20px;
+@bordermap : 1px;
 
 /* reset */
 *, p, div, ul, li, h1, h2, h3, h4, h5, h6{padding:0; margin:0;}
@@ -113,13 +118,58 @@ body{height: 100%; border: 0px solid red;}
 #top{position: absolute; width:100%; height:@topH;}
 /* #content{width:35%; min-width:400px; left:40px; top:40px;} */
 
-#bma-overlay-0{position:absolute;width:232px; right:0; bottom:0;}
+#map-wrapper {
+    width: -calc(~"100% - 2 * @{externalmargin}px"); 
+    width: -webkit-calc(~"100% - 2 * @{externalmargin}px"); 
+    width: -moz-calc(~"100% - 2 * @{externalmargin}px"); 
+    height: -calc(~"100% - @{externalmargin}px - @{topH}px"); 
+    height: -webkit-calc(~"100% - @{externalmargin}px - @{topH}px"); 
+    height: -moz-calc(~"100% - @{externalmargin}px - @{topH}px"); 
+    padding: @topH @externalmargin @externalmargin @externalmargin;
+}
 
-#console{top:@topH; right:0px; width:@consoleW; position:absolute;}
+#map-wrapper-2 {
+    width: -calc(~"100% - 2 * @{internalmargin}px - 2 * @{bordermap}px"); 
+    width: -webkit-calc(~"100% - 2 * @{internalmargin}px - 2 * @{bordermap}px"); 
+    width: -moz-calc(~"100% - 2 * @{internalmargin}px - 2 * @{bordermap}px"); 
+    height: -calc(~"100% - 2 * @{internalmargin}px - 2 * @{bordermap}px"); 
+    height: -webkit-calc(~"100% - 2 * @{internalmargin}px - 2 * @{bordermap}px"); 
+    height: -moz-calc(~"100% - 2 * @{internalmargin}px - 2 * @{bordermap}px"); 
+    padding: @internalmargin;
+    border: @bordermap dotted #000;
+}
+
+#map{
+    width:100%; 
+    min-height:100%; 
+    left:0;
+}
+
+#bma-overlay-0 {
+    position:absolute;
+    width:232px; 
+    left: 31px; 
+    top:61px;
+    }
+    
+#bma-overlay-1 {
+    position:absolute;
+    width:232px; 
+    right:31px; 
+    bottom:31px;
+    }
+
+#console{
+    top:@topH; 
+    right:0px; 
+    width:@consoleW; 
+    position:absolute;
+    }
 
 /* z-index */
 #top{z-index:100;}
 #bma-overlay-0{z-index:80;}
+#bma-overlay-1{z-index:80;}
 #console{z-index:70;}
 #map{z-index:50;}
 
@@ -177,34 +227,6 @@ body{height: 100%; border: 0px solid red;}
 	}
 	a{color:#000; padding:2px 4px 1px; text-decoration:none;}
 }
-
-#map-wrapper {
-    width: -calc(~"100% - 20px"); 
-    width: -webkit-calc(~"100% - 20px"); 
-    width: -moz-calc(~"100% - 20px"); 
-    height: -calc(~"100% - 50px"); 
-    height: -webkit-calc(~"100% - 50px"); 
-    height: -moz-calc(~"100% - 50px"); 
-    padding: 40px 10px 10px 10px;
-}
-
-#map-wrapper-2 {
-    width: -calc(~"100% - 40px"); 
-    width: -webkit-calc(~"100% - 40px"); 
-    width: -moz-calc(~"100% - 40px"); 
-    height: -calc(~"100% - 40px"); 
-    height: -webkit-calc(~"100% - 40px"); 
-    height: -moz-calc(~"100% - 40px"); 
-    padding: 20px;
-    border: 1px dotted #000;
-}
-
-#map{
-    width:100%; 
-    min-height:100%; 
-    left:0;
-}
-
 
 
 #console{
