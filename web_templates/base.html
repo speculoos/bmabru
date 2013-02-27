@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{% block title %}bMa{% endblock %}</title>
+	<title>{% block title %}bMa -- {{debug}}{% endblock %}</title>
 	{% block style %}
 	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css" />
+	{% if debug %}
+	<link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}debug.less">
+	{% endif %}
 	<link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}styles.less">
 	{% endblock %}
 	<script>
