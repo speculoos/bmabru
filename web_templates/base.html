@@ -20,6 +20,7 @@
     <script src="{{STATIC_URL}}lib/Console.js"></script>
     <script src="{{STATIC_URL}}lib/Legend.js"></script>
     <script src="{{STATIC_URL}}lib/LayerSelector.js"></script>
+    <script src="{{STATIC_URL}}lib/ZoomControl.js"></script>
     <script src="{{STATIC_URL}}wms.config.js"></script>
     <script src="{{STATIC_URL}}bma.js"></script>
     {% endblock %}
@@ -57,7 +58,10 @@
     {% block map %}
     <div id="map-wrapper">
         <div id="bma-overlay-0">
+            <div id="zoom-control-box"></div>
             <div id="layer-selector"></div>
+        </div>
+        <div id="bma-overlay-1">
             <div id="content"></div>
         </div>
         <div id="map"></div>

@@ -8,6 +8,7 @@ function InitMap()
 //     var csl = bMa.Console($('#console'), map);
     var legend = bMa.Legend($('#content'));
     var selector = bMa.LayerSelector($('#layer-selector'), map);
+    var zoom_control = bMa.ZoomControl(map, $('#zoom-control-box'));
     
     for(var key in WMS_CONFIG)
     {
