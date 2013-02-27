@@ -30,7 +30,7 @@ window.bMa.ZoomControl = function(map, container){
             function scale_resize(scale_factor){
                 that.scale_container.empty();
                 var width = that.scale_container.width();
-                var steps = Math.floor(width / scale_factor);
+                var steps = Math.floor(width / (scale_factor));
                 var step_width = Math.floor(width / steps);
                 var dark = false;
                 for(var s = 0; s < steps; s++)
@@ -42,6 +42,8 @@ window.bMa.ZoomControl = function(map, container){
                     }
                     var part = $('<div />');
                     part.css('width', step_width+'px');
+                    
+                    part.addClass('zoom-control-scale-part');
                     part.addClass(sc_class);
                     that.scale_container.append(part);
                     console.log('Append '+sc_class+' to scale_container');
@@ -55,7 +57,9 @@ window.bMa.ZoomControl = function(map, container){
             lmap.on('zoomend', function(evt){
                 scale_resize(lmap.getZoom());
             });
-            scale_resize(lmap.getZoom());
+            var zoom = lmap.getZoom();
+            console.log('Initial Zoom: '+zoom);
+            scale_resize(zoom);
             return that.scale_container;
             
         },
