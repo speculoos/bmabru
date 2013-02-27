@@ -101,9 +101,12 @@ font-family:'OSP_helvetica_serif';
 @fontH:Helvetica, Arial;
 @topH:40px;
 @consoleW:200px;
-@externalmargin : 10px;
-@internalmargin : 20px;
+@marginEXT : 10px;
+@marginINT : 20px;
 @bordermap : 1px;
+@Wmap-wrapper: ~"100% - 2 * @{marginEXT}px";
+@Hmap-wrapper: ~"100% - @{marginEXT}px - @{topH}px";
+@WHmap-wrapper-2: ~"100% - 2 * @{marginINT}px - 2 * @{bordermap}px";
 
 /* reset */
 *, p, div, ul, li, h1, h2, h3, h4, h5, h6{padding:0; margin:0;}
@@ -119,23 +122,23 @@ body{height: 100%; border: 0px solid red;}
 /* #content{width:35%; min-width:400px; left:40px; top:40px;} */
 
 #map-wrapper {
-    width: -calc(~"100% - 2 * @{externalmargin}px"); 
-    width: -webkit-calc(~"100% - 2 * @{externalmargin}px"); 
-    width: -moz-calc(~"100% - 2 * @{externalmargin}px"); 
-    height: -calc(~"100% - @{externalmargin}px - @{topH}px"); 
-    height: -webkit-calc(~"100% - @{externalmargin}px - @{topH}px"); 
-    height: -moz-calc(~"100% - @{externalmargin}px - @{topH}px"); 
-    padding: @topH @externalmargin @externalmargin @externalmargin;
+    width: -calc(@Wmap-wrapper); 
+    width: -webkit-calc(@Wmap-wrapper); 
+    width: -moz-calc(@Wmap-wrapper); 
+    height: -calc(@Hmap-wrapper); 
+    height: -webkit-calc(@Hmap-wrapper); 
+    height: -moz-calc(@Hmap-wrapper); 
+    padding: @topH @marginEXT @marginEXT @marginEXT;
 }
 
 #map-wrapper-2 {
-    width: -calc(~"100% - 2 * @{internalmargin}px - 2 * @{bordermap}px"); 
-    width: -webkit-calc(~"100% - 2 * @{internalmargin}px - 2 * @{bordermap}px"); 
-    width: -moz-calc(~"100% - 2 * @{internalmargin}px - 2 * @{bordermap}px"); 
-    height: -calc(~"100% - 2 * @{internalmargin}px - 2 * @{bordermap}px"); 
-    height: -webkit-calc(~"100% - 2 * @{internalmargin}px - 2 * @{bordermap}px"); 
-    height: -moz-calc(~"100% - 2 * @{internalmargin}px - 2 * @{bordermap}px"); 
-    padding: @internalmargin;
+    width: -calc(@WHmap-wrapper-2); 
+    width: -webkit-calc(@WHmap-wrapper-2); 
+    width: -moz-calc(@WHmap-wrapper-2); 
+    height: -calc(@WHmap-wrapper-2); 
+    height: -webkit-calc(@WHmap-wrapper-2); 
+    height: -moz-calc(@WHmap-wrapper-2); 
+    padding: @marginINT;
     border: @bordermap dotted #000;
 }
 
@@ -148,15 +151,15 @@ body{height: 100%; border: 0px solid red;}
 #bma-overlay-0 {
     position:absolute;
     width:232px; 
-    left: 31px; 
-    top:61px;
+    left: (@marginEXT + @marginINT + @bordermap); 
+    top:(@topH + @marginINT + @bordermap);
     }
     
 #bma-overlay-1 {
     position:absolute;
     width:232px; 
-    right:31px; 
-    bottom:31px;
+    right: (@marginEXT + @marginINT + @bordermap);
+    bottom: (@marginEXT + @marginINT + @bordermap);
     }
 
 #console{
