@@ -3,7 +3,8 @@
 <head>
 	<title>{% block title %}bMa -- {{debug}}{% endblock %}</title>
 	{% block style %}
-	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css" />
+	<link rel="stylesheet" href="{{STATIC_URL}}leaflet/dist/leaflet.css" />
+	<link rel="stylesheet" href="{{STATIC_URL}}leaflet/dist/leaflet.ie.css" />
 	{% if debug %}
 	<link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}debug.less">
 	{% endif %}
@@ -16,7 +17,7 @@
 	{% block script %}
 	<script src="{{STATIC_URL}}jquery-1.8.2.js"></script>
 	<script src="{{STATIC_URL}}lessjs/dist/less-1.4.0-alpha.min.js"></script>
-    <script src="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"></script>
+	<script src="{{STATIC_URL}}leaflet/dist/leaflet.js"></script>
     <!--     <script src="{{STATIC_URL}}lib/WKT.js"></script> -->
     <script src="{{STATIC_URL}}lib/Map.js"></script>
     <script src="{{STATIC_URL}}lib/Project.js"></script>
