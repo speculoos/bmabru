@@ -1,3 +1,6 @@
 [submodule "web_static/lessjs"]
 	path = web_static/lessjs
 	url = git://github.com/cloudhead/less.js.git
+[submodule "web_static/leaflet"]
+	path = web_static/leaflet
+	url = git://github.com/Leaflet/Leaflet.git
