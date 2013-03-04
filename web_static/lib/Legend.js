@@ -10,16 +10,31 @@ window.bMa.Legend = function(container)
         init:function(container){
             this.container = container;
             this.container.hide();
-            this.wrapper = $('<div class="short-description"></div>');
-            this.title = $('<div class="description-title"></div>');
-            this.content = $('<div class="description-wrapper"></div>');
+            this.wrapper = $('<div class="project-box"></div>');
+            var elems = 'title description address city partners'.split(' ');
+            this.elements = {};
+            for(var i=0; i < elems.length; i++)
+            {
+                var ename = elems[i];
+                this.elements[ename] = $('<div class="project-'+ename+'" />');
+                this.wrapper.append(this.elements[ename]);
+            }
             this.container.append(this.wrapper);
-            this.wrapper.append(this.title);
-            this.wrapper.append(this.content);
         },
         show:function(project){
-            this.title.text(project.get('name'));
-            this.content.text(project.get('description'));
+            this.elements.title.text(project.get('name'));
+            this.elements.description.text(project.get('description'));
+            this.elements.address.text(project.get('address', 1));
+            this.elements.city.text(project.get('city', 1) + ' ' + project.get('city', 2));
+            var partners = project.get('partners');
+            var pstring = '';
+            var sep = '';
+            for(var i=0; i<partners.length; i++)
+            {
+                pstring += sep + partners[i][1];
+                sep = ', ';
+            }
+            this.elements.partners.text(pstring);
             this.container.show();
         },
         hide:function(){

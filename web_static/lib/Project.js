@@ -12,11 +12,17 @@ window.bMa.Project = function(args){
             this.data = args.fields;
             this.id = args.pk;
         },
-        get:function(key){
+        get:function(key, idx){
             if(this.data[key] !== undefined)
-                return this.data[key]
+            {
+                if(idx === undefined)
+                    return this.data[key]
+                else
+                    return this.data[key][idx]
+            }
             else
             { 
+                return 'Data not available';
                 throw new this.NoKeyException(key);
             }
         },
