@@ -28,24 +28,29 @@ function InitMap()
         clickable:true
     };
     $.getJSON(bmabru_json_url, function( projects_data ){
+        var cur_p = undefined;
         for(var idx = 0; idx < projects_data.length; idx++)
         {
             var pdata = projects_data[idx];
             var p = bMa.Project(pdata);
+            console.log('Add ['+p.id+'] => '+p.get('slug'))
+            if(bma_current_project !== undefined 
+                && bma_current_project === p.id)
+            {
+                cur_p = p;
+            }
             var geo = p.get('geojson');
             var ovl = new L.GeoJSON(geo, {style:function(f){ return ovl_options;}});
             map.add_overlay('bMa', ovl);
-//             csl.add(p);
-//             ovl.on('mouseover', function(evt){
-//                 csl.highlight(this.id);
-//             }, p);
-//             ovl.on('mouseout', function(evt){
-//                 csl.dehighlight();
-//             });
-//             
+            
             ovl.on('click', function(evt){
                 legend.show(this);
             }, p);
+        }
+        
+        if(cur_p !== undefined)
+        {
+            legend.show(cur_p);
         }
     });
 }
