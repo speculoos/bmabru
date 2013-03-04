@@ -64,6 +64,9 @@ def index(request):
     data = {'category':Category.objects.all()}
     return render_to_response("index.html", data, context_instance = RequestContext(request))
     
+def project(request, project):
+    
+    
 def projects_json(request):
     #jr = serializers.get_serializer("json")()
     jr = GeoSerial()

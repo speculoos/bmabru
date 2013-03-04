@@ -4,6 +4,7 @@
 """
 
 from django.contrib.gis.db import models
+from django.template.defaultfilters import slugify
 
 
 
@@ -168,6 +169,12 @@ class Project(models.Model):
     
     mpoly = models.MultiPolygonField(srid=4326, geography=True)
     objects = models.GeoManager()
+    
+    slug = models.SlugField(max_length=255, editable=False, default='None')
+    
+    def save(self, force_insert=False, force_update=False, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Project, self).save(force_insert, force_update) 
     
     @property
     def centroid(self):

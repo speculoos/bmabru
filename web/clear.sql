@@ -1,0 +1,21 @@
+BEGIN;
+DROP TABLE "bmabru_project" CASCADE;
+DROP TABLE "bmabru_project_steps" CASCADE;
+DROP TABLE "bmabru_project_programs" CASCADE;
+DROP TABLE "bmabru_project_actions" CASCADE;
+DROP TABLE "bmabru_project_partners" CASCADE;
+DROP TABLE "bmabru_project_functions" CASCADE;
+DROP TABLE "bmabru_project_image" CASCADE;
+DROP TABLE "bmabru_city" CASCADE;
+DROP TABLE "bmabru_step" CASCADE;
+DROP TABLE "bmabru_action" CASCADE;
+DROP TABLE "bmabru_projectstatus" CASCADE;
+DROP TABLE "bmabru_mission" CASCADE;
+DROP TABLE "bmabru_function" CASCADE;
+DROP TABLE "bmabru_projectimage" CASCADE;
+DROP TABLE "bmabru_procedure" CASCADE;
+DROP TABLE "bmabru_program" CASCADE;
+DROP TABLE "bmabru_partner" CASCADE;
+DROP TABLE "bmabru_partnertype" CASCADE;
+
+COMMIT;
