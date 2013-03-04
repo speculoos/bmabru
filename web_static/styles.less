@@ -190,44 +190,80 @@ body{height: 100%; border: 0px solid red;}
     opacity: @zoomopacity;
     position:absolute;
     width:232px; 
-    left: (@marginEXT + @marginINT + @bordermap); 
-    top:(@topH + @marginINT + @bordermap);
+    left: (@marginEXT + @marginINT + @bordermap + 10px); 
+    top:(@topH + @marginINT + @bordermap + 10px);
     
-    .zoom-control-out {
-        float: left;
-        margin-right: 5px;
-        .zoomCTRL;
-    }
-
-    .zoom-control-scale-scale{
-        width:150px;
-        float: left;
-        opacity: @zoomopacity;
-
-        .zoom-control-scale-part{
-            display:inline-block;
-            height:6px;
-            &.zoom-control-scale-part-light{
-                background-color: white;
-            }
-            &.zoom-control-scale-part-dark{
-                background-color: red;
-            }
+    #zoom-control-box {
+        height: 30px;
+            
+        .zoom-control-out {
+            float: left;
+            margin-right: 5px;
+            .zoomCTRL;
         }
-    }  
-    .zoom-control-in {
-        float: left;
-        clear: right;
-        margin-left: 5px;    
-        .zoomCTRL;
-    }   
-} 
-   
+    
+        .zoom-control-scale-scale{
+            width:150px;
+            float: left;
+            opacity: @zoomopacity;
+    
+            .zoom-control-scale-part{
+                display:inline-block;
+                height:6px;
+                &.zoom-control-scale-part-light{
+                    background-color: white;
+                }
+                &.zoom-control-scale-part-dark{
+                    background-color: red;
+                }
+            }
+        }  
+        .zoom-control-in {
+            float: left;
+            clear: right;
+            margin-left: 5px;    
+            .zoomCTRL;
+        }   
+    } 
+}
+    
 
 #layer-selector {
+    display: block;
     float: none;
     clear: both;
+    font-size: 12px;
+    width: 100px;
+    background-color: red;
+    .zoomrounded;
 }
+
+.layer-item {
+    width: 100px;
+    color: white;
+    text-align: center;
+}
+
+.layer-item {
+  display: none;
+  &.layer-selected {
+    display: block;
+    float: none;
+    clear: both;
+  }
+}
+
+#layer-selector:hover > .layer-item {
+  display: block;
+  float: right;
+  -webkit-transition: all 5s ease;  
+  &.layer-selected {
+    display: block;
+    float: none;
+    clear: both;
+  }
+}
+
 
 #bma-overlay-1 {
     position:absolute;
