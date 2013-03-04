@@ -44,6 +44,7 @@ def geom(pid):
     #raise Exception('No geom for %d'%pid)
 
 
+
 builders = {}
 cities = {}
 missions = {}
@@ -93,6 +94,14 @@ for p in pdata:
     for s in status:
         ps = p[s]
         status[s]['actions'][ps['value']] = ps
+    
+## DEFAULTS
+default_city = City.objects.create(zipcode=9999, name_fr=u'None City', name_nl=u'None City')
+default_city.save()
+
+default_mission = Mission.objects.create(name_fr=u'No Mission', name_nl=u'No Mission')
+default_mission.save()
+
     
 ## import buiders
 try:
@@ -176,10 +185,17 @@ for p in pdata:
         new_p.description_nl = ue(p['BODY']['dut'])
     except Exception:
         print 'No description for %s %s'%(p['ID'], ue(p['TITLE']['fre']))
+        
+    try:
+        new_p.address_fr = ue(p['ADDRESS']['fre']) 
+        new_p.address_nl = ue(p['ADDRESS']['dut'])
+    except Exception:
+        print 'No address for %s %s'%(p['ID'], ue(p['TITLE']['fre']))
     
     try:
         new_p.city = cities[p['ZIP']['value']]['django_id']
     except Exception:
+        new_p.city = default_city
         pass
 
     if p['CONTRACTTYPE']['value'] == '':
@@ -187,8 +203,11 @@ for p in pdata:
     else:
         new_p.procedure = procedures[p['CONTRACTTYPE']['value']]['django_id']
         
-    for m in p['mission']:
-        new_p.mission = missions[m['value']]['django_id']
+    if  p['mission']:
+        for m in p['mission']:
+            new_p.mission = missions[m['value']]['django_id']
+    else:
+        new_p.mission = default_mission
         
     new_p.mpoly = geom(int(p['ID']))
     
