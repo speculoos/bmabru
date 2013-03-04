@@ -44,7 +44,8 @@ class Program(models.Model):
     """
     name = models.CharField(max_length=512)
     description = models.TextField(blank=True)
-    
+    def natural_key(self):
+        return (self.id, self.name)
     def __unicode__(self):
         return self.name
 
@@ -56,7 +57,8 @@ class Procedure(models.Model):
     
     name = models.CharField(max_length=512)
     description = models.TextField(blank=True)
-    
+    def natural_key(self):
+        return (self.id, self.name)
     def __unicode__(self):
         return self.name
         
@@ -77,7 +79,8 @@ class Function(models.Model):
     """
     name = models.CharField(max_length=512)
     description = models.TextField(blank=True)
-    
+    def natural_key(self):
+        return (self.id, self.name)
     def __unicode__(self):
         return self.name
 
@@ -88,7 +91,8 @@ class Mission(models.Model):
     """
     name = models.CharField(max_length=512)
     description = models.TextField(blank=True)
-    
+    def natural_key(self):
+        return (self.id, self.name)
     def __unicode__(self):
         return self.name
         
@@ -102,7 +106,8 @@ class ProjectStatus(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField(blank=True)
     order = models.IntegerField()
-    
+    def natural_key(self):
+        return (self.id, self.name)
     def __unicode__(self):
         return self.name
         
@@ -112,7 +117,8 @@ class Action(models.Model):
     """
     sentence = models.TextField()
     project_status = models.ForeignKey('ProjectStatus')
-    
+    def natural_key(self):
+        return (self.id, self.sentence)
     def __unicode__(self):
         return '%s / %s'%(self.project_status.name, self.sentence[:32])
 
@@ -131,7 +137,8 @@ class Step(models.Model):
 class City(models.Model):
     zipcode = models.CharField(max_length=32)
     name = models.CharField(max_length=256)
-    
+    def natural_key(self):
+        return (self.id, self.zipcode, self.name)
     def __unicode__(self):
         return self.name
     
