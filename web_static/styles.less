@@ -86,6 +86,18 @@ font-family:'OSP_helvetica_serif';
                                                           font-style: normal;
 }
 
+@font-face {
+    font-family: 'URWGothicL';
+    src: url('fonts/urwgothicldemi.eot');
+    src: url('fonts/urwgothicldemi.eot?#iefix') format('embedded-opentype'),
+                                                          url('fonts/urwgothicldemi.woff') format('woff'),
+                                                          url('fonts/urwgothicldemi.ttf') format('truetype'),
+                                                          url('fonts/urwgothicldemi.svg#urwgothicldemi') format('svg');
+                                                          font-weight: normal;
+                                                          font-style: normal;
+}
+
+
 /* debug */
 #map{background:white;}
 #debug{position:fixed; top:0; left:0; background:#ccc; width:200px; font-size:6px; }
@@ -107,7 +119,8 @@ font-family:'OSP_helvetica_serif';
 @Wmap-wrapper: ~"100% - 2 * @{marginEXT}";
 @Hmap-wrapper: ~"100% - @{marginEXT} - @{topH}";
 @WHmap-wrapper-2: ~"100% - 2 * @{marginINT} - 2 * @{bordermap}";
-@zoomopacity : 0.7;
+@Hproject: ~"100% - 2 * @{marginINT} - 2 * @{bordermap} - @{marginEXT} - @{topH}";
+@printopacity : 0.7;
 
 /* ruleset */
 .zoomrounded (@radius: 10px) {
@@ -187,7 +200,7 @@ body{height: 100%; border: 0px solid red;}
  ************************/
 
 #bma-overlay-0 {
-    opacity: @zoomopacity;
+    opacity: @printopacity;
     position:absolute;
     width:232px; 
     left: (@marginEXT + @marginINT + @bordermap + 10px); 
@@ -205,7 +218,7 @@ body{height: 100%; border: 0px solid red;}
         .zoom-control-scale-scale{
             width:150px;
             float: left;
-            opacity: @zoomopacity;
+            opacity: @printopacity;
     
             .zoom-control-scale-part{
                 display:inline-block;
@@ -226,7 +239,10 @@ body{height: 100%; border: 0px solid red;}
         }   
     } 
 }
-    
+
+/************************
+ *  Layer selector
+ ************************/    
 
 #layer-selector {
     display: block;
@@ -248,29 +264,68 @@ body{height: 100%; border: 0px solid red;}
   display: none;
   &.layer-selected {
     display: block;
-    float: none;
-    clear: both;
   }
 }
 
 #layer-selector:hover > .layer-item {
   display: block;
-  float: right;
   -webkit-transition: all 5s ease;  
   &.layer-selected {
     display: block;
-    float: none;
-    clear: both;
   }
 }
 
+
+/************************
+ *  Project description
+ * 
+ ************************/
 
 #bma-overlay-1 {
     position:absolute;
     width:232px; 
     right: (@marginEXT + @marginINT + @bordermap);
-    bottom: (@marginEXT + @marginINT + @bordermap);
-    }
+/*  bottom: (@marginEXT + @marginINT + @bordermap); */
+    height: -calc(@Hproject); 
+    height: -webkit-calc(@Hproject); 
+    height: -moz-calc(@Hproject); 
+    height: -o-calc(@Hproject); 
+    overflow: auto;
+    background-color: white;
+    opacity: @printopacity;
+  
+      #content{
+          background-color:white;
+          overflow: auto;   
+
+          .short-description{
+              padding:0px 0px 6px 0px;
+              
+              .description-title{
+                  display:inline-block;
+                  background-color: @blue;
+                  color: white;
+           	    font-size:14pt;
+           	    font-family: 'URWGothicL', Arial, Helvetica;  
+           	    text-transform:uppercase;
+           	    padding:2px 6px 0px 6px;
+           	    letter-spacing:2px;
+              }
+
+              .description-wrapper{
+      		    text-decoration:none;
+      		    font-size:10pt;
+      		    font-family: Helvetica, Arial;    
+      		    padding:10px 6px 0 6px;
+              }
+          }
+      }
+}
+
+
+
+
+
 
 #console{
     top:@topH; 
@@ -346,38 +401,7 @@ body{height: 100%; border: 0px solid red;}
     background-color:white;
 }
 
-#content{
-    background-color:white;
-    padding:6px 0 0 6px;
-    .short-description{
-        padding:6px;
-        background-color:@yellow;
-        
-        .description-title{
-            display:inline-block;
-            background-color:black;
-            color:@yellow;
-	    font-size:11pt;
-	    font-family:'Futura-Bold';  
-	    text-transform:uppercase;
-	    padding:6px 6px 0px 6px;
-	    letter-spacing:2px;
-        }
-        .description-wrapper{
-            
-            
-            p{
-		    text-decoration:none;
-		    font-weight: 300;
-		    color:black;
-		    font-size:7pt;
-		    font-family:'Futura-Bold';    
-		    padding:10px 0 0 0;
 
-            }
-        }
-    }
-}
 
 div.console_item{
     position:absolute;
