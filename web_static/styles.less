@@ -71,7 +71,7 @@ a, .link{cursor:pointer;}
 
 /* position and dimensions */
 html {width: 100%; height: 100%;}
-body{height: 100%; border: 0px solid red;}
+body{height: 100%; }
 #container{width:100%; height:100%; }
 #container>*{top:0; }
 #top{position: absolute; width:100%; height:@topH;}
@@ -123,10 +123,11 @@ body{height: 100%; border: 0px solid red;}
 
 #bma-overlay-0 {
     opacity: @printopacity;
+    blend-mode: multiply;
     position:absolute;
     width:232px; 
-    left: (@marginEXT + @marginINT + @bordermap + 10px); 
-    top:(@topH + @marginINT + @bordermap + 10px);
+    left: (@marginEXT + @marginINT + @bordermap - 11px); 
+    top:(@topH + @marginINT + @bordermap - 11px);
     
     #zoom-control-box {
         height: 30px;
@@ -174,28 +175,25 @@ body{height: 100%; border: 0px solid red;}
     width: 100px;
     background-color: red;
     .zoomrounded;
-}
-
-.layer-item {
-    width: 100px;
-    color: white;
-    text-align: center;
-}
-
-.layer-item {
-  display: none;
-  &.layer-selected {
-    display: block;
-  }
+    
+    .layer-item {
+        width: 100px;
+        color: white;
+        text-align: center;
+        display: none;
+          &.layer-selected {
+            display: block;
+          }
+    }
 }
 
 #layer-selector:hover > .layer-item {
   display: block;
-  -webkit-transition: all 5s ease;  
   &.layer-selected {
     display: block;
   }
 }
+
 
 
 /************************
@@ -214,7 +212,6 @@ body{height: 100%; border: 0px solid red;}
     height: -o-calc(@Hproject); 
     overflow: auto;
     background-color: white;
-    opacity: @printopacity;
   
       #content{
           background-color:white;
@@ -224,7 +221,7 @@ body{height: 100%; border: 0px solid red;}
               text-decoration:none;
       		font-size:10pt;
       		font-family: Helvetica, Arial;    
-      		padding:6px 6px 0 6px;
+      		padding:0px 0px 0px 6px;
               
               .project-title{
                   padding:2px 6px 0px 6px;
@@ -234,7 +231,10 @@ body{height: 100%; border: 0px solid red;}
            	    letter-spacing:2px;
                   display:inline-block;
                   background-color: @blue;
+                  
+                  .project-link{
                   color: white;
+                  text-decoration: none;}
               }
 
               .project-description{
