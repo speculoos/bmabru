@@ -6,7 +6,7 @@ function InitMap()
     
     var map = bMa.Map('map');
 //     var csl = bMa.Console($('#console'), map);
-    var legend = bMa.Legend($('#content'));
+    var legend = bMa.Legend($('#bma-overlay-1'));
     var selector = bMa.LayerSelector($('#layer-selector'), map);
     var zoom_control = bMa.ZoomControl(map, $('#zoom-control-box'));
     
