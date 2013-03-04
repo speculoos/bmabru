@@ -22,7 +22,9 @@ window.bMa.Legend = function(container)
             this.container.append(this.wrapper);
         },
         show:function(project){
-            this.elements.title.text(project.get('name'));
+            var proj_name = $('<a class="project-link" href="/project/'+project.get('slug')+'">'+project.get('name')+'</a>');
+            this.elements.title.empty();
+            this.elements.title.append(proj_name);
             this.elements.description.text(project.get('description'));
             this.elements.address.text(project.get('address', 1));
             this.elements.city.text(project.get('city', 1) + ' ' + project.get('city', 2));

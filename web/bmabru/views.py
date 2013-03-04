@@ -65,7 +65,13 @@ def index(request):
     return render_to_response("index.html", data, context_instance = RequestContext(request))
     
 def project(request, project):
-    
+    data = {'category':Category.objects.all()}
+    try:
+        p = Project.objects.filter(slug=project)
+        data['current_project'] = p[0]
+    except Exception as e:
+        raise Http404('Project %s Not Found [%s]'%(project, e))
+    return render_to_response("index.html", data, context_instance = RequestContext(request))
     
 def projects_json(request):
     #jr = serializers.get_serializer("json")()
