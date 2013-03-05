@@ -9,7 +9,7 @@ window.bMa.Legend = function(container)
     var proto = {
         init:function(container){
             this.container = container;
-            this.container.hide();
+            this.container.parent().hide();
             this.wrapper = $('<div class="project-box"></div>');
             var elems = 'title description address city partners'.split(' ');
             this.elements = {};
@@ -37,10 +37,10 @@ window.bMa.Legend = function(container)
                 sep = ', ';
             }
             this.elements.partners.text(pstring);
-            this.container.show();
+            this.container.parent().show();
         },
         hide:function(){
-            this.container.hide();
+            this.container.parent().hide();
         },
     };
     
