@@ -63,6 +63,38 @@ font-family:'OSP_helvetica_serif';
     vertical-align:text-top;
     .zoomrounded;
     }
+    
+.overlays {
+    position:absolute;
+    height: -calc(@Hproject); 
+    height: -webkit-calc(@Hproject); 
+    height: -moz-calc(@Hproject); 
+    height: -o-calc(@Hproject); 
+    overflow: auto;
+    background-color: white;
+}
+
+.bluetitle {
+     padding:2px 6px 0px 6px;
+     font-size:14pt;
+     font-family: 'URWGothicL', Arial, Helvetica;  
+     text-transform:uppercase;
+     letter-spacing:2px;
+     display:inline-block;
+     background-color: @blue;
+     color: white;
+}
+
+.text {
+     text-decoration:none;
+     font-size:10pt;
+     font-family: Helvetica, Arial;    
+}
+
+.infofield {
+     border-top: 1px solid #000;
+     padding: 10px 0px;
+}
 
 /* reset */
 *, p, div, ul, li, h1, h2, h3, h4, h5, h6{padding:0; margin:0;}
@@ -76,6 +108,15 @@ body{height: 100%; }
 #container>*{top:0; }
 #top{position: absolute; width:100%; height:@topH;}
 /* #content{width:35%; min-width:400px; left:40px; top:40px;} */
+
+/* z-index */
+#top{z-index:100;}
+#bma-overlay-0{z-index:80;}
+#bma-overlay-1{z-index:80;}
+#bma-overlay-2{z-index:80;}
+#bma-overlay-3{z-index:80;}
+#console{z-index:70;}
+#map{z-index:50;}
 
 
 /************************
@@ -123,7 +164,6 @@ body{height: 100%; }
 
 #bma-overlay-0 {
     opacity: @printopacity;
-    blend-mode: multiply;
     position:absolute;
     width:232px; 
     left: (@marginEXT + @marginINT + @bordermap - 11px); 
@@ -202,43 +242,19 @@ body{height: 100%; }
  ************************/
 
 #bma-overlay-1 {
-    position:absolute;
+    .overlays;
+    right: (@marginEXT + @marginINT + @bordermap);
+    width: 232px;    
     
-/*     width:232px;  */
-/*  bottom: (@marginEXT + @marginINT + @bordermap); */
-    height: -calc(@Hproject); 
-    height: -webkit-calc(@Hproject); 
-    height: -moz-calc(@Hproject); 
-    height: -o-calc(@Hproject); 
-    overflow: auto;
-    background-color: white;
-    
-    #page-box{
-        left: (@marginEXT + @marginINT + @bordermap);
-        background-color:white;
-        overflow: auto;   
-        width:432px;
-    }
-  
     #legend-box{
-        right: (@marginEXT + @marginINT + @bordermap);
-          background-color:white;
-          overflow: auto;   
-          width:232px; 
+      display: block;
+
           .project-box{
-                text-decoration:none;
-                font-size:10pt;
-                font-family: Helvetica, Arial;    
+                .text;   
                 padding:0px 0px 0px 6px;
               
               .project-title{
-                  padding:2px 6px 0px 6px;
-           	    font-size:14pt;
-           	    font-family: 'URWGothicL', Arial, Helvetica;  
-           	    text-transform:uppercase;
-           	    letter-spacing:2px;
-                  display:inline-block;
-                  background-color: @blue;
+                  .bluetitle;
                   
                   .project-link{
                   color: white;
@@ -249,24 +265,36 @@ body{height: 100%; }
               padding:6px 6px 10px 0px;
               }
               .project-adress{
-              border-top: 1px solid #000;
-              padding: 10px 0px;
+              .infofield;
               }
               .project-city{
-              border-top: 1px solid #000;
-              padding: 10px 0px;
-
+              .infofield;
               }
                .project-partners{
-              border-top: 1px solid #000;
-              border-bottom: 1px solid #000;
-              padding: 10px 0px;
+              .infofield;
               }
           }
       }
 }
 
-
+#bma-overlay-2 {
+    .overlays;
+    left: (@marginEXT + @marginINT + @bordermap);
+    width:464px;  
+    
+        #page-box{
+           .text;   
+           padding:0px 6px 0px 0px;
+         
+         .article-title{
+             .bluetitle;
+             
+             p {
+                 margin-bottom: 1em;
+             }
+         }
+    }
+}
 
 
 
@@ -278,12 +306,6 @@ body{height: 100%; }
     position:absolute;
     }
 
-/* z-index */
-#top{z-index:100;}
-#bma-overlay-0{z-index:80;}
-#bma-overlay-1{z-index:80;}
-#console{z-index:70;}
-#map{z-index:50;}
 
 /* elements */
 #top {
