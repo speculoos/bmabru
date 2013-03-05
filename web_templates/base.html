@@ -11,6 +11,11 @@
 	<link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}styles.less">
 	{% endblock %}
 	<script>
+	var bma_medias = {};
+	{% for cat in category %}
+    bma_medias['{{cat.name}}'] = {};
+    {% for page in cat.page_set.all %}bma_medias['{{cat.name}}'][{{page.id}}] = '{{page.title}}';{% endfor %}
+	{% endfor %}
 	{% block script_data %}
 	{% endblock %}
 	</script>
@@ -25,6 +30,7 @@
     <script src="{{STATIC_URL}}lib/Legend.js"></script>
     <script src="{{STATIC_URL}}lib/LayerSelector.js"></script>
     <script src="{{STATIC_URL}}lib/ZoomControl.js"></script>
+    <script src="{{STATIC_URL}}lib/Article.js"></script>
     <script src="{{STATIC_URL}}wms.config.js"></script>
     <script src="{{STATIC_URL}}bma.js"></script>
     {% endblock %}
@@ -46,7 +52,7 @@
                 <a>{{cat.name}}</a>
             <ul>
             {% for page in cat.page_set.all %}
-                <li>
+                <li class="page-ref" id="page_ref_{{page.id}}">
                     <a href="/media/{{page.slug}}">{{page.title}}</a>
                 </li>
             {% endfor %}
@@ -67,6 +73,8 @@
             <div id="layer-selector"></div>
         </div>
         <div id="bma-overlay-1">
+        <div id="page-box"></div>
+        <div id="legend-box"></div>
         </div>
         <div id="map"></div>
     </div>

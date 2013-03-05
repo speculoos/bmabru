@@ -28,7 +28,7 @@ class Page(models.Model):
     title = models.CharField(max_length=512)
     body = models.TextField()
     published = models.BooleanField(default=False)
-    resources = models.ManyToManyField('Resource')
+    resources = models.ManyToManyField('Resource', blank=True)
     
     def __unicode__(self):
         return self.title

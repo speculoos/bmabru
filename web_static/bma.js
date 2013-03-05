@@ -6,9 +6,19 @@ function InitMap()
     
     var map = bMa.Map('map');
 //     var csl = bMa.Console($('#console'), map);
-    var legend = bMa.Legend($('#bma-overlay-1'));
+    var legend = bMa.Legend($('#legend-box'));
     var selector = bMa.LayerSelector($('#layer-selector'), map);
     var zoom_control = bMa.ZoomControl(map, $('#zoom-control-box'));
+    
+    var article = bMa.Article($('#page-box'));
+    $('.page-ref').on('click', function(){
+        var id = $(this).attr('id');
+        var id_parts = id.split('_');
+        var aid = id_parts.pop();
+        legend.hide();
+        article.show(aid);
+    });
+    
     
     for(var key in WMS_CONFIG)
     {
@@ -44,6 +54,7 @@ function InitMap()
             map.add_overlay('bMa', ovl);
             
             ovl.on('click', function(evt){
+                article.hide();
                 legend.show(this);
             }, p);
         }

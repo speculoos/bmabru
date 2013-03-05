@@ -203,8 +203,8 @@ body{height: 100%; }
 
 #bma-overlay-1 {
     position:absolute;
-    width:232px; 
-    right: (@marginEXT + @marginINT + @bordermap);
+    
+/*     width:232px;  */
 /*  bottom: (@marginEXT + @marginINT + @bordermap); */
     height: -calc(@Hproject); 
     height: -webkit-calc(@Hproject); 
@@ -212,16 +212,24 @@ body{height: 100%; }
     height: -o-calc(@Hproject); 
     overflow: auto;
     background-color: white;
+    
+    #page-box{
+        left: (@marginEXT + @marginINT + @bordermap);
+        background-color:white;
+        overflow: auto;   
+        width:432px;
+    }
   
-      #content{
+    #legend-box{
+        right: (@marginEXT + @marginINT + @bordermap);
           background-color:white;
           overflow: auto;   
-
+          width:232px; 
           .project-box{
-              text-decoration:none;
-      		font-size:10pt;
-      		font-family: Helvetica, Arial;    
-      		padding:0px 0px 0px 6px;
+                text-decoration:none;
+                font-size:10pt;
+                font-family: Helvetica, Arial;    
+                padding:0px 0px 0px 6px;
               
               .project-title{
                   padding:2px 6px 0px 6px;
