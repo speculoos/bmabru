@@ -19,7 +19,6 @@ function InitMap()
         article.show(aid);
     });
     
-    var filter = bMa.Filter($('#filter-box'));
     
     
     for(var key in WMS_CONFIG)
@@ -61,6 +60,9 @@ function InitMap()
         {
             legend.show(cur_p);
         }
+        
+        
+        var filter = bMa.Filter($('#filter-box'));
     });
 }
 
