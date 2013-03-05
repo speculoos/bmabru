@@ -251,7 +251,7 @@ body{height: 100%; }
 
           .project-box{
                 .text;   
-                padding:0px 0px 0px 6px;
+                padding:0px 0px 0px @marginINT;
               
               .project-title{
                   .bluetitle;
@@ -284,7 +284,7 @@ body{height: 100%; }
     
         #page-box{
            .text;   
-           padding:0px 6px 0px 0px;
+           padding:0px @marginINT 0px 0px;
          
          .article-title{
              .bluetitle;
@@ -300,7 +300,27 @@ body{height: 100%; }
 }
 
 
-
+#bma-overlay-30 {
+    .overlays;
+    left: (@marginEXT + @marginINT + @bordermap);
+    width:464px;  
+    
+        #page-box{
+           .text;   
+           padding:0px 6px 0px 0px;
+         
+         .article-title{
+             .bluetitle;
+          }
+             
+          .article-body {
+          
+              p {
+                 margin-bottom: 10px;
+             }
+         }
+    }
+}
 
 #console{
     top:@topH; 
