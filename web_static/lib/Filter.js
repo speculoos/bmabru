@@ -12,6 +12,12 @@ window.bMa.Filter = function(container){
             this.container = container;
             this.filters = {};
             
+            this.filterbox = $('<div id="filter-filter" />');
+            this.listbox = $('<div id="filter-list" />');
+            
+            this.container.append(this.filterbox);
+            this.container.append(this.listbox);
+            
             var that = this;
             this.cities = {};
             this.functions = {};
@@ -23,6 +29,7 @@ window.bMa.Filter = function(container){
                 {
                     var n = $('<div class="filter-item filter-item-function">'+city+'</div>');
                     n.on('click',{city:city},function(evt){that.filter_city(evt.data.city)});
+                    this.filterbox.append(n);
                     this.cities[city] = {
                         node:n,
                         projects:[]
@@ -30,17 +37,23 @@ window.bMa.Filter = function(container){
                 }
                 this.cities[city].projects.push(project);
                 
-                var fn = project.get('functions')[0][1];
-                if(this.functions[fn] === undefined)
+                var fn_a = project.get('functions');
+                if(fn_a.length > 0)
                 {
-                    var n = $('<div class="filter-item filter-item-function">'+fn+'</div>');
-                    n.on('click',{fn:fn},function(evt){that.filter_function(evt.data.fn)});
-                    this.functions[fn] = {
-                        node:n,
-                        projects:[]
-                    };
+                    var fn = fn_a[0][1];
+                    if(this.functions[fn] === undefined)
+                    {
+                        var n = $('<div class="filter-item filter-item-function">'+fn+'</div>');
+                        n.on('click',{fn:fn},function(evt){that.filter_function(evt.data.fn)});
+                        this.filterbox.append(n);
+                        this.functions[fn] = {
+                            node:n,
+                            projects:[]
+                        };
+                    }
+                    this.functions[fn].projects.push(project);
                 }
-                this.functions[fn].projects.push(project);
+                
             }
         },
         reset:function(show){

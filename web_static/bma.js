@@ -6,7 +6,7 @@ function InitMap()
     
     var map = bMa.Map('map');
 //     var csl = bMa.Console($('#console'), map);
-    var legend = bMa.Legend($('#legend-box'));
+    var legend = bMa.Legend($('#legend-box'), map);
     var selector = bMa.LayerSelector($('#layer-selector'), map);
     var zoom_control = bMa.ZoomControl(map, $('#zoom-control-box'));
     
@@ -19,7 +19,6 @@ function InitMap()
         article.show(aid);
     });
     
-    var filter = bMa.Filter($('#filter-box'));
     
     
     for(var key in WMS_CONFIG)
@@ -61,6 +60,9 @@ function InitMap()
         {
             legend.show(cur_p);
         }
+        
+        
+        var filter = bMa.Filter($('#filter-box'));
     });
 }
 
