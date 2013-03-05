@@ -35,8 +35,8 @@ font-family:'OSP_helvetica_serif';
 @fontH:Helvetica, Arial;
 @topH:40px;
 @consoleW:200px;
-@marginEXT : 10px;
-@marginINT : 20px;
+@marginEXT : 15px;
+@marginINT : 30px;
 @bordermap : 1px;
 @Wmap-wrapper: ~"100% - 2 * @{marginEXT}";
 @Hmap-wrapper: ~"100% - @{marginEXT} - @{topH}";
@@ -111,7 +111,7 @@ body{height: 100%; }
 
 /* z-index */
 #top{z-index:100;}
-#bma-overlay-0{z-index:80;}
+#bma-overlay-0{z-index:90;}
 #bma-overlay-1{z-index:80;}
 #bma-overlay-2{z-index:80;}
 #bma-overlay-3{z-index:80;}
@@ -165,9 +165,9 @@ body{height: 100%; }
 #bma-overlay-0 {
     opacity: @printopacity;
     position:absolute;
-    width:232px; 
-    left: (@marginEXT + @marginINT + @bordermap - 11px); 
-    top:(@topH + @marginINT + @bordermap - 11px);
+    width:330px; 
+    left: (@marginEXT + @marginINT + @bordermap); 
+    top:(@topH + @bordermap + 5px);
     
     #zoom-control-box {
         height: 30px;
@@ -196,7 +196,7 @@ body{height: 100%; }
         }  
         .zoom-control-in {
             float: left;
-            clear: right;
+            clear: none;
             margin-left: 5px;    
             .zoomCTRL;
         }   
@@ -208,9 +208,10 @@ body{height: 100%; }
  ************************/    
 
 #layer-selector {
+    position:absolute;
+    right: 0px;
+    top: 3px;
     display: block;
-    float: none;
-    clear: both;
     font-size: 12px;
     width: 100px;
     background-color: red;
