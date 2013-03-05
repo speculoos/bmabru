@@ -9,7 +9,7 @@ window.bMa.Article = function(container)
     var proto = {
         init:function(container){
             this.container = container;
-            this.container.hide();
+            this.container.parent().hide();
             this.menu = $('<div class="menu-box"></div>');
             this.content = $('<div class="article-box"></div>');
             this.container.append(this.menu);
@@ -57,7 +57,7 @@ window.bMa.Article = function(container)
             this.content.append('<div class="article-body">'
                                 +article.body
                                 +'</div>');
-            this.container.show();
+            this.container.parent().show();
         },
         show:function(article_id){
             var cat = this.find_cat(article_id);
@@ -76,7 +76,7 @@ window.bMa.Article = function(container)
             }
         },
         hide:function(){
-            this.container.hide();
+            this.container.parent().hide();
         },
     };
     
