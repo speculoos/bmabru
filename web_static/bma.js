@@ -27,16 +27,6 @@ function InitMap()
     }
     
     
-    var ovl_options = {
-        stroke:true,
-        color: '#d43b2d',
-        weight:1,
-        opacity:1,
-        fill:true,
-        fillColor: '#d43b2d',
-        fillOpacity:0.5,
-        clickable:true
-    };
     $.getJSON(bmabru_json_url, function( projects_data ){
         var cur_p = undefined;
         for(var idx = 0; idx < projects_data.length; idx++)
@@ -50,13 +40,19 @@ function InitMap()
                 cur_p = p;
             }
             var geo = p.get('geojson');
-            var ovl = new L.GeoJSON(geo, {style:function(f){ return ovl_options;}});
+            var ovl = new L.GeoJSON(geo, {
+                style:function(f){ 
+                    return bMa.Config().get_dict('/feature/style/show');
+                }
+            });
             map.add_overlay('bMa', ovl);
             
             ovl.on('click', function(evt){
                 article.hide();
                 legend.show(this);
             }, p);
+            
+            p.layer = ovl;
         }
         
         if(cur_p !== undefined)

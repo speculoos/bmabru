@@ -23,14 +23,17 @@
 	<script src="{{STATIC_URL}}jquery-1.8.2.js"></script>
 	<script src="{{STATIC_URL}}lessjs/dist/less-1.4.0-alpha.min.js"></script>
 	<script src="{{STATIC_URL}}leaflet/dist/leaflet.js"></script>
-    <!--     <script src="{{STATIC_URL}}lib/WKT.js"></script> -->
-    <script src="{{STATIC_URL}}lib/Map.js"></script>
-    <script src="{{STATIC_URL}}lib/Project.js"></script>
-    <script src="{{STATIC_URL}}lib/Console.js"></script>
-    <script src="{{STATIC_URL}}lib/Legend.js"></script>
-    <script src="{{STATIC_URL}}lib/LayerSelector.js"></script>
-    <script src="{{STATIC_URL}}lib/ZoomControl.js"></script>
+	
     <script src="{{STATIC_URL}}lib/Article.js"></script>
+    <script src="{{STATIC_URL}}lib/Config.js"></script>
+    <script src="{{STATIC_URL}}lib/Console.js"></script>
+    <script src="{{STATIC_URL}}lib/Filter.js"></script>
+    <script src="{{STATIC_URL}}lib/LayerSelector.js"></script>
+    <script src="{{STATIC_URL}}lib/Legend.js"></script>
+	<script src="{{STATIC_URL}}lib/Map.js"></script>
+    <script src="{{STATIC_URL}}lib/Project.js"></script>
+    <script src="{{STATIC_URL}}lib/ZoomControl.js"></script>
+    
     <script src="{{STATIC_URL}}wms.config.js"></script>
     <script src="{{STATIC_URL}}bma.js"></script>
     {% endblock %}
@@ -77,6 +80,9 @@
         </div>
         <div id="bma-overlay-2">
             <div id="page-box"></div>
+        </div>
+        <div id="bma-overlay-3">
+            <div id="filter-box"></div>
         </div>
         <div id="map"></div>
     </div>
