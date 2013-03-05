@@ -4,11 +4,12 @@
 
 window.bMa = window.bMa || {}
 
-window.bMa.Legend = function(container)
+window.bMa.Legend = function(container, map)
 {
     var proto = {
-        init:function(container){
+        init:function(container, map){
             this.container = container;
+            this.map = map;
             this.container.parent().hide();
             this.wrapper = $('<div class="project-box"></div>');
             var elems = 'title description address city partners'.split(' ');
@@ -22,6 +23,7 @@ window.bMa.Legend = function(container)
             this.container.append(this.wrapper);
         },
         show:function(project){
+            this.map.map.fitBounds(project.layer.getBounds());
             var proj_name = $('<a class="project-link" href="/project/'+project.get('slug')+'">'+project.get('name')+'</a>');
             this.elements.title.empty();
             this.elements.title.append(proj_name);
@@ -45,6 +47,6 @@ window.bMa.Legend = function(container)
     };
     
     var ret = Object.create(proto);
-    ret.init(container);
+    ret.init(container, map);
     return ret;
 };
