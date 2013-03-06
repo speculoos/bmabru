@@ -62,7 +62,7 @@ function InitMap()
         }
         
         
-        var filter = bMa.Filter($('#filter-box'));
+        var filter = bMa.Filter($('#filter-box'), map);
     });
 }
 
