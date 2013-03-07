@@ -186,11 +186,21 @@ for p in pdata:
     except Exception:
         print 'No description for %s %s'%(p['ID'], ue(p['TITLE']['fre']))
         
+    
     try:
-        new_p.address_fr = ue(p['ADDRESS']['fre']) 
-        new_p.address_nl = ue(p['ADDRESS']['dut'])
+        address = p['ADDRESS']
+        try:
+            new_p.address_fr = ue(address['fre']) 
+        except Exception:
+            print 'No FRE address for %s %s'%(p['ID'], ue(p['TITLE']['fre']))
+        try:
+            new_p.address_nl = ue(address['dut'])
+        except Exception:
+            print 'No DUT address for %s %s'%(p['ID'], ue(p['TITLE']['fre']))
+            
     except Exception:
         print 'No address for %s %s'%(p['ID'], ue(p['TITLE']['fre']))
+        
     
     try:
         new_p.city = cities[p['ZIP']['value']]['django_id']

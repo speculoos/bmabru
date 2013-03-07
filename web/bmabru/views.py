@@ -64,6 +64,11 @@ def index(request):
     data = {'category':Category.objects.all()}
     return render_to_response("index.html", data, context_instance = RequestContext(request))
     
+def projects(request):
+    prjcts = Project.objects.filter(published=True)
+    cats = Category.objects.all()
+    return render_to_response("projects.html", {'category':cats, 'projects':prjcts}, context_instance = RequestContext(request))
+
 def project(request, project):
     data = {'category':Category.objects.all()}
     try:
@@ -76,5 +81,5 @@ def project(request, project):
 def projects_json(request):
     #jr = serializers.get_serializer("json")()
     jr = GeoSerial()
-    data = jr.serialize(Project.objects.all(), indent=2, use_natural_keys=True, props=['centroid','geojson'])
+    data = jr.serialize(Project.objects.filter(published=True), indent=2, use_natural_keys=True, props=['centroid','geojson'])
     return HttpResponse(data, mimetype="application/json")

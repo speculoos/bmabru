@@ -46,6 +46,14 @@ window.bMa.Project = function(args){
                 var options = config.get_dict('/feature/style/show');
                 this.layer.setStyle(function(f){ return options;});
             }
+        },
+        bounds:function(){
+            if(this.layer === undefined || this.data.geojson.coordinates.length === 0)
+            {
+                var llb = new L.LatLngBounds();
+                return llb;
+            }
+            return this.layer.getBounds();
         }
     };
     

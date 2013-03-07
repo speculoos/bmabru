@@ -36,7 +36,7 @@ class CityTrOptions(TranslationOptions):
     fields = ('name',)
     
 class ProjectTrOptions(TranslationOptions):
-    fields = ('name', 'description')
+    fields = ('name', 'description', 'address')
 
 translator.register(PartnerType, PartnerTypeTrOptions)
 translator.register(Partner, PartnerTrOptions)

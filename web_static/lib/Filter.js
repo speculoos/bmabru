@@ -5,20 +5,22 @@
 
 window.bMa = window.bMa || {}
 
-window.bMa.Filter = function(container){
+window.bMa.Filter = function(container, map){
     
     var proto = {
-        init:function(container){
+        init:function(container, map){
             this.container = container;
+            this.map = map;
             this.filters = {};
-            
-            this.filterbox = $('<div id="filter-filter" />');
-            this.listbox = $('<div id="filter-list" />');
-            
-            this.container.append(this.filterbox);
-            this.container.append(this.listbox);
-            
             var that = this;
+            
+            this.selector = bMa.Selector(container, 'Projects Filter');
+            this.selector.add_item('All Projects',{
+                click:function(evt){
+                    that.reset(true);
+                }},
+                'filter-reset');
+
             this.cities = {};
             this.functions = {};
             for(var p in bMa.Projects)
@@ -27,11 +29,8 @@ window.bMa.Filter = function(container){
                 var city = project.get('city').slice(1);
                 if(this.cities[city] === undefined)
                 {
-                    var n = $('<div class="filter-item filter-item-function">'+city+'</div>');
-                    n.on('click',{city:city},function(evt){that.filter_city(evt.data.city)});
-                    this.filterbox.append(n);
                     this.cities[city] = {
-                        node:n,
+                        node:city,
                         projects:[]
                     };
                 }
@@ -43,11 +42,8 @@ window.bMa.Filter = function(container){
                     var fn = fn_a[0][1];
                     if(this.functions[fn] === undefined)
                     {
-                        var n = $('<div class="filter-item filter-item-function">'+fn+'</div>');
-                        n.on('click',{fn:fn},function(evt){that.filter_function(evt.data.fn)});
-                        this.filterbox.append(n);
                         this.functions[fn] = {
-                            node:n,
+                            node:fn,
                             projects:[]
                         };
                     }
@@ -55,8 +51,39 @@ window.bMa.Filter = function(container){
                 }
                 
             }
+            this.selector.add_label('Cities');
+            for(var k in this.cities)
+            {
+                this.selector.add_item(k, {
+                    click:{
+                        callback:function(evt){
+                        that.filter_city(evt.data.city);
+                        },
+                        data:{
+                            city:k
+                        }
+                    }
+                });
+            }
+            
+            this.selector.add_label('Functions');
+            for(var k in this.functions)
+            {
+                this.selector.add_item(k, {
+                    click:{
+                        callback:function(evt){
+                            that.filter_city(evt.data.fn);
+                        },
+                        data:{
+                            fn:k
+                        }
+                    }
+                });
+            }
+            
         },
         reset:function(show){
+            var bounds = undefined;
             for(var p in bMa.Projects)
             {
                 var project = bMa.Projects[p];
@@ -64,15 +91,40 @@ window.bMa.Filter = function(container){
                     project.show_layer();
                 else
                     project.hide_layer();
+                if(bounds === undefined)
+                {
+                    if(project.bounds().isValid())
+                        bounds = project.bounds();
+                }
+                else
+                {
+                    if(project.bounds().isValid())
+                        bounds.extend(project.bounds());
+                }
             }
+            if(bounds !== undefined)
+                this.map.map.fitBounds(bounds);
         },
         filter_city:function(city){
             this.reset(false);
             var ps = this.cities[city].projects;
+            var bounds = undefined;
             for(var i=0; i<ps.length; i++)
             {
                 ps[i].show_layer();
+                if(bounds === undefined)
+                {
+                    if(ps[i].bounds().isValid())
+                        bounds = ps[i].bounds();
+                }
+                else
+                {
+                    if(ps[i].bounds().isValid())
+                        bounds.extend(ps[i].bounds());
+                }
             }
+            if(bounds !== undefined)
+                this.map.map.fitBounds(bounds);
         },
         filter_function:function(fn){
             this.reset(false);
@@ -86,6 +138,6 @@ window.bMa.Filter = function(container){
     };
     
     var ret = Object.create(proto);
-    ret.init(container);
+    ret.init(container, map);
     return ret;
 };
