@@ -19,18 +19,18 @@ window.bMa.Article = function(container)
         },
         make_menu:function(cat, citem){
             var medias = window.bma_medias[cat];
-            var items = medias[cat];
+            var items = medias;
             this.menu.empty();
             var that = this;
             for(var ik in items)
             {
-                var item = $('<div class="menu_item" id="menu_item_'+items[ik]+'">'+ik+'</div>');
-                if(citem === items[ik])
+                var item = $('<div class="menu_item" id="menu_item_'+items[ik]+'">'+items[ik]+'</div>');
+                if(citem === ik)
                 {
                     item.addClass('menu_item_current');
                 }
                 this.menu.append(item);
-                item.on('click', {aid:items[ik]}, function(evt){
+                item.on('click', {aid:ik}, function(evt){
                     that.show(evt.data.aid);
                 });
             }
