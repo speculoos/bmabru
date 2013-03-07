@@ -21,6 +21,7 @@ window.bMa.Article = function(container)
             var medias = window.bma_medias[cat];
             var items = medias;
             this.menu.empty();
+            this.menu.append('<div class="menu-title">'+cat+'</div>');
             var that = this;
             for(var ik in items)
             {
