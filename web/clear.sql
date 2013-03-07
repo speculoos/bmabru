@@ -1,21 +1,17 @@
 BEGIN;
-DROP TABLE "bmabru_project" CASCADE;
-DROP TABLE "bmabru_project_steps" CASCADE;
-DROP TABLE "bmabru_project_programs" CASCADE;
-DROP TABLE "bmabru_project_actions" CASCADE;
-DROP TABLE "bmabru_project_partners" CASCADE;
-DROP TABLE "bmabru_project_functions" CASCADE;
-DROP TABLE "bmabru_project_image" CASCADE;
-DROP TABLE "bmabru_city" CASCADE;
-DROP TABLE "bmabru_step" CASCADE;
-DROP TABLE "bmabru_action" CASCADE;
-DROP TABLE "bmabru_projectstatus" CASCADE;
-DROP TABLE "bmabru_mission" CASCADE;
-DROP TABLE "bmabru_function" CASCADE;
-DROP TABLE "bmabru_projectimage" CASCADE;
-DROP TABLE "bmabru_procedure" CASCADE;
-DROP TABLE "bmabru_program" CASCADE;
-DROP TABLE "bmabru_partner" CASCADE;
-DROP TABLE "bmabru_partnertype" CASCADE;
+TRUNCATE "bmabru_project_partners", "bmabru_projectimage", "bmabru_action", "bmabru_partnertype", "bmabru_function", "bmabru_project_image", "bmabru_partner", "bmabru_project", "bmabru_mission", "bmabru_project_functions", "bmabru_city", "bmabru_project_steps", "bmabru_step", "bmabru_program", "bmabru_projectstatus", "bmabru_project_programs",  "bmabru_procedure", "bmabru_project_actions";
+
+SELECT setval(pg_get_serial_sequence('"bmabru_partnertype"','id'), 1, false);
+SELECT setval(pg_get_serial_sequence('"bmabru_partner"','id'), 1, false);
+SELECT setval(pg_get_serial_sequence('"bmabru_program"','id'), 1, false);
+SELECT setval(pg_get_serial_sequence('"bmabru_procedure"','id'), 1, false);
+SELECT setval(pg_get_serial_sequence('"bmabru_projectimage"','id'), 1, false);
+SELECT setval(pg_get_serial_sequence('"bmabru_function"','id'), 1, false);
+SELECT setval(pg_get_serial_sequence('"bmabru_mission"','id'), 1, false);
+SELECT setval(pg_get_serial_sequence('"bmabru_projectstatus"','id'), 1, false);
+SELECT setval(pg_get_serial_sequence('"bmabru_action"','id'), 1, false);
+SELECT setval(pg_get_serial_sequence('"bmabru_step"','id'), 1, false);
+SELECT setval(pg_get_serial_sequence('"bmabru_city"','id'), 1, false);
+SELECT setval(pg_get_serial_sequence('"bmabru_project"','id'), 1, false);
 
 COMMIT;

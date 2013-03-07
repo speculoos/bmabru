@@ -14,23 +14,13 @@ window.bMa.Filter = function(container, map){
             this.filters = {};
             var that = this;
             
-            this.filterbox = $('<div id="filter-filter" />');
-            this.filterbox_city = $('<div />');
-            var all_city = $('<div id="filter-all-city">Toutes les communes</div>');
-            all_city.on('click',function(){that.reset(true)});
-            this.filterbox_city.append(all_city);
-            this.filterbox_functions = $('<div />');
-            var all_functions = $('<div id="filter-all-city">Toutes les fonctions</div>');
-            all_functions.on('click',function(){that.reset(true)});
-            this.filterbox_functions.append(all_functions);
-            this.filterbox.append(this.filterbox_city);
-            this.filterbox.append(this.filterbox_functions);
-            
-            this.listbox = $('<div id="filter-list" />');
-            
-            this.container.append(this.filterbox);
-            this.container.append(this.listbox);
-            
+            this.selector = bMa.Selector(container, 'Projects Filter');
+            this.selector.add_item('All Projects',{
+                click:function(evt){
+                    that.reset(true);
+                }},
+                'filter-reset');
+
             this.cities = {};
             this.functions = {};
             for(var p in bMa.Projects)
@@ -39,11 +29,8 @@ window.bMa.Filter = function(container, map){
                 var city = project.get('city').slice(1);
                 if(this.cities[city] === undefined)
                 {
-                    var n = $('<div class="filter-item filter-item-function">'+city+'</div>');
-                    n.on('click',{city:city},function(evt){that.filter_city(evt.data.city)});
-                    this.filterbox_city.append(n);
                     this.cities[city] = {
-                        node:n,
+                        node:city,
                         projects:[]
                     };
                 }
@@ -55,11 +42,8 @@ window.bMa.Filter = function(container, map){
                     var fn = fn_a[0][1];
                     if(this.functions[fn] === undefined)
                     {
-                        var n = $('<div class="filter-item filter-item-function">'+fn+'</div>');
-                        n.on('click',{fn:fn},function(evt){that.filter_function(evt.data.fn)});
-                        this.filterbox_functions.append(n);
                         this.functions[fn] = {
-                            node:n,
+                            node:fn,
                             projects:[]
                         };
                     }
@@ -67,6 +51,24 @@ window.bMa.Filter = function(container, map){
                 }
                 
             }
+            this.selector.add_label('Cities');
+            for(var k in this.cities)
+            {
+                this.selector.add_item(k, {
+                    click:function(evt){
+                        that.filter_city(k);
+                }});
+            }
+            
+            this.selector.add_label('Functions');
+            for(var k in this.functions)
+            {
+                this.selector.add_item(k, {
+                    click:function(evt){
+                        that.filter_function(k);
+                    }});
+            }
+            
         },
         reset:function(show){
             var bounds = undefined;
