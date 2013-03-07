@@ -58,6 +58,12 @@ window.bMa.Article = function(container)
             this.content.append('<div class="article-body">'
                                 +article.body
                                 +'</div>');
+            var image = $('<div class="article-image" />');
+            if(article.image)
+            {
+                image.append('<image src="/web_media/'+article.image+'" width="'+article.width+'" height="'+article.height+'" />');
+            }
+            this.content.append(image);
             this.container.parent().show();
         },
         show:function(article_id){

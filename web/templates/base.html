@@ -65,7 +65,7 @@
             <ul>
             {% for page in cat.page_set.all %}
                 <li class="page-ref" id="page_ref_{{page.id}}">
-                    <a href="/media/{{page.slug}}">{{page.title}}</a>
+                    <span>{{page.title}}</span>
                 </li>
             {% endfor %}
             </ul>

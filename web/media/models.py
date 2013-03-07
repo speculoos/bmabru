@@ -29,6 +29,9 @@ class Page(models.Model):
     body = models.TextField()
     published = models.BooleanField(default=False)
     resources = models.ManyToManyField('Resource', blank=True)
+    image = models.ImageField(upload_to='media_page', height_field='image_height', width_field='image_width', blank=True)
+    image_width = models.IntegerField(blank=True, default=0)
+    image_height = models.IntegerField(blank=True, default=0)
     
     def __unicode__(self):
         return self.title
