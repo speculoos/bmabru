@@ -28,7 +28,7 @@ window.bMa.Legend = function(container, map)
             this.elements.title.empty();
             this.elements.title.append(proj_name);
             this.elements.description.text(project.get('description'));
-            this.elements.address.text(project.get('address', 1));
+            this.elements.address.text(project.get('address'));
             this.elements.city.text(project.get('city', 1) + ' ' + project.get('city', 2));
             var partners = project.get('partners');
             var pstring = '';

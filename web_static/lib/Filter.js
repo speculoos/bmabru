@@ -55,18 +55,30 @@ window.bMa.Filter = function(container, map){
             for(var k in this.cities)
             {
                 this.selector.add_item(k, {
-                    click:function(evt){
-                        that.filter_city(k);
-                }});
+                    click:{
+                        callback:function(evt){
+                        that.filter_city(evt.data.city);
+                        },
+                        data:{
+                            city:k
+                        }
+                    }
+                });
             }
             
             this.selector.add_label('Functions');
             for(var k in this.functions)
             {
                 this.selector.add_item(k, {
-                    click:function(evt){
-                        that.filter_function(k);
-                    }});
+                    click:{
+                        callback:function(evt){
+                            that.filter_city(evt.data.fn);
+                        },
+                        data:{
+                            fn:k
+                        }
+                    }
+                });
             }
             
         },

@@ -50,7 +50,14 @@ window.bMa.Selector = function(container, label){
             {
                 for(var k in callbacks)
                 {
-                    item.on(k, callbacks[k]);
+                    if((typeof callbacks[k]) === 'function')
+                    {
+                        item.on(k, callbacks[k]);
+                    }
+                    else // we assume {callback: fn, data: {}}
+                    {
+                        item.on(k, callbacks[k].data, callbacks[k].callback);
+                    }
                 }
             }
             this.items.append(item);
