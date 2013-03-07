@@ -71,7 +71,7 @@ font-family:'OSP_helvetica_serif';
     background-color: red;
     padding: 0px 6px;
     color: white;
-    .zoomrounded;
+    .zoomrounded (3px);
     } 
     
 .overlays {
@@ -238,11 +238,14 @@ body{height: 100%; }
     opacity: @printopacity;
     position:absolute;
     width:500px; 
-    left: (@marginEXT + @marginINT + @bordermap); 
+    right: (@marginEXT + @marginINT + @bordermap); 
     bottom:(@marginINT / 2 + @Hzoomcontrol / 4 + @bordermap);
     
     #zoom-control-box {
-        background-color: #000;
+        position: absolute;
+        width: 200px;
+        right: 0px;
+        bottom: 0px;
 
         .zoom-control-out {
             float: left;
@@ -275,15 +278,27 @@ body{height: 100%; }
     }
     #layer-selector {
     .map-controls;
-    right: 160px;
-    bottom: 3px;    
-    
+    right: 210px;
+    bottom: 3px;   
+    width: 70px; 
+
+        .selector-items-open {
+          padding-bottom: 6px;
+        }    
+        
+        .selector-item-selected {
+          text-decoration: underline;
+        }    
     }
     
     #filter-box {
     .map-controls;
-    right: 0px;
+    right: 300px;
     bottom: 3px;
+        
+        .selector-items-open {
+          padding-bottom: 6px;
+        }
     
         .filter-reset {
           text-align: right;
