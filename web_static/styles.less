@@ -90,6 +90,8 @@ font-family:'OSP_helvetica_serif';
 @Hmap-wrapper: ~"100% - @{marginEXT} - @{topH}";
 @WHmap-wrapper-2: ~"100% - 2 * @{marginINT} - 2 * @{bordermap}";
 @Hproject: ~"100% - 2 * @{marginINT} - 2 * @{bordermap} - @{marginEXT} - @{topH}";
+@Warticle: 400px;
+@Wmenu: 150px;
 @printopacity : 0.7;
 
 /* ruleset */
@@ -107,8 +109,9 @@ font-family:'OSP_helvetica_serif';
     background-color: red;
     color: white;
     text-align: center;
-    font-size: 15px;
-    vertical-align:text-top;
+    font-size: 15pt;
+    line-height: 17px;
+    font-family: @bold;
     .zoomrounded;
     }
     
@@ -142,11 +145,6 @@ font-family:'OSP_helvetica_serif';
      color: white;
 }
 
-.text {
-     text-decoration:none;
-     font-size:10pt;
-}
-
 .infofield {
      border-top: 1px solid #000;
      padding: 10px 0px;
@@ -154,7 +152,7 @@ font-family:'OSP_helvetica_serif';
 
 /* reset */
 *, p, div, ul, li, h1, h2, h3, h4, h5, h6{padding:0; margin:0;}
-body{font-family:'FreeSans', Helvetica, Arial; text-align:left; margin:0px; }
+body{font-family:'FreeSans', Helvetica, Arial; text-align:left; margin:0px; font-size: 10pt;}
 a, .link{cursor:pointer;}
 
 /* position and dimensions */
@@ -292,36 +290,38 @@ body{height: 100%; }
         width: 200px;
         right: 0px;
         bottom: 0px;
+        height: @Hzoomcontrol;
 
-        .zoom-control-out {
-            float: left;
-            margin-right: 5px;
-            .zoomCTRL;
-        }
-    
-        .zoom-control-scale-scale{
-            width:150px;
-            float: left;
-            opacity: @printopacity;
-    
-            .zoom-control-scale-part{
-                display:inline-block;
-                height:6px;
-                &.zoom-control-scale-part-light{
-                    background-color: white;
-                }
-                &.zoom-control-scale-part-dark{
-                    background-color: red;
-                }
+            .zoom-control-out {
+                float: left;
+                margin-right: 5px;
+                .zoomCTRL;
             }
-        }  
-        .zoom-control-in {
-            float: left;
-            clear: none;
-            margin-left: 5px;    
-            .zoomCTRL;
-        }   
+        
+            .zoom-control-scale-scale{
+                width:148px;
+                float: left;
+                opacity: @printopacity;
+        
+                .zoom-control-scale-part{
+                    display:inline-block;
+                    
+                    &.zoom-control-scale-part-light{
+                        background-color: white;
+                    }
+                    &.zoom-control-scale-part-dark{
+                        background-color: red;
+                    }
+                }
+            }  
+            .zoom-control-in {
+                float: left;
+                clear: none;
+                margin-left: 5px;    
+                .zoomCTRL;
+            }   
     }
+    
     #layer-selector {
     .map-controls;
     right: 210px;
@@ -377,7 +377,6 @@ body{height: 100%; }
       display: block;
 
           .project-box{
-                .text;   
                 padding:0px @marginINT 0px 0px ;
               
               .project-title{
@@ -404,51 +403,46 @@ body{height: 100%; }
       }
 }
 
+/************************
+ *  Articles and Menu
+ * 
+ ************************/
+
 #bma-overlay-2 {
     .overlays;
     left: (@marginEXT + @marginINT + @bordermap);
-    width:464px;  
+    width: (@Warticle + @Wmenu);  
+    padding:0px @marginINT 0px 0px;
+
     
-        #page-box{
-           .text;   
-           padding:0px @marginINT 0px 0px;
+        .article-box{
+           max-width: (@Warticle);
+           display: block;
+           float: left; 
+
          
-         .article-title{
-             .bluetitle;
-          }
-             
-          .article-body {
-          
-              p {
-                 margin-bottom: 10px;
+             .article-title{
+                 .bluetitle;
+              }
+                 
+              .article-body {
+              
+                  p {
+                     margin-bottom: 10px;
+                 }
              }
-         }
-    }
+        }
+        
+        .menu-box {
+        display: block;
+        width: @Wmenu;
+        min-height: 100%;
+        float: left;
+        background-color: white;
+        font-size: 8pt;
+        }
 }
 
-
-#bma-overlay-3 {
-    display:none;
-    .overlays;
-    left: (@marginEXT + @marginINT + @bordermap);
-    width:464px;  
-    
-        #page-box{
-           .text;   
-           padding:0px 6px 0px 0px;
-         
-         .article-title{
-             .bluetitle;
-          }
-             
-          .article-body {
-          
-              p {
-                 margin-bottom: 10px;
-             }
-         }
-    }
-}
 
 #console{
     top:@topH; 
