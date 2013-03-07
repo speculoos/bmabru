@@ -24,6 +24,8 @@ window.bMa.LayerSelector = function(container, map){
                     that.select(name);
                 }
             });
+            
+            that.select(name);
         },
 //         update:function(name){
 //             if(name === undefined)
