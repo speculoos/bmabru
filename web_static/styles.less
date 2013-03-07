@@ -92,7 +92,7 @@ font-family:'OSP_helvetica_serif';
 @Hproject: ~"100% - 2 * @{marginINT} - 2 * @{bordermap} - @{marginEXT} - @{topH}";
 @Warticle: 400px;
 @Wmenu: 150px;
-@printopacity : 0.7;
+@printopacity : 0.9;
 
 /* ruleset */
 .zoomrounded (@radius: 10px) {
@@ -106,7 +106,7 @@ font-family:'OSP_helvetica_serif';
 .zoomCTRL {
     width: 20px;
     height: 20px;
-    background-color: red;
+    background-color: @red;
     color: white;
     text-align: center;
     font-size: 15pt;
@@ -118,7 +118,7 @@ font-family:'OSP_helvetica_serif';
 .map-controls {
     position:absolute;
     font-size: 8pt;
-    background-color: red;
+    background-color: @red;
     padding: 0px 6px;
     color: white;
     .zoomrounded (3px);
@@ -134,15 +134,24 @@ font-family:'OSP_helvetica_serif';
     background-color: white;
 }
 
-.bluetitle {
+.Title {
      padding:2px 6px 0px 6px;
      font-size:14pt;
      font-family: 'URWGothicL', Arial, Helvetica;  
      text-transform:uppercase;
      letter-spacing:2px;
      display:inline-block;
-     background-color: @blue;
      color: white;
+}
+
+.bluetitle {
+     background-color: @blue;
+     .Title;
+}
+
+.redtitle {
+     background-color: @red;
+     .Title;
 }
 
 .infofield {
@@ -254,7 +263,7 @@ body{height: 100%; }
         height: -moz-calc(@WHmap-wrapper-2); 
         height: -o-calc(@WHmap-wrapper-2); 
         padding: @marginINT;
-        border: @bordermap dotted #000;
+        border: @bordermap solid #000;
         
         #map{
           width:100%; 
@@ -310,7 +319,7 @@ body{height: 100%; }
                         background-color: white;
                     }
                     &.zoom-control-scale-part-dark{
-                        background-color: red;
+                        background-color: @red;
                     }
                 }
             }  
@@ -410,8 +419,8 @@ body{height: 100%; }
 
 #bma-overlay-2 {
     .overlays;
-    left: (@marginEXT + @marginINT + @bordermap);
-    width: (@Warticle + @Wmenu);  
+    left: (@marginEXT + @bordermap);
+    width: (@Warticle + @Wmenu + 2 * @marginINT);  
     padding:0px @marginINT 0px 0px;
 
     
@@ -422,7 +431,7 @@ body{height: 100%; }
 
          
              .article-title{
-                 .bluetitle;
+                 .redtitle;
               }
                  
               .article-body {
@@ -440,6 +449,7 @@ body{height: 100%; }
         float: left;
         background-color: white;
         font-size: 8pt;
+        margin-right: @marginINT;
         }
 }
 
@@ -458,7 +468,7 @@ div.console_item{
     position:absolute;
     width:80%;
     min-height:3px;
-/*     border:1px solid red; */
+/*     border:1px solid @red; */
     font-size:8pt;
     padding-left:10%;
     
