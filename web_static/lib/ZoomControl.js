@@ -27,8 +27,10 @@ window.bMa.ZoomControl = function(map, container){
         scale: function(){
             this.scale_container = $('<div class="zoom-control-scale-scale" />');
             var that = this;
-            function scale_resize(scale_factor){
+            function scale_resize(map){
                 that.scale_container.empty();
+//                 var aKilometer = map.project();
+                var scale_factor= map.getZoom();
                 var width = that.scale_container.width();
                 var steps = Math.floor(width / (scale_factor));
                 var step_width = Math.floor(width / steps);
@@ -51,15 +53,15 @@ window.bMa.ZoomControl = function(map, container){
                 }
             };
             that.scale_container.on('resize',function(evt){
-                scale_resize(lmap.getZoom());
+                scale_resize(lmap);
             });
             var lmap = this.map.map;
             lmap.on('zoomend', function(evt){
-                scale_resize(lmap.getZoom());
+                scale_resize(lmap);
             });
-            var zoom = lmap.getZoom();
-            console.log('Initial Zoom: '+zoom);
-            scale_resize(zoom);
+//             var zoom = lmap.getZoom();
+//             console.log('Initial Zoom: '+zoom);
+            scale_resize(lmap);
             return that.scale_container;
             
         },

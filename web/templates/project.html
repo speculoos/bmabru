@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}bMa -- {{current_project.name}}{% endblock %}
+{% block script_data %}
+{% if current_project %}
+var bma_current_project = {{current_project.id}};
+{% endif %}
+{% endblock %}

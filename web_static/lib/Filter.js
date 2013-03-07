@@ -72,7 +72,7 @@ window.bMa.Filter = function(container, map){
                 this.selector.add_item(k, {
                     click:{
                         callback:function(evt){
-                            that.filter_city(evt.data.fn);
+                            that.filter_function(evt.data.fn);
                         },
                         data:{
                             fn:k
