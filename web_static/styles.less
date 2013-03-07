@@ -38,6 +38,7 @@ font-family:'OSP_helvetica_serif';
 @marginEXT : 15px;
 @marginINT : 30px;
 @bordermap : 1px;
+@Hzoomcontrol : 20px;
 @Wmap-wrapper: ~"100% - 2 * @{marginEXT}";
 @Hmap-wrapper: ~"100% - @{marginEXT} - @{topH}";
 @WHmap-wrapper-2: ~"100% - 2 * @{marginINT} - 2 * @{bordermap}";
@@ -63,6 +64,15 @@ font-family:'OSP_helvetica_serif';
     vertical-align:text-top;
     .zoomrounded;
     }
+    
+.map-controls {
+    position:absolute;
+    font-size: 8pt;
+    background-color: red;
+    padding: 0px 6px;
+    color: white;
+    .zoomrounded;
+    } 
     
 .overlays {
     position:absolute;
@@ -118,6 +128,61 @@ body{height: 100%; }
 #console{z-index:70;}
 #map{z-index:50;}
 
+/* elements */
+#top {
+	font-size:11px; letter-spacing:0.05em;
+	ul{ list-style:none; 
+		li{
+			height:@topH;
+			background:white;
+			float:left;
+			position:relative;
+			padding:0px 10px;
+
+			a{
+               	text-transform:uppercase; 
+               	position:relative; 
+               	top:15px;
+               }
+
+			ul{
+				display:none;
+				position:absolute;
+				top:@topH;
+				left:0;
+				text-align:left;
+				width: 100px;
+				border: 1px solid #000;
+				margin-left: 13px;
+				padding: 5px 0px;
+
+
+				li{
+        				padding:0; 
+        				margin-bottom:2px; 
+        				float:none; 
+        				height:auto;
+        			}
+
+				a{
+      				text-transform:none; 
+      				position:static;
+
+					&:hover{color:@hred;}
+				}
+			}
+			&:hover{background:white;
+				ul{background:white; display:block;
+				   width: 100px;}
+				}
+			&:first-child{
+				a{top:5px;}
+			}
+		}
+	}
+	a{color:#000; padding:2px 4px 1px; text-decoration:none;}
+}
+
 
 /************************
  *  Map & borders map
@@ -172,13 +237,13 @@ body{height: 100%; }
 #bma-overlay-0 {
     opacity: @printopacity;
     position:absolute;
-    width:330px; 
+    width:500px; 
     left: (@marginEXT + @marginINT + @bordermap); 
-    top:(@topH + @bordermap + 5px);
+    bottom:(@marginINT / 2 + @Hzoomcontrol / 4 + @bordermap);
     
     #zoom-control-box {
-        height: 30px;
-            
+        background-color: #000;
+
         .zoom-control-out {
             float: left;
             margin-right: 5px;
@@ -207,6 +272,32 @@ body{height: 100%; }
             margin-left: 5px;    
             .zoomCTRL;
         }   
+    }
+    #layer-selector {
+    .map-controls;
+    right: 160px;
+    bottom: 3px;    
+    
+    }
+    
+    #filter-box {
+    .map-controls;
+    right: 0px;
+    bottom: 3px;
+    
+        .filter-reset {
+          text-align: right;
+          padding-top: 6px;
+        }
+        
+        .selector-item-label {
+          font-style: italic;
+          margin-top: 6px;
+        }
+        
+        .selector-item {
+          padding-left: 6px;
+        }
     } 
 }
 
@@ -214,33 +305,7 @@ body{height: 100%; }
  *  Layer selector
  ************************/    
 
-#layer-selector {
-    position:absolute;
-    right: 0px;
-    top: 3px;
-    display: block;
-    font-size: 12px;
-    width: 100px;
-    background-color: red;
-    .zoomrounded;
-    
-    .layer-item {
-        width: 100px;
-        color: white;
-        text-align: center;
-        display: none;
-          &.layer-selected {
-            display: block;
-          }
-    }
-}
 
-#layer-selector:hover > .layer-item {
-  display: block;
-  &.layer-selected {
-    display: block;
-  }
-}
 
 
 
@@ -336,66 +401,6 @@ body{height: 100%; }
     right:0px; 
     width:@consoleW; 
     position:absolute;
-    }
-
-
-/* elements */
-#top {
-	font-size:11px; letter-spacing:0.05em;
-	ul{ list-style:none; 
-		li{
-			height:@topH;
-			background:white;
-			float:left;
-			position:relative;
-			padding:0px 10px;
-
-			a{
-               	text-transform:uppercase; 
-               	position:relative; 
-               	top:15px;
-               }
-
-			ul{
-				display:none;
-				position:absolute;
-				top:@topH;
-				left:0;
-				text-align:left;
-				width: 100px;
-				border: 1px solid #000;
-				margin-left: 13px;
-				padding: 5px 0px;
-
-
-				li{
-        				padding:0; 
-        				margin-bottom:2px; 
-        				float:none; 
-        				height:auto;
-        			}
-
-				a{
-      				text-transform:none; 
-      				position:static;
-
-					&:hover{color:@hred;}
-				}
-			}
-			&:hover{background:white;
-				ul{background:white; display:block;
-				   width: 100px;}
-				}
-			&:first-child{
-				a{top:5px;}
-			}
-		}
-	}
-	a{color:#000; padding:2px 4px 1px; text-decoration:none;}
-}
-
-
-#console{
     background-color:white;
 }
 
