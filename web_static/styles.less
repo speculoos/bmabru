@@ -85,6 +85,7 @@ font-family:'OSP_helvetica_serif';
 @marginEXT : 15px;
 @marginINT : 30px;
 @bordermap : 1px;
+@border: @bordermap solid #000;
 @Hzoomcontrol : 20px;
 @Wmap-wrapper: ~"100% - 2 * @{marginEXT}";
 @Hmap-wrapper: ~"100% - @{marginEXT} - @{topH}";
@@ -95,6 +96,7 @@ font-family:'OSP_helvetica_serif';
 @printopacity : 0.9;
 
 /* ruleset */
+
 .zoomrounded (@radius: 10px) {
   -webkit-border-radius: @radius;
   -moz-border-radius: @radius;
@@ -130,7 +132,7 @@ font-family:'OSP_helvetica_serif';
     height: -webkit-calc(@Hproject); 
     height: -moz-calc(@Hproject); 
     height: -o-calc(@Hproject); 
-    overflow: auto;
+    overflow-y: auto;
     background-color: white;
 }
 
@@ -175,9 +177,8 @@ body{height: 100%; }
 /* z-index */
 #top{z-index:100;}
 #bma-overlay-0{z-index:90;}
-#bma-overlay-1{z-index:80;}
-#bma-overlay-2{z-index:80;}
-#bma-overlay-3{z-index:80;}
+#bma-overlay-1{z-index:90;}
+#bma-overlay-2{z-index:90;}
 #console{z-index:70;}
 #map{z-index:50;}
 
@@ -263,7 +264,7 @@ body{height: 100%; }
         height: -moz-calc(@WHmap-wrapper-2); 
         height: -o-calc(@WHmap-wrapper-2); 
         padding: @marginINT;
-        border: @bordermap solid #000;
+        border: @border;
         
         #map{
           width:100%; 
@@ -389,7 +390,7 @@ body{height: 100%; }
                 padding:0px @marginINT 0px 0px ;
               
               .project-title{
-                  .bluetitle;
+                  .redtitle;
                   
                   .project-link{
                   color: white;
@@ -419,38 +420,50 @@ body{height: 100%; }
 
 #bma-overlay-2 {
     .overlays;
-    left: (@marginEXT + @bordermap);
+    left: (@marginEXT);
     width: (@Warticle + @Wmenu + 2 * @marginINT);  
     padding:0px @marginINT 0px 0px;
 
-    
-        .article-box{
-           max-width: (@Warticle);
-           display: block;
-           float: left; 
 
-         
-             .article-title{
-                 .redtitle;
-              }
-                 
-              .article-body {
-              
-                  p {
-                     margin-bottom: 10px;
-                 }
-             }
-        }
+        #page-box {
+            width: (@Warticle + @Wmenu + 2 * @marginINT);  
+
         
-        .menu-box {
-        display: block;
-        width: @Wmenu;
-        min-height: 100%;
-        float: left;
-        background-color: white;
-        font-size: 8pt;
-        margin-right: @marginINT;
-        }
+            .article-box{
+               position: absolute;
+               max-width: (@Warticle);
+               display: block;
+               left: (@Wmenu + @marginINT); 
+    
+             
+                 .article-title{
+                     .bluetitle;
+                  }
+                     
+                  .article-body {
+                  
+                      p {
+                         margin-bottom: 10px;
+                     }
+                 }
+            }
+            
+            .menu-box {
+            position: absolute;
+            display: block;
+            width: @Wmenu;
+            min-height:100%; 
+            height: 100%;
+            float: left;
+            font-size: 8pt;
+            margin-right: @marginINT;
+            border-left: 1px solid blue;
+            
+                .menu-title {
+                .bluetitle;
+                }
+            }
+    }
 }
 
 
