@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{% block title %}bMa -- {{debug}}{% endblock %}</title>
+	<title>{% block title %}bMa - Bouwmeester Maître Architecte{% endblock %}</title>
 	{% block style %}
 	<link rel="stylesheet" href="{{STATIC_URL}}leaflet/dist/leaflet.css" />
 	<link rel="stylesheet" href="{{STATIC_URL}}leaflet/dist/leaflet.ie.css" />
@@ -49,15 +49,15 @@
 <body>
 
   <div id="container">
-    {% block menu %}
     <div id="top">
       <div id="navigation">
         <ul>
 		  <li> 
-			<a href="#">
-	          <img src="http://www.bmabru.be/Files/media/site_material/logo.png" alt="bMa" />
+		  <a href="{% url "index" %}">
+	          <img src="{{STATIC_URL}}logo.png" alt="bMa" />
 	        </a>
-	      </li>
+	        </li>
+        {% block menu %}
 	      {% for cat in category %}
             <li>
                 <a>{{cat.name}}</a>
@@ -71,11 +71,10 @@
             </li>
 	      {% endfor %}
           
-        </ul>
+          </ul>
+          {% endblock %}
       </div>
-      <br  />
     </div>
-    {% endblock %}
     {% block map %}
     <div id="map-wrapper">
     <div id="map-wrapper-2">
