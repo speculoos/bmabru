@@ -76,14 +76,16 @@
           {% endblock %}
       </div>
       {% block site_tools %}
-      <div id="language_switcher">
-      {% for l in LANGUAGES %}
-        <form class="language-switcher-item {% if  l.0 == LANGUAGE_CODE %}language-current{% endif %}" action="{% url 'set_language' %}" method="post">
-        {% csrf_token %}
-        <input name="language" value="{{l.0}}" type="hidden" />
-        <input type="submit" value="{{l.1}}" />
-        </form>
-      {% endfor %}
+      <div id="site_tools">
+        <div id="language_switcher">
+        {% for l in LANGUAGES %}
+            <form class="language-switcher-item {% if  l.0 == LANGUAGE_CODE %}language-current{% endif %}" action="{% url 'set_language' %}" method="post">
+            {% csrf_token %}
+            <input name="language" value="{{l.0}}" type="hidden" />
+            <input type="submit" value="{{l.1}}" />
+            </form>
+        {% endfor %}
+        </div>
       </div>
       {% endblock %}
     </div>
