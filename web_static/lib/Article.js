@@ -25,7 +25,8 @@ window.bMa.Article = function(container)
             var that = this;
             for(var ik in items)
             {
-                var item = $('<div class="menu_item" id="menu_item_'+items[ik]+'">'+items[ik]+'</div>');
+                var item = $('<div class="menu_item" id="menu_item_'+items[ik]+'"></div>');
+                item.append('<span>'+items[ik]+'</span>');
                 if(citem === ik)
                 {
                     item.addClass('menu_item_current');
