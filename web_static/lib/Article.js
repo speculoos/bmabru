@@ -10,8 +10,10 @@ window.bMa.Article = function(container)
         init:function(container){
             this.container = container;
             this.container.parent().hide();
+            this.catname = $('<div class="catname-box"></div>');
             this.menu = $('<div class="menu-box"></div>');
             this.content = $('<div class="article-box"></div>');
+            this.container.append(this.catname);
             this.container.append(this.menu);
             this.container.append(this.content);
             
@@ -21,12 +23,13 @@ window.bMa.Article = function(container)
             var medias = window.bma_medias[cat];
             var items = medias;
             this.menu.empty();
-            this.menu.append('<div class="menu-title">'+cat+'</div>');
+            this.catname.empty();
+            this.catname.append('<div class="menu-title">'+cat+'</div>');
             var that = this;
             for(var ik in items)
             {
                 var item = $('<div class="menu_item" id="menu_item_'+items[ik]+'"></div>');
-                item.append('<span>'+items[ik]+'</span>');
+                item.append('<span><span>'+items[ik]+'</span></span>');
                 if(citem === ik)
                 {
                     item.addClass('menu_item_current');

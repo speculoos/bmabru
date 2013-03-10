@@ -77,12 +77,14 @@
       </div>
       {% block site_tools %}
       <div id="site_tools">
+        <div id="projetcs-link"><a href="{% url 'projects' %}">{% trans "Projects list" %}</a></div>
         <div id="language_switcher">
         {% for l in LANGUAGES %}
-            <form class="language-switcher-item {% if  l.0 == LANGUAGE_CODE %}language-current{% endif %}" action="{% url 'set_language' %}" method="post">
+        {# FIXME - url 'set_language' broke at some point, dont know why #}
+        <form class="language-switcher-item {% if  l.0 == LANGUAGE_CODE %}language-current{% endif %}" action="/i8n/setlang/" method="post">
             {% csrf_token %}
             <input name="language" value="{{l.0}}" type="hidden" />
-            <input type="submit" value="{{l.1}}" />
+            <input type="submit" value="{% trans l.1 %}" />
             </form>
         {% endfor %}
         </div>
@@ -91,25 +93,26 @@
     </div>
     {% block map %}
     <div id="map-wrapper">
-    <div id="map-wrapper-2">
-        <div id="bma-overlay-0">
-            <div id="zoom-control-box"></div>
-            <div id="layer-selector"></div>
-            <div id="filter-box"></div>
+        <div id="map-wrapper-2">
+            <div id="bma-overlay-0">
+                <div id="zoom-control-box"></div>
+                <div id="layer-selector"></div>
+                <div id="filter-box"></div>
+            </div>
+            <div id="bma-overlay-1">
+                <div id="legend-box"></div>
+            </div>
+            <div id="bma-overlay-2">
+                <div id="page-box"></div>
+            </div>
+            <div id="map"></div>
         </div>
-        <div id="bma-overlay-1">
-            <div id="legend-box"></div>
-        </div>
-        <div id="bma-overlay-2">
-            <div id="page-box"></div>
-        </div>
-        <div id="map"></div>
-    </div>
     </div>
 <!--	To reactivate when submited to bMa
 	<div id="console"></div>
   </div>
 -->
+    <div id="gallery-wrapper" />
     {% endblock %}
 </body>
 </html>

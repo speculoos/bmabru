@@ -10,9 +10,10 @@ admin.autodiscover()
 ##}
 
 urlpatterns = patterns('',
-    url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog'),
-    url(r'^i18n/', include('django.conf.urls.i18n')),
+    url(r'^config/(?P<q>.+)$', 'bma.views.config'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^media/', include('media.urls')),
+    url(r'^i18n/$', include('django.conf.urls.i18n')),
+    url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog'),
     url(r'^', include('bmabru.urls')),
 )

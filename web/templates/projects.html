@@ -38,7 +38,7 @@ $('document').ready(function(){
 <tbody>
 {% for project in projects %}
 <tr>
-<td>{{ project.name }}</td>
+<td><a href="{% url 'project' project.slug %}">{{ project.name }}</a></td>
 <td>{{ project.address }}</td>
 <td>{{ project.city.zipcode }} {{ project.city.name }}</td>
 <td>{%for f in project.functions.all %}{{ f.name }}{% if not forloop.last %}, {% endif %}{%endfor%}</td>
