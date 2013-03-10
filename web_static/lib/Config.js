@@ -52,6 +52,9 @@ window.bMa.Config = function(){
             }
             return this.config[name][key];
         },
+        server: function(key, callback){
+            $.getJSON('/config/'+key, callback);
+        },
     };
     
     var ret = Object.create(proto);

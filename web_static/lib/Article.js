@@ -18,6 +18,12 @@ window.bMa.Article = function(container)
             this.container.append(this.content);
             
             this.articles_cache = {};
+            
+            this.media_url = undefined;
+            var that = this;
+            bMa.Config().server('MEDIA_URL', function(data){
+                that.media_url = data.MEDIA_URL;
+            });
         },
         make_menu:function(cat, citem){
             var medias = window.bma_medias[cat];
@@ -63,9 +69,9 @@ window.bMa.Article = function(container)
                                 +article.body
                                 +'</div>');
             var image = $('<div class="article-image" />');
-            if(article.image)
+            if(article.image && this.media_url !== undefined)
             {
-                image.append('<image src="/web_media/'+article.image+'" width="'+article.width+'" height="'+article.height+'" />');
+                image.append('<image src="'+this.media_url+article.image+'" width="'+article.width+'" height="'+article.height+'" />');
             }
             this.content.append(image);
             this.container.parent().show();
