@@ -91,6 +91,8 @@ font-family:'OSP_helvetica_serif';
 @Wmap-wrapper: ~"100% - 2 * @{marginEXT}";
 @Hmap-wrapper: ~"100% - @{marginEXT} - @{topH}";
 @WHmap-wrapper-2: ~"100% - 2 * @{marginINT} - 2 * @{bordermap}";
+@Warticle-box:~"100% - @{Wmenu} - @{marginINT}";
+@Wimage-box:~"100% - @{Warticle} - @{marginINT}";
 @Hproject: ~"100% - 2 * @{marginINT} - 2 * @{bordermap} - @{marginEXT} - @{topH}";
 @Warticle: 350px;
 @Wmenu: 120px;
@@ -324,6 +326,7 @@ body{height: 100%; }
           height: 100%;
           left:0;
         }
+        
         #projects_table_wrapper{
             width:100%; 
             min-height:100%; 
@@ -491,57 +494,44 @@ body{height: 100%; }
 #bma-overlay-2 {
     .overlays;
     left: (@marginEXT);
-    width: (@Warticle + @Wmenu + @marginINT);  
+    width: -calc(@WHmap-wrapper-2); 
+    width: -webkit-calc(@WHmap-wrapper-2); 
+    width: -moz-calc(@WHmap-wrapper-2); 
+    width: -o-calc(@WHmap-wrapper-2); 
     padding:0px @marginINT 0px 0px;
 
 
         #page-box {
-            width: (@Warticle + @Wmenu + 2 * @marginINT);  
-
-        
-            .article-box{
-               position: absolute;
-               max-width: (@Warticle);
-               display: block;
-               left: (@Wmenu + @marginINT); 
-    
-             
-                 .article-title{
-                     .bluetitle;
-                     margin-bottom: 10px;
-                  }
-                     
-                  .article-body {
-                  
-                      p {
-                         margin-bottom: 10px;
-                     }
-                 }
-            }
+            height: auto;
+            min-height: 100%;
+            border-left: @border; 
+          
             
-            .menu-box {
-            position: absolute;
-            display: block;
-            width: @Wmenu;
-            min-height:100%; 
-            height: 100%;
-            float: left;
-            font-size: 8pt;
-            margin-right: @marginINT;
-            border-left: @border;
-            text-align: center;
-            
+            .catname-box {
+              margin-left: (@Wmenu + @marginINT); 
+              width: (@Warticle); 
+           
                 .menu-title {
                    .Title;
                    font-size:10pt;
                    background-color: @blue;
                    margin-bottom: 20px;
                    display:inline-block;
-                }
+                }            
+            }
+            
+            .menu-box {
+            position: absolute;
+            display: block;
+            width: @Wmenu;
+            float: left;
+            font-size: 8pt;
+            margin-right: @marginINT;
+            text-align: center;
+            margin-left: -1px;
                 
                 .menu_item {
                 border-left: 1px solid white;
-                margin-left: -1px;
                 margin-top: 5px;
                 text-align: left;
                 padding-bottom: 2px;
@@ -582,6 +572,52 @@ body{height: 100%; }
                   }
                    
                }   
+            }
+                    
+            .article-box{
+               position: absolute;
+               display: block;
+               left: (@Wmenu + @marginINT); 
+               height: 80%;
+               overflow: auto;
+               width: -calc(@Warticle-box); 
+               width: -webkit-calc(@Warticle-box); 
+               width: -moz-calc(@Warticle-box); 
+               width: -o-calc(@Warticle-box); 
+
+             
+                 .article-title{
+                     .bluetitle;
+                     margin-bottom: 10px;
+                     float: left;
+                     clear: right;
+                  }
+                     
+                  .article-body {
+                    width: (@Warticle);
+                    float: left;
+                    clear: left;
+
+                      p {
+                         margin-bottom: 10px;
+                     }
+                 }
+                 
+                 .article-image{
+                     width: -calc(@Wimage-box); 
+                     width: -webkit-calc(@Wimage-box); 
+                     width: -moz-calc(@Wimage-box); 
+                     width: -o-calc(@Wimage-box); 
+                     float: left;
+                     margin-left: @marginINT;
+                    
+                  img {
+                    display: block;
+                    width: 300px;
+                    margin-left: auto;
+                    margin-right: auto;
+                  }
+                 }
             }
       }
 }
