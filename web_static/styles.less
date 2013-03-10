@@ -81,7 +81,7 @@ font-family:'OSP_helvetica_serif';
 @bold:'FreeSansBold';
 @italic-bold: 'FreeSansBoldOblique';
 @consoleW:200px;
-@marginEXT : 15px;
+@marginEXT : 10px;
 @marginINT : 30px;
 @bordermap : 1px;
 @border: @bordermap solid #000;
@@ -92,9 +92,9 @@ font-family:'OSP_helvetica_serif';
 @Hmap-wrapper: ~"100% - @{marginEXT} - @{topH}";
 @WHmap-wrapper-2: ~"100% - 2 * @{marginINT} - 2 * @{bordermap}";
 @Hproject: ~"100% - 2 * @{marginINT} - 2 * @{bordermap} - @{marginEXT} - @{topH}";
-@Warticle: 400px;
-@Wmenu: 150px;
-@printopacity : 0.9;
+@Warticle: 350px;
+@Wmenu: 120px;
+@printopacity : 1;
 
 /* ruleset */
 
@@ -107,23 +107,24 @@ font-family:'OSP_helvetica_serif';
 }
 
 .zoomCTRL {
-    width: 20px;
-    height: 20px;
-    background-color: @red;
-    color: white;
+    width: 18px;
+    height: 18px;
+    background-color: white;
+    color: @red;
     text-align: center;
-    font-size: 15pt;
+    font-size: 12pt;
     line-height: 17px;
-    font-family: @bold;
+    font-family: 'FreeSans';
+    border: 1px solid @red;
     .zoomrounded;
     }
     
 .map-controls {
     position:absolute;
     font-size: 8pt;
-    background-color: @red;
+    background-color: white;
     padding: 0px 6px;
-    color: white;
+    color: #000;
     .zoomrounded (3px);
     } 
     
@@ -414,6 +415,7 @@ body{height: 100%; }
     .map-controls;
     right: 300px;
     bottom: 3px;
+    width: 150px;
     
     
         &:hover {
@@ -430,7 +432,7 @@ body{height: 100%; }
         }
         
         .selector-item-label {
-          font-family: @italic;
+          font-family: @bold;
           margin-top: 6px;
         }
         
@@ -539,18 +541,47 @@ body{height: 100%; }
                 
                 .menu_item {
                 border-left: 1px solid white;
-                border-top: 1px solid #000;
-                border-bottom: 1px solid #000;
                 margin-left: -1px;
                 margin-top: 5px;
-                padding-left: 6px;
                 text-align: left;
-               
-                  &:hover {
-                  cursor: pointer;
-                  color: @blue;
+                padding-bottom: 2px;
+                
+                  span {
+                  padding: 0px 10px 2px 10px;                      
+                  border-top: 1px solid #000;
+                  border-bottom: 1px solid #000;
+
+                      &:hover {
+                          cursor: pointer;
+                          color: @blue;
+                          background: white url(images/L2-h-red.gif) repeat-x 0px 6px;
+                          z-index: 10;
+                          }
+                                            
+                      span{
+                          background: white url(none) repeat-x 0px 6px;
+
+                          &:hover {
+                              cursor: pointer;
+                              color: @blue;
+                              background: white url(none) repeat-x 0px 6px;
+                              }
+                            }
+                        }
+                    
+
+                &.menu_item_current {
+                      span {
+                    color: #000;
+                      background: white url(images/L2-h-red.gif) repeat-x 0px 6px;
+                                                                          
+                          span{
+                              background: white url(none) repeat-x 0px 6px;
+                          }
+                      }
                   }
-                }
+                   
+               }   
             }
       }
 }
