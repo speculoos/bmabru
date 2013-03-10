@@ -43,23 +43,40 @@ window.bMa.Selector = function(container, label){
                 item.addClass(klass);
             var that = this;
             item.on('click', function(evt){
-                that.set_current(item, label);
                 that.toggle_items();
-            });
-            if(callbacks !== undefined)
-            {
-                for(var k in callbacks)
+                if(!that.set_current(item, label)) // noop, item already current one
+                    return;
+                if(callbacks !== undefined)
                 {
-                    if((typeof callbacks[k]) === 'function')
+                    for(var k in callbacks)
                     {
-                        item.on(k, callbacks[k]);
-                    }
-                    else // we assume {callback: fn, data: {}}
-                    {
-                        item.on(k, callbacks[k].data, callbacks[k].callback);
+                        if((typeof callbacks[k]) !== 'function')
+                        {
+                            evt.data = $.extend({}, callbacks[k].data);
+                            callbacks[k].callback.call(item, evt);
+                        }
+                        else
+                        {
+                            callbacks[k].call(item, evt);
+                        }
                     }
                 }
-            }
+                
+            });
+//             if(callbacks !== undefined)
+//             {
+//                 for(var k in callbacks)
+//                 {
+//                     if((typeof callbacks[k]) === 'function')
+//                     {
+//                         item.on(k, callbacks[k]);
+//                     }
+//                     else // we assume {callback: fn, data: {}}
+//                     {
+//                         item.on(k, callbacks[k].data, callbacks[k].callback);
+//                     }
+//                 }
+//             }
             this.items.append(item);
             return item;
         },
@@ -78,6 +95,10 @@ window.bMa.Selector = function(container, label){
         },
         set_current:function(item, label){
             var sk = 'selector-item-selected';
+            if(item.hasClass(sk))
+            {
+                return false;
+            }
             this.button.text(label);
             if(this.selected !== undefined)
             {
@@ -85,6 +106,7 @@ window.bMa.Selector = function(container, label){
             }
             this.selected = item;
             this.selected.addClass(sk);
+            return true;
         },
         get:function(){
             return this.selected;
