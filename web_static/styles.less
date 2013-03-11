@@ -63,6 +63,17 @@ font-family:'OSP_helvetica_serif';
                                                           font-style: normal;
 }
 
+@font-face {
+    font-family: 'FjallaOne-Regular';
+    src: url('fonts/FjallaOne-Regular.eot');
+    src: url('fonts/FjallaOne-Regular.eot?#iefix') format('embedded-opentype'),
+                                                          url('fonts/FjallaOne-Regular.woff') format('woff'),
+                                                          url('fonts/FjallaOne-Regular.ttf') format('truetype'),
+                                                          url('fonts/FjallaOne-Regular.svg#FjallaOne-Regular') format('svg');
+                                                          font-weight: normal;
+                                                          font-style: normal;
+}
+
 
 /* debug */
 #map{background:white;}
@@ -92,10 +103,12 @@ font-family:'OSP_helvetica_serif';
 @Hmap-wrapper: ~"100% - @{marginEXT} - @{topH}";
 @WHmap-wrapper-2: ~"100% - 2 * @{marginINT} - 2 * @{bordermap}";
 @Warticle-box:~"100% - @{Wmenu} - @{marginINT}";
+@Harticle-box:~"100% - @{Hcatname}";
 @Wimage-box:~"100% - @{Warticle} - @{marginINT}";
 @Hproject: ~"100% - 2 * @{marginINT} - 2 * @{bordermap} - @{marginEXT} - @{topH}";
 @Warticle: 350px;
-@Wmenu: 120px;
+@Hcatname: 50px;
+@Wmenu: 140px;
 @printopacity : 1;
 
 /* ruleset */
@@ -510,13 +523,13 @@ body{height: 100%; }
             .catname-box {
               margin-left: (@Wmenu + @marginINT); 
               width: (@Warticle); 
+              height: (@Hcatname);
            
                 .menu-title {
-                   .Title;
-                   font-size:10pt;
-                   background-color: @blue;
-                   margin-bottom: 20px;
+                   font-family: 'FjallaOne-Regular', arial;
+                   font-size:20pt;
                    display:inline-block;
+                   text-transform: uppercase;
                 }            
             }
             
@@ -525,21 +538,23 @@ body{height: 100%; }
             display: block;
             width: @Wmenu;
             float: left;
-            font-size: 8pt;
+            font-size: 11px;
             margin-right: @marginINT;
             text-align: center;
-            margin-left: -1px;
                 
-                .menu_item {
-                border-left: 1px solid white;
+                .menu_item {                
                 margin-top: 5px;
                 text-align: left;
                 padding-bottom: 2px;
+                line-height: 20px;
+                margin-left: -1px;
                 
                   span {
-                  padding: 0px 10px 2px 10px;                      
+                  padding: 0px 15px 1px 15px ;                      
+                  border-left: 1px solid white;
                   border-top: 1px solid #000;
                   border-bottom: 1px solid #000;
+                  
 
                       &:hover {
                           cursor: pointer;
@@ -549,12 +564,14 @@ body{height: 100%; }
                           }
                                             
                       span{
-                          background: white url(none) repeat-x 0px 6px;
+                          background: white;
+                          padding: 0px 6px; 
+                          border: 0px;      
 
                           &:hover {
                               cursor: pointer;
                               color: @blue;
-                              background: white url(none) repeat-x 0px 6px;
+                              background: white;
                               }
                             }
                         }
@@ -583,11 +600,16 @@ body{height: 100%; }
                width: -calc(@Warticle-box); 
                width: -webkit-calc(@Warticle-box); 
                width: -moz-calc(@Warticle-box); 
-               width: -o-calc(@Warticle-box); 
+               width: -o-calc(@Warticle-box);
+               height: -calc(@Harticle-box); 
+               height: -webkit-calc(@Harticle-box); 
+               height: -moz-calc(@Harticle-box); 
+               height: -o-calc(@Harticle-box); 
 
              
                  .article-title{
                      .bluetitle;
+                    width: (@Warticle);                     
                      margin-bottom: 10px;
                      float: left;
                      clear: right;
@@ -613,7 +635,7 @@ body{height: 100%; }
                     
                   img {
                     display: block;
-                    width: 300px;
+                    width: 480px;
                     margin-left: auto;
                     margin-right: auto;
                   }
