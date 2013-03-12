@@ -11,15 +11,15 @@ window.bMa.ZoomControl = function(map, container){
             this.container = container || $('<div class="zoom-control-box" />');
             this.zoom_out = $('<div class="zoom-control-out"> − </div>');
             this.zoom_in = $('<div class="zoom-control-in"> + </div>');
-            this.zoom_scale_box = $('<div class="zoom-control-scale-box" />');
-            this.zoom_scale_cursor = $('<div class="zoom-control-scale-cursor" />');
-            this.zoom_scale_scale = this.scale();
+//             this.zoom_scale_box = $('<div class="zoom-control-scale-box" />');
+//             this.zoom_scale_cursor = $('<div class="zoom-control-scale-cursor" />');
+//             this.zoom_scale_scale = this.scale();
             
-            this.zoom_scale_box.append(this.zoom_scale_cursor);
-            this.zoom_scale_box.append(this.zoom_scale_scale);
+//             this.zoom_scale_box.append(this.zoom_scale_cursor);
+//             this.zoom_scale_box.append(this.zoom_scale_scale);
             
             this.container.append(this.zoom_out);
-            this.container.append(this.zoom_scale_box);
+//             this.container.append(this.zoom_scale_box);
             this.container.append(this.zoom_in);
             
             this.setup_events();

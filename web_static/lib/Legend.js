@@ -23,7 +23,9 @@ window.bMa.Legend = function(container, map)
             this.container.append(this.wrapper);
         },
         show:function(project){
-            this.map.map.fitBounds(project.layer.getBounds());
+            var pbounds = project.bounds();
+            if(pbounds.isValid())
+                this.map.map.fitBounds(pbounds);
             var proj_name = $('<a class="project-link" href="/project/'+project.get('slug')+'">'+project.get('name')+'</a>');
             this.elements.title.empty();
             this.elements.title.append(proj_name);

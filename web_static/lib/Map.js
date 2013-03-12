@@ -1,6 +1,6 @@
 /*
- Map.js
-*/
+ * Map.js
+ */
 
 window.bMa = window.bMa || {};
 
@@ -14,6 +14,9 @@ window.bMa.Map = function(container){
                 zoomControl: false,
                 attributionControl: false
             });
+            
+            var s = bMa.Scale()
+            s.addTo(this.map);
             
             this.observers = [];
             this.layers = {};
