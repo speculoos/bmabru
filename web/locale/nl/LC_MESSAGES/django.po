@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-07 04:41-0600\n"
+"POT-Creation-Date: 2013-03-12 17:03-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,6 +26,118 @@ msgstr ""
 msgid "Dutch"
 msgstr ""
 
+#: bmabru/admin.py:70
+msgid "Project facts"
+msgstr ""
+
+#: bmabru/admin.py:73
+msgid "bMa qualification"
+msgstr ""
+
+#: bmabru/admin.py:76
+msgid "bMa activity"
+msgstr ""
+
+#: bmabru/admin.py:79
+msgid "publication interest"
+msgstr ""
+
+#: bmabru/models.py:18
+msgid "Partner type"
+msgstr ""
+
+#: bmabru/models.py:19
+msgid "Partner types"
+msgstr ""
+
+#: bmabru/models.py:32
+msgid "Partner"
+msgstr ""
+
+#: bmabru/models.py:33
+msgid "Partners"
+msgstr ""
+
+#: bmabru/models.py:56
+msgid "Program"
+msgstr ""
+
+#: bmabru/models.py:57
+msgid "Programs"
+msgstr ""
+
+#: bmabru/models.py:72
+msgid "Procedure"
+msgstr ""
+
+#: bmabru/models.py:73
+msgid "Procedures"
+msgstr ""
+
+#: bmabru/models.py:88
+msgid "Project image"
+msgstr ""
+
+#: bmabru/models.py:89
+msgid "Project images"
+msgstr ""
+
+#: bmabru/models.py:102 templates/projects.html:35
+msgid "Function"
+msgstr ""
+
+#: bmabru/models.py:103
+msgid "Functions"
+msgstr ""
+
+#: bmabru/models.py:118
+msgid "Mission"
+msgstr ""
+
+#: bmabru/models.py:119
+msgid "Missions"
+msgstr ""
+
+#: bmabru/models.py:136 bmabru/models.py:137
+msgid "Project status"
+msgstr ""
+
+#: bmabru/models.py:152
+msgid "Action"
+msgstr ""
+
+#: bmabru/models.py:153
+msgid "Actions"
+msgstr ""
+
+#: bmabru/models.py:168
+msgid "Step"
+msgstr ""
+
+#: bmabru/models.py:169
+msgid "Steps"
+msgstr ""
+
+#: bmabru/models.py:180 templates/projects.html:34
+msgid "City"
+msgstr ""
+
+#: bmabru/models.py:181
+msgid "Cities"
+msgstr ""
+
+#: bmabru/models.py:196
+msgid "Project"
+msgstr ""
+
+#: bmabru/models.py:197
+msgid "Projects"
+msgstr ""
+
+#: templates/base.html:81
+msgid "Projects list"
+msgstr ""
+
 #: templates/projects.html:17 templates/projects.html.py:22
 msgid "Projects List"
 msgstr ""
@@ -38,10 +150,30 @@ msgstr ""
 msgid "Address"
 msgstr ""
 
-#: templates/projects.html:34
-msgid "City"
+#: templates/admin/base.html:28
+msgid "Welcome,"
 msgstr ""
 
-#: templates/projects.html:35
-msgid "Function"
+#: templates/admin/base.html:33
+msgid "Documentation"
+msgstr ""
+
+#: templates/admin/base.html:36
+msgid "Change password"
+msgstr ""
+
+#: templates/admin/base.html:38
+msgid "Log out"
+msgstr ""
+
+#: templates/admin/base.html:47
+msgid "Home"
+msgstr ""
+
+#: templates/admin/base_site.html:4
+msgid "bMa site admin"
+msgstr ""
+
+#: templates/admin/base_site.html:7
+msgid "bMa administration"
 msgstr ""

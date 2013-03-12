@@ -7,6 +7,8 @@ from django.contrib.gis import admin as geo_admin
 
 from modeltranslation.admin import TranslationAdmin
 
+from django.utils.translation import ugettext_lazy as _
+
 from bmabru.models import *
 import bma.settings as settings
 
@@ -63,7 +65,24 @@ class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
         css = {
             'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
         }
+    
     filter_horizontal = ('partners', 'programs', 'functions', 'image', 'actions', 'steps')
+    fieldsets = [
+            (_('Project facts'),{
+                'fields': ('name', 'description', ('address', 'city'))
+            }),
+            (_('bMa qualification'),{
+                'fields': ('functions','surface','budget','partners','programs')
+            }),
+            (_('bMa activity'),{
+                'fields':('procedure','mission','actions')
+            }),
+            (_('publication interest'),{
+                'fields':('mpoly','image')
+            })
+        ]
+    list_display = ('name', 'address', 'city')
+    
     def __init__(self, model, admin_site):
         super(GeoAdmin, self).__init__(model, admin_site)
         self.wms_url = 'http://bmawms.specgis.be/service'

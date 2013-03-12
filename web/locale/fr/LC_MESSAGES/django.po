@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-07 04:40-0600\n"
+"POT-Creation-Date: 2013-03-12 17:03-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,6 +26,128 @@ msgstr "Français"
 msgid "Dutch"
 msgstr "Néerlandais"
 
+#: bmabru/admin.py:70
+#, fuzzy
+msgid "Project facts"
+msgstr "Éléments factuelles"
+
+#: bmabru/admin.py:73
+msgid "bMa qualification"
+msgstr "Qualification par le bMa"
+
+#: bmabru/admin.py:76
+msgid "bMa activity"
+msgstr "Activité du bMa"
+
+#: bmabru/admin.py:79
+msgid "publication interest"
+msgstr "Publication"
+
+#: bmabru/models.py:18
+msgid "Partner type"
+msgstr "Type d'intervenant"
+
+#: bmabru/models.py:19
+msgid "Partner types"
+msgstr "Types d'intervenant"
+
+#: bmabru/models.py:32
+msgid "Partner"
+msgstr ""
+
+#: bmabru/models.py:33
+msgid "Partners"
+msgstr "Intervenants"
+
+#: bmabru/models.py:56
+msgid "Program"
+msgstr "Programme"
+
+#: bmabru/models.py:57
+msgid "Programs"
+msgstr "Programmes"
+
+#: bmabru/models.py:72
+msgid "Procedure"
+msgstr "Procédure"
+
+#: bmabru/models.py:73
+msgid "Procedures"
+msgstr "Procédures"
+
+#: bmabru/models.py:88
+#, fuzzy
+msgid "Project image"
+msgstr "Image du projet"
+
+#: bmabru/models.py:89
+#, fuzzy
+msgid "Project images"
+msgstr "Images du projet"
+
+#: bmabru/models.py:102 templates/projects.html:35
+msgid "Function"
+msgstr "Fonction"
+
+#: bmabru/models.py:103
+#, fuzzy
+msgid "Functions"
+msgstr "Fonctions"
+
+#: bmabru/models.py:118
+msgid "Mission"
+msgstr "Mission"
+
+#: bmabru/models.py:119
+msgid "Missions"
+msgstr "Missions"
+
+#: bmabru/models.py:136 bmabru/models.py:137
+#, fuzzy
+msgid "Project status"
+msgstr "Statut du projet"
+
+#: bmabru/models.py:152
+#, fuzzy
+msgid "Action"
+msgstr "Action"
+
+#: bmabru/models.py:153
+#, fuzzy
+msgid "Actions"
+msgstr "Actions"
+
+#: bmabru/models.py:168
+msgid "Step"
+msgstr "Étape"
+
+#: bmabru/models.py:169
+msgid "Steps"
+msgstr "Étapes"
+
+#: bmabru/models.py:180 templates/projects.html:34
+msgid "City"
+msgstr "Commune"
+
+#: bmabru/models.py:181
+msgid "Cities"
+msgstr "Communes"
+
+#: bmabru/models.py:196
+#, fuzzy
+msgid "Project"
+msgstr "Projets"
+
+#: bmabru/models.py:197
+#, fuzzy
+msgid "Projects"
+msgstr "Projets"
+
+#: templates/base.html:81
+#, fuzzy
+msgid "Projects list"
+msgstr "Liste des projets"
+
 #: templates/projects.html:17 templates/projects.html.py:22
 msgid "Projects List"
 msgstr "Liste des projets"
@@ -38,10 +160,30 @@ msgstr "Nom"
 msgid "Address"
 msgstr "Adresse"
 
-#: templates/projects.html:34
-msgid "City"
-msgstr "Commune"
+#: templates/admin/base.html:28
+msgid "Welcome,"
+msgstr "Bienvenue"
 
-#: templates/projects.html:35
-msgid "Function"
-msgstr "Fonction"
+#: templates/admin/base.html:33
+msgid "Documentation"
+msgstr "Documentation"
+
+#: templates/admin/base.html:36
+msgid "Change password"
+msgstr "Changer de mot de passe"
+
+#: templates/admin/base.html:38
+msgid "Log out"
+msgstr "Déconnexion"
+
+#: templates/admin/base.html:47
+msgid "Home"
+msgstr "Accueil"
+
+#: templates/admin/base_site.html:4
+msgid "bMa site admin"
+msgstr "Administration du site bMa"
+
+#: templates/admin/base_site.html:7
+msgid "bMa administration"
+msgstr "Administration du site bMa"

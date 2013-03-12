@@ -5,6 +5,7 @@
 
 from django.contrib.gis.db import models
 from django.template.defaultfilters import slugify
+from django.utils.translation import ugettext_lazy as _
 
 
 
@@ -13,6 +14,10 @@ class PartnerType(models.Model):
     """
     Define custom partner types
     """
+    class Meta:
+        verbose_name = _("Partner type")
+        verbose_name_plural = _("Partner types")
+        
     name = models.CharField(max_length=512)
     
     def __unicode__(self):
@@ -23,6 +28,10 @@ class Partner(models.Model):
     """
     Organisations connected to bMa
     """
+    class Meta:
+        verbose_name = _("Partner")
+        verbose_name_plural = _("Partners")
+        
     name = models.CharField(max_length=512)
     url = models.URLField(blank=True)
     ptype = models.ForeignKey('PartnerType', related_name='partners')
@@ -43,6 +52,10 @@ class Program(models.Model):
     """
     building programs
     """
+    class Meta:
+        verbose_name = _("Program")
+        verbose_name_plural = _("Programs")
+        
     name = models.CharField(max_length=512)
     description = models.TextField(blank=True)
     def natural_key(self):
@@ -55,6 +68,9 @@ class Procedure(models.Model):
     """
     Procédure
     """
+    class Meta:
+        verbose_name = _("Procedure")
+        verbose_name_plural = _("Procedures")
     
     name = models.CharField(max_length=512)
     description = models.TextField(blank=True)
@@ -68,6 +84,10 @@ class ProjectImage(models.Model):
     """
     An illustration for a project
     """
+    class Meta:
+        verbose_name = _("Project image")
+        verbose_name_plural = _("Project images")
+        
     image = models.ImageField(upload_to='project_trigo', height_field='height', width_field='width')
     width = models.IntegerField(blank=True)
     height = models.IntegerField(blank=True)
@@ -78,6 +98,10 @@ class Function(models.Model):
     """
     Fonction du projet
     """
+    class Meta:
+        verbose_name = _("Function")
+        verbose_name_plural = _("Functions")
+        
     name = models.CharField(max_length=512)
     description = models.TextField(blank=True)
     def natural_key(self):
@@ -90,6 +114,10 @@ class Mission(models.Model):
     """
     Type de mission
     """
+    class Meta:
+        verbose_name = _("Mission")
+        verbose_name_plural = _("Missions")
+        
     name = models.CharField(max_length=512)
     description = models.TextField(blank=True)
     def natural_key(self):
@@ -104,6 +132,10 @@ class ProjectStatus(models.Model):
     """
     Etat d'avancement du projet
     """
+    class Meta:
+        verbose_name = _("Project status")
+        verbose_name_plural = _("Project status")
+        
     name = models.CharField(max_length=128)
     description = models.TextField(blank=True)
     order = models.IntegerField()
@@ -116,6 +148,10 @@ class Action(models.Model):
     """
     ???
     """
+    class Meta:
+        verbose_name = _("Action")
+        verbose_name_plural = _("Actions")
+        
     sentence = models.TextField()
     project_status = models.ForeignKey('ProjectStatus')
     def natural_key(self):
@@ -128,6 +164,10 @@ class Step(models.Model):
     """
     Etapes
     """
+    class Meta:
+        verbose_name = _("Step")
+        verbose_name_plural = _("Steps")
+    
     name = models.CharField(max_length=128)
     description = models.TextField(blank=True)
     date = models.DateField(blank=True, null=True)
@@ -136,6 +176,10 @@ class Step(models.Model):
         return self.name
         
 class City(models.Model):
+    class Meta:
+        verbose_name = _("City")
+        verbose_name_plural = _("Cities")
+        
     zipcode = models.CharField(max_length=32)
     name = models.CharField(max_length=256)
     def natural_key(self):
@@ -148,6 +192,10 @@ class Project(models.Model):
     A project is the main item to present on the website,
     everything else is more or less related to a project
     """
+    class Meta:
+        verbose_name = _("Project")
+        verbose_name_plural = _("Projects")
+    
     published = models.BooleanField(default=False)
     name = models.CharField(max_length=1024)
     description = models.TextField(blank=True)
