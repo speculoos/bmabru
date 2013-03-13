@@ -5,6 +5,7 @@ admin custom
 from django.contrib import admin
 
 from modeltranslation.admin import TranslationAdmin
+from django.utils.translation import ugettext_lazy as _
 
 from media.models import *
 
@@ -27,7 +28,14 @@ class CategoryAdmin(TabbedTr, TranslationAdmin):
 
     
 class PageAdmin(TabbedTr, TranslationAdmin):
-    pass
+    list_display = ('title', 'category', 'published')
+    list_filter = ['category', 'published']
+    search_fields = ['title', 'body']
+    fieldsets = [
+            (None, {'fields':(('published', 'category'),)}),
+            (_('Content'), {'fields':('title', 'body')}),
+            (_('Extra'), {'fields':('image', 'resources')})
+            ]
 
 admin.site.register(Resource)
 admin.site.register(Category, CategoryAdmin)

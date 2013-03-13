@@ -68,6 +68,7 @@ class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
     
     filter_horizontal = ('partners', 'programs', 'functions', 'image', 'actions', 'steps')
     fieldsets = [
+            (None, {'fields':('published',)}),
             (_('Project facts'),{
                 'fields': ('name', 'description', ('address', 'city'))
             }),
@@ -81,7 +82,9 @@ class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
                 'fields':('mpoly','image')
             })
         ]
-    list_display = ('name', 'address', 'city')
+    list_display = ('name', 'address', 'city', 'published')
+    list_filter = ['city', 'published']
+    search_fields = ['name',]
     
     def __init__(self, model, admin_site):
         super(GeoAdmin, self).__init__(model, admin_site)

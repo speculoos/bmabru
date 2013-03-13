@@ -4,12 +4,17 @@ media.models
 
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.utils.translation import ugettext_lazy as _
 
 
 
 
 
 class Resource(models.Model):
+    class Meta:
+        verbose_name = _("Resource")
+        verbose_name_plural = _("Resources")
+        
     name = models.CharField(max_length=256)
     path = models.FileField(upload_to='resources/%Y/%m/%d')
     
@@ -17,12 +22,20 @@ class Resource(models.Model):
         return self.name
 
 class Category(models.Model):
+    class Meta:
+        verbose_name = _("Category")
+        verbose_name_plural = _("Categories")
+        
     name = models.CharField(max_length=128)
     
     def __unicode__(self):
         return self.name
         
 class Page(models.Model):
+    class Meta:
+        verbose_name = _("Page")
+        verbose_name_plural = _("Pages")
+        
     slug = models.SlugField(max_length=255, editable=False)
     category = models.ForeignKey('Category')
     title = models.CharField(max_length=512)
