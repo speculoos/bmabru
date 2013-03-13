@@ -6,7 +6,7 @@ from django.contrib import admin
 
 from modeltranslation.admin import TranslationAdmin
 from django.utils.translation import ugettext_lazy as _
-
+from orderable.admin import OrderableAdmin
 from media.models import *
 
 
@@ -23,7 +23,7 @@ class TabbedTr:
 
 
     
-class CategoryAdmin(TabbedTr, TranslationAdmin):
+class CategoryAdmin(TabbedTr, TranslationAdmin, OrderableAdmin):
     pass
 
     

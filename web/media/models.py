@@ -5,7 +5,7 @@ media.models
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
-
+from orderable.models import Orderable
 
 
 
@@ -21,7 +21,7 @@ class Resource(models.Model):
     def __unicode__(self):
         return self.name
 
-class Category(models.Model):
+class Category(Orderable):
     class Meta:
         verbose_name = _("Category")
         verbose_name_plural = _("Categories")
