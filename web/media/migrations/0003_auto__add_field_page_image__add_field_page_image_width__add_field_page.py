@@ -10,17 +10,17 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding field 'Page.image'
         db.add_column(u'media_page', 'image',
-                      self.gf('django.db.models.fields.files.ImageField')(default=None, max_length=100),
+                      self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True),
                       keep_default=False)
 
         # Adding field 'Page.image_width'
         db.add_column(u'media_page', 'image_width',
-                      self.gf('django.db.models.fields.IntegerField')(default=0, blank=True),
+                      self.gf('django.db.models.fields.IntegerField')(default=0, null=True, blank=True),
                       keep_default=False)
 
         # Adding field 'Page.image_height'
         db.add_column(u'media_page', 'image_height',
-                      self.gf('django.db.models.fields.IntegerField')(default=0, blank=True),
+                      self.gf('django.db.models.fields.IntegerField')(default=0, null=True, blank=True),
                       keep_default=False)
 
 
@@ -50,11 +50,11 @@ class Migration(SchemaMigration):
             'body_nl': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'category': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['media.Category']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
-            'image_height': ('django.db.models.fields.IntegerField', [], {'blank': 'True'}),
-            'image_width': ('django.db.models.fields.IntegerField', [], {'blank': 'True'}),
+            'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'image_height': ('django.db.models.fields.IntegerField', [], {'default': '0', 'null': 'True', 'blank': 'True'}),
+            'image_width': ('django.db.models.fields.IntegerField', [], {'default': '0', 'null': 'True', 'blank': 'True'}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'resources': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['media.Resource']", 'symmetrical': 'False', 'blank': 'True'}),
+            'resources': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['media.Resource']", 'null': 'True', 'blank': 'True'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '255'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '512'}),
             'title_fr': ('django.db.models.fields.CharField', [], {'max_length': '512', 'null': 'True', 'blank': 'True'}),

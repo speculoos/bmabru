@@ -3,6 +3,7 @@ admin custom
 """
 
 from django.contrib import admin
+from django.contrib.admin import SimpleListFilter
 from django.contrib.gis import admin as geo_admin
 
 from modeltranslation.admin import TranslationAdmin
@@ -54,6 +55,21 @@ class StepAdmin(TabbedTr, TranslationAdmin):
 class CityAdmin(TabbedTr, TranslationAdmin):
     pass
 
+class ProjectCityListFilter(SimpleListFilter):
+    title = _('City')
+    parameter_name = 'city_id'
+    
+    def lookups(self, request, model_admin):
+        ret = []
+        cities = City.objects.all()
+        for c in cities:
+            ret.append((c.id, '%s %s'%(c.zipcode, c.name)))
+        return ret
+        
+    def queryset(self, request, queryset):
+        if self.parameter_name in request.GET:
+            return queryset.filter(city__id=self.value())
+        return queryset
 
 class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
     class Media:
@@ -82,8 +98,8 @@ class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
                 'fields':('mpoly','image')
             })
         ]
-    list_display = ('name', 'address', 'city', 'published')
-    list_filter = ['city', 'published']
+    list_display = ('name', 'address', 'get_city_display', 'published')
+    list_filter = (ProjectCityListFilter, 'published')
     search_fields = ['name',]
     
     def __init__(self, model, admin_site):

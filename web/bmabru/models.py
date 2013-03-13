@@ -220,6 +220,9 @@ class Project(models.Model):
     
     slug = models.SlugField(max_length=255, editable=False, default='None')
     
+    def get_city_display(self):
+        return '%s %s'%(self.city.zipcode, self.city.name)
+    
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Project, self).save(force_insert, force_update) 

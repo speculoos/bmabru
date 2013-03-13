@@ -111,6 +111,7 @@ font-family:'OSP_helvetica_serif';
 @Hcatname: 40px;
 @Wmenu: 140px;
 @printopacity : 1;
+@scale-height: 26px;
 
 /* ruleset */
 
@@ -476,6 +477,43 @@ body{height: 100%; }
     } 
 }
 
+.control-scale-box{
+    height: @scale-height;
+    background-color:white;
+    margin:2px;
+    border:2px solid black;
+    padding:2px;
+    .control-scale-metrics-box{
+        position:relative;
+        height: calc(@scale-height / 2);
+        .control-scale-metrics-start{
+            position:absolute;
+            left:0;
+        }
+        .control-scale-metrics-end{
+            position:absolute;
+            right:0;
+        }
+    }
+
+    .control-scale-scale{
+  /*      position:absolute;
+        bottom:0;*/
+        .control-scale-row{
+            height:4px;
+            .control-scale-part{
+                display:inline-block;
+                height:4px;
+                &.control-scale-part-light{
+                    background-color:white;
+                }
+                &.control-scale-part-dark{
+                    background-color:@red;
+                }
+            }
+        }
+    }
+}
 
 /************************
  *  Project description

@@ -33,26 +33,26 @@ window.bMa.Scale = function(options){
             var end_label = meters < 1000 ? meters + ' m' : (meters / 1000) + ' km';
             this.scale_container.empty();
             this.scale_container.css('width', sc_width + 'px');
-            this.scale_container.append('<div id="control-scale-metrics-box">\
-            <div id="control-scale-metrics-start">0</div>\
-            <div id="control-scale-metrics-end">'+end_label+'</div>\
+            this.scale_container.append('<div class="control-scale-metrics-box">\
+            <div class="control-scale-metrics-start">0</div>\
+            <div class="control-scale-metrics-end">'+end_label+'</div>\
             </div');
-            var scb = $('<div id="control-scale-scale"></div>');
-            var top_row = $('<div />');
-            var bottom_row = $('<div />');
+            var scb = $('<div class="control-scale-scale"></div>');
+            var top_row = $('<div class="control-scale-row control-scale-row-top" />');
+            var bottom_row = $('<div class="control-scale-row control-scale-row-bottom" />');
             var steps = this.options.steps || 4;
             var step_width = Math.floor(sc_width / steps);
             var dark = false;
             for(var s = 0; s < steps; s++)
             {
-                var sc_class = 'zoom-control-scale-part-light';
+                var sc_class = 'control-scale-part-light';
                 if(dark)
                 {
-                    sc_class = 'zoom-control-scale-part-dark';
+                    sc_class = 'control-scale-part-dark';
                 }
                 var part = $('<div />');
                 part.css('width', step_width+'px');
-                part.addClass('zoom-control-scale-part');
+                part.addClass('control-scale-part');
                 part.addClass(sc_class);
                 top_row.append(part);
                 dark = !dark;
@@ -60,14 +60,14 @@ window.bMa.Scale = function(options){
             dark = true;
             for(var s = 0; s < steps; s++)
             {
-                var sc_class = 'zoom-control-scale-part-light';
+                var sc_class = 'control-scale-part-light';
                 if(dark)
                 {
-                    sc_class = 'zoom-control-scale-part-dark';
+                    sc_class = 'control-scale-part-dark';
                 }
                 var part = $('<div />');
                 part.css('width', step_width+'px');
-                part.addClass('zoom-control-scale-part');
+                part.addClass('control-scale-part');
                 part.addClass(sc_class);
                 bottom_row.append(part);
                 dark = !dark;
