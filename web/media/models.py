@@ -5,7 +5,7 @@ media.models
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
-from orderable.models import Orderable
+from adminsortable.models import Sortable
 
 
 
@@ -21,8 +21,8 @@ class Resource(models.Model):
     def __unicode__(self):
         return self.name
 
-class Category(Orderable):
-    class Meta:
+class Category(Sortable):
+    class Meta(Sortable.Meta):
         verbose_name = _("Category")
         verbose_name_plural = _("Categories")
         
@@ -31,8 +31,8 @@ class Category(Orderable):
     def __unicode__(self):
         return self.name
         
-class Page(models.Model):
-    class Meta:
+class Page(Sortable):
+    class Meta(Sortable.Meta):
         verbose_name = _("Page")
         verbose_name_plural = _("Pages")
         
