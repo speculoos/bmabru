@@ -78,7 +78,7 @@
       </div>
       {% block site_tools %}
       <div id="site_tools">
-        <div id="projetcs-link"><a href="{% url 'projects' %}">{% trans "Projects list" %}</a></div>
+        <div id="projetcs-link" class="{% if projects %}selected{% endif %}"><a href="{% url 'projects' %}">{% trans "Projects list" %}</a></div>
         <div id="language_switcher">
         {% for l in LANGUAGES %}
         {# FIXME - url 'set_language' broke at some point, dont know why #}
