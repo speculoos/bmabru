@@ -290,7 +290,11 @@ body{height: 100%; }
      	#projetcs-link{
           position: absolute;
           right: 120px;
-          bottom: 6px;     	
+          bottom: 6px;  
+          
+             &.selected a{
+             color: @blue;
+            }   	
           }
         	
         	#language_switcher {
@@ -473,6 +477,10 @@ body{height: 100%; }
         
         .selector-item {
           padding-left: 6px;
+        }
+        
+        .selector-item-selected {
+          text-decoration: underline;
         }
     } 
 }
