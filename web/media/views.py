@@ -9,6 +9,7 @@ import json
 from markdown2 import markdown
 
 from media.models import *
+import bma.settings as settings
 
 class MarkdownSerial(serializers.get_serializer("json")):
     def serialize(self, queryset, **options):
@@ -63,6 +64,15 @@ def media_json(request, mid):
     data = js.serialize(media, indent=2, use_natural_keys=True, props=['body']);
     return HttpResponse(data, mimetype="application/json")
 
+def subjective_images_json(request):
+    sims = SubjectiveImage.objects.all()
+    d = []
+    for s in sims:
+        d.append({
+            'id':s.pk,
+            'url':s.image.url,
+            'note':s.note})
+    return HttpResponse(json.dumps(d), mimetype="application/json")
     
 def page(request, page_slug):
     data = {'category':Category.objects.all()}

@@ -75,6 +75,8 @@ function InitMap()
         
         var filter = bMa.Filter($('#filter-box'), map);
     });
+    
+    var gallery = bMa.Gallery($('#gallery-wrapper'));
 }
 
 function Init () {
