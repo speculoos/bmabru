@@ -62,9 +62,9 @@ window.bMa.Article = function(container)
         },
         show_complete:function(article){
             this.content.empty();
-            this.content.append('<div class="article-title">'
+            this.content.append('<div class="article-title"><a href="/media/page/'+article.slug+'">'
                                 +article.title
-                                +'</div>');
+                                +'</a></div>');
             this.content.append('<div class="article-body">'
                                 +article.body
                                 +'</div>');

@@ -105,11 +105,11 @@ font-family:'OSP_helvetica_serif';
 @Hmap-wrapper-2: ~"100% - @{marginINT} - @{topH} - 2 * @{bordermap}";
 @Warticle-box:~"100% - @{Wmenu} - @{marginINT}";
 @Harticle-box:~"100% - @{Hcatname}";
-@Wimage-box:~"100% - @{Warticle} - @{marginINT}";
+@Wimage-box:~"100% - @{Warticle} - 2 * @{marginINT}";
 @Hproject: ~"100% - 2 * @{marginINT} - 2 * @{bordermap} - @{marginEXT} - @{topH}";
 @Warticle: 350px;
 @Hcatname: 40px;
-@Wmenu: 187px;
+@Wmenu: 167px;
 @printopacity : 1;
 @scale-height: 26px;
 
@@ -167,10 +167,21 @@ font-family:'OSP_helvetica_serif';
 
 .bluetitle {
      background-color: @blue;
-     font-size:14pt;    
+     font-size:16pt;    
      display:inline-block;      
      .Title;
 }
+
+.whitetitle {
+     background-color: white;
+     font-size:16pt;    
+     display:inline-block;      
+     padding:2px 6px 0px 6px;
+     font-family: 'URWGothicL', Arial, Helvetica;  
+     text-transform:uppercase;
+     letter-spacing:2px;
+     color: #000;
+ }
 
 .redtitle {
      background-color: @red;
@@ -245,7 +256,7 @@ body{height: 100%; }
 				display:none;
 				position:absolute;
 				top:@topH;
-				left:0;
+				left:1px;
 				text-align:left;
 				width: 100px;
 				border: 1px solid #000;
@@ -290,7 +301,11 @@ body{height: 100%; }
      	#projetcs-link{
           position: absolute;
           right: 120px;
-          bottom: 6px;     	
+          bottom: 6px;  
+          
+             &.selected a{
+             color: @blue;
+            }   	
           }
         	
         	#language_switcher {
@@ -386,7 +401,7 @@ body{height: 100%; }
     
     #zoom-control-box {
         position: absolute;
-        width: 200px;
+        width: 50px;
         right: 0px;
         bottom: 0px;
         height: @Hzoomcontrol;
@@ -431,8 +446,8 @@ body{height: 100%; }
     
     #layer-selector {
     .map-controls;
-    right: 210px;
-    width: 70px; 
+    right: 60px;
+    width: 150px; 
     
         &:hover {
         cursor: pointer;
@@ -449,7 +464,7 @@ body{height: 100%; }
     
     #filter-box {
     .map-controls;
-    right: 300px;
+    right: 235px;
     width: 150px;
     
     
@@ -474,25 +489,37 @@ body{height: 100%; }
         .selector-item {
           padding-left: 6px;
         }
+        
+        .selector-item-selected {
+          text-decoration: underline;
+        }
     } 
 }
 
 .control-scale-box{
     height: @scale-height;
-    background-color:white;
+    background-color:transparent;
     margin:2px;
-    border:2px solid black;
+    border:0px solid black;
     padding:2px;
     .control-scale-metrics-box{
         position:relative;
-        height: calc(@scale-height / 2);
+        height: (@scale-height / 2);
         .control-scale-metrics-start{
             position:absolute;
             left:0;
+            bottom:-10px;
+            -webkit-text-stroke: 0.3px white;
+            font-family: 'FreeSansBold';
+            font-size: 10pt;
         }
         .control-scale-metrics-end{
             position:absolute;
             right:0;
+            bottom:-10px;            
+            -webkit-text-stroke: 0.3px white;
+            font-family: 'FreeSansBold';
+            font-size: 10pt;
         }
     }
 
@@ -577,7 +604,7 @@ body{height: 100%; }
           
             
             .catname-box {
-              margin-left: (@Wmenu + @marginINT); 
+              margin-left: (@Wmenu + 30px); 
               width: (@Warticle); 
               height: (@Hcatname);
            
@@ -595,7 +622,6 @@ body{height: 100%; }
             width: @Wmenu;
             float: left;
             font-size: 11px;
-            margin-right: @marginINT;
             margin-top: -6px;
             text-align: center;
                 
@@ -605,25 +631,30 @@ body{height: 100%; }
                 padding-bottom: 2px;
                 line-height: 16px;
                 margin-left: -1px;
+                border-top: 1px solid #000;
+                border-bottom: 1px solid #000;
+                border-left: 1px solid white;
                 
                   span {
-                  padding: 0px 15px 1px 15px ;                      
-                  border-left: 1px solid white;
-                  border-top: 1px solid #000;
-                  border-bottom: 1px solid #000;
+                  padding: 0px 15px 1px 15px ;
+                  max-width: (@Wmenu - 30px); 
+                  width: auto; 
+                  display: inline-block;                    
+
                   
 
                       &:hover {
                           cursor: pointer;
                           color: @blue;
-                          background: white url(images/L2-h-red.gif) repeat-x 0px 6px;
+                          background: white url(images/L2-h-red.gif) repeat-x 0px 50%;
                           z-index: 10;
                           }
                                             
                       span{
                           background: white;
                           padding: 0px 6px; 
-                          border: 0px;      
+                          border: 0px;  
+   
 
                           &:hover {
                               cursor: pointer;
@@ -636,11 +667,11 @@ body{height: 100%; }
 
                 &.menu_item_current {
                       span {
-                    color: #000;
-                      background: white url(images/L2-h-red.gif) repeat-x 0px 6px;
-                                                                          
+                        color: #000;
+                        background: white url(images/L2-h-red.gif) repeat-x 0px 50%;     
+                                                                                         
                           span{
-                              background: white url(none) repeat-x 0px 6px;
+                              background: white url(none) repeat-x 0px 8px;
                           }
                       }
                   }
@@ -651,7 +682,7 @@ body{height: 100%; }
             .article-box{
                position: absolute;
                display: block;
-               left: (@Wmenu + @marginINT); 
+               left: (@Wmenu + 30px); 
                height: 80%;
                overflow: auto;
                width: -calc(@Warticle-box); 
@@ -664,21 +695,52 @@ body{height: 100%; }
                height: -o-calc(@Harticle-box); 
              
                  .article-title{
-                     .bluetitle;
-                    width: (@Warticle);                     
+                     width: (@Warticle);                     
                      margin-bottom: 10px;
                      float: left;
                      clear: right;
+                     
+                     & a {
+                        .bluetitle;
+                        text-decoration: none;
+                        padding: 10px 15px;
+                     
+                        &:hover {
+                          .whitetitle;
+                          border: 1px solid #000;
+                          padding: 9px 14px;
+                        }
+                     }
                   }
                      
                   .article-body {
                     width: (@Warticle);
                     float: left;
                     clear: left;
+                      
+                      h1 {
+                         font-family: 'URWGothicL';
+                         font-size: 12pt;
+                         text-transform: uppercase;
+                         margin-top: 10px;
+                      }
 
                       p {
                          margin-top: 7px;
                          margin-bottom: 7px;
+                     }
+                     
+                     strong {
+                     font-family: 'FreeSansBold';
+                     }
+                     
+                     ul {
+                     list-style-type: circle;
+                     margin-left: 30px;
+                  
+                        li{
+                        margin-bottom: 5px;
+                        }
                      }
                  }
                  
@@ -689,10 +751,11 @@ body{height: 100%; }
                      width: -o-calc(@Wimage-box); 
                      float: left;
                      margin-left: @marginINT;
+                     padding-right: @marginINT;
                     
                   img {
                     display: block;
-                    width: 480px;
+                    width: 100%;
                     margin-left: auto;
                     margin-right: auto;
                   }

@@ -5,9 +5,9 @@ media.models
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
-from orderable.models import Orderable
+from adminsortable.models import Sortable
 
-
+from bmabru.models import Project
 
 
 class Resource(models.Model):
@@ -21,8 +21,8 @@ class Resource(models.Model):
     def __unicode__(self):
         return self.name
 
-class Category(Orderable):
-    class Meta:
+class Category(Sortable):
+    class Meta(Sortable.Meta):
         verbose_name = _("Category")
         verbose_name_plural = _("Categories")
         
@@ -31,8 +31,33 @@ class Category(Orderable):
     def __unicode__(self):
         return self.name
         
-class Page(models.Model):
-    class Meta:
+class Featured(Sortable):
+    class Meta(Sortable.Meta):
+        verbose_name = _("Featured")
+        verbose_name_plural = _("Featured")
+    
+    ftype = models.CharField(max_length=2, editable=False)
+    published = models.BooleanField(default=False)
+    page = models.ForeignKey('Page', blank=True, null=True)
+    project = models.ForeignKey(Project, blank=True, null=True)
+    
+    def pretty_display(self):
+        if self.ftype == 'PA':
+            return self.page.title
+        return self.project.name
+        
+    def __unicode__(self):
+        return self.pretty_display()
+    
+    def save(self, force_insert=False, force_update=False, *args, **kwargs):
+        if self.page:
+            self.ftype = 'PA'
+        if self.project:
+            self.ftype = 'PR'
+        super(Featured, self).save(force_insert, force_update)
+        
+class Page(Sortable):
+    class Meta(Sortable.Meta):
         verbose_name = _("Page")
         verbose_name_plural = _("Pages")
         

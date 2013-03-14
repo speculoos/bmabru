@@ -2,28 +2,18 @@
  *  wms.config.js
  */
 
-var WMS_CONFIG = {
-    
-    'bMa (on Open Street Map)':{
-        url: 'http://bmawms.specgis.be/service',
-        options:{
-            layers: 'bMa',
-            format: 'image/png',
-                transparent: true,
-                attribution: "OpenStreetMap styled by Speculoos"
-        }
-},
-
+var WMS_CONFIG = 
+{
 //     http://www.cirb.irisnet.be/catalogue-de-services/urbis/services-urbis-1/urbis-wms-et-wmts
-
     'Urbis':{
-    url: 'http://geoserver.gis.irisnet.be/geoserver/wms',
-    options:{
-        layers: 'urbis:urbisFR',
-        format: 'image/png',
+        url: 'http://geoserver.gis.irisnet.be/geoserver/wms',
+        options:{
+            layers: 'urbis:urbisFR',
+            format: 'image/png',
             transparent: true,
             attribution: "Brugis GeoWebCache"
-    }
+        }
+    },
     
     'Urbis bâtiments':{
         url: 'http://geoserver.gis.irisnet.be/geoserver/wms',
@@ -40,8 +30,8 @@ var WMS_CONFIG = {
         options:{
             layers: 'urbis:URB_M_SHAPE',
             format: 'image/png',
-                transparent: true,
-                attribution: "Brugis GeoWebCache"
+            transparent: true,
+            attribution: "Brugis GeoWebCache"
         }
     },
   
@@ -55,5 +45,13 @@ var WMS_CONFIG = {
         }
     },
     
-    
+    'bMa (OSM)':{
+        url: 'http://bmawms.specgis.be/service',
+        options:{
+            layers: 'bMa',
+            format: 'image/png',
+                transparent: true,
+                attribution: "OpenStreetMap styled by Speculoos"
+        }
+    },
 };
