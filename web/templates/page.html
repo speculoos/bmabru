@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}bMa -- {{current_page.title}}{% endblock %}
+{% block script_data %}
+var bma_current_page = '{{current_page.id}}';
+{% endblock %}
