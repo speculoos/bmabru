@@ -19,6 +19,11 @@ function InitMap()
         article.show(aid);
     });
     
+    if(window.bma_current_page !== undefined)
+    {
+        article.show(window.bma_current_page);
+    }
+    
     
     
     for(var key in WMS_CONFIG)

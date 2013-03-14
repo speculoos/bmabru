@@ -62,3 +62,13 @@ def media_json(request, mid):
     js = MarkdownSerial()
     data = js.serialize(media, indent=2, use_natural_keys=True, props=['body']);
     return HttpResponse(data, mimetype="application/json")
+
+    
+def page(request, page_slug):
+    data = {'category':Category.objects.all()}
+    try:
+        p = Page.objects.filter(slug=page_slug)
+        data['current_page'] = p[0]
+    except Exception as e:
+        raise Http404('Page "%s" Not Found'%(page_slug))
+    return render_to_response("page.html", data, context_instance = RequestContext(request))
