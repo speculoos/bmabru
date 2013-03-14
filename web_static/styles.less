@@ -290,7 +290,11 @@ body{height: 100%; }
      	#projetcs-link{
           position: absolute;
           right: 120px;
-          bottom: 6px;     	
+          bottom: 6px;  
+          
+             &.selected a{
+             color: @blue;
+            }   	
           }
         	
         	#language_switcher {
@@ -386,7 +390,7 @@ body{height: 100%; }
     
     #zoom-control-box {
         position: absolute;
-        width: 200px;
+        width: 50px;
         right: 0px;
         bottom: 0px;
         height: @Hzoomcontrol;
@@ -431,8 +435,8 @@ body{height: 100%; }
     
     #layer-selector {
     .map-controls;
-    right: 210px;
-    width: 70px; 
+    right: 60px;
+    width: 150px; 
     
         &:hover {
         cursor: pointer;
@@ -449,7 +453,7 @@ body{height: 100%; }
     
     #filter-box {
     .map-controls;
-    right: 300px;
+    right: 235px;
     width: 150px;
     
     
@@ -473,6 +477,10 @@ body{height: 100%; }
         
         .selector-item {
           padding-left: 6px;
+        }
+        
+        .selector-item-selected {
+          text-decoration: underline;
         }
     } 
 }
@@ -665,7 +673,7 @@ body{height: 100%; }
              
                  .article-title{
                      .bluetitle;
-                    width: (@Warticle);                     
+                     width: (@Warticle);                     
                      margin-bottom: 10px;
                      float: left;
                      clear: right;
@@ -675,10 +683,30 @@ body{height: 100%; }
                     width: (@Warticle);
                     float: left;
                     clear: left;
+                      
+                      h1 {
+                         font-family: 'URWGothicL';
+                         font-size: 12pt;
+                         text-transform: uppercase;
+                         margin-top: 10px;
+                      }
 
                       p {
                          margin-top: 7px;
                          margin-bottom: 7px;
+                     }
+                     
+                     strong {
+                     font-family: 'FreeSansBold';
+                     }
+                     
+                     ul {
+                     list-style-type: circle;
+                     margin-left: 30px;
+                  
+                        li{
+                        margin-bottom: 5px;
+                        }
                      }
                  }
                  
