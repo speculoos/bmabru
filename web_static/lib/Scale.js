@@ -40,7 +40,7 @@ window.bMa.Scale = function(options){
             var scb = $('<div class="control-scale-scale"></div>');
             var top_row = $('<div class="control-scale-row control-scale-row-top" />');
             var bottom_row = $('<div class="control-scale-row control-scale-row-bottom" />');
-            var steps = this.options.steps || 4;
+            var steps = this.options.steps || 2;
             var step_width = Math.floor(sc_width / steps);
             var dark = false;
             for(var s = 0; s < steps; s++)

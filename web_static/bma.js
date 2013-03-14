@@ -10,8 +10,11 @@ function InitMap()
     var selector = bMa.LayerSelector($('#layer-selector'), map);
     var zoom_control = bMa.ZoomControl(map, $('#zoom-control-box'));
     
+    var popup = $('#index_popup_box');
+    
     var article = bMa.Article($('#page-box'));
     $('.page-ref').on('click', function(){
+        popup.hide();
         var id = $(this).attr('id');
         var id_parts = id.split('_');
         var aid = id_parts.pop();
@@ -21,6 +24,7 @@ function InitMap()
     
     if(window.bma_current_page !== undefined)
     {
+        popup.hide();
         article.show(window.bma_current_page);
     }
     
@@ -54,6 +58,7 @@ function InitMap()
             map.add_overlay('bMa', ovl);
             
             ovl.on('click', function(evt){
+                popup.hide();
                 article.hide();
                 legend.show(this);
             }, p);
@@ -63,6 +68,7 @@ function InitMap()
         
         if(cur_p !== undefined)
         {
+            popup.hide();
             legend.show(cur_p);
         }
         
