@@ -498,20 +498,28 @@ body{height: 100%; }
 
 .control-scale-box{
     height: @scale-height;
-    background-color:white;
+    background-color:transparent;
     margin:2px;
-    border:2px solid black;
+    border:0px solid black;
     padding:2px;
     .control-scale-metrics-box{
         position:relative;
-        height: calc(@scale-height / 2);
+        height: (@scale-height / 2);
         .control-scale-metrics-start{
             position:absolute;
             left:0;
+            bottom:-10px;
+            -webkit-text-stroke: 0.3px white;
+            font-family: 'FreeSansBold';
+            font-size: 10pt;
         }
         .control-scale-metrics-end{
             position:absolute;
             right:0;
+            bottom:-10px;            
+            -webkit-text-stroke: 0.3px white;
+            font-family: 'FreeSansBold';
+            font-size: 10pt;
         }
     }
 
