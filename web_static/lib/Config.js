@@ -15,7 +15,7 @@ window.bMa.Config = function(){
             opacity:1,
             fill:true,
             fillColor: '#d43b2d',
-            fillOpacity:0.5,
+            fillOpacity:0.75,
             clickable:true
         },
         feature_style_hide : {
@@ -25,7 +25,7 @@ window.bMa.Config = function(){
             opacity:1,
             fill:true,
             fillColor: '#d43b2d',
-            fillOpacity:0.2,
+            fillOpacity:0.25,
             clickable:false
         }
     };
