@@ -21,9 +21,11 @@ window.bMa.Config = function(){
         feature_style_hide : {
             stroke:true,
             color: '#d43b2d',
-            weight:.5,
+            weight:1,
             opacity:1,
-            fill:false,
+            fill:true,
+            fillColor: '#d43b2d',
+            fillOpacity:0.2,
             clickable:false
         }
     };

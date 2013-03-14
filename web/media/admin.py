@@ -6,7 +6,7 @@ from django.contrib import admin
 
 from modeltranslation.admin import TranslationAdmin
 from django.utils.translation import ugettext_lazy as _
-from orderable.admin import OrderableAdmin
+from adminsortable.admin import SortableAdmin
 from media.models import *
 
 
@@ -23,11 +23,11 @@ class TabbedTr:
 
 
     
-class CategoryAdmin(TabbedTr, TranslationAdmin, OrderableAdmin):
+class CategoryAdmin(TabbedTr, TranslationAdmin, SortableAdmin):
     pass
 
     
-class PageAdmin(TabbedTr, TranslationAdmin):
+class PageAdmin(TabbedTr, TranslationAdmin, SortableAdmin):
     list_display = ('title', 'category', 'published')
     list_filter = ['category', 'published']
     search_fields = ['title', 'body']
