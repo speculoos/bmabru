@@ -936,7 +936,10 @@ table#projects_table {
     
 }
 
-
+/************************
+ *  Gallery
+ * 
+ ************************/
 #gallery-wrapper {
  height: 100%;
  width: 10px;
@@ -947,6 +950,37 @@ table#projects_table {
  &:hover {
    cursor: pointer;
  }
+ 
+    .gallery-container{
+        width:100%;
+        height:100%;
+        overflow:hidden;
+        .gallery-image{
+            background-color:black;
+            img{
+                width:100%;
+            }
+        }
+        .gallery-control{
+            position:absolute;
+            top:0;
+            font-size:92pt;
+            height:100%;
+            line-height:100%;
+            width:5%;
+            cursor: pointer;
+            color:white;
+            &.gallery-back{
+                left:0;
+            }
+            &.gallery-next{
+                right:0;
+            }
+            &:hover {
+/*                 background-color:white; */
+            }
+        }
+    }
 }
 
 

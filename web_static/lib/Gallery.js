@@ -11,20 +11,18 @@ window.bMa.Gallery = function(container)
     var proto = {
         init:function(container){
             this.container = container;
-            
-            
-            
-            this.wrapper = $('<div />');
+            this.container_stored_width = this.container.css('width');
+            this.wrapper = $('<div class="gallery-container" />');
             this.image = $('<div class="gallery-image" />');
-            this.back = $('<div class="gallery-back">&lt;</div>');
-            this.next = $('<div class="gallery-next">&gt;</div>');
+            this.back = $('<div class="gallery-control gallery-back">&lt;</div>');
+            this.next = $('<div class="gallery-control gallery-next">&gt;</div>');
             this.note = $('<div class="gallery-note" />');
             
             this.container.append(this.wrapper);
             this.wrapper.append(this.image);
             this.wrapper.append(this.back);
             this.wrapper.append(this.next);
-            
+            this.wrapper.hide();
             
             this.ready = false;
             this.items = undefined;
@@ -42,8 +40,11 @@ window.bMa.Gallery = function(container)
             });
             
             
-            this.back.on('click',this.show_previous)
-            this.next.on('click',this.show_next)
+            this.back.on('click',function(evt){
+                that.show_previous();
+                
+            });
+            this.next.on('click',this.show_next);
             
             this.container.on('click', function(){
                 if(that.wrapper.is(':visible'))
@@ -58,11 +59,13 @@ window.bMa.Gallery = function(container)
             
         },
         show:function(){
+            this.container.css('width','100%');
             this.wrapper.show(1000);
             if(this.current < 0)
                 this.show_next();
         },
         hide:function(){
+            this.container.css('width',this.container_stored_width);
             this.wrapper.hide(1000);
         },
         show_next:function(){

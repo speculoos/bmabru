@@ -11,6 +11,9 @@ function InitMap()
     var zoom_control = bMa.ZoomControl(map, $('#zoom-control-box'));
     
     var popup = $('#index_popup_box');
+    popup.on('click', function(){
+        $(this).hide();
+    });
     
     var article = bMa.Article($('#page-box'));
     $('.page-ref').on('click', function(){
