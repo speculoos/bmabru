@@ -45,6 +45,9 @@ class Featured(Sortable):
         if self.ftype == 'PA':
             return self.page.title
         return self.project.name
+        
+    def __unicode__(self):
+        return self.pretty_display()
     
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
         if self.page:

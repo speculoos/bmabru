@@ -1,8 +1,22 @@
 {% extends "base.html" %}
+{% load md %}
 
 {% block script_data %}
 {% endblock %}
 
 {% block popup %}
-
+<div id="index_popup_box">
+<div id="index_popup_left"><img src="{{STATIC_URL}}popup.png" title="popup image" /></div>
+<div id="index_popup_right">
+{% for f in featured %}
+{% if f.ftype == 'PA' %}
+<div class="featured-title featured-page"><a href="{% url 'page' f.page.slug %}">{{f}}</a></div>
+<div class="featured-body">{{f.page.body|md|truncatewords_html:24}}</div>
+{% else %}
+<div class="featured-title featured-project"><a href="{% url 'project' f.project.slug %}">{{f}}</a></div>
+<div class="featured-body">{{f.project.description|md|truncatewords_html:24}}</div>
+{% endif %}
+{%endfor%}
+</div>
+</div>
 {% endblock %}
