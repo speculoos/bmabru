@@ -105,7 +105,7 @@ font-family:'OSP_helvetica_serif';
 @Hmap-wrapper-2: ~"100% - @{marginINT} - @{topH} - 2 * @{bordermap}";
 @Warticle-box:~"100% - @{Wmenu} - @{marginINT}";
 @Harticle-box:~"100% - @{Hcatname}";
-@Wimage-box:~"100% - @{Warticle} - @{marginINT}";
+@Wimage-box:~"100% - @{Warticle} - 2 * @{marginINT}";
 @Hproject: ~"100% - 2 * @{marginINT} - 2 * @{bordermap} - @{marginEXT} - @{topH}";
 @Warticle: 350px;
 @Hcatname: 40px;
@@ -167,10 +167,21 @@ font-family:'OSP_helvetica_serif';
 
 .bluetitle {
      background-color: @blue;
-     font-size:14pt;    
+     font-size:16pt;    
      display:inline-block;      
      .Title;
 }
+
+.whitetitle {
+     background-color: white;
+     font-size:16pt;    
+     display:inline-block;      
+     padding:2px 6px 0px 6px;
+     font-family: 'URWGothicL', Arial, Helvetica;  
+     text-transform:uppercase;
+     letter-spacing:2px;
+     color: #000;
+ }
 
 .redtitle {
      background-color: @red;
@@ -672,11 +683,22 @@ body{height: 100%; }
                height: -o-calc(@Harticle-box); 
              
                  .article-title{
-                     .bluetitle;
                      width: (@Warticle);                     
                      margin-bottom: 10px;
                      float: left;
                      clear: right;
+                     
+                     & a {
+                        .bluetitle;
+                        text-decoration: none;
+                        padding: 10px 15px;
+                     
+                        &:hover {
+                          .whitetitle;
+                          border: 1px solid #000;
+                          padding: 9px 14px;
+                        }
+                     }
                   }
                      
                   .article-body {
@@ -717,10 +739,11 @@ body{height: 100%; }
                      width: -o-calc(@Wimage-box); 
                      float: left;
                      margin-left: @marginINT;
+                     padding-right: @marginINT;
                     
                   img {
                     display: block;
-                    width: 480px;
+                    width: 100%;
                     margin-left: auto;
                     margin-right: auto;
                   }
