@@ -36,8 +36,12 @@ class PageAdmin(TabbedTr, TranslationAdmin, SortableAdmin):
             (_('Content'), {'fields':('title', 'body')}),
             (_('Extra'), {'fields':('image', 'resources')})
             ]
+            
+class FeaturedAdmin(SortableAdmin):
+    list_display = ('pretty_display', 'published')
 
-admin.site.register(Resource)
-admin.site.register(Category, CategoryAdmin)
 admin.site.register(Page, PageAdmin)
+admin.site.register(Featured, FeaturedAdmin)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Resource)
 
