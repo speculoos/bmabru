@@ -39,9 +39,15 @@ class PageAdmin(TabbedTr, TranslationAdmin, SortableAdmin):
             
 class FeaturedAdmin(SortableAdmin):
     list_display = ('pretty_display', 'published')
+    
+class SubjectiveImageAdmin(SortableAdmin):
+    fieldsets = [
+            (None, {'fields':('note', 'image')}),
+            ]
 
 admin.site.register(Page, PageAdmin)
 admin.site.register(Featured, FeaturedAdmin)
+admin.site.register(SubjectiveImage, SubjectiveImageAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Resource)
 

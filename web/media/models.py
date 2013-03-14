@@ -56,6 +56,21 @@ class Featured(Sortable):
             self.ftype = 'PR'
         super(Featured, self).save(force_insert, force_update)
         
+class SubjectiveImage(Sortable):
+    class Meta(Sortable.Meta):
+        verbose_name = _("Subjective Image")
+        verbose_name_plural = _("Subjective Images")
+        
+    image = models.ImageField(upload_to='media_subjective', height_field='image_height', width_field='image_width', blank=True, null=True)
+    image_width = models.IntegerField(blank=True, null=True, default=0)
+    image_height = models.IntegerField(blank=True, null=True, default=0)
+    note = models.TextField(blank=True)
+    
+    def __unicode__(self):
+        words = self.note.split(' ')
+        excerpt = ' '.join(words[0:8])
+        return '[%s] %s'%(self.image, excerpt)
+        
 class Page(Sortable):
     class Meta(Sortable.Meta):
         verbose_name = _("Page")
