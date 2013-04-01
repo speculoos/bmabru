@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include, url
 
+import bma.api as api
+
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -17,3 +19,11 @@ urlpatterns = patterns('',
     url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog'),
     url(r'^', include('bmabru.urls')),
 )
+
+urlpatterns += api.urls(
+    (
+        ('bmabru', 'Project', ({'published':True},)),
+        ('media', 'Page', ({'published':True},)),
+    )
+) 
+

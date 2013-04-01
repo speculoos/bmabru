@@ -11,8 +11,16 @@ from django.core import serializers
 from django.utils import six
 import json
 
+from rest_framework import generics
+from rest_framework.decorators import api_view
+from rest_framework.reverse import reverse
+from rest_framework.response import Response
+
 from bmabru.models import *
 from media.models import *
+
+from bma.api import get_list_view
+
 
 
 class GeoSerial(serializers.get_serializer("json")):
@@ -84,3 +92,16 @@ def projects_json(request):
     jr = GeoSerial()
     data = jr.serialize(Project.objects.filter(published=True), indent=2, use_natural_keys=True, props=['centroid','geojson'])
     return HttpResponse(data, mimetype="application/json")
+    
+    
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'projects': reverse('project-list', request=request),
+    })
+    
+@api_view(['GET'])
+def api_view_list(request, model, filters):
+    view = get_list_view('bmabru', model, filters)
+    return view(request)
+    

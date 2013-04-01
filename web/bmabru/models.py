@@ -7,7 +7,7 @@ from django.contrib.gis.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 
-
+from bma.api import serializer
 
 
 class PartnerType(models.Model):
@@ -23,7 +23,7 @@ class PartnerType(models.Model):
     def __unicode__(self):
         return self.name
     
-    
+@serializer()
 class Partner(models.Model):
     """
     Organisations connected to bMa
@@ -47,7 +47,7 @@ class Partner(models.Model):
         return '%s (%s)'%(self.name, self.ptype)
         
         
-
+@serializer()
 class Program(models.Model):
     """
     building programs
@@ -64,6 +64,7 @@ class Program(models.Model):
         return self.name
 
 
+@serializer()
 class Procedure(models.Model):
     """
     Procédure
@@ -93,7 +94,8 @@ class ProjectImage(models.Model):
     height = models.IntegerField(blank=True)
     zoom_level = models.IntegerField(blank=True)
     
-    
+
+@serializer()
 class Function(models.Model):
     """
     Fonction du projet
@@ -110,6 +112,7 @@ class Function(models.Model):
         return self.name
 
         
+@serializer()
 class Mission(models.Model):
     """
     Type de mission
@@ -144,6 +147,7 @@ class ProjectStatus(models.Model):
     def __unicode__(self):
         return self.name
         
+@serializer()
 class Action(models.Model):
     """
     ???
@@ -159,7 +163,7 @@ class Action(models.Model):
     def __unicode__(self):
         return '%s / %s'%(self.project_status.name, self.sentence[:32])
 
-
+@serializer()
 class Step(models.Model):
     """
     Etapes
@@ -174,7 +178,8 @@ class Step(models.Model):
     
     def __unicode__(self):
         return self.name
-        
+     
+@serializer()
 class City(models.Model):
     class Meta:
         verbose_name = _("City")
@@ -187,6 +192,8 @@ class City(models.Model):
     def __unicode__(self):
         return self.name
     
+    
+@serializer()
 class Project(models.Model):
     """
     A project is the main item to present on the website,

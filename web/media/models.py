@@ -9,6 +9,8 @@ from adminsortable.models import Sortable
 
 from bmabru.models import Project
 
+from bma.api import serializer
+
 
 class Resource(models.Model):
     class Meta:
@@ -71,6 +73,7 @@ class SubjectiveImage(Sortable):
         excerpt = ' '.join(words[0:8])
         return '[%s] %s'%(self.image, excerpt)
         
+@serializer()
 class Page(Sortable):
     class Meta(Sortable.Meta):
         verbose_name = _("Page")
