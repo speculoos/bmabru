@@ -29,7 +29,7 @@ msgstr "Néerlandais"
 #: bmabru/admin.py:70
 #, fuzzy
 msgid "Project facts"
-msgstr "Éléments factuelles"
+msgstr "Éléments factuels"
 
 #: bmabru/admin.py:73
 msgid "bMa qualification"
@@ -53,7 +53,7 @@ msgstr "Types d'intervenant"
 
 #: bmabru/models.py:32
 msgid "Partner"
-msgstr ""
+msgstr "Intervenant"
 
 #: bmabru/models.py:33
 msgid "Partners"
@@ -136,7 +136,7 @@ msgstr "Communes"
 #: bmabru/models.py:196
 #, fuzzy
 msgid "Project"
-msgstr "Projets"
+msgstr "Projet"
 
 #: bmabru/models.py:197
 #, fuzzy
