@@ -262,7 +262,33 @@ class ProjectWorth(models.Model):
         return (self.id, self.name)
     def __unicode__(self):
         return self.name
+        
+        
+@serializer()
+class BudgetRange(models.Model):
+    class Meta:
+        verbose_name = _("Budget range")
+        verbose_name_plural = _("Budget ranges")
+        
+    floor = models.IntegerField(verbose_name=_('Floor'))
+    ceiling = models.IntegerField(verbose_name=_('Ceiling'))
     
+    def __unicode__(self):
+        return '%d - %d'%(self.floor, self.ceiling)
+    
+@serializer()
+class SurfaceRange(models.Model):
+    class Meta:
+        verbose_name = _("Surface range")
+        verbose_name_plural = _("Surface ranges")
+        
+    floor = models.IntegerField(verbose_name=_('Floor'))
+    ceiling = models.IntegerField(verbose_name=_('Ceiling'))
+    
+    def __unicode__(self):
+        return '%d - %d'%(self.floor, self.ceiling)
+        
+        
 @serializer(property_list = ('centroid', 'geojson'))
 class Project(models.Model):
     """
@@ -275,31 +301,30 @@ class Project(models.Model):
     
     published = models.BooleanField(verbose_name=_('Published'),default=False)
     name = models.CharField(verbose_name=_('Name'),max_length=1024)
-    description = models.TextField(verbose_name=_('Description'),blank=True)
-    address = models.TextField(verbose_name=_('Address'),blank=True)
-    surface = models.CommaSeparatedIntegerField(verbose_name=_('Surface'),max_length=64, blank=True)
-    budget = models.CommaSeparatedIntegerField(verbose_name=_('Budget'),max_length=64, blank=True)
+    description = models.TextField(verbose_name=_('Description'),blank=True, null=True, default=None)
+    address = models.TextField(verbose_name=_('Address'),blank=True, null=True, default=None)
     trade_name = models.CharField(verbose_name=_('Trade name'),max_length=512, blank=True)
     attribution = models.IntegerField(verbose_name=_('Attribution'),max_length=512, blank=True)
     
-    city = models.ForeignKey('City', verbose_name=_('City'),blank=True)
+    city = models.ForeignKey('City', verbose_name=_('City'),blank=True, null=True, default=None)
+    surface_range = models.ForeignKey('SurfaceRange', verbose_name=_('Surface'),blank=True, null=True, default=None)
+    budget_range = models.ForeignKey('BudgetRange', verbose_name=_('Budget'), blank=True, null=True, default=None)
+    procedure = models.ForeignKey('Procedure', verbose_name=_('Procedure'),blank=True, null=True, default=None)
+    mission = models.ForeignKey('Mission', verbose_name=_('Mission'),blank=True, null=True, default=None)
+    trade_object = models.ForeignKey('TradeObject', verbose_name=_('Trade object'),blank=True, null=True, default=None) 
     
-    procedure = models.ForeignKey('Procedure', verbose_name=_('Procedure'),blank=True)
-    mission = models.ForeignKey('Mission', verbose_name=_('Mission'),blank=True)
-    trade_object = models.ForeignKey('TradeObject', verbose_name=_('Trade object'),blank=True) 
-    
-    programs = models.ManyToManyField('Program', verbose_name=_('Programs'),blank=True)
-    image = models.ManyToManyField('ProjectImage', verbose_name=_('Project Images'),blank=True)
-    functions = models.ManyToManyField('Function', verbose_name=_('Functions'),blank=True)
+    programs = models.ManyToManyField('Program', verbose_name=_('Programs'),blank=True, null=True, default=None)
+    image = models.ManyToManyField('ProjectImage', verbose_name=_('Project Images'),blank=True, null=True, default=None)
+    functions = models.ManyToManyField('Function', verbose_name=_('Functions'),blank=True, null=True, default=None)
     steps = models.ManyToManyField('Step', blank=True)
-    actions = models.ManyToManyField('Action', verbose_name=_('Actions'),blank=True)
-    worth = models.ManyToManyField('ProjectWorth', verbose_name=_('Project worths'),blank=True)
+    actions = models.ManyToManyField('Action', verbose_name=_('Actions'),blank=True, null=True, default=None)
+    worth = models.ManyToManyField('ProjectWorth', verbose_name=_('Project worths'),blank=True, null=True, default=None)
     
     
     mpoly = models.MultiPolygonField(verbose_name=_('Perimeter'), srid=4326, geography=True)
     objects = models.GeoManager()
     
-    parent = models.ForeignKey( 'Project', verbose_name=_('Parent'), blank=True)
+    parent = models.ForeignKey( 'Project', verbose_name=_('Parent'), blank=True, null=True, default=None)
     
     slug = models.SlugField(max_length=255, editable=False, default='None')
     

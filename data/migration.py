@@ -50,6 +50,8 @@ cities = {}
 missions = {}
 fonctions = {}
 procedures = {}
+budget_ranges = {}
+surface_ranges = {}
 status = {
 'PROJECT_STEP_1_PROGRAM':{},
 'PROJECT_STEP_2_CSC':{},
@@ -94,6 +96,11 @@ for p in pdata:
     for s in status:
         ps = p[s]
         status[s]['actions'][ps['value']] = ps
+        
+    try:
+        surface_ranges[p['SURFACE']] = None
+    except Exception:
+        pass
     
 ## DEFAULTS
 default_city = City.objects.create(zipcode=9999, name_fr=u'None City', name_nl=u'None City')
@@ -102,17 +109,25 @@ default_city.save()
 default_mission = Mission.objects.create(name_fr=u'No Mission', name_nl=u'No Mission')
 default_mission.save()
 
+ptype_mo = PartnershipType.objects.create(name_fr=u'Maitrise d’ouvrage', name_nl=u'Bouwheer')
+ptype_mo.save()
+
+acteur_decision = PartnerType.objects.create(name_fr=u'Acteur décision', name_nl=u'-')
+acteur_decision.save()
+mo_reg_adm = PartnerType.objects.create(name_fr=u'MO. Régional Administration', name_nl=u'-', parent=acteur_decision)
+mo_reg_adm.save()
+
     
 ## import buiders
-try:
-    partner_type = PartnerType.objects.get(name=u'Maître d’ouvrage')
-except Exception:
-    partner_type = PartnerType.objects.create(name_fr = u'Maître d’ouvrage', name_nl = u'Bouwheren')
-    partner_type.save()
+#try:
+    #partner_type = PartnerType.objects.get(name=u'Maître d’ouvrage')
+#except Exception:
+    #partner_type = PartnerType.objects.create(name_fr = u'Maître d’ouvrage', name_nl = u'Bouwheren')
+    #partner_type.save()
 
 for b in builders:
     print 'Import Builder %s'%(b,)
-    nb = Partner.objects.create(name_fr=ue(builders[b]['fre']), name_nl = ue(builders[b]['dut']), ptype=partner_type)
+    nb = Partner.objects.create(name_fr=ue(builders[b]['fre']), name_nl = ue(builders[b]['dut']), ptype=mo_reg_adm)
     nb.save()
     builders[b]['django_id'] = nb
     
@@ -168,7 +183,22 @@ for s in status:
         na.save()
         ss['actions'][a]['django_id'] = na
         
-        
+## import surfaces
+for sr in surface_ranges:
+    print 'Import Surface %s'%(sr,)
+    try:
+        f, c = list(sr.split('-'))
+        ff = f.split('m')[0]
+        cc = c.split('m')[0]
+        fff = int(''.join(ff.split('.')))
+        ccc = int(''.join(cc.split('.')))
+        surf = SurfaceRange.objects.create(floor=fff, ceiling=ccc)
+        surf.save()
+        surface_ranges[sr] = surf
+    except Exception:
+        print 'Failed to import surface [%s]'%sr
+    
+    
         
 ## import projects
 
@@ -180,6 +210,7 @@ for p in pdata:
     new_p.published = p['PUBLISHED'] == '1'
     new_p.name_fr = ue(p['TITLE']['fre'])
     new_p.name_nl = ue(p['TITLE']['dut'])
+    new_p.attribution = 0
     try:
         new_p.description_fr = ue(p['BODY']['fre'])
         new_p.description_nl = ue(p['BODY']['dut'])
@@ -229,10 +260,11 @@ for p in pdata:
         continue
         
     
-    #print(dir(new_p.partners))
+    try:
+        new_p.surface_range = surface_ranges[p['SURFACE']]
+    except Exception:
+        print 'Failed to set surface'
     
-    for b in p['builder']:
-        new_p.partners.add(builders[b['ID']]['django_id'])
         
     for f in p['fonctions']:
         new_p.functions.add(fonctions[f['value']]['django_id'])
@@ -242,3 +274,11 @@ for p in pdata:
         new_p.actions.add(status[s]['actions'][ps['value']]['django_id'])
         
     new_p.save()
+    
+    
+    for b in p['builder']:
+        # create a new partnership
+        pship = Partnership.objects.create(ptype=ptype_mo, partner=builders[b['ID']]['django_id'], project=new_p)
+        pship.save()
+    
+    

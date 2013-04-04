@@ -58,6 +58,9 @@ class StepAdmin(TabbedTr, TranslationAdmin):
 class CityAdmin(TabbedTr, TranslationAdmin):
     pass
     
+class ProjectWorthAdmin(TabbedTr, TranslationAdmin):
+    pass
+    
 class PartnershipInline(admin.TabularInline):
     model = Partnership
     extra = 1
@@ -100,8 +103,8 @@ class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
                     'description', 
                     ('address', 'city'),
                     'functions',
-                    'surface', 
-                    'budget',
+                    'surface_range', 
+                    'budget_range',
                     'programs',
                     'trade_name'
                     )
@@ -158,5 +161,8 @@ admin.site.register(Action, ActionAdmin)
 admin.site.register(Step, StepAdmin)
 admin.site.register(City, CityAdmin)
 admin.site.register(ProjectImage)
+admin.site.register(ProjectWorth, ProjectWorthAdmin)
+admin.site.register(SurfaceRange)
+admin.site.register(BudgetRange)
 admin.site.register(Project, GeoAdmin)
 
