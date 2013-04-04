@@ -11,13 +11,21 @@ from django.conf.urls import  url
 
 
 # class decorator
-def serializer():
+def serializer(property_list = tuple()):
     def decorator(cls):
         name = cls.__name__
-        print('Decorating [%s] with a serializer'%(name,))
-        meta = type('Meta', (object, ), {'model':cls})
+        #print('Decorating [%s] with a serializer'%(name,))
+        meta = type('Meta', (object, ), {'model':cls, 'depth':9})
         srl = type(''.join([name,'Serializer']), (serializers.ModelSerializer,), {'Meta':meta} )
-        #setattr(cls, 'Meta', meta)
+
+        fields = {}
+        for prop in property_list:
+            sfield = serializers.Field(source=prop)
+            setattr(srl, prop, sfield)
+            fields[prop] = sfield
+        if property_list:
+            setattr(srl, 'base_fields', fields)
+            
         setattr(cls, 'serializer_class', srl)
         return cls
     return decorator
@@ -72,14 +80,14 @@ def urls(resources):
         f = r[2]
         mn = m.lower() 
         ret.append(url(
-            r''.join(['^', mn + 's' ,'/$']),
+            r''.join(['^api/', mn + 's' ,'/$']),
             'bma.api.view_list',
             {'app': app, 'model':m, 'filters':f},
             name= mn + '-list'
             ),
         )
         ret.append(url(
-            r''.join(['^', mn + 's' ,'/(?P<pk>\d+)$']),
+            r''.join(['^api/', mn + 's' ,'/(?P<pk>\d+)$']),
             'bma.api.view_detail',
             {'app': app, 'model':m},
             name= mn + '-detail'

@@ -31,6 +31,9 @@ class PartnerTypeAdmin(TabbedTr, TranslationAdmin):
 class PartnerAdmin(TabbedTr, TranslationAdmin):
     pass
     
+class PartnershipTypeAdmin(TabbedTr, TranslationAdmin):
+    pass
+    
 class ProgramAdmin(TabbedTr, TranslationAdmin):
     pass
     
@@ -54,6 +57,11 @@ class StepAdmin(TabbedTr, TranslationAdmin):
     
 class CityAdmin(TabbedTr, TranslationAdmin):
     pass
+    
+class PartnershipInline(admin.TabularInline):
+    model = Partnership
+    extra = 1
+    fieldset_id = 'partnership_set'
 
 class ProjectCityListFilter(SimpleListFilter):
     title = _('City')
@@ -82,25 +90,42 @@ class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
             'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
         }
     
-    filter_horizontal = ('partners', 'programs', 'functions', 'image', 'actions', 'steps')
+    filter_horizontal = ('programs', 'functions', 'image', 'actions', 'worth')
     fieldsets = [
             (None, {'fields':('published',)}),
-            (_('Project facts'),{
-                'fields': ('name', 'description', ('address', 'city'))
+            (_('Description'),{
+                'fields': (
+                    'name', 
+                    'description', 
+                    ('address', 'city'),
+                    'functions',
+                    ('surface', 'budget'),
+                    'programs',
+                    'trade_name'
+                    )
             }),
-            (_('bMa qualification'),{
-                'fields': ('functions','surface','budget','partners','programs')
+            (_('bMa'),{
+                'fields': (
+                    'trade_object',
+                    'procedure',
+                    'mission',
+                    'actions',
+                    'worth'
+                    )
             }),
-            (_('bMa activity'),{
-                'fields':('procedure','mission','actions')
+            (_('Project'),{
+                'fields':(
+                    'attribution',
+                    'mpoly',
+                    'image'
+                    )
             }),
-            (_('publication interest'),{
-                'fields':('mpoly','image')
-            })
+            (None, {'fields':('parent',)}),
         ]
     list_display = ('name', 'address', 'get_city_display', 'published')
     list_filter = (ProjectCityListFilter, 'published')
     search_fields = ['name',]
+    inlines = [PartnershipInline]
     
     def __init__(self, model, admin_site):
         super(GeoAdmin, self).__init__(model, admin_site)
@@ -119,6 +144,7 @@ class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
         self.map_height = 600
         
 
+admin.site.register(PartnershipType, PartnershipTypeAdmin)
 admin.site.register(PartnerType, PartnerTypeAdmin)
 admin.site.register(Partner, PartnerAdmin)
 admin.site.register(Program, ProgramAdmin)

@@ -3,6 +3,8 @@
 
 """
 
+import json
+
 from django.contrib.gis.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
@@ -19,6 +21,7 @@ class PartnerType(models.Model):
         verbose_name_plural = _("Partner types")
         
     name = models.CharField(max_length=512)
+    parent = models.ForeignKey('PartnerType', blank=True, null=True)
     
     def __unicode__(self):
         return self.name
@@ -46,6 +49,49 @@ class Partner(models.Model):
     def __unicode__(self):
         return '%s (%s)'%(self.name, self.ptype)
         
+@serializer()
+class PartnershipType(models.Model):
+    """
+    Define type of partnership
+    """
+    class Meta:
+        verbose_name = _("Partnership type")
+        verbose_name_plural = _("Partnership types")
+        
+    name = models.CharField(max_length=512)
+    description = models.TextField(blank=True)
+    
+    def __unicode__(self):
+        return self.name
+        
+@serializer()
+class Partnership(models.Model):
+    """
+    Represent how a partner is involved in a project
+    """
+    class Meta:
+        verbose_name = _("Partnership")
+        verbose_name_plural = _("Partnerships")
+        
+    ptype = models.ForeignKey('PartnershipType')
+    partner = models.ForeignKey('Partner') 
+    project = models.ForeignKey('Project')
+    
+@serializer()
+class TradeObject(models.Model):
+    """
+    """
+    class Meta:
+        verbose_name = _("Trade object")
+        verbose_name_plural = _("Trade objects")
+        
+    name = models.CharField(max_length=512)
+    description = models.TextField(blank=True)
+    
+    def natural_key(self):
+        return (self.id, self.name)
+    def __unicode__(self):
+        return self.name
         
 @serializer()
 class Program(models.Model):
@@ -187,13 +233,30 @@ class City(models.Model):
         
     zipcode = models.CharField(max_length=32)
     name = models.CharField(max_length=256)
+    
     def natural_key(self):
         return (self.id, self.zipcode, self.name)
+        
+    def __unicode__(self):
+        return '%s %s'%(self.zipcode, self.name)
+
+@serializer()
+class ProjectWorth(models.Model):
+    """
+    Capital gain?
+    """
+    class Meta:
+        verbose_name = _("Project worth")
+        verbose_name_plural = _("Project worth")
+        
+    name = models.CharField(max_length=512)
+    description = models.TextField(blank=True)
+    def natural_key(self):
+        return (self.id, self.name)
     def __unicode__(self):
         return self.name
     
-    
-@serializer()
+@serializer(property_list = ('centroid', 'geojson'))
 class Project(models.Model):
     """
     A project is the main item to present on the website,
@@ -203,27 +266,33 @@ class Project(models.Model):
         verbose_name = _("Project")
         verbose_name_plural = _("Projects")
     
-    published = models.BooleanField(default=False)
-    name = models.CharField(max_length=1024)
-    description = models.TextField(blank=True)
-    address = models.TextField(blank=True)
-    surface = models.CommaSeparatedIntegerField(max_length=64,blank=True)
-    budget = models.CommaSeparatedIntegerField(max_length=64,blank=True)
+    published = models.BooleanField(verbose_name=_('Published'),default=False)
+    name = models.CharField(verbose_name=_('Name'),max_length=1024)
+    description = models.TextField(verbose_name=_('Description'),blank=True)
+    address = models.TextField(verbose_name=_('Address'),blank=True)
+    surface = models.CommaSeparatedIntegerField(verbose_name=_('Surface'),max_length=64, blank=True)
+    budget = models.CommaSeparatedIntegerField(verbose_name=_('Budget'),max_length=64, blank=True)
+    trade_name = models.CharField(verbose_name=_('Trade name'),max_length=512, blank=True)
+    attribution = models.IntegerField(verbose_name=_('Attribution'),max_length=512, blank=True)
     
-    city = models.ForeignKey('City', blank=True)
-    partners = models.ManyToManyField('Partner')
-    programs = models.ManyToManyField('Program')
-    procedure = models.ForeignKey('Procedure')
-    functions = models.ManyToManyField('Function')
-    image = models.ManyToManyField('ProjectImage', blank=True)
-    mission = models.ForeignKey('Mission', blank=True)
+    city = models.ForeignKey('City', verbose_name=_('City'),blank=True)
     
-    steps = models.ManyToManyField('Step')
-    actions = models.ManyToManyField('Action')
+    procedure = models.ForeignKey('Procedure', verbose_name=_('Procedure'),blank=True)
+    mission = models.ForeignKey('Mission', verbose_name=_('Mission'),blank=True)
+    trade_object = models.ForeignKey('TradeObject', verbose_name=_('Trade object'),blank=True) 
+    
+    programs = models.ManyToManyField('Program', verbose_name=_('Programs'),blank=True)
+    image = models.ManyToManyField('ProjectImage', verbose_name=_('Project Images'),blank=True)
+    functions = models.ManyToManyField('Function', verbose_name=_('Functions'),blank=True)
+    steps = models.ManyToManyField('Step', blank=True)
+    actions = models.ManyToManyField('Action', verbose_name=_('Actions'),blank=True)
+    worth = models.ManyToManyField('ProjectWorth', verbose_name=_('Project worths'),blank=True)
     
     
-    mpoly = models.MultiPolygonField(srid=4326, geography=True)
+    mpoly = models.MultiPolygonField(verbose_name=_('Perimeter'), srid=4326, geography=True)
     objects = models.GeoManager()
+    
+    parent = models.ForeignKey( 'Project', verbose_name=_('Parent'), blank=True)
     
     slug = models.SlugField(max_length=255, editable=False, default='None')
     
@@ -237,13 +306,13 @@ class Project(models.Model):
     @property
     def centroid(self):
         try:
-            return self.mpoly.centroid.geojson
+            return json.loads(self.mpoly.centroid.geojson)
         except:
-            return  u'{ "type": "Point", "coordinates": [ 0, 0 ] }'
+            return  { "type": "Point", "coordinates": [ 0, 0 ] }
         
     @property
     def geojson(self):
-        return self.mpoly.geojson
+        return json.loads(self.mpoly.geojson)
     
         
     def __unicode__(self):

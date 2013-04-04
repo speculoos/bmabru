@@ -11,6 +11,15 @@ class PartnerTypeTrOptions(TranslationOptions):
 class PartnerTrOptions(TranslationOptions):
     fields = ('name', 'description')
     
+class PartnershipTypeOptions(TranslationOptions):
+    fields = ('name', 'description')
+    
+class TradeObjectOptions(TranslationOptions):
+    fields = ('name', 'description')
+    
+class ProjectWorthOptions(TranslationOptions):
+    fields = ('name', 'description')
+    
 class ProgramTrOptions(TranslationOptions):
     fields = ('name', 'description')
     
@@ -40,6 +49,9 @@ class ProjectTrOptions(TranslationOptions):
 
 translator.register(PartnerType, PartnerTypeTrOptions)
 translator.register(Partner, PartnerTrOptions)
+translator.register(PartnershipType, PartnershipTypeOptions)
+translator.register(TradeObject, TradeObjectOptions)
+translator.register(ProjectWorth, ProjectWorthOptions)
 translator.register(Program, ProgramTrOptions)
 translator.register(Procedure, ProcedureTrOptions)
 translator.register(Function, FunctionTrOptions)
