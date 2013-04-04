@@ -11,7 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from bma.api import serializer
 
-
+@serializer()
 class PartnerType(models.Model):
     """
     Define custom partner types
@@ -20,8 +20,8 @@ class PartnerType(models.Model):
         verbose_name = _("Partner type")
         verbose_name_plural = _("Partner types")
         
-    name = models.CharField(max_length=512)
-    parent = models.ForeignKey('PartnerType', blank=True, null=True)
+    name = models.CharField(max_length=512, verbose_name=_('Name'))
+    parent = models.ForeignKey('PartnerType', verbose_name=_('Parent'), blank=True, null=True)
     
     def __unicode__(self):
         return self.name
@@ -35,13 +35,13 @@ class Partner(models.Model):
         verbose_name = _("Partner")
         verbose_name_plural = _("Partners")
         
-    name = models.CharField(max_length=512)
+    name = models.CharField(max_length=512, verbose_name=_('Name'))
     url = models.URLField(blank=True)
-    ptype = models.ForeignKey('PartnerType', related_name='partners')
-    description = models.TextField(blank=True)
-    contact_name = models.CharField(max_length=128, blank=True)
-    subscribed = models.BooleanField(default=False)
-    email = models.EmailField(max_length=128, blank=True)
+    ptype = models.ForeignKey('PartnerType', verbose_name=_('Partner type'), related_name='partners')
+    description = models.TextField(blank=True, verbose_name=_('Description'))
+    contact_name = models.CharField(max_length=128, verbose_name=_('Contact name'), blank=True)
+    subscribed = models.BooleanField(default=False, verbose_name=_('Subscribed'))
+    email = models.EmailField(max_length=128, verbose_name=_('email'), blank=True)
     
     def natural_key(self):
         return (self.id, self.name)
@@ -58,8 +58,8 @@ class PartnershipType(models.Model):
         verbose_name = _("Partnership type")
         verbose_name_plural = _("Partnership types")
         
-    name = models.CharField(max_length=512)
-    description = models.TextField(blank=True)
+    name = models.CharField(max_length=512, verbose_name=_('Name'))
+    description = models.TextField(blank=True, verbose_name=_('Description'))
     
     def __unicode__(self):
         return self.name
@@ -73,9 +73,9 @@ class Partnership(models.Model):
         verbose_name = _("Partnership")
         verbose_name_plural = _("Partnerships")
         
-    ptype = models.ForeignKey('PartnershipType')
-    partner = models.ForeignKey('Partner') 
-    project = models.ForeignKey('Project')
+    ptype = models.ForeignKey('PartnershipType', verbose_name=_('Partnership type'))
+    partner = models.ForeignKey('Partner', verbose_name=_('Partner')) 
+    project = models.ForeignKey('Project', verbose_name=_('Project'))
     
 @serializer()
 class TradeObject(models.Model):
@@ -85,8 +85,8 @@ class TradeObject(models.Model):
         verbose_name = _("Trade object")
         verbose_name_plural = _("Trade objects")
         
-    name = models.CharField(max_length=512)
-    description = models.TextField(blank=True)
+    name = models.CharField(max_length=512, verbose_name=_('Name'))
+    description = models.TextField(blank=True, verbose_name=_('Description'))
     
     def natural_key(self):
         return (self.id, self.name)
@@ -102,8 +102,9 @@ class Program(models.Model):
         verbose_name = _("Program")
         verbose_name_plural = _("Programs")
         
-    name = models.CharField(max_length=512)
-    description = models.TextField(blank=True)
+    name = models.CharField(max_length=512, verbose_name=_('Name'))
+    description = models.TextField(blank=True, verbose_name=_('Description'))
+    
     def natural_key(self):
         return (self.id, self.name)
     def __unicode__(self):
@@ -119,8 +120,9 @@ class Procedure(models.Model):
         verbose_name = _("Procedure")
         verbose_name_plural = _("Procedures")
     
-    name = models.CharField(max_length=512)
-    description = models.TextField(blank=True)
+    name = models.CharField(max_length=512, verbose_name=_('Name'))
+    description = models.TextField(blank=True, verbose_name=_('Description'))
+    
     def natural_key(self):
         return (self.id, self.name)
     def __unicode__(self):
@@ -135,7 +137,7 @@ class ProjectImage(models.Model):
         verbose_name = _("Project image")
         verbose_name_plural = _("Project images")
         
-    image = models.ImageField(upload_to='project_trigo', height_field='height', width_field='width')
+    image = models.ImageField(upload_to='project_trigo', height_field='height', width_field='width', verbose_name=_('Image'))
     width = models.IntegerField(blank=True)
     height = models.IntegerField(blank=True)
     zoom_level = models.IntegerField(blank=True)
@@ -150,8 +152,9 @@ class Function(models.Model):
         verbose_name = _("Function")
         verbose_name_plural = _("Functions")
         
-    name = models.CharField(max_length=512)
-    description = models.TextField(blank=True)
+    name = models.CharField(max_length=512, verbose_name=_('Name'))
+    description = models.TextField(blank=True, verbose_name=_('Description'))
+    
     def natural_key(self):
         return (self.id, self.name)
     def __unicode__(self):
@@ -167,8 +170,9 @@ class Mission(models.Model):
         verbose_name = _("Mission")
         verbose_name_plural = _("Missions")
         
-    name = models.CharField(max_length=512)
-    description = models.TextField(blank=True)
+    name = models.CharField(max_length=512, verbose_name=_('Name'))
+    description = models.TextField(blank=True, verbose_name=_('Description'))
+    
     def natural_key(self):
         return (self.id, self.name)
     def __unicode__(self):
@@ -185,8 +189,9 @@ class ProjectStatus(models.Model):
         verbose_name = _("Project status")
         verbose_name_plural = _("Project status")
         
-    name = models.CharField(max_length=128)
-    description = models.TextField(blank=True)
+    name = models.CharField(max_length=128, verbose_name=_('Name'))
+    description = models.TextField(blank=True, verbose_name=_('Description'))
+    
     order = models.IntegerField()
     def natural_key(self):
         return (self.id, self.name)
@@ -202,8 +207,9 @@ class Action(models.Model):
         verbose_name = _("Action")
         verbose_name_plural = _("Actions")
         
-    sentence = models.TextField()
-    project_status = models.ForeignKey('ProjectStatus')
+    sentence = models.TextField(verbose_name=_('Sentence'))
+    project_status = models.ForeignKey('ProjectStatus', verbose_name=_('Project status'))
+    
     def natural_key(self):
         return (self.id, self.sentence)
     def __unicode__(self):
@@ -218,9 +224,9 @@ class Step(models.Model):
         verbose_name = _("Step")
         verbose_name_plural = _("Steps")
     
-    name = models.CharField(max_length=128)
-    description = models.TextField(blank=True)
-    date = models.DateField(blank=True, null=True)
+    name = models.CharField(max_length=512, verbose_name=_('Name'))
+    description = models.TextField(blank=True, verbose_name=_('Description'))
+    date = models.DateField(blank=True, null=True, verbose_name=_('Date'))
     
     def __unicode__(self):
         return self.name
@@ -231,8 +237,8 @@ class City(models.Model):
         verbose_name = _("City")
         verbose_name_plural = _("Cities")
         
-    zipcode = models.CharField(max_length=32)
-    name = models.CharField(max_length=256)
+    zipcode = models.CharField(max_length=32, verbose_name=_('zip code'))
+    name = models.CharField(max_length=256, verbose_name=_('Name'))
     
     def natural_key(self):
         return (self.id, self.zipcode, self.name)
@@ -249,8 +255,9 @@ class ProjectWorth(models.Model):
         verbose_name = _("Project worth")
         verbose_name_plural = _("Project worth")
         
-    name = models.CharField(max_length=512)
-    description = models.TextField(blank=True)
+    name = models.CharField(max_length=512, verbose_name=_('Name'))
+    description = models.TextField(blank=True, verbose_name=_('Description'))
+    
     def natural_key(self):
         return (self.id, self.name)
     def __unicode__(self):
