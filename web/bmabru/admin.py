@@ -62,6 +62,7 @@ class PartnershipInline(admin.TabularInline):
     model = Partnership
     extra = 1
     fieldset_id = 'partnership_set'
+    after_field = 'budget'
 
 class ProjectCityListFilter(SimpleListFilter):
     title = _('City')
@@ -99,7 +100,8 @@ class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
                     'description', 
                     ('address', 'city'),
                     'functions',
-                    ('surface', 'budget'),
+                    'surface', 
+                    'budget',
                     'programs',
                     'trade_name'
                     )
