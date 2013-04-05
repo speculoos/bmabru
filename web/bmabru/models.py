@@ -216,7 +216,7 @@ class Action(models.Model):
     def natural_key(self):
         return (self.id, self.sentence)
     def __unicode__(self):
-        return '%s / %s'%(self.project_status.name, self.sentence[:32])
+        return '%s: %s'%(self.project_status.name, self.sentence)
 
 @serializer()
 class Step(models.Model):

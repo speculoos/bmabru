@@ -9,6 +9,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.core import serializers
 from django.utils import six
+from django.core.urlresolvers import reverse
 import json
 
 from rest_framework import generics
@@ -112,11 +113,20 @@ def expose_structure(req):
     
     def unfold_rel(mdl, msg):
         objs = mdl.objects.all()
-        msg.append('<ul>')
+        msg.append(' '.join([' <a style="font-family:sans-serif;font-size:120%;color:#999;" href="',
+                reverse('admin:bmabru_'+model._meta.module_name+'_add'),
+                '" target="_blank">Ajouter</a>']))
+        msg.append('<ul style="list-style-type:none">')
         for o in objs:
             msg.append(' '.join([
                 '<li>',
+                '<span style="font-family:sans-serif;font-size:70%;color:#999;font-weight:bold">',
+                str(o.id),
+                '</span> ',
                 o.__unicode__(),
+                ' <a style="font-family:sans-serif;font-size:90%;color:#999;" href="',
+                reverse('admin:bmabru_'+model._meta.module_name+'_change', args=(o.id,)),
+                '" target="_blank">modifier</a>',
                 '</li>'
             ]))
         msg.append('</ul>')

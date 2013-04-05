@@ -58,6 +58,9 @@ class StepAdmin(TabbedTr, TranslationAdmin):
 class CityAdmin(TabbedTr, TranslationAdmin):
     pass
     
+class TradeObjectAdmin(TabbedTr, TranslationAdmin):
+    pass
+    
 class ProjectWorthAdmin(TabbedTr, TranslationAdmin):
     pass
     
@@ -164,5 +167,6 @@ admin.site.register(ProjectImage)
 admin.site.register(ProjectWorth, ProjectWorthAdmin)
 admin.site.register(SurfaceRange)
 admin.site.register(BudgetRange)
+admin.site.register(TradeObject, TradeObjectAdmin)
 admin.site.register(Project, GeoAdmin)
 
