@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-12 17:03-0500\n"
+"POT-Creation-Date: 2013-04-04 18:58-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,128 +26,288 @@ msgstr ""
 msgid "Dutch"
 msgstr ""
 
-#: bmabru/admin.py:70
-msgid "Project facts"
-msgstr ""
-
-#: bmabru/admin.py:73
-msgid "bMa qualification"
-msgstr ""
-
-#: bmabru/admin.py:76
-msgid "bMa activity"
-msgstr ""
-
-#: bmabru/admin.py:79
-msgid "publication interest"
-msgstr ""
-
-#: bmabru/models.py:18
-msgid "Partner type"
-msgstr ""
-
-#: bmabru/models.py:19
-msgid "Partner types"
-msgstr ""
-
-#: bmabru/models.py:32
-msgid "Partner"
-msgstr ""
-
-#: bmabru/models.py:33
-msgid "Partners"
-msgstr ""
-
-#: bmabru/models.py:56
-msgid "Program"
-msgstr ""
-
-#: bmabru/models.py:57
-msgid "Programs"
-msgstr ""
-
-#: bmabru/models.py:72
-msgid "Procedure"
-msgstr ""
-
-#: bmabru/models.py:73
-msgid "Procedures"
-msgstr ""
-
-#: bmabru/models.py:88
-msgid "Project image"
-msgstr ""
-
-#: bmabru/models.py:89
-msgid "Project images"
-msgstr ""
-
-#: bmabru/models.py:102 templates/projects.html:35
-msgid "Function"
-msgstr ""
-
-#: bmabru/models.py:103
-msgid "Functions"
-msgstr ""
-
-#: bmabru/models.py:118
-msgid "Mission"
-msgstr ""
-
-#: bmabru/models.py:119
-msgid "Missions"
-msgstr ""
-
-#: bmabru/models.py:136 bmabru/models.py:137
-msgid "Project status"
-msgstr ""
-
-#: bmabru/models.py:152
-msgid "Action"
-msgstr ""
-
-#: bmabru/models.py:153
-msgid "Actions"
-msgstr ""
-
-#: bmabru/models.py:168
-msgid "Step"
-msgstr ""
-
-#: bmabru/models.py:169
-msgid "Steps"
-msgstr ""
-
-#: bmabru/models.py:180 templates/projects.html:34
+#: bmabru/admin.py:71 bmabru/models.py:237 bmabru/models.py:309
+#: templates/projects.html:34
 msgid "City"
 msgstr ""
 
-#: bmabru/models.py:181
-msgid "Cities"
+#: bmabru/admin.py:100 bmabru/models.py:41 bmabru/models.py:62
+#: bmabru/models.py:89 bmabru/models.py:106 bmabru/models.py:124
+#: bmabru/models.py:156 bmabru/models.py:174 bmabru/models.py:193
+#: bmabru/models.py:228 bmabru/models.py:259 bmabru/models.py:304
+msgid "Description"
 msgstr ""
 
-#: bmabru/models.py:196
+#: bmabru/admin.py:112
+msgid "bMa"
+msgstr ""
+
+#: bmabru/admin.py:121 bmabru/models.py:78 bmabru/models.py:299
 msgid "Project"
 msgstr ""
 
-#: bmabru/models.py:197
-msgid "Projects"
+#: bmabru/models.py:20 bmabru/models.py:40
+msgid "Partner type"
 msgstr ""
 
-#: templates/base.html:81
-msgid "Projects list"
+#: bmabru/models.py:21
+msgid "Partner types"
 msgstr ""
 
-#: templates/projects.html:17 templates/projects.html.py:22
-msgid "Projects List"
-msgstr ""
-
-#: templates/projects.html:32
+#: bmabru/models.py:23 bmabru/models.py:38 bmabru/models.py:61
+#: bmabru/models.py:88 bmabru/models.py:105 bmabru/models.py:123
+#: bmabru/models.py:155 bmabru/models.py:173 bmabru/models.py:192
+#: bmabru/models.py:227 bmabru/models.py:241 bmabru/models.py:258
+#: bmabru/models.py:303 templates/projects.html:32
 msgid "Name"
 msgstr ""
 
-#: templates/projects.html:33
+#: bmabru/models.py:24 bmabru/models.py:327
+msgid "Parent"
+msgstr ""
+
+#: bmabru/models.py:35 bmabru/models.py:77
+msgid "Partner"
+msgstr ""
+
+#: bmabru/models.py:36
+msgid "Partners"
+msgstr ""
+
+#: bmabru/models.py:42
+msgid "Contact name"
+msgstr ""
+
+#: bmabru/models.py:43
+msgid "Subscribed"
+msgstr ""
+
+#: bmabru/models.py:44
+msgid "email"
+msgstr ""
+
+#: bmabru/models.py:58 bmabru/models.py:76
+msgid "Partnership type"
+msgstr ""
+
+#: bmabru/models.py:59
+msgid "Partnership types"
+msgstr ""
+
+#: bmabru/models.py:73
+msgid "Partnership"
+msgstr ""
+
+#: bmabru/models.py:74
+msgid "Partnerships"
+msgstr ""
+
+#: bmabru/models.py:85 bmabru/models.py:314
+msgid "Trade object"
+msgstr ""
+
+#: bmabru/models.py:86
+msgid "Trade objects"
+msgstr ""
+
+#: bmabru/models.py:102
+msgid "Program"
+msgstr ""
+
+#: bmabru/models.py:103 bmabru/models.py:316
+msgid "Programs"
+msgstr ""
+
+#: bmabru/models.py:120 bmabru/models.py:312
+msgid "Procedure"
+msgstr ""
+
+#: bmabru/models.py:121
+msgid "Procedures"
+msgstr ""
+
+#: bmabru/models.py:137
+msgid "Project image"
+msgstr ""
+
+#: bmabru/models.py:138
+msgid "Project images"
+msgstr ""
+
+#: bmabru/models.py:140
+msgid "Image"
+msgstr ""
+
+#: bmabru/models.py:152 templates/projects.html:35
+msgid "Function"
+msgstr ""
+
+#: bmabru/models.py:153 bmabru/models.py:318
+msgid "Functions"
+msgstr ""
+
+#: bmabru/models.py:170 bmabru/models.py:313
+msgid "Mission"
+msgstr ""
+
+#: bmabru/models.py:171
+msgid "Missions"
+msgstr ""
+
+#: bmabru/models.py:189 bmabru/models.py:190 bmabru/models.py:211
+msgid "Project status"
+msgstr ""
+
+#: bmabru/models.py:207
+msgid "Action"
+msgstr ""
+
+#: bmabru/models.py:208 bmabru/models.py:320
+msgid "Actions"
+msgstr ""
+
+#: bmabru/models.py:210
+msgid "Sentence"
+msgstr ""
+
+#: bmabru/models.py:224
+msgid "Step"
+msgstr ""
+
+#: bmabru/models.py:225
+msgid "Steps"
+msgstr ""
+
+#: bmabru/models.py:229
+msgid "Date"
+msgstr ""
+
+#: bmabru/models.py:238
+msgid "Cities"
+msgstr ""
+
+#: bmabru/models.py:240
+msgid "zip code"
+msgstr ""
+
+#: bmabru/models.py:255 bmabru/models.py:256
+msgid "Project worth"
+msgstr ""
+
+#: bmabru/models.py:270
+msgid "Budget range"
+msgstr ""
+
+#: bmabru/models.py:271
+msgid "Budget ranges"
+msgstr ""
+
+#: bmabru/models.py:273 bmabru/models.py:285
+msgid "Floor"
+msgstr ""
+
+#: bmabru/models.py:274 bmabru/models.py:286
+msgid "Ceiling"
+msgstr ""
+
+#: bmabru/models.py:282
+msgid "Surface range"
+msgstr ""
+
+#: bmabru/models.py:283
+msgid "Surface ranges"
+msgstr ""
+
+#: bmabru/models.py:300
+msgid "Projects"
+msgstr ""
+
+#: bmabru/models.py:302
+msgid "Published"
+msgstr ""
+
+#: bmabru/models.py:305 templates/projects.html:33
 msgid "Address"
+msgstr ""
+
+#: bmabru/models.py:306
+msgid "Trade name"
+msgstr ""
+
+#: bmabru/models.py:307
+msgid "Attribution"
+msgstr ""
+
+#: bmabru/models.py:310
+msgid "Surface"
+msgstr ""
+
+#: bmabru/models.py:311
+msgid "Budget"
+msgstr ""
+
+#: bmabru/models.py:317
+msgid "Project Images"
+msgstr ""
+
+#: bmabru/models.py:321
+msgid "Project worths"
+msgstr ""
+
+#: bmabru/models.py:324
+msgid "Perimeter"
+msgstr ""
+
+#: media/admin.py:36
+msgid "Content"
+msgstr ""
+
+#: media/admin.py:37
+msgid "Extra"
+msgstr ""
+
+#: media/models.py:17
+msgid "Resource"
+msgstr ""
+
+#: media/models.py:18
+msgid "Resources"
+msgstr ""
+
+#: media/models.py:28
+msgid "Category"
+msgstr ""
+
+#: media/models.py:29
+msgid "Categories"
+msgstr ""
+
+#: media/models.py:38 media/models.py:39
+msgid "Featured"
+msgstr ""
+
+#: media/models.py:63
+msgid "Subjective Image"
+msgstr ""
+
+#: media/models.py:64
+msgid "Subjective Images"
+msgstr ""
+
+#: media/models.py:79
+msgid "Page"
+msgstr ""
+
+#: media/models.py:80
+msgid "Pages"
+msgstr ""
+
+#: templates/base.html:82
+msgid "Projects list"
+msgstr ""
+
+#: templates/projects.html:17
+msgid "Projects List"
 msgstr ""
 
 #: templates/admin/base.html:28
@@ -176,4 +336,21 @@ msgstr ""
 
 #: templates/admin/base_site.html:7
 msgid "bMa administration"
+msgstr ""
+
+#: templates/admin/bmabru/project/tabular.html:18
+msgid "Delete?"
+msgstr ""
+
+#: templates/admin/bmabru/project/tabular.html:31
+msgid "View on site"
+msgstr ""
+
+#: templates/admin/bmabru/project/tabular.html:77
+#, python-format
+msgid "Add another %(verbose_name)s"
+msgstr ""
+
+#: templates/admin/bmabru/project/tabular.html:78
+msgid "Remove"
 msgstr ""
