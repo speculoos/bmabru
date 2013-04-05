@@ -12,7 +12,7 @@ window.bMa.Legend = function(container, map)
             this.map = map;
             this.container.parent().hide();
             this.wrapper = $('<div class="project-box"></div>');
-            var elems = 'title description address city partnership'.split(' ');
+            var elems = 'title description address city partnership function surface budget'.split(' ');
             this.elements = {};
             for(var i=0; i < elems.length; i++)
             {
@@ -42,13 +42,33 @@ window.bMa.Legend = function(container, map)
                          null, 
                          project.get('description'));
             
+            if(project.get('address'))
+            {
             this.add_box(this.elements.address, 
-                         'adresse', 
+                         'Adresse', 
                          project.get('address'));
+            }
             
+            if(project.get('city').zipcode)
+            {
             this.add_box(this.elements.city,
                         'Commune',
                          project.get('city').zipcode + ' ' + project.get('city').name);
+            }
+            
+            if(project.get('function').name)
+            {
+            this.add_box(this.elements.function,
+                         'Fonction',
+                         project.get('function').name);
+            }
+            
+            if(project.get('surface').floor)
+            {
+                this.add_box(this.elements.surface,
+                            'Surface',
+                            project.get('surface').floor + ' - ' + project.get('surface').ceiling);
+            }
             
             var partnerships = project.get('partnerships');
             var pstring = '';

@@ -14,8 +14,8 @@ window.bMa.Filter = function(container, map){
             this.filters = {};
             var that = this;
             
-            this.selector = bMa.Selector(container, 'Projects Filter');
-            this.selector.add_item('All Projects',{
+            this.selector = bMa.Selector(container, 'Filtre Projets');
+            this.selector.add_item('Tout les projets',{
                 click:function(evt){
                     that.reset(true);
                 }},
@@ -32,6 +32,7 @@ window.bMa.Filter = function(container, map){
                 {
                     this.cities[city] = {
                         node:city,
+                        zip:city_data.zipcode ,
                         projects:[]
                     };
                 }
@@ -52,23 +53,33 @@ window.bMa.Filter = function(container, map){
                 }
                 
             }
-            this.selector.add_label('Cities');
-            for(var k in this.cities)
+            
+            var cties_a = Object.keys(this.cities);
+            cties_a.sort(function(a,b){
+                if (a.zip < b.zip)
+                    return 1;
+                if (a.zip > b.zip)
+                    return -1;
+                return 0;
+            });
+            
+            this.selector.add_label('Communes');
+            for(var k in cties_a)
             {
-                console.log('Add '+ k + ' to filter');
-                this.selector.add_item(k, {
+                console.log(cties_a[k]);
+                this.selector.add_item(cties_a[k], {
                     click:{
                         callback:function(evt){
                         that.filter_city(evt.data.city);
                         },
                         data:{
-                            city:k
+                            city:cties_a[k]
                         }
                     }
                 });
             }
             
-            this.selector.add_label('Functions');
+            this.selector.add_label('Fonctions');
             for(var k in this.functions)
             {
                 this.selector.add_item(k, {
