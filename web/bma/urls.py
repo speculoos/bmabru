@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.conf import settings
 
 import bma.api as api
 
@@ -17,8 +18,13 @@ urlpatterns = patterns('',
     url(r'^media/', include('media.urls')),
     url(r'^i18n/$', include('django.conf.urls.i18n')),
     url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog'),
-    url(r'^', include('bmabru.urls')),
+    url(r'', include('bmabru.urls')),
 )
+
+if 'rosetta' in settings.INSTALLED_APPS:
+    urlpatterns += patterns('',
+        url(r'^translate/', include('rosetta.urls')),
+    )
 
 urlpatterns += api.urls(
     (

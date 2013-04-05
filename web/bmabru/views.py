@@ -105,3 +105,38 @@ def api_view_list(request, model, filters):
     view = get_list_view('bmabru', model, filters)
     return view(request)
     
+    
+def expose_structure(req):
+    from bmabru.admin import GeoAdmin
+    pm = Project()._meta
+    
+    def unfold_rel(mdl, msg):
+        objs = mdl.objects.all()
+        msg.append('<ul>')
+        for o in objs:
+            msg.append(' '.join([
+                '<li>',
+                o.__unicode__(),
+                '</li>'
+            ]))
+        msg.append('</ul>')
+        
+    html = []
+    tstr = type('')
+    for block in GeoAdmin.fieldsets:
+        fields = block[1]['fields']
+        for line in fields:
+            tline = line
+            if type(line) == tstr:
+                tline = (line,)
+            for field in tline:
+                f = pm.get_field(field)
+                if f.rel:
+                    html.append(''.join(['<h2>', unicode(f.verbose_name), '</h2>' ]))
+                    model = f.rel.to
+                    unfold_rel(model, html)
+                else:
+                    html.append(''.join(['<h3>', unicode(f.verbose_name), '</h3>' ]))
+                    
+    return HttpResponse('\n'.join(html))
+    
