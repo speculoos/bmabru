@@ -29,7 +29,7 @@ class PartnerTypeAdmin(TabbedTr, TranslationAdmin):
     pass
     
 class PartnerAdmin(TabbedTr, TranslationAdmin):
-    pass
+    search_fields = ['name',]
     
 class PartnershipTypeAdmin(TabbedTr, TranslationAdmin):
     pass

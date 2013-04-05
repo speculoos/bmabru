@@ -12,7 +12,7 @@ window.bMa.Legend = function(container, map)
             this.map = map;
             this.container.parent().hide();
             this.wrapper = $('<div class="project-box"></div>');
-            var elems = 'title description address city partnership function surface budget'.split(' ');
+            var elems = 'title description address city partnership function surface budget program tradeobject prcedure missions actions worth'.split(' ');
             this.elements = {};
             for(var i=0; i < elems.length; i++)
             {
@@ -52,23 +52,33 @@ window.bMa.Legend = function(container, map)
             if(project.get('city').zipcode)
             {
             this.add_box(this.elements.city,
-                        'Commune',
+                        null,
                          project.get('city').zipcode + ' ' + project.get('city').name);
             }
             
             if(project.get('function').name)
             {
-            this.add_box(this.elements.function,
-                         'Fonction',
-                         project.get('function').name);
+                this.add_box(this.elements.function,
+                             'Fonction',
+                             project.get('function').name);
             }
+            
+            
             
             if(project.get('surface').floor)
             {
                 this.add_box(this.elements.surface,
-                            'Surface',
-                            project.get('surface').floor + ' - ' + project.get('surface').ceiling);
+                             'Surface',
+                             project.get('surface').floor + ' - ' + project.get('surface').ceiling);
             }
+            
+            if(project.get('budget').floor)
+            {
+                this.add_box(this.elements.budget,
+                             'Budget',
+                             project.get('budget').floor + ' - ' + project.get('budget').ceiling);
+            }
+            
             
             var partnerships = project.get('partnerships');
             var pstring = '';
@@ -83,6 +93,20 @@ window.bMa.Legend = function(container, map)
             this.add_box(this.elements.partnership,
                          'Interventions',
                          pstring);
+            
+            if(project.get('programs').length > 0)
+            {
+                this.add_box(this.elements.program,
+                             'Cadre de programmation',
+                             project.get('programs')[0].name );
+            }
+            
+            if(project.get('trade_name'))
+            {
+                this.add_box(this.elements.program,
+                             'Nom du marché attribué',
+                             project.get('trade_name').name );
+            }
             
             this.container.parent().show();
         },
