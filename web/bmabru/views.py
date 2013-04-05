@@ -121,6 +121,7 @@ def expose_structure(req):
             ]))
         msg.append('</ul>')
         
+    
     html = []
     tstr = type('')
     for block in GeoAdmin.fieldsets:
@@ -137,6 +138,11 @@ def expose_structure(req):
                     unfold_rel(model, html)
                 else:
                     html.append(''.join(['<h3>', unicode(f.verbose_name), '</h3>' ]))
+                    
+                for inline in GeoAdmin.inlines:
+                    if inline.after_field == field:
+                        html.append(''.join(['<h2>', unicode(inline.model._meta.verbose_name_plural), '</h2>' ]))
+                        unfold_rel(inline.model, html)
                     
     return HttpResponse('\n'.join(html))
     

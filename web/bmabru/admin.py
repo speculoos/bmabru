@@ -65,7 +65,7 @@ class PartnershipInline(admin.TabularInline):
     model = Partnership
     extra = 1
     fieldset_id = 'partnership_set'
-    after_field = 'budget'
+    after_field = 'budget_range'
 
 class ProjectCityListFilter(SimpleListFilter):
     title = _('City')

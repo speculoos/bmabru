@@ -77,6 +77,9 @@ class Partnership(models.Model):
     partner = models.ForeignKey('Partner', verbose_name=_('Partner')) 
     project = models.ForeignKey('Project', verbose_name=_('Project'))
     
+    def __unicode__(self):
+        return u'%s: %s'%(self.ptype, self.partner)
+    
 @serializer()
 class TradeObject(models.Model):
     """
