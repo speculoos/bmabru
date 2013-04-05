@@ -306,8 +306,11 @@ class Project(models.Model):
     name = models.CharField(verbose_name=_('Name'),max_length=1024)
     description = models.TextField(verbose_name=_('Description'),blank=True, null=True, default=None)
     address = models.TextField(verbose_name=_('Address'),blank=True, null=True, default=None)
-    trade_name = models.CharField(verbose_name=_('Trade name'),max_length=512, blank=True)
+    trade_name = models.TextField(verbose_name=_('Trade name'), blank=True, default='')
     attribution = models.IntegerField(verbose_name=_('Attribution'),max_length=512, blank=True)
+    
+    activity_start = models.DateField(verbose_name=_('Activity start'), blank=True, null=True, default=None)
+    activity_end = models.DateField(verbose_name=_('Activity end'), blank=True, null=True, default=None)
     
     city = models.ForeignKey('City', verbose_name=_('City'),blank=True, null=True, default=None)
     surface_range = models.ForeignKey('SurfaceRange', verbose_name=_('Surface'),blank=True, null=True, default=None)

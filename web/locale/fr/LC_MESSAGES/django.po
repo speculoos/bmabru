@@ -2,50 +2,39 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-04 18:58-0500\n"
-"PO-Revision-Date: 2013-04-05 02:12+0100\n"
-"Last-Translator: Pierre Marchand <pierremarc07@gmail.com>\n"
+"PO-Revision-Date: 2013-04-05 03:09-0500\n"
+"Last-Translator:   <p@p.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"X-Translated-Using: django-rosetta 0.7.1\n"
 
-#: bma/example_settings.py:35
-#: bma/settings.py:43
+#: bma/example_settings.py:35 bma/settings.py:43
 msgid "French"
 msgstr "Français"
 
-#: bma/example_settings.py:36
-#: bma/settings.py:44
+#: bma/example_settings.py:36 bma/settings.py:44
 msgid "Dutch"
 msgstr "Néerlandais"
 
-#: bmabru/admin.py:71
-#: bmabru/models.py:237
-#: bmabru/models.py:309
+#: bmabru/admin.py:71 bmabru/models.py:237 bmabru/models.py:309
 #: templates/projects.html:34
 msgid "City"
 msgstr "Commune"
 
-#: bmabru/admin.py:100
-#: bmabru/models.py:41
-#: bmabru/models.py:62
-#: bmabru/models.py:89
-#: bmabru/models.py:106
-#: bmabru/models.py:124
-#: bmabru/models.py:156
-#: bmabru/models.py:174
-#: bmabru/models.py:193
-#: bmabru/models.py:228
-#: bmabru/models.py:259
-#: bmabru/models.py:304
+#: bmabru/admin.py:100 bmabru/models.py:41 bmabru/models.py:62
+#: bmabru/models.py:89 bmabru/models.py:106 bmabru/models.py:124
+#: bmabru/models.py:156 bmabru/models.py:174 bmabru/models.py:193
+#: bmabru/models.py:228 bmabru/models.py:259 bmabru/models.py:304
 msgid "Description"
 msgstr "Description"
 
@@ -53,14 +42,11 @@ msgstr "Description"
 msgid "bMa"
 msgstr "bMa"
 
-#: bmabru/admin.py:121
-#: bmabru/models.py:78
-#: bmabru/models.py:299
+#: bmabru/admin.py:121 bmabru/models.py:78 bmabru/models.py:299
 msgid "Project"
 msgstr "Projet"
 
-#: bmabru/models.py:20
-#: bmabru/models.py:40
+#: bmabru/models.py:20 bmabru/models.py:40
 msgid "Partner type"
 msgstr "Type d'intervenant"
 
@@ -68,30 +54,19 @@ msgstr "Type d'intervenant"
 msgid "Partner types"
 msgstr "Types d'intervenant"
 
-#: bmabru/models.py:23
-#: bmabru/models.py:38
-#: bmabru/models.py:61
-#: bmabru/models.py:88
-#: bmabru/models.py:105
-#: bmabru/models.py:123
-#: bmabru/models.py:155
-#: bmabru/models.py:173
-#: bmabru/models.py:192
-#: bmabru/models.py:227
-#: bmabru/models.py:241
-#: bmabru/models.py:258
-#: bmabru/models.py:303
-#: templates/projects.html:32
+#: bmabru/models.py:23 bmabru/models.py:38 bmabru/models.py:61
+#: bmabru/models.py:88 bmabru/models.py:105 bmabru/models.py:123
+#: bmabru/models.py:155 bmabru/models.py:173 bmabru/models.py:192
+#: bmabru/models.py:227 bmabru/models.py:241 bmabru/models.py:258
+#: bmabru/models.py:303 templates/projects.html:32
 msgid "Name"
 msgstr "Nom"
 
-#: bmabru/models.py:24
-#: bmabru/models.py:327
+#: bmabru/models.py:24 bmabru/models.py:327
 msgid "Parent"
 msgstr "Parent"
 
-#: bmabru/models.py:35
-#: bmabru/models.py:77
+#: bmabru/models.py:35 bmabru/models.py:77
 msgid "Partner"
 msgstr "Intervenant"
 
@@ -111,8 +86,7 @@ msgstr "Abonné"
 msgid "email"
 msgstr "adresse électronique"
 
-#: bmabru/models.py:58
-#: bmabru/models.py:76
+#: bmabru/models.py:58 bmabru/models.py:76
 msgid "Partnership type"
 msgstr "Type d'intervenant"
 
@@ -128,26 +102,23 @@ msgstr "Intervenants"
 msgid "Partnerships"
 msgstr "Intervenants"
 
-#: bmabru/models.py:85
-#: bmabru/models.py:314
+#: bmabru/models.py:85 bmabru/models.py:314
 msgid "Trade object"
-msgstr "Projet"
+msgstr "Objet de marché"
 
 #: bmabru/models.py:86
 msgid "Trade objects"
-msgstr "Projets"
+msgstr "Objets de marché"
 
 #: bmabru/models.py:102
 msgid "Program"
 msgstr "Programme"
 
-#: bmabru/models.py:103
-#: bmabru/models.py:316
+#: bmabru/models.py:103 bmabru/models.py:316
 msgid "Programs"
 msgstr "Programmes"
 
-#: bmabru/models.py:120
-#: bmabru/models.py:312
+#: bmabru/models.py:120 bmabru/models.py:312
 msgid "Procedure"
 msgstr "Mode de passation"
 
@@ -167,18 +138,15 @@ msgstr "Images du projet"
 msgid "Image"
 msgstr "Image"
 
-#: bmabru/models.py:152
-#: templates/projects.html:35
+#: bmabru/models.py:152 templates/projects.html:35
 msgid "Function"
 msgstr "Fonction"
 
-#: bmabru/models.py:153
-#: bmabru/models.py:318
+#: bmabru/models.py:153 bmabru/models.py:318
 msgid "Functions"
 msgstr "Fonctions"
 
-#: bmabru/models.py:170
-#: bmabru/models.py:313
+#: bmabru/models.py:170 bmabru/models.py:313
 msgid "Mission"
 msgstr "Mission"
 
@@ -186,9 +154,7 @@ msgstr "Mission"
 msgid "Missions"
 msgstr "Missions"
 
-#: bmabru/models.py:189
-#: bmabru/models.py:190
-#: bmabru/models.py:211
+#: bmabru/models.py:189 bmabru/models.py:190 bmabru/models.py:211
 msgid "Project status"
 msgstr "Statut du projet"
 
@@ -196,8 +162,7 @@ msgstr "Statut du projet"
 msgid "Action"
 msgstr "Action"
 
-#: bmabru/models.py:208
-#: bmabru/models.py:320
+#: bmabru/models.py:208 bmabru/models.py:320
 msgid "Actions"
 msgstr "Actions"
 
@@ -225,8 +190,7 @@ msgstr "Communes"
 msgid "zip code"
 msgstr "Code postal"
 
-#: bmabru/models.py:255
-#: bmabru/models.py:256
+#: bmabru/models.py:255 bmabru/models.py:256
 msgid "Project worth"
 msgstr "Plus-value"
 
@@ -238,13 +202,11 @@ msgstr "Budget"
 msgid "Budget ranges"
 msgstr "Budgets"
 
-#: bmabru/models.py:273
-#: bmabru/models.py:285
+#: bmabru/models.py:273 bmabru/models.py:285
 msgid "Floor"
 msgstr "Seuil"
 
-#: bmabru/models.py:274
-#: bmabru/models.py:286
+#: bmabru/models.py:274 bmabru/models.py:286
 msgid "Ceiling"
 msgstr "Plafond"
 
@@ -264,8 +226,7 @@ msgstr "Projets"
 msgid "Published"
 msgstr "Publié"
 
-#: bmabru/models.py:305
-#: templates/projects.html:33
+#: bmabru/models.py:305 templates/projects.html:33
 msgid "Address"
 msgstr "Adresse"
 
@@ -321,8 +282,7 @@ msgstr "Catégorie"
 msgid "Categories"
 msgstr "Catégories"
 
-#: media/models.py:38
-#: media/models.py:39
+#: media/models.py:38 media/models.py:39
 msgid "Featured"
 msgstr "Sélectionné"
 

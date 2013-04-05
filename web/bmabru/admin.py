@@ -118,7 +118,8 @@ class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
                     'procedure',
                     'mission',
                     'actions',
-                    'worth'
+                    'worth',
+                    ('activity_start', 'activity_end')
                     )
             }),
             (_('Project'),{
