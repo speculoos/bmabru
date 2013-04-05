@@ -2,6 +2,8 @@
     helpers for django-rest-framework
 """
 
+import  django.db.models
+            
 from rest_framework import serializers
 from rest_framework import generics
 from rest_framework.decorators import api_view
@@ -11,16 +13,23 @@ from django.conf.urls import  url
 
 
 # class decorator
-def serializer(property_list = tuple()):
+def serializer(property_list = tuple(), exclude=tuple()):
     def decorator(cls):
         name = cls.__name__
         #print('Decorating [%s] with a serializer'%(name,))
-        meta = type('Meta', (object, ), {'model':cls, 'depth':9})
+        meta = type('Meta', (object, ), {'model':cls, 'depth':3, 'exclude':exclude})
         srl = type(''.join([name,'Serializer']), (serializers.ModelSerializer,), {'Meta':meta} )
 
         fields = {}
         for prop in property_list:
-            sfield = serializers.Field(source=prop)
+            is_fk = issubclass(type(getattr(cls, prop)), 
+                            django.db.models.related.ForeignRelatedObjectsDescriptor)
+                            
+            if is_fk:
+                sfield = getattr(cls, prop).related.model.serializer_class(many=True)
+            else:
+                sfield = serializers.Field(source=prop)
+                
             setattr(srl, prop, sfield)
             fields[prop] = sfield
         if property_list:

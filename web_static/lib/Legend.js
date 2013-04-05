@@ -12,7 +12,7 @@ window.bMa.Legend = function(container, map)
             this.map = map;
             this.container.parent().hide();
             this.wrapper = $('<div class="project-box"></div>');
-            var elems = 'title description address city partners'.split(' ');
+            var elems = 'title description address city partnership'.split(' ');
             this.elements = {};
             for(var i=0; i < elems.length; i++)
             {
@@ -22,25 +22,48 @@ window.bMa.Legend = function(container, map)
             }
             this.container.append(this.wrapper);
         },
+        add_box:function(elem, label, content)
+        {
+            elem.empty();
+            if(label)
+                elem.append('<div class="project-info-label">'+label+'</div>');
+            elem.append('<div class="project-info-box">'+content+'</div>');
+        },
         show:function(project){
             var pbounds = project.bounds();
             if(pbounds.isValid())
                 this.map.map.fitBounds(pbounds);
-            var proj_name = $('<a class="project-link" href="/project/'+project.get('slug')+'">'+project.get('name')+'</a>');
-            this.elements.title.empty();
-            this.elements.title.append(proj_name);
-            this.elements.description.text(project.get('description'));
-            this.elements.address.text(project.get('address'));
-            this.elements.city.text(project.get('city', 1) + ' ' + project.get('city', 2));
-            var partners = project.get('partners');
+            
+            this.add_box(this.elements.title, 
+                         null, 
+                         '<a class="project-link" href="/project/'+project.get('slug')+'">'+project.get('name')+'</a>');
+            
+            this.add_box(this.elements.description, 
+                         null, 
+                         project.get('description'));
+            
+            this.add_box(this.elements.address, 
+                         'adresse', 
+                         project.get('address'));
+            
+            this.add_box(this.elements.city,
+                        'Commune',
+                         project.get('city').zipcode + ' ' + project.get('city').name);
+            
+            var partnerships = project.get('partnerships');
             var pstring = '';
-            var sep = '';
-            for(var i=0; i<partners.length; i++)
+            for(var i=0; i < partnerships.length; i++)
             {
-                pstring += sep + partners[i][1];
-                sep = ', ';
+                partner = partnerships[i].partner;
+                ptype = partnerships[i].ptype;
+                pstring += '<div class="partneship-item"> <span class="project-partnership-type">'+ptype.name+'</span> '
+                + '<span class="project-partnership-type">'+partner.name+'</span> </div>';
             }
-            this.elements.partners.text(pstring);
+            
+            this.add_box(this.elements.partnership,
+                         'Interventions',
+                         pstring);
+            
             this.container.parent().show();
         },
         hide:function(){

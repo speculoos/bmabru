@@ -12,7 +12,7 @@ window.bMa.Project = function(args){
     var proto = {
         init:function(args){
             this.data = args;
-            this.id = args.pk;
+            this.id = args.id;
             window.bMa.Projects[this.id] = this;
         },
         get:function(key, idx){

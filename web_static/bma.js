@@ -46,7 +46,7 @@ function InitMap()
         {
             var pdata = projects_data[idx];
             var p = bMa.Project(pdata);
-            console.log('Add ['+p.id+'] => '+p.get('slug'))
+//             console.log('Add ['+p.id+'] => '+p.get('slug'))
             if(window.bma_current_project !== undefined 
                 && bma_current_project === p.id)
             {

@@ -26,7 +26,8 @@ window.bMa.Filter = function(container, map){
             for(var p in bMa.Projects)
             {
                 var project = bMa.Projects[p];
-                var city = project.get('city').slice(1);
+                var city_data = project.get('city');
+                var city = city_data.zipcode + ' ' + city_data.name;
                 if(this.cities[city] === undefined)
                 {
                     this.cities[city] = {
@@ -39,7 +40,7 @@ window.bMa.Filter = function(container, map){
                 var fn_a = project.get('functions');
                 if(fn_a.length > 0)
                 {
-                    var fn = fn_a[0][1];
+                    var fn = fn_a[0].name;
                     if(this.functions[fn] === undefined)
                     {
                         this.functions[fn] = {
@@ -54,6 +55,7 @@ window.bMa.Filter = function(container, map){
             this.selector.add_label('Cities');
             for(var k in this.cities)
             {
+                console.log('Add '+ k + ' to filter');
                 this.selector.add_item(k, {
                     click:{
                         callback:function(evt){

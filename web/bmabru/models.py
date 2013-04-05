@@ -26,7 +26,7 @@ class PartnerType(models.Model):
     def __unicode__(self):
         return self.name
     
-@serializer()
+@serializer(exclude=('ptype','description','contact_name','subscribed','email'))
 class Partner(models.Model):
     """
     Organisations connected to bMa
@@ -49,7 +49,7 @@ class Partner(models.Model):
     def __unicode__(self):
         return '%s (%s)'%(self.name, self.ptype)
         
-@serializer()
+@serializer(exclude=('description',))
 class PartnershipType(models.Model):
     """
     Define type of partnership
@@ -64,7 +64,7 @@ class PartnershipType(models.Model):
     def __unicode__(self):
         return self.name
         
-@serializer()
+@serializer(exclude=('project',))
 class Partnership(models.Model):
     """
     Represent how a partner is involved in a project
@@ -75,12 +75,12 @@ class Partnership(models.Model):
         
     ptype = models.ForeignKey('PartnershipType', verbose_name=_('Partnership type'))
     partner = models.ForeignKey('Partner', verbose_name=_('Partner')) 
-    project = models.ForeignKey('Project', verbose_name=_('Project'))
+    project = models.ForeignKey('Project', verbose_name=_('Project'), related_name="partnerships")
     
     def __unicode__(self):
         return u'%s: %s'%(self.ptype, self.partner)
     
-@serializer()
+@serializer(exclude=('description',))
 class TradeObject(models.Model):
     """
     """
@@ -96,7 +96,7 @@ class TradeObject(models.Model):
     def __unicode__(self):
         return self.name
         
-@serializer()
+@serializer(exclude=('description',))
 class Program(models.Model):
     """
     building programs
@@ -114,7 +114,7 @@ class Program(models.Model):
         return self.name
 
 
-@serializer()
+@serializer(exclude=('description',))
 class Procedure(models.Model):
     """
     Procédure
@@ -146,7 +146,7 @@ class ProjectImage(models.Model):
     zoom_level = models.IntegerField(blank=True)
     
 
-@serializer()
+@serializer(exclude=('description',))
 class Function(models.Model):
     """
     Fonction du projet
@@ -164,7 +164,7 @@ class Function(models.Model):
         return self.name
 
         
-@serializer()
+@serializer(exclude=('description',))
 class Mission(models.Model):
     """
     Type de mission
@@ -249,7 +249,7 @@ class City(models.Model):
     def __unicode__(self):
         return '%s %s'%(self.zipcode, self.name)
 
-@serializer()
+@serializer(exclude=('description',))
 class ProjectWorth(models.Model):
     """
     Capital gain?
@@ -292,7 +292,8 @@ class SurfaceRange(models.Model):
         return '%d - %d'%(self.floor, self.ceiling)
         
         
-@serializer(property_list = ('centroid', 'geojson'))
+@serializer(property_list = ('centroid', 'geojson', 'partnerships'), 
+            exclude=('mpoly','parent', 'published','activity_start', 'activity_end', 'steps'))
 class Project(models.Model):
     """
     A project is the main item to present on the website,
