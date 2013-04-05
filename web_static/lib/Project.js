@@ -11,7 +11,7 @@ window.bMa.Project = function(args){
     var config = bMa.Config();
     var proto = {
         init:function(args){
-            this.data = args.fields;
+            this.data = args;
             this.id = args.pk;
             window.bMa.Projects[this.id] = this;
         },
