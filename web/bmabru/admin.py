@@ -4,6 +4,7 @@ admin custom
 
 from django.contrib import admin
 from django.contrib.admin import SimpleListFilter
+from django.forms import ModelForm
 from django.contrib.gis import admin as geo_admin
 
 from modeltranslation.admin import TranslationAdmin
@@ -26,25 +27,27 @@ class TabbedTr:
         }
 
 class PartnerTypeAdmin(TabbedTr, TranslationAdmin):
-    pass
+    search_fields = ['name',]
     
 class PartnerAdmin(TabbedTr, TranslationAdmin):
     search_fields = ['name',]
+    list_display = ('name', 'ptype')
+    list_filter = ('ptype',)
     
 class PartnershipTypeAdmin(TabbedTr, TranslationAdmin):
-    pass
+    search_fields = ['name',]
     
 class ProgramAdmin(TabbedTr, TranslationAdmin):
-    pass
+    search_fields = ['name',]
     
 class ProcedureAdmin(TabbedTr, TranslationAdmin):
-    pass
+    search_fields = ['name',]
     
 class FunctionAdmin(TabbedTr, TranslationAdmin):
-    pass
+    search_fields = ['name',]
     
 class MissionAdmin(TabbedTr, TranslationAdmin):
-    pass
+    search_fields = ['name',]
     
 class ProjectStatusAdmin(TabbedTr, TranslationAdmin):
     pass
@@ -59,10 +62,10 @@ class CityAdmin(TabbedTr, TranslationAdmin):
     pass
     
 class TradeObjectAdmin(TabbedTr, TranslationAdmin):
-    pass
+    search_fields = ['name',]
     
 class ProjectWorthAdmin(TabbedTr, TranslationAdmin):
-    pass
+    search_fields = ['name',]
     
 class PartnershipInline(admin.TabularInline):
     model = Partnership
@@ -85,19 +88,37 @@ class ProjectCityListFilter(SimpleListFilter):
         if self.parameter_name in request.GET:
             return queryset.filter(city__id=self.value())
         return queryset
-
-class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
+        
+class ProjectForm(ModelForm):
     class Media:
         js = (
             'modeltranslation/js/force_jquery.js',
             'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.24/jquery-ui.min.js',
             'geo_tabbed_translation_fields.js',
+            'admin_override/SelectBox.js'
         )
         css = {
             'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
         }
+    def __init__(self, *args, **kwargs):
+        super(ProjectForm, self).__init__(*args, **kwargs)
+
+        choices = []
+        for project_status in ProjectStatus.objects.all():
+            #choices.append([project_status.name,  project_status.action_set.all()])
+            action_choice = []
+            for action in project_status.action_set.all():
+                action_choice.append([action.id, action.sentence])
+            choices.append([project_status.name, action_choice])
+            
+        print choices
+                
+        self.fields['actions'].choices = choices
+
+
+class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
     
-    filter_horizontal = ('programs', 'functions', 'image', 'actions', 'worth')
+    filter_horizontal = ('programs', 'functions', 'image',  'worth', 'actions')
     fieldsets = [
             (None, {'fields':('published',)}),
             (_('Description'),{
@@ -131,6 +152,7 @@ class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
             }),
             (None, {'fields':('parent',)}),
         ]
+    form = ProjectForm
     list_display = ('name', 'address', 'get_city_display', 'published')
     list_filter = (ProjectCityListFilter, 'published')
     search_fields = ['name',]

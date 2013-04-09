@@ -19,11 +19,14 @@ class PartnerType(models.Model):
     class Meta:
         verbose_name = _("Partner type")
         verbose_name_plural = _("Partner types")
+        ordering = ['name']
         
     name = models.CharField(max_length=512, verbose_name=_('Name'))
     parent = models.ForeignKey('PartnerType', verbose_name=_('Parent'), blank=True, null=True)
     
     def __unicode__(self):
+        if self.parent:
+            return u'%s > %s'%(self.parent.__unicode__(), self.name, )
         return self.name
     
 @serializer(exclude=('ptype','description','contact_name','subscribed','email'))
@@ -34,6 +37,7 @@ class Partner(models.Model):
     class Meta:
         verbose_name = _("Partner")
         verbose_name_plural = _("Partners")
+        ordering = ['name']
         
     name = models.CharField(max_length=512, verbose_name=_('Name'))
     url = models.URLField(blank=True)
@@ -57,6 +61,7 @@ class PartnershipType(models.Model):
     class Meta:
         verbose_name = _("Partnership type")
         verbose_name_plural = _("Partnership types")
+        ordering = ['name']
         
     name = models.CharField(max_length=512, verbose_name=_('Name'))
     description = models.TextField(blank=True, verbose_name=_('Description'))
@@ -87,6 +92,7 @@ class TradeObject(models.Model):
     class Meta:
         verbose_name = _("Trade object")
         verbose_name_plural = _("Trade objects")
+        ordering = ['name']
         
     name = models.CharField(max_length=512, verbose_name=_('Name'))
     description = models.TextField(blank=True, verbose_name=_('Description'))
@@ -104,6 +110,7 @@ class Program(models.Model):
     class Meta:
         verbose_name = _("Program")
         verbose_name_plural = _("Programs")
+        ordering = ['name']
         
     name = models.CharField(max_length=512, verbose_name=_('Name'))
     description = models.TextField(blank=True, verbose_name=_('Description'))
@@ -122,6 +129,7 @@ class Procedure(models.Model):
     class Meta:
         verbose_name = _("Procedure")
         verbose_name_plural = _("Procedures")
+        ordering = ['name']
     
     name = models.CharField(max_length=512, verbose_name=_('Name'))
     description = models.TextField(blank=True, verbose_name=_('Description'))
@@ -154,6 +162,7 @@ class Function(models.Model):
     class Meta:
         verbose_name = _("Function")
         verbose_name_plural = _("Functions")
+        ordering = ['name']
         
     name = models.CharField(max_length=512, verbose_name=_('Name'))
     description = models.TextField(blank=True, verbose_name=_('Description'))
@@ -172,6 +181,7 @@ class Mission(models.Model):
     class Meta:
         verbose_name = _("Mission")
         verbose_name_plural = _("Missions")
+        ordering = ['name']
         
     name = models.CharField(max_length=512, verbose_name=_('Name'))
     description = models.TextField(blank=True, verbose_name=_('Description'))
@@ -191,6 +201,7 @@ class ProjectStatus(models.Model):
     class Meta:
         verbose_name = _("Project status")
         verbose_name_plural = _("Project status")
+        ordering = ['name']
         
     name = models.CharField(max_length=128, verbose_name=_('Name'))
     description = models.TextField(blank=True, verbose_name=_('Description'))
@@ -209,6 +220,7 @@ class Action(models.Model):
     class Meta:
         verbose_name = _("Action")
         verbose_name_plural = _("Actions")
+        ordering = ['project_status__name', 'sentence']
         
     sentence = models.TextField(verbose_name=_('Sentence'))
     project_status = models.ForeignKey('ProjectStatus', verbose_name=_('Project status'))
@@ -226,6 +238,7 @@ class Step(models.Model):
     class Meta:
         verbose_name = _("Step")
         verbose_name_plural = _("Steps")
+        ordering = ['name']
     
     name = models.CharField(max_length=512, verbose_name=_('Name'))
     description = models.TextField(blank=True, verbose_name=_('Description'))
@@ -239,6 +252,7 @@ class City(models.Model):
     class Meta:
         verbose_name = _("City")
         verbose_name_plural = _("Cities")
+        ordering = ['zipcode']
         
     zipcode = models.CharField(max_length=32, verbose_name=_('zip code'))
     name = models.CharField(max_length=256, verbose_name=_('Name'))
@@ -257,6 +271,7 @@ class ProjectWorth(models.Model):
     class Meta:
         verbose_name = _("Project worth")
         verbose_name_plural = _("Project worth")
+        ordering = ['name']
         
     name = models.CharField(max_length=512, verbose_name=_('Name'))
     description = models.TextField(blank=True, verbose_name=_('Description'))
@@ -272,24 +287,36 @@ class BudgetRange(models.Model):
     class Meta:
         verbose_name = _("Budget range")
         verbose_name_plural = _("Budget ranges")
+        ordering = ['floor']
         
     floor = models.IntegerField(verbose_name=_('Floor'))
     ceiling = models.IntegerField(verbose_name=_('Ceiling'))
     
     def __unicode__(self):
-        return '%d - %d'%(self.floor, self.ceiling)
+        if self.floor > 0 and self.ceiling > 0:
+            return u'%d € - %d €'%(self.floor, self.ceiling)
+        elif self.floor > 0:
+            return u'> %d €'%(self.floor, )
+        else:
+            return u'< %d €'%(self.ceiling, )
     
 @serializer()
 class SurfaceRange(models.Model):
     class Meta:
         verbose_name = _("Surface range")
         verbose_name_plural = _("Surface ranges")
+        ordering = ['floor']
         
     floor = models.IntegerField(verbose_name=_('Floor'))
     ceiling = models.IntegerField(verbose_name=_('Ceiling'))
     
     def __unicode__(self):
-        return '%d - %d'%(self.floor, self.ceiling)
+        if self.floor > 0 and self.ceiling > 0:
+            return u'%d m² - %d m²'%(self.floor, self.ceiling)
+        elif self.floor > 0:
+            return u'> %d m²'%(self.floor, )
+        else:
+            return u'< %d m²'%(self.ceiling, )
         
         
 @serializer(property_list = ('centroid', 'geojson', 'partnerships'), 
