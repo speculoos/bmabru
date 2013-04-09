@@ -111,7 +111,6 @@ class ProjectForm(ModelForm):
                 action_choice.append([action.id, action.sentence])
             choices.append([project_status.name, action_choice])
             
-        print choices
                 
         self.fields['actions'].choices = choices
 
