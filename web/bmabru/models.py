@@ -357,7 +357,7 @@ class Project(models.Model):
     worth = models.ManyToManyField('ProjectWorth', verbose_name=_('Project worths'),blank=True, null=True, default=None)
     
     
-    mpoly = models.MultiPolygonField(verbose_name=_('Perimeter'), srid=4326, geography=True)
+    mpoly = models.MultiPolygonField(verbose_name=_('Perimeter'), srid=4326, geography=True, blank=True, null=True, default=None)
     objects = models.GeoManager()
     
     parent = models.ForeignKey( 'Project', verbose_name=_('Parent'), blank=True, null=True, default=None)
