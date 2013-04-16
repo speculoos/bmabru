@@ -347,8 +347,8 @@ class Project(models.Model):
     budget_range = models.ForeignKey('BudgetRange', verbose_name=_('Budget'), blank=True, null=True, default=None)
     procedure = models.ForeignKey('Procedure', verbose_name=_('Procedure'),blank=True, null=True, default=None)
     mission = models.ForeignKey('Mission', verbose_name=_('Mission'),blank=True, null=True, default=None)
-    trade_object = models.ForeignKey('TradeObject', verbose_name=_('Trade object'),blank=True, null=True, default=None) 
     
+    trade_object = models.ManyToManyField('TradeObject', verbose_name=_('Trade object'),blank=True, null=True, default=None)
     programs = models.ManyToManyField('Program', verbose_name=_('Programs'),blank=True, null=True, default=None)
     image = models.ManyToManyField('ProjectImage', verbose_name=_('Project Images'),blank=True, null=True, default=None)
     functions = models.ManyToManyField('Function', verbose_name=_('Functions'),blank=True, null=True, default=None)
