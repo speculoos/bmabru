@@ -8,6 +8,7 @@ import json
 from django.contrib.gis.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
+from django.utils.formats import localize
 
 from bma.api import serializer
 
@@ -294,11 +295,11 @@ class BudgetRange(models.Model):
     
     def __unicode__(self):
         if self.floor > 0 and self.ceiling > 0:
-            return u'%d € - %d €'%(self.floor, self.ceiling)
+            return u'%s € - %s €'%(localize(self.floor), localize(self.ceiling))
         elif self.floor > 0:
-            return u'> %d €'%(self.floor, )
+            return u'> %s €'%(localize(self.floor), )
         else:
-            return u'< %d €'%(self.ceiling, )
+            return u'< %s €'%(localize(self.ceiling), )
     
 @serializer()
 class SurfaceRange(models.Model):
@@ -312,11 +313,11 @@ class SurfaceRange(models.Model):
     
     def __unicode__(self):
         if self.floor > 0 and self.ceiling > 0:
-            return u'%d m² - %d m²'%(self.floor, self.ceiling)
+            return u'%s m² - %s m²'%(localize(self.floor), localize(self.ceiling))
         elif self.floor > 0:
-            return u'> %d m²'%(self.floor, )
+            return u'> %s m²'%(localize(self.floor), )
         else:
-            return u'< %d m²'%(self.ceiling, )
+            return u'< %s m²'%(localize(self.ceiling), )
         
         
 @serializer(property_list = ('centroid', 'geojson', 'partnerships'), 
@@ -329,6 +330,7 @@ class Project(models.Model):
     class Meta:
         verbose_name = _("Project")
         verbose_name_plural = _("Projects")
+        ordering = ['name']
     
     published = models.BooleanField(verbose_name=_('Published'),default=False)
     name = models.CharField(verbose_name=_('Name'),max_length=1024)
