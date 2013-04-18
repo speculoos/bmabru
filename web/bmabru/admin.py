@@ -117,7 +117,7 @@ class ProjectForm(ModelForm):
 
 class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
     
-    filter_horizontal = ('programs', 'functions', 'image',  'worth', 'actions')
+    filter_horizontal = ('programs', 'functions', 'image',  'worth', 'actions', 'trade_object')
     fieldsets = [
             (None, {'fields':('published',)}),
             (_('Description'),{
