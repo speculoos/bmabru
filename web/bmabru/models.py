@@ -337,7 +337,7 @@ class Project(models.Model):
     description = models.TextField(verbose_name=_('Description'),blank=True, null=True, default=None)
     address = models.TextField(verbose_name=_('Address'),blank=True, null=True, default=None)
     trade_name = models.TextField(verbose_name=_('Trade name'), blank=True, default='')
-    attribution = models.IntegerField(verbose_name=_('Attribution'),max_length=512, blank=True)
+    attribution = models.IntegerField(verbose_name=_('Attribution'),max_length=512, blank=True, null=True)
     
     activity_start = models.DateField(verbose_name=_('Activity start'), blank=True, null=True, default=None)
     activity_end = models.DateField(verbose_name=_('Activity end'), blank=True, null=True, default=None)
@@ -365,7 +365,10 @@ class Project(models.Model):
     slug = models.SlugField(max_length=255, editable=False, default='None')
     
     def get_city_display(self):
-        return '%s %s'%(self.city.zipcode, self.city.name)
+        try:
+            return '%s %s'%(self.city.zipcode, self.city.name)
+        except Exception:
+            return ''
     
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -375,12 +378,15 @@ class Project(models.Model):
     def centroid(self):
         try:
             return json.loads(self.mpoly.centroid.geojson)
-        except:
+        except Exception:
             return  { "type": "Point", "coordinates": [ 0, 0 ] }
         
     @property
     def geojson(self):
-        return json.loads(self.mpoly.geojson)
+        try:
+            return json.loads(self.mpoly.geojson)
+        except Exception:
+            return  None
     
         
     def __unicode__(self):
