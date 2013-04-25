@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-04 18:58-0500\n"
-"PO-Revision-Date: 2013-04-05 03:09-0500\n"
-"Last-Translator:   <p@p.com>\n"
+"POT-Creation-Date: 2013-04-05 08:04-0500\n"
+"PO-Revision-Date: 2013-04-05 09:30-0500\n"
+"Last-Translator: Pierre Huyghebaert <pierre@speculoos.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,51 +18,51 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 "X-Translated-Using: django-rosetta 0.7.1\n"
 
-#: bma/example_settings.py:35 bma/settings.py:43
+#: bma/example_settings.py:35 bma/settings.py:37
 msgid "French"
 msgstr "Français"
 
-#: bma/example_settings.py:36 bma/settings.py:44
+#: bma/example_settings.py:36 bma/settings.py:38
 msgid "Dutch"
 msgstr "Néerlandais"
 
-#: bmabru/admin.py:71 bmabru/models.py:237 bmabru/models.py:309
+#: bmabru/admin.py:74 bmabru/models.py:240 bmabru/models.py:316
 #: templates/projects.html:34
 msgid "City"
 msgstr "Commune"
 
-#: bmabru/admin.py:100 bmabru/models.py:41 bmabru/models.py:62
-#: bmabru/models.py:89 bmabru/models.py:106 bmabru/models.py:124
-#: bmabru/models.py:156 bmabru/models.py:174 bmabru/models.py:193
-#: bmabru/models.py:228 bmabru/models.py:259 bmabru/models.py:304
+#: bmabru/admin.py:103 bmabru/models.py:41 bmabru/models.py:62
+#: bmabru/models.py:92 bmabru/models.py:109 bmabru/models.py:127
+#: bmabru/models.py:159 bmabru/models.py:177 bmabru/models.py:196
+#: bmabru/models.py:231 bmabru/models.py:262 bmabru/models.py:308
 msgid "Description"
 msgstr "Description"
 
-#: bmabru/admin.py:112
+#: bmabru/admin.py:115
 msgid "bMa"
 msgstr "bMa"
 
-#: bmabru/admin.py:121 bmabru/models.py:78 bmabru/models.py:299
+#: bmabru/admin.py:125 bmabru/models.py:78 bmabru/models.py:303
 msgid "Project"
 msgstr "Projet"
 
 #: bmabru/models.py:20 bmabru/models.py:40
 msgid "Partner type"
-msgstr "Type d'intervenant"
+msgstr "Catégories d'intervenant"
 
 #: bmabru/models.py:21
 msgid "Partner types"
-msgstr "Types d'intervenant"
+msgstr "Catégorie d'intervenant"
 
 #: bmabru/models.py:23 bmabru/models.py:38 bmabru/models.py:61
-#: bmabru/models.py:88 bmabru/models.py:105 bmabru/models.py:123
-#: bmabru/models.py:155 bmabru/models.py:173 bmabru/models.py:192
-#: bmabru/models.py:227 bmabru/models.py:241 bmabru/models.py:258
-#: bmabru/models.py:303 templates/projects.html:32
+#: bmabru/models.py:91 bmabru/models.py:108 bmabru/models.py:126
+#: bmabru/models.py:158 bmabru/models.py:176 bmabru/models.py:195
+#: bmabru/models.py:230 bmabru/models.py:244 bmabru/models.py:261
+#: bmabru/models.py:307 templates/projects.html:32
 msgid "Name"
 msgstr "Nom"
 
-#: bmabru/models.py:24 bmabru/models.py:327
+#: bmabru/models.py:24 bmabru/models.py:334
 msgid "Parent"
 msgstr "Parent"
 
@@ -84,177 +84,185 @@ msgstr "Abonné"
 
 #: bmabru/models.py:44
 msgid "email"
-msgstr "adresse électronique"
+msgstr "Adresse électronique"
 
 #: bmabru/models.py:58 bmabru/models.py:76
 msgid "Partnership type"
-msgstr "Type d'intervenant"
+msgstr "Type d'intervention"
 
 #: bmabru/models.py:59
 msgid "Partnership types"
-msgstr "Types d'intervenant"
+msgstr "Types d'intervention"
 
 #: bmabru/models.py:73
 msgid "Partnership"
-msgstr "Intervenants"
+msgstr "Intervention"
 
 #: bmabru/models.py:74
 msgid "Partnerships"
-msgstr "Intervenants"
+msgstr "Interventions"
 
-#: bmabru/models.py:85 bmabru/models.py:314
+#: bmabru/models.py:88 bmabru/models.py:321
 msgid "Trade object"
 msgstr "Objet de marché"
 
-#: bmabru/models.py:86
+#: bmabru/models.py:89
 msgid "Trade objects"
 msgstr "Objets de marché"
 
-#: bmabru/models.py:102
+#: bmabru/models.py:105
 msgid "Program"
 msgstr "Programme"
 
-#: bmabru/models.py:103 bmabru/models.py:316
+#: bmabru/models.py:106 bmabru/models.py:323
 msgid "Programs"
 msgstr "Programmes"
 
-#: bmabru/models.py:120 bmabru/models.py:312
+#: bmabru/models.py:123 bmabru/models.py:319
 msgid "Procedure"
 msgstr "Mode de passation"
 
-#: bmabru/models.py:121
+#: bmabru/models.py:124
 msgid "Procedures"
 msgstr "Modes de passation"
 
-#: bmabru/models.py:137
+#: bmabru/models.py:140
 msgid "Project image"
 msgstr "Image du projet"
 
-#: bmabru/models.py:138
+#: bmabru/models.py:141
 msgid "Project images"
 msgstr "Images du projet"
 
-#: bmabru/models.py:140
+#: bmabru/models.py:143
 msgid "Image"
 msgstr "Image"
 
-#: bmabru/models.py:152 templates/projects.html:35
+#: bmabru/models.py:155 templates/projects.html:35
 msgid "Function"
 msgstr "Fonction"
 
-#: bmabru/models.py:153 bmabru/models.py:318
+#: bmabru/models.py:156 bmabru/models.py:325
 msgid "Functions"
 msgstr "Fonctions"
 
-#: bmabru/models.py:170 bmabru/models.py:313
+#: bmabru/models.py:173 bmabru/models.py:320
 msgid "Mission"
 msgstr "Mission"
 
-#: bmabru/models.py:171
+#: bmabru/models.py:174
 msgid "Missions"
 msgstr "Missions"
 
-#: bmabru/models.py:189 bmabru/models.py:190 bmabru/models.py:211
+#: bmabru/models.py:192 bmabru/models.py:193 bmabru/models.py:214
 msgid "Project status"
 msgstr "Statut du projet"
 
-#: bmabru/models.py:207
+#: bmabru/models.py:210
 msgid "Action"
 msgstr "Action"
 
-#: bmabru/models.py:208 bmabru/models.py:320
+#: bmabru/models.py:211 bmabru/models.py:327
 msgid "Actions"
 msgstr "Actions"
 
-#: bmabru/models.py:210
+#: bmabru/models.py:213
 msgid "Sentence"
 msgstr "Phrase"
 
-#: bmabru/models.py:224
+#: bmabru/models.py:227
 msgid "Step"
 msgstr "Étape"
 
-#: bmabru/models.py:225
+#: bmabru/models.py:228
 msgid "Steps"
 msgstr "Étapes"
 
-#: bmabru/models.py:229
+#: bmabru/models.py:232
 msgid "Date"
 msgstr "Date"
 
-#: bmabru/models.py:238
+#: bmabru/models.py:241
 msgid "Cities"
 msgstr "Communes"
 
-#: bmabru/models.py:240
+#: bmabru/models.py:243
 msgid "zip code"
 msgstr "Code postal"
 
-#: bmabru/models.py:255 bmabru/models.py:256
+#: bmabru/models.py:258 bmabru/models.py:259
 msgid "Project worth"
 msgstr "Plus-value"
 
-#: bmabru/models.py:270
+#: bmabru/models.py:273
 msgid "Budget range"
 msgstr "Budget"
 
-#: bmabru/models.py:271
+#: bmabru/models.py:274
 msgid "Budget ranges"
 msgstr "Budgets"
 
-#: bmabru/models.py:273 bmabru/models.py:285
+#: bmabru/models.py:276 bmabru/models.py:288
 msgid "Floor"
 msgstr "Seuil"
 
-#: bmabru/models.py:274 bmabru/models.py:286
+#: bmabru/models.py:277 bmabru/models.py:289
 msgid "Ceiling"
 msgstr "Plafond"
 
-#: bmabru/models.py:282
+#: bmabru/models.py:285
 msgid "Surface range"
 msgstr "Surface"
 
-#: bmabru/models.py:283
+#: bmabru/models.py:286
 msgid "Surface ranges"
 msgstr "Surface"
 
-#: bmabru/models.py:300
+#: bmabru/models.py:304
 msgid "Projects"
 msgstr "Projets"
 
-#: bmabru/models.py:302
+#: bmabru/models.py:306
 msgid "Published"
 msgstr "Publié"
 
-#: bmabru/models.py:305 templates/projects.html:33
+#: bmabru/models.py:309 templates/projects.html:33
 msgid "Address"
 msgstr "Adresse"
 
-#: bmabru/models.py:306
-msgid "Trade name"
-msgstr "Nom du marché attribué"
-
-#: bmabru/models.py:307
-msgid "Attribution"
-msgstr "Attribution"
-
 #: bmabru/models.py:310
+msgid "Trade name"
+msgstr "Marché attribué à"
+
+#: bmabru/models.py:311
+msgid "Attribution"
+msgstr "Attribution (année)"
+
+#: bmabru/models.py:313
+msgid "Activity start"
+msgstr "Début d'activité"
+
+#: bmabru/models.py:314
+msgid "Activity end"
+msgstr "Fin d'activité"
+
+#: bmabru/models.py:317
 msgid "Surface"
 msgstr "Surface"
 
-#: bmabru/models.py:311
+#: bmabru/models.py:318
 msgid "Budget"
 msgstr "Budget"
 
-#: bmabru/models.py:317
+#: bmabru/models.py:324
 msgid "Project Images"
 msgstr "Images du projet"
 
-#: bmabru/models.py:321
+#: bmabru/models.py:328
 msgid "Project worths"
-msgstr "Pls-values"
+msgstr "Plus-values"
 
-#: bmabru/models.py:324
+#: bmabru/models.py:331
 msgid "Perimeter"
 msgstr "Périmètre"
 
@@ -312,7 +320,7 @@ msgstr "Liste des projets"
 
 #: templates/admin/base.html:28
 msgid "Welcome,"
-msgstr "Bienvenue"
+msgstr "Bienvenue,"
 
 #: templates/admin/base.html:33
 msgid "Documentation"
@@ -340,7 +348,7 @@ msgstr "Administration du site bMa"
 
 #: templates/admin/bmabru/project/tabular.html:18
 msgid "Delete?"
-msgstr "Supprimer ?"
+msgstr "Supprimer?"
 
 #: templates/admin/bmabru/project/tabular.html:31
 msgid "View on site"
