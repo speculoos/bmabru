@@ -11,7 +11,7 @@ from django.core.urlresolvers import reverse
 import urllib
 from news.models import *
 
-from hp import Parser
+from hp_bs import Parser
 
 
 def render_body(req, id):
@@ -27,8 +27,6 @@ def parser(req):
     url = req.GET.get('url', None)
     if url is None:
         return HttpResponse('{}', mimetype="application/json")
-    f = urllib.urlopen(url)
-    p = Parser()
-    p.feed(f.read());
+    p = Parser(url)
             
     return HttpResponse(p.to_json(), mimetype="application/json")

@@ -28,7 +28,7 @@ class TextNode(object):
         r = self.root
         txt = []
         self.r_dump(txt)
-        return ' '.join(txt)
+        return u' '.join(txt)
         
     def r_dump(self, txt):
         txt.append(self.text)
@@ -36,14 +36,13 @@ class TextNode(object):
             c.r_dump(txt)
 
         
-
 class Parser(HTMLParser):
     STATE_NONE = 0
     STATE_META = 1
     STATE_CONTENT = 2
     STATE_IMAGE = 3
     
-    def __init__(self):
+    def __init__(self, url=None):
         HTMLParser.__init__(self)
         self.meta = {}
         self.contents = ['']
@@ -53,6 +52,8 @@ class Parser(HTMLParser):
         self._states = { 
             'head': self.STATE_META,
             'img': self.STATE_IMAGE,
+            #'body': self.STATE_CONTENT,
+            'header': self.STATE_CONTENT,
             'p': self.STATE_CONTENT,
             'div': self.STATE_CONTENT,
             'span': self.STATE_CONTENT,
@@ -65,8 +66,19 @@ class Parser(HTMLParser):
             
         self.content_depth = 0
         self.textnode = TextNode()
-            
         self.current_tag = None
+        
+        if url:
+            try:
+                self.start_parser(url)
+            except Exception:
+                pass
+        
+    def start_parser(self, url):
+        connection = urllib.urlopen(url)
+        encoding = connection.headers.getparam('charset')
+        page = connection.read().decode(encoding)
+        self.feed(page)
 
     def handle_starttag(self, tag, attrs):
         st = self.push_state(tag)
@@ -81,6 +93,8 @@ class Parser(HTMLParser):
             self.content_depth += 1
             
     def handle_endtag(self, tag):
+        if tag != self.current_tag:
+            print 'Closing %s when %s is still open'%(tag, self.current_tag)
         st = self.pop_state(tag)
         if st == self.STATE_CONTENT:
             self.content_depth -= 1
@@ -89,6 +103,7 @@ class Parser(HTMLParser):
                 self.textnode = TextNode()
         
     def handle_data(self, data):
+        #print('%s %s %s'%(self.state(), self.current_tag, data))
         if self.state() == self.STATE_CONTENT:
             self.textnode.append(data)
         elif self.state(True) == self.STATE_META:
@@ -117,10 +132,9 @@ class Parser(HTMLParser):
             print '[WARNING] %s'%e
 
     def push_state(self, tag):
-        st = self.STATE_NONE
+        st = self.state()
         if tag in self._states:
             st = self._states[tag]
-            
         self._state.append(st)
         return st
             
@@ -131,8 +145,5 @@ class Parser(HTMLParser):
             print '[WARNING] %s'%e
             
             
-#f = urllib.urlopen(sys.argv[1])
-#p = Parser()
-#p.feed(f.read());
-        
-#print p.to_json()
+
+            

@@ -6,8 +6,14 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 
-# Create your models here.
+from bmabru.models import Project
 
+class Resource(models.Model):
+    class Meta:
+        verbose_name = _("Resource")
+        verbose_name_plural = _("Resources")
+        
+    
 
 class News(models.Model):
     class Meta:
@@ -18,6 +24,7 @@ class News(models.Model):
     title = models.CharField(max_length=512, verbose_name=_('Title'))
     body = models.TextField(verbose_name=_('Body'))
     pub_date = models.DateField(auto_now_add=True)
+    project = models.ForeignKey(Project, related_name='+')
     
     
     def __unicode__(self):
