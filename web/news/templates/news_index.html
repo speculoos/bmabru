@@ -1,0 +1,47 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>bMa - News</title>
+
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}news/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}news/style.less">
+
+<script src="{{STATIC_URL}}jquery-1.8.2.js"></script>
+
+<script>
+window.NEWS = {
+    Config:{
+        API_URL: '/api/',
+        user_name: {% if user %}'{{user}}'{% else %}undefined{% endif %},
+        user_pk: {% if user_pk %}{{user_pk}}{% else %}undefined{% endif %},
+    },
+};
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    crossDomain: false, // obviates need for sameOrigin test
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type)) {
+            xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+        }
+    }
+});
+</script>
+
+<script src="{{STATIC_URL}}lessjs/dist/less-1.4.0-alpha.min.js"></script>
+<script src="{{STATIC_URL}}news/bootstrap/js/bootstrap.min.js"></script>
+<script src="{{STATIC_URL}}news/underscore-min.js"></script>
+<script src="{{STATIC_URL}}news/backbone-min.js"></script>
+<script src="{{STATIC_URL}}news/template.js"></script>
+<script src="{{STATIC_URL}}news/backbone_generic.js"></script>
+<script src="{{STATIC_URL}}news/router.js"></script>
+<script src="{{STATIC_URL}}news/app.js"></script>
+<script src="{{STATIC_URL}}news/index.js"></script>
+
+</head>
+<body>
+</body>
+</html>

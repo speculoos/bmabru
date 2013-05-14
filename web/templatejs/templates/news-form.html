@@ -1,0 +1,13 @@
+<div class="well span8">
+
+        <legend>New Post</legend>
+        <span class="help-block">You can either directly edit your news or use the tools to prepare it.</span>
+        <label>Title</label>
+        <input class="input-block-level" type="text" placeholder="title" name="title" value="<%- data.title %>">
+        
+        <label>Body</label>
+        <textarea class="input-block-level" rows="12" name="body"><%- data.body %></textarea>
+        <div class="pull-right">
+        <button class="btn btn-primary submit" data-loading-text="Saving...">Save</button>
+        </div>
+</div>

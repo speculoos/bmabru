@@ -6,11 +6,23 @@ import  django.db.models
             
 from rest_framework import serializers
 from rest_framework import generics
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
+from rest_framework.permissions import IsAuthenticated
 
 from django.conf.urls import  url
 
 
+REGISTERED_MODELS = []
+
+@api_view(('GET',))
+@permission_classes((IsAuthenticated, ))
+def api_root(request, format=None):
+    r = {}
+    for M in REGISTERED_MODELS:
+        r[M+'s'] = reverse('%s-list'%(M,), request=request, format=format)
+    return Response(r)
 
 # class decorator
 def serializer(property_list = tuple(), exclude=tuple()):
@@ -49,33 +61,40 @@ def get_queryset(self):
 def get_list_view(app, model, filters=None):
     mi = __import__('.'.join([app,'models']), globals(), locals(), [model], 0)
     m = getattr(mi, model)
-    cls = type(''.join([app,model,'List']), (generics.ListAPIView,), {})
+    cls = type(''.join([app,model,'List']), (generics.ListCreateAPIView,), {})
     setattr(cls, '_filters', filters)
     setattr(cls, 'model', m)
     setattr(cls, 'serializer_class', m.serializer_class)
     setattr(cls, 'get_queryset', get_queryset)
     
-    return cls().as_view()
+    return cls
     
 def get_detail_view(app, model):
     mi = __import__('.'.join([app,'models']), globals(), locals(), [model], 0)
     m = getattr(mi, model)
-    cls = type(''.join([app,model,'Detail']), (generics.RetrieveAPIView,), {})
+    cls = type(''.join([app,model,'Detail']), (generics.RetrieveUpdateDestroyAPIView,), {})
     setattr(cls, 'model', m)
     setattr(cls, 'serializer_class', m.serializer_class)
     
-    return cls().as_view()
+    return cls
     
 
-@api_view(['GET'])
+#@api_view(['GET','POST'])
+
+
 def view_list(request, app, model, filters):
-    view = get_list_view(app, model, filters)
-    return view(request)
+    view_cls = get_list_view(app, model, filters)
+    #return view(request)
+    v = view_cls.as_view()
+    return v(request)
     
-@api_view(['GET'])
+#@api_view(['GET','POST', 'PUT'])
+
+
 def view_detail(request, app, model, pk):
-    view = get_detail_view(app, model)
-    return view(request, pk=pk)
+    view_cls = get_detail_view(app, model)
+    #return view(request, pk=pk)
+    return view_cls.as_view()(request, pk=pk)
     
 def urls(resources):
     """
@@ -102,6 +121,6 @@ def urls(resources):
             name= mn + '-detail'
             )
         )
-        
+        REGISTERED_MODELS.append(mn)
         
     return tuple(ret)

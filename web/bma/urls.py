@@ -19,6 +19,9 @@ urlpatterns = patterns('',
     url(r'^news/', include('news.urls')),
     url(r'^i18n/$', include('django.conf.urls.i18n')),
     url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog'),
+    url(r'^templatejs/', include('templatejs.urls')),
+    url(r'^api/$', 'bma.api.api_root', name='api'),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'', include('bmabru.urls')),
 )
 
@@ -31,6 +34,7 @@ urlpatterns += api.urls(
     (
         ('bmabru', 'Project', ({'published':True},)),
         ('media', 'Page', ({'published':True},)),
+        ('news', 'Item', None),
     )
 ) 
 
