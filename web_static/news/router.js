@@ -16,6 +16,7 @@
             'new': 'newform',
             'edit/:id': 'edit',
             'image':'image',
+            'new-image':'newImage',
         },
         index:function(){
             this.newform();
@@ -30,6 +31,10 @@
         },
         image:function(){
             app.setComponents(['images']);
+        },
+        newImage:function(){
+            app.setComponent('new_image');
+            app.render();
         },
     });
     

@@ -9,7 +9,9 @@ from django.utils.translation import ugettext_lazy as _
 from bmabru.models import Project
 from bma.api import serializer
 
-@serializer(property_list=('url',))
+from easy_thumbnails.files import get_thumbnailer
+
+@serializer(property_list=('url','thumbnail'))
 class Resource(models.Model):
     class Meta:
         verbose_name = _("Resource")
@@ -23,6 +25,12 @@ class Resource(models.Model):
     @property
     def url(self):
         return self.image.url
+        
+    @property
+    def thumbnail(self):
+        from easy_thumbnails.files import get_thumbnailer
+        options = {'size': (256, 256), 'crop': True}
+        return get_thumbnailer(self.image).get_thumbnail(options).url
         
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
         self.slug = slugify(self.image)

@@ -60,7 +60,8 @@
         </div> <!-- end of tabbable -->
         
         <div class="well well-small" >
-        <span class="link" data-route="image">Add or edit Image</span>
+        <span class="link" data-route="image">Select an Image</span> from the collection, 
+        or <span class="link" data-route="new-image">Add</span> an image.
         </div>
         
         <%if(data.project){%>
@@ -83,7 +84,7 @@
 </div>
 
 <!-- Modal -->
-<div id="ChangeFormModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="ChangeFormModal" class="modal hide">
 <div class="modal-header">
 <h3 id="ChangeFormModalLabel">Save changes</h3>
 </div>
