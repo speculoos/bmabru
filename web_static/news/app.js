@@ -15,7 +15,7 @@
     
     var ResourceProto = {
         tagName:'li',
-        className:'span2',
+        className:'span3',
     };
     
     var ProjectModelProto = {
@@ -75,7 +75,7 @@
     
     
     var ProjectsView = Backbone.View.extend({
-        className:'projects well span3',
+        className:'projects well span4',
         initialize:function(){
             this.projects = new NEWS.Collections.projects;
 //             this.projects.on('add', function(){
@@ -171,7 +171,7 @@
     });
     
     var PostImagesView = Backbone.View.extend({
-        className:'images well span3',
+        className:'images well span4',
         initialize:function(){
             this.images = [];
         },
@@ -201,7 +201,7 @@
     });
     
     var NewsImagesView = Backbone.View.extend({
-        className:'row-fluid news-images-box',
+        className:'news-images-box',
         initialize:function(){
             this.images = new NEWS.Collections.resources;
             this.images.on('add', this.renderOne, this);
@@ -238,6 +238,14 @@
             
             return this;
         },
+        events:{
+            'click .image-selector':'select',
+        },
+        select: function(evt){
+            var btn = $(evt.target);
+            window.app.components.form.view.model.set({image_url:btn.attr('data-image')});
+            Backbone.history.history.back()
+        },
     });
     
     var PostView = Backbone.View.extend({
@@ -245,6 +253,8 @@
         comparator:'pub_date',
         initialize:function(){
             this.resetModel(this.model);
+            this._initial = true;
+            this.resetChangeState();
         },
         render: function() {
             var $el = this.$el;
@@ -268,6 +278,7 @@
         },
         resetModel:function(model) {
             this.model = model;
+            this._initial = false;
             if(this.model.get('project') 
                 && !this.model.get('project_data'))
             {
@@ -278,17 +289,27 @@
                 this.fillProjectData;
             }, this)
             this.model.on('change', this.render, this);
+            this.resetChangeState();
         },
         setProject:function(id){
             this.model.set({ project:id, });
+            this.setChangeState();
         },
         events:{
             'click .submit':'save',
             'click .parser':'parser',
             'click .reset-project':'resetProject',
+            'change input, textarea': 'setChangeState'
+        },
+        setChangeState:function(){
+            this._changed = true;
+        },
+        resetChangeState:function(){
+            this._changed = false;
         },
         resetProject:function(){
             this.model.set({project:null});
+            this.setChangeState();
         },
         serialize:function(){
             var ret = {};
@@ -322,6 +343,7 @@
                 window.app.items.newsItems.add(model);
             });
             model.save(data);
+            this.resetChangeState();
         },
         parser:function(){
             var urlElt = this.$el.find('[name=parse_url]');
@@ -357,6 +379,31 @@
                 
                 btn.button('reset');
             });
+        },
+        confirmLeave:function(next){
+            if(this._initial || !this._changed)
+            {   
+                next();
+                return;
+            }
+            console.log('confirm', this._initial, this._changed);
+            var modal = this.$el.find('#ChangeFormModal');
+            var dismiss = modal.find('.news-dismiss');
+            var cancel = modal.find('.news-cancel');
+            var save = modal.find('.news-save');
+            dismiss.one('click', function(){
+                modal.modal('hide');
+                next();
+            });
+            cancel.one('click', function(){
+                modal.modal('hide');
+            });
+            save.one('click', function(){
+                modal.modal('hide');
+                this.save();
+                next();
+            });
+            modal.modal('show');
         },
     });
     
@@ -468,13 +515,19 @@
         },
         newForm:function(){
             var item = new NEWS.Models.items;
-            this.components.form.view.resetModel(item);
-            this.components.post_images.view.setImages([]);
+            var self = this;
+            this.components.form.view.confirmLeave(function(){
+                self.components.form.view.resetModel(item);
+                self.components.post_images.view.setImages([]);
+            });
         },
         editForm:function(id){
             var item = this.items.newsItems.get(id);
-            this.components.form.view.resetModel(item);
-            this.components.post_images.view.setImages([]);
+            var self = this;
+            this.components.form.view.confirmLeave(function(){
+                self.components.form.view.resetModel(item);
+                self.components.post_images.view.setImages([]);
+            });
         },
     });
     NEWS.App = AppView;

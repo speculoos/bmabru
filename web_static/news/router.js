@@ -15,17 +15,21 @@
             'index': 'index',
             'new': 'newform',
             'edit/:id': 'edit',
+            'image':'image',
         },
         index:function(){
             this.newform();
         },
         newform:function(){
             app.newForm();
-            app.setComponents(['form','post_images','projects', 'images']);
+            app.setComponents(['form','post_images','projects']);
         },
         edit:function(id){
             app.editForm(id);
-            app.setComponents(['form','post_images','projects','images']);
+            app.setComponents(['form','post_images','projects']);
+        },
+        image:function(){
+            app.setComponents(['images']);
         },
     });
     

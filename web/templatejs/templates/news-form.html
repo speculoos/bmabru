@@ -59,6 +59,10 @@
         </div> <!-- end of tab-content -->
         </div> <!-- end of tabbable -->
         
+        <div class="well well-small" >
+        <span class="link" data-route="image">Add or edit Image</span>
+        </div>
+        
         <%if(data.project){%>
         <input type="hidden" name="project" value="<%= data.project %>" />
         <div class="well well-small project-box" data-pid="<%= data.project %>" >
@@ -77,3 +81,20 @@
         <button class="btn btn-primary submit" data-loading-text="Saving...">Save</button>
         </div>
 </div>
+
+<!-- Modal -->
+<div id="ChangeFormModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-header">
+<h3 id="ChangeFormModalLabel">Save changes</h3>
+</div>
+<div class="modal-body">
+<p>Vous êtes sur le point de quitter le formulaire, en laissant éventuellement des changements non sauvegardés.</p>
+</div>
+<div class="modal-footer">
+<button class="btn  news-dismiss">Abandonner</button>
+<button class="btn news-cancel">Annuler</button>
+<button class="btn btn-primary news-save">Sauvegarder</button>
+</div>
+</div>
+
+

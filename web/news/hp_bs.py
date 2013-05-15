@@ -36,7 +36,7 @@ class Parser(object):
             self.meta['title'] = ''
         for m in self.soup.head.find_all('meta'):
             try:
-                self.meta[m.attrs['name']] = m.attrs['content']
+                self.meta[m.attrs['name'].lower()] = m.attrs['content']
             except Exception:
                 pass
             
