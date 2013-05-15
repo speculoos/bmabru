@@ -1,0 +1,20 @@
+
+<div class="accordion-heading">
+<a class="accordion-toggle" 
+    data-toggle="collapse" 
+    data-parent="#accordion_project" 
+    href="#project_collapse_<%= data.id %>">
+<%- data.name %> 
+</a>
+
+</div>
+<div id="project_collapse_<%= data.id %>" class="accordion-body collapse in">
+<div class="accordion-inner">
+
+<address>
+<strong><%- data.city.zipcode %> <%- data.city.name %></strong><br>
+<%- data.address %><br>
+</address>
+<button data-pid="<%= data.id %>" class="btn btn-mini"> select </button>
+</div>
+</div>

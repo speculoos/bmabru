@@ -77,7 +77,7 @@ def index(request):
 def projects(request):
     prjcts = Project.objects.filter(published=True)
     cats = Category.objects.all()
-    return render_to_response("projects.html", {'category':cats, 'projects':prjcts}, context_instance = RequestContext(request))
+    return render_to_response("projects_table.html", {'category':cats, 'projects':prjcts}, context_instance = RequestContext(request))
 
 def project(request, project):
     data = {'category':Category.objects.all()}

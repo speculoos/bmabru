@@ -18,6 +18,10 @@
         className:'span2',
     };
     
+    var ProjectProto = {
+        className:'accordion-group',
+    };
+    
     var ItemsView = Backbone.View.extend({
         tagName:'ul',
         className:'nav nav-list',
@@ -52,6 +56,59 @@
             });
             
             return this;
+        },
+    });
+    
+    
+    var ProjectsView = Backbone.View.extend({
+        className:'projects well span3',
+        initialize:function(){
+            this.projects = new NEWS.Collections.projects;
+//             this.projects.on('add', function(){
+//                 this.render();
+//             }, this);
+            this.projects.on('reset', function(){
+                this.projects_ready = true;
+                this.render();
+            }, this);
+//             this.items = {};
+            this.projects_ready = false;
+            this.projects.fetch({reset:true});
+        },
+        renderOne: function(item){
+            var i = new NEWS.Views.projects({model:item});
+            console.log(item.toJSON());
+            var el = i.render().el;
+            var $root = this.$el.find('.accordion');
+            if($root.length > 0)
+            {
+                $root.append(el);
+            }
+            return this;
+        },
+        render: function(){
+            this.$el.empty();
+            Template.render('projects-list', this, function(t){
+                this.$el.html(t({
+                    ready:this.projects_ready,
+                }));
+                }, this);
+            return this;
+        },
+        events:{
+            'click .search-submit':'search',
+        },
+        search:function(evt){
+            evt.preventDefault();
+            this.$el.find('.accordion').empty();
+            var re = new RegExp(this.$el.find('.search-q').val(), "i");
+            var self = this;
+            this.projects.each(function(item, idx){
+                var name = item.get('name');
+                var desc = item.get('description');
+                if(re.test(name) || re.test(desc))
+                    self.renderOne(item);
+            });
         },
     });
     
@@ -127,10 +184,10 @@
                 });
                 var i = new NEWS.Views.resources({model:item});
                 var el = i.render().el;
-                this.$root = this.$el.find('.thumbnails');
-                if(this.$root.length > 0)
+                var $root = this.$el.find('.thumbnails');
+                if($root.length > 0)
                 {
-                    this.$root.append(el);
+                    $root.append(el);
                     this.items[item.cid] = i;
                 }
             }
@@ -257,9 +314,11 @@
             NEWS.Modeler(function(){
                 _.extend(NEWS.Views.items.prototype, ItemProto);
                 _.extend(NEWS.Views.resources.prototype, ResourceProto);
+                _.extend(NEWS.Views.projects.prototype, ProjectProto);
                 
                 this.registerComponent('form', new PostView({model:new NEWS.Models.items}));
-                this.registerComponent('post_images', new PostImagesView);
+//                 this.registerComponent('post_images', new PostImagesView);
+                this.registerComponent('projects', new ProjectsView);
                 this.registerComponent('images', new NewsImagesView);
                 
                 this.titleBar = new TitleView;
@@ -345,12 +404,12 @@
         newForm:function(){
             var item = new NEWS.Models.items;
             this.components.form.view.resetModel(item);
-            this.components.post_images.view.setImages([]);
+//             this.components.post_images.view.setImages([]);
         },
         editForm:function(id){
             var item = this.items.newsItems.get(id);
             this.components.form.view.resetModel(item);
-            this.components.post_images.view.setImages([]);
+//             this.components.post_images.view.setImages([]);
         },
     });
     NEWS.App = AppView;
