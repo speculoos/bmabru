@@ -48,7 +48,9 @@ window.bMa.Project = function(args){
             }
         },
         bounds:function(){
-            if(this.layer === undefined || this.data.geojson.coordinates.length === 0)
+            if(this.layer === undefined 
+                || his.data.geojson.coordinates === undefined
+                || this.data.geojson.coordinates.length === 0)
             {
                 var llb = new L.LatLngBounds();
                 return llb;
