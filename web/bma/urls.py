@@ -35,6 +35,7 @@ urlpatterns += api.urls(
         ('bmabru', 'Project', ({'published':True},)),
         ('media', 'Page', ({'published':True},)),
         ('news', 'Item', None),
+        ('news', 'Resource', None),
     )
 ) 
 

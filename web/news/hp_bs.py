@@ -6,7 +6,8 @@ from bs4 import BeautifulSoup as BS
 import urllib
 import sys
 import json
-
+import copy
+from urlparse import urljoin
 
 class Parser(object):
     def __init__(self, url=None):
@@ -21,6 +22,7 @@ class Parser(object):
                 pass
         
     def start_parser(self, url):
+        self.url = url
         connection = urllib.urlopen(url)
         self.soup = BS(connection)
         self.get_meta()
@@ -39,8 +41,14 @@ class Parser(object):
                 pass
             
     def get_images(self):
+        print('get_images:')
         for i in self.soup.find_all('img'):
-            self.images.append(i.attrs)
+            img = copy.copy(i.attrs)
+            try:
+                img['src'] = urljoin(self.url, img['src'])
+                self.images.append(img)
+            except Exception:
+                pass
             
     def get_content(self):
         for p in self.soup.body.find_all('p'):

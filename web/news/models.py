@@ -9,11 +9,27 @@ from django.utils.translation import ugettext_lazy as _
 from bmabru.models import Project
 from bma.api import serializer
 
+@serializer(property_list=('url',))
 class Resource(models.Model):
     class Meta:
         verbose_name = _("Resource")
         verbose_name_plural = _("Resources")
         
+    slug = models.SlugField(max_length=255, editable=False, default='None')
+    image = models.ImageField(upload_to='images',  height_field='height', width_field='width', max_length=255);
+    width = models.IntegerField(editable=False)
+    height = models.IntegerField(editable=False)
+    
+    @property
+    def url(self):
+        return self.image.url
+        
+    def save(self, force_insert=False, force_update=False, *args, **kwargs):
+        self.slug = slugify(self.image)
+        super(Resource, self).save(force_insert, force_update) 
+    
+    def __unicode__(self):
+        return self.slug
     
 @serializer()
 class Item(models.Model):
@@ -27,7 +43,9 @@ class Item(models.Model):
     body = models.TextField(verbose_name=_('Body'))
     pub_date = models.DateField(auto_now_add=True)
     project = models.ForeignKey(Project, related_name='+', blank=True, null=True, default=None)
-    resource = models.ForeignKey(Resource, blank=True, null=True, default=None)
+    #resource = models.ForeignKey(Resource, blank=True, null=True, default=None)
+    image_url = models.URLField(max_length=1024, blank=True, null=True, default=None)
+    
     
     
     def __unicode__(self):

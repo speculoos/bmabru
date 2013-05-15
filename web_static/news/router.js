@@ -18,11 +18,11 @@
         },
         newform:function(){
             app.newForm();
-            app.setComponents(['form']);
+            app.setComponents(['form','post_images', 'images']);
         },
         edit:function(id){
             app.editForm(id);
-            app.setComponents(['form']);
+            app.setComponents(['form','post_images','images']);
         },
     });
     

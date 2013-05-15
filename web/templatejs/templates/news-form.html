@@ -1,12 +1,32 @@
 <div class="well span8">
 
+        <% if(data.id){ %>
+        <legend>News #<%= data.id %></legend>
+        <% }else{ %>
         <legend>New Post</legend>
-        <span class="help-block">You can either directly edit your news or use the tools to prepare it.</span>
+        <% } %>
+        <div class="input-append">
+        <input  class="span12"  type="text" name="parse_url" placeholder="Enter an URL to populate the news" />
+        <button class="btn btn-success parser" type="button"  data-loading-text="Parsing...">Parse it!</button>
+        </div>
+        
+        <div class="ruler" />
+        
+        <div >
         <label>Title</label>
-        <input class="input-block-level" type="text" placeholder="title" name="title" value="<%- data.title %>">
+        <input class="input-block-level" type="text" placeholder="title" name="title" value="<%- data.title %>" />
+        </div>
         
         <label>Body</label>
-        <textarea class="input-block-level" rows="12" name="body"><%- data.body %></textarea>
+        <% if(data.image_url){ %>
+        <div class="span6 pull-right image">
+        <img src="<%= data.image_url %>" />
+        </div>
+        <% } %>
+        <textarea class="<% if(data.image_url){print('span6');}else{print('input-block-level');} %>" 
+                    rows="12" 
+                    name="body"><%- data.body %></textarea>
+        
         <div class="pull-right">
         <button class="btn btn-primary submit" data-loading-text="Saving...">Save</button>
         </div>

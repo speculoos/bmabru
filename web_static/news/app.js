@@ -13,6 +13,11 @@
         tagName: "li",
     };
     
+    var ResourceProto = {
+        tagName:'li',
+        className:'span2',
+    };
+    
     var ItemsView = Backbone.View.extend({
         tagName:'ul',
         className:'nav nav-list',
@@ -74,8 +79,79 @@
         },
     });
     
+    var PostImagesView = Backbone.View.extend({
+        className:'images well span3',
+        initialize:function(){
+            this.images = [];
+        },
+        render:function(){
+            this.$el.empty();
+            if(this.images.length > 0)
+                this.$el.show();
+            else
+                this.$el.hide();
+            Template.render('images', this, function(t){
+                this.$el.html(t({images:this.images}));
+                }, this);
+            
+            return this;
+        },
+        setImages:function(images){
+            this.images = images;
+            this.render();
+        },
+        events:{
+            'click .image-selector':'select',
+        },
+        select: function(evt){
+            var btn = $(evt.target);
+            window.app.components.form.view.model.set({image_url:btn.attr('data-image')});
+        },
+    });
+    
+    var NewsImagesView = Backbone.View.extend({
+        className:'row-fluid news-images-box',
+        initialize:function(){
+            this.images = new NEWS.Collections.resources;
+            this.images.on('add', this.renderOne, this);
+            this.images.on('reset', this.render, this);
+            this.items = {};
+            this.images.fetch();
+        },
+        renderOne: function(item){
+            if(this.items[item.cid] === undefined)
+            {
+                item.set({
+                    visited:false,
+                    current:false,
+                });
+                var i = new NEWS.Views.resources({model:item});
+                var el = i.render().el;
+                this.$root = this.$el.find('.thumbnails');
+                if(this.$root.length > 0)
+                {
+                    this.$root.append(el);
+                    this.items[item.cid] = i;
+                }
+            }
+            return this;
+        },
+        render: function(){
+            this.$el.empty();
+            Template.render('resources-list', this, function(t){
+                this.$el.html(t({}));
+                this.images.each(function(item){
+                    this.renderOne(item);
+                }, this);
+            });
+            
+            return this;
+        },
+    });
+    
     var PostView = Backbone.View.extend({
         className:'news-form',
+        comparator:'pub_date',
         initialize:function(){
             this.model.on('change', this.render, this);
             if(!this.model.isNew())
@@ -85,7 +161,6 @@
         },
         render: function() {
             var $el = this.$el;
-            $el.attr('id', 'news_form_' + this.model.id)
             $el.empty();
             var data = this.model.toJSON();
             Template.render(this.className, this, function(t){
@@ -96,9 +171,11 @@
         resetModel:function(model) {
             this.model = model;
             this.render();
+            this.model.on('change', this.render, this);
         },
         events:{
             'click .submit':'save',
+            'click .parser':'parser'
         },
         serialize:function(){
             var ret = {};
@@ -119,7 +196,39 @@
                 window.app.items.newsItems.add(model);
             });
             model.save(data);
-        }
+        },
+        parser:function(){
+            var urlElt = this.$el.find('[name=parse_url]');
+            var btn = this.$el.find('.parser');
+            btn.button('loading');
+            var url = urlElt.val();
+            urlElt.val('');
+            var self = this;
+            $.ajax({
+                url:NEWS.Config.PARSER_URL,
+                type: "POST",
+                data:{url:url},
+                dataType:'json'
+            }).done(function(data){
+                console.log(data);
+                self.$el.find('[name=title]').val(data.meta.title);
+                var body = [url];
+                if(data.meta.description)
+                {
+                    body.push(data.meta.description);
+                }
+                else
+                {
+                    if(data.content.length > 0)
+                        body.push(data.content[0]);
+                }
+                self.$el.find('[name=body]').val(body.join('\n\n'));
+                
+                window.app.components.images.view.setImages(data.images);
+                
+                btn.button('reset');
+            });
+        },
     });
     
     var AppView =  Backbone.View.extend({
@@ -132,15 +241,21 @@
             this.navBox = $('<div>').addClass('span3 navbox').appendTo(this.r1);
             this.workSpace = $('<div>').addClass('span9  workSpace').appendTo(this.r1);
             
+            
             NEWS.Modeler(function(){
                 _.extend(NEWS.Views.items.prototype, ItemProto);
+                _.extend(NEWS.Views.resources.prototype, ResourceProto);
                 
                 this.registerComponent('form', new PostView({model:new NEWS.Models.items}));
+                this.registerComponent('post_images', new PostImagesView);
+                this.registerComponent('images', new NewsImagesView);
                 
                 this.titleBar = new TitleView;
                 this.items = new ItemsView;
+                
                 this.r0.append(this.titleBar.render().el);
                 this.navBox.append(this.items.render().el);
+                this.workSpace
                 this.trigger('ready');
             }, this);
         },
@@ -218,10 +333,12 @@
         newForm:function(){
             var item = new NEWS.Models.items;
             this.components.form.view.resetModel(item);
+            this.components.post_images.view.setImages([]);
         },
         editForm:function(id){
             var item = this.items.newsItems.get(id);
             this.components.form.view.resetModel(item);
+            this.components.post_images.view.setImages([]);
         },
     });
     NEWS.App = AppView;
