@@ -12,9 +12,12 @@
             Backbone.Router.prototype.navigate.apply(this, [route, options]);
         },
         routes:{
-            '': 'newform',
+            'index': 'index',
             'new': 'newform',
             'edit/:id': 'edit',
+        },
+        index:function(){
+            this.newform();
         },
         newform:function(){
             app.newForm();

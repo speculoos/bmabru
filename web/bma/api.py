@@ -25,12 +25,12 @@ def api_root(request, format=None):
     return Response(r)
 
 # class decorator
-def serializer(property_list = tuple(), exclude=tuple()):
+def serializer(property_list = tuple(), exclude=tuple(), depth=3, serializer='ModelSerializer'):
     def decorator(cls):
         name = cls.__name__
         #print('Decorating [%s] with a serializer'%(name,))
-        meta = type('Meta', (object, ), {'model':cls, 'depth':3, 'exclude':exclude})
-        srl = type(''.join([name,'Serializer']), (serializers.ModelSerializer,), {'Meta':meta} )
+        meta = type('Meta', (object, ), {'model':cls, 'depth':depth, 'exclude':exclude})
+        srl = type(''.join([name,'Serializer']), (getattr(serializers, serializer),), {'Meta':meta} )
 
         fields = {}
         for prop in property_list:

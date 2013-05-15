@@ -18,6 +18,10 @@
         className:'span2',
     };
     
+    var ProjectModelProto = {
+        deps : [{attr:'project',model:'projects'}],
+    };
+    
     var ProjectProto = {
         className:'accordion-group',
     };
@@ -30,7 +34,17 @@
             this.newsItems.on('add', this.renderOne, this);
             this.newsItems.on('reset', this.render, this);
             this.items = {};
-            this.newsItems.fetch();
+            
+            this._ready = false;
+            this.newsItems.on('reset', function(){
+                if(!this._ready)
+                {
+                    this._ready = true;
+                    this.trigger('ready');
+                }
+            }, this);
+            
+            this.newsItems.fetch({reset:true});
         },
         renderOne: function(item){
             if(this.items[item.cid] === undefined)
@@ -75,10 +89,15 @@
             this.projects_ready = false;
             this.projects.fetch({reset:true});
         },
-        renderOne: function(item){
+        renderOne: function(item, options){
+            options = _.extend({open:false}, options);
             var i = new NEWS.Views.projects({model:item});
             console.log(item.toJSON());
             var el = i.render().el;
+            if(options.open)
+            {
+                i.$el.find('.accordion-body').addClass('in');
+            }
             var $root = this.$el.find('.accordion');
             if($root.length > 0)
             {
@@ -97,18 +116,33 @@
         },
         events:{
             'click .search-submit':'search',
+            'click .select': 'select',
         },
         search:function(evt){
             evt.preventDefault();
             this.$el.find('.accordion').empty();
             var re = new RegExp(this.$el.find('.search-q').val(), "i");
             var self = this;
+            var items = [];
             this.projects.each(function(item, idx){
                 var name = item.get('name');
-                var desc = item.get('description');
-                if(re.test(name) || re.test(desc))
-                    self.renderOne(item);
+                if(re.test(name))
+                {
+                    var res = re.exec(name);
+                    items.push({item:item,m:res.length});
+                }
             });
+            items.sort(function(a, b) {
+                return a.m - b.m;
+            });
+            for(var i=0; i < items.length; i++){
+                 this.renderOne(items[i].item, {open:(i === 0)});
+            }
+        },
+        select:function(evt){
+            var el = $(evt.target);
+            var id = el.attr('data-pid');
+            window.app.components.form.view.setProject(id);
         },
     });
     
@@ -210,11 +244,7 @@
         className:'news-form',
         comparator:'pub_date',
         initialize:function(){
-            this.model.on('change', this.render, this);
-            if(!this.model.isNew())
-            {
-                this.render();
-            }
+            this.resetModel(this.model);
         },
         render: function() {
             var $el = this.$el;
@@ -225,14 +255,40 @@
             });
             return this;
         },
+        fillProjectData:function(){
+            var id = this.model.get('project');
+            var projects = window.app.components.projects.view.projects;
+            var project = projects.get(id);
+            if(project)
+            {
+                this.model.set({
+                    project_data: project.toJSON(),
+                });
+            }
+        },
         resetModel:function(model) {
             this.model = model;
+            if(this.model.get('project') 
+                && !this.model.get('project_data'))
+            {
+                this.fillProjectData();
+            }
             this.render();
+            this.model.on('change:project', function(){
+                this.fillProjectData;
+            }, this)
             this.model.on('change', this.render, this);
+        },
+        setProject:function(id){
+            this.model.set({ project:id, });
         },
         events:{
             'click .submit':'save',
-            'click .parser':'parser'
+            'click .parser':'parser',
+            'click .reset-project':'resetProject',
+        },
+        resetProject:function(){
+            this.model.set({project:null});
         },
         serialize:function(){
             var ret = {};
@@ -250,8 +306,9 @@
                 ret.body_nl = 'translation not available';
             ret.title = '@fr @nl';
             ret.body = '@fr @nl';
+            
             ret.resource = '';
-            ret.project = '';
+            ret.project = parseInt(this.$el.find('[name=project]').val());
             return ret;
         },
         save:function(){
@@ -317,17 +374,20 @@
                 _.extend(NEWS.Views.projects.prototype, ProjectProto);
                 
                 this.registerComponent('form', new PostView({model:new NEWS.Models.items}));
-//                 this.registerComponent('post_images', new PostImagesView);
+                this.registerComponent('post_images', new PostImagesView);
                 this.registerComponent('projects', new ProjectsView);
                 this.registerComponent('images', new NewsImagesView);
                 
                 this.titleBar = new TitleView;
                 this.items = new ItemsView;
+                this.items.on('ready', function(){
+                    this.trigger('ready');
+                },this);
                 
                 this.r0.append(this.titleBar.render().el);
                 this.navBox.append(this.items.render().el);
-                this.workSpace
-                this.trigger('ready');
+//                 this.workSpace
+                
             }, this);
         },
         registerComponent: function(name, view){
@@ -344,6 +404,7 @@
         render:function(){
             for(var k in this.components){
                 var c = this.components[k];
+                console.log(k, c.visible, c.rendered);
                 if(c.visible)
                 {
                     this.workSpace.append(c.view.el);
@@ -373,6 +434,7 @@
             this.render();
         },
         setComponents:function(comps){
+            console.log(comps);
             this.current_comps = comps;
             for(var k in this.components){
                 var c = this.components[k];

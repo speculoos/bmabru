@@ -31,7 +31,7 @@ class Resource(models.Model):
     def __unicode__(self):
         return self.slug
     
-@serializer()
+@serializer(depth=0)
 class Item(models.Model):
     class Meta:
         verbose_name = _("News Item")

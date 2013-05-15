@@ -59,6 +59,20 @@
         </div> <!-- end of tab-content -->
         </div> <!-- end of tabbable -->
         
+        <%if(data.project){%>
+        <input type="hidden" name="project" value="<%= data.project %>" />
+        <div class="well well-small project-box" data-pid="<%= data.project %>" >
+        <div class="pull-right"><i class="icon-remove-sign  reset-project"></i></div>
+            <%if(data.project_data){%>
+            Selected project: <%= data.project_data.name %>
+            <%}else{%>
+            Selected project <span class="badge badge-inverse"><%= data.project %></span>
+            <%}%>
+        </div>
+        <%}else{%>
+        <input type="hidden" name="project" />
+        <%}%>
+        
         <div class="pull-right">
         <button class="btn btn-primary submit" data-loading-text="Saving...">Save</button>
         </div>
