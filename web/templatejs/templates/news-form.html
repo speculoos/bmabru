@@ -12,20 +12,52 @@
         
         <div class="ruler" />
         
-        <div >
-        <label>Title</label>
-        <input class="input-block-level" type="text" placeholder="title" name="title" value="<%- data.title %>" />
-        </div>
         
-        <label>Body</label>
-        <% if(data.image_url){ %>
-        <div class="span6 pull-right image">
-        <img src="<%= data.image_url %>" />
-        </div>
-        <% } %>
-        <textarea class="<% if(data.image_url){print('span6');}else{print('input-block-level');} %>" 
+        <div class="tabbable">
+        <ul class="nav nav-pills">
+            <li class="active">
+            <a href="#tabFR" data-toggle="tab">FR</a>
+            </li>
+            <li>
+            <a href="#tabNL" data-toggle="tab">NL</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tabFR">
+                <label>Title</label>
+                <input class="input-block-level" type="text" placeholder="title" name="title_fr" value="<%- data.title_fr %>" />
+                
+                
+                <label>Body</label>
+                <% if(data.image_url){ %>
+                <div class="span6 pull-right image">
+                <img src="<%= data.image_url %>" />
+                </div>
+                <% } %>
+                    <textarea class="<% if(data.image_url){print('span6');}else{print('input-block-level');} %>" 
+                                rows="12" 
+                                name="body_fr"><%- data.body_fr %></textarea>
+                            
+            </div> <!-- end of FR -->
+            
+            <div class="tab-pane" id="tabNL">
+                <label>Title</label>
+                <input class="input-block-level" type="text" placeholder="titel" name="title_nl" value="<%- data.title_nl %>" />
+                
+                
+                <label>Body</label>
+                <% if(data.image_url){ %>
+                <div class="span6 pull-right image">
+                <img src="<%= data.image_url %>" />
+                </div>
+                <% } %>
+                    <textarea class="<% if(data.image_url){print('span6');}else{print('input-block-level');} %>" 
                     rows="12" 
-                    name="body"><%- data.body %></textarea>
+                    name="body_nl"><%- data.body_nl %></textarea>
+                
+            </div> <!-- end of NL -->
+        </div> <!-- end of tab-content -->
+        </div> <!-- end of tabbable -->
         
         <div class="pull-right">
         <button class="btn btn-primary submit" data-loading-text="Saving...">Save</button>

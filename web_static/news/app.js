@@ -179,8 +179,20 @@
         },
         serialize:function(){
             var ret = {};
-            ret.title = this.$el.find('[name=title]').val();
-            ret.body = this.$el.find('[name=body]').val();
+            ret.title_fr = this.$el.find('[name=title_fr]').val();
+            ret.body_fr = this.$el.find('[name=body_fr]').val();
+            ret.title_nl = this.$el.find('[name=title_nl]').val();
+            ret.body_nl = this.$el.find('[name=body_nl]').val();
+            if(ret.title_fr === '')
+                ret.title_fr = 'translation not available';
+            if(ret.body_fr === '')
+                ret.body_fr = 'translation not available';
+            if(ret.title_nl === '')
+                ret.title_nl = 'translation not available';
+            if(ret.body_nl === '')
+                ret.body_nl = 'translation not available';
+            ret.title = '@fr @nl';
+            ret.body = '@fr @nl';
             ret.resource = '';
             ret.project = '';
             return ret;
