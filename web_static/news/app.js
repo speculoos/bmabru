@@ -336,8 +336,6 @@
                 data:{url:url},
                 dataType:'json'
             }).done(function(data){
-                console.log(data);
-                self.$el.find('[name=title]').val(data.meta.title);
                 var body = [url];
                 if(data.meta.description)
                 {
@@ -348,9 +346,14 @@
                     if(data.content.length > 0)
                         body.push(data.content[0]);
                 }
-                self.$el.find('[name=body]').val(body.join('\n\n'));
+                self.model.set({
+                    title_fr:data.meta.title,
+                    body_fr:body.join('\n\n'),
+                               title_nl:data.meta.title,
+                    body_nl:body.join('\n\n'),
+                });
                 
-                window.app.components.images.view.setImages(data.images);
+                window.app.components.post_images.view.setImages(data.images);
                 
                 btn.button('reset');
             });
@@ -466,12 +469,12 @@
         newForm:function(){
             var item = new NEWS.Models.items;
             this.components.form.view.resetModel(item);
-//             this.components.post_images.view.setImages([]);
+            this.components.post_images.view.setImages([]);
         },
         editForm:function(id){
             var item = this.items.newsItems.get(id);
             this.components.form.view.resetModel(item);
-//             this.components.post_images.view.setImages([]);
+            this.components.post_images.view.setImages([]);
         },
     });
     NEWS.App = AppView;
