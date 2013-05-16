@@ -4,6 +4,7 @@
 <head>
 	<title>{% block title %}bMa - Bouwmeester Maître Architecte{% endblock %}</title>
 	{% block style %}
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}news/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="{{STATIC_URL}}leaflet/dist/leaflet.css" />
 	<link rel="stylesheet" href="{{STATIC_URL}}leaflet/dist/leaflet.ie.css" />
 	{% if debug %}
@@ -23,15 +24,15 @@
 	</script>
 	{% block script %}
 <!-- 	<script src="{% url 'django.views.i18n.javascript_catalog' %}"></script> -->
-	<script src="{{STATIC_URL}}jquery-1.8.2.js"></script>
+    <script src="{{STATIC_URL}}jquery/jquery-1.9.1.min.js"></script>
 	<script src="{{STATIC_URL}}news/underscore-min.js"></script>
 	<script src="{{STATIC_URL}}lessjs/dist/less-1.4.0-alpha.min.js"></script>
 	{% endblock %}
 	
 	{% block script_map %}
-	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}news/bootstrap/css/bootstrap.min.css">
+	<script src="{{STATIC_URL}}jquery/jquery.ajax-progress.js"></script>
 	<script src="{{STATIC_URL}}news/bootstrap/js/bootstrap.min.js"></script>
-	<script src="{{STATIC_URL}}leaflet/dist/leaflet-src.js"></script>
+	<script src="{{STATIC_URL}}leaflet/dist/leaflet.js"></script>
 	<script src="{{STATIC_URL}}news/template.js"></script>
     <script src="{{STATIC_URL}}lib/Article.js"></script>
     <script src="{{STATIC_URL}}lib/Config.js"></script>

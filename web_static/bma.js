@@ -39,52 +39,59 @@ function InitMap()
         map.add_layer(key, wms.url, wms.options);
     }
     
-    
-    $.getJSON(bmabru_json_url, function( projects_data ){
-        var cur_p = undefined;
-        
-//         for(var key in WMS_CONFIG)
-//         {
-//             var wms = WMS_CONFIG[key];
-//             map.add_layer(key, wms.url, wms.options);
-//         }
-//         
-        for(var idx = 0; idx < projects_data.length; idx++)
-        {
-            
-            var pdata = projects_data[idx];
-            var p = bMa.Project(pdata);
-//             console.log('Add ['+p.id+'] => '+p.get('slug'))
-            if(window.bma_current_project !== undefined 
-                && bma_current_project === p.id)
+    $.ajax({
+        method: 'GET',
+        url: bmabru_json_url,
+        dataType: 'json',
+           progress: function(e) {
+//                //make sure we can compute the length
+//                if(e.lengthComputable) {
+//                    //calculate the percentage loaded
+//                    var pct = (e.loaded / e.total) * 100;
+//                    
+//                    //log percentage loaded
+//                    console.log(pct);
+//                }
+//                //this usually happens when Content-Length isn't set
+//                else {
+//                    console.warn('Content Length not reported!');
+//                }
+           }
+    }).done(function(projects_data){
+            var cur_p = undefined;
+            for(var idx = 0; idx < projects_data.length; idx++)
             {
-                cur_p = p;
-            }
-            var geo = p.get('geojson');
-            var ovl = new L.GeoJSON(geo, {
-                style:function(f){ 
-                    return bMa.Config().get_dict('/feature/style/show');
+                var pdata = projects_data[idx];
+                var p = bMa.Project(pdata);
+                if(window.bma_current_project !== undefined 
+                    && bma_current_project === p.id)
+                {
+                    cur_p = p;
                 }
-            });
-            map.add_overlay('bMa', ovl);
+                var geo = p.get('geojson');
+                var ovl = new L.GeoJSON(geo, {
+                    style:function(f){ 
+                        return bMa.Config().get_dict('/feature/style/show');
+                    }
+                });
+                map.add_overlay('bMa', ovl);
+                
+                ovl.on('click', function(evt){
+                    popup.hide();
+                    article.hide();
+                    legend.show(this);
+                }, p);
+                
+                p.layer = ovl;
+            }
             
-            ovl.on('click', function(evt){
-                popup.hide();
-                article.hide();
-                legend.show(this);
-            }, p);
-            
-            p.layer = ovl;
-        }
-        
-        if(cur_p !== undefined)
-        {
             popup.hide();
-            legend.show(cur_p);
-        }
-        
-        
-        var filter = bMa.Filter($('#filter-box'), map);
+            if(cur_p !== undefined)
+            {
+                legend.show(cur_p);
+            }
+            
+            var filter = bMa.Filter($('#filter-box'), map);
     });
     
     var gallery = bMa.Gallery($('#gallery-wrapper'));
