@@ -30,12 +30,13 @@ if 'rosetta' in settings.INSTALLED_APPS:
         url(r'^translate/', include('rosetta.urls')),
     )
 
-urlpatterns += api.urls(
-    (
-        ('bmabru', 'Project', ({'published':True},)),
-        ('media', 'Page', ({'published':True},)),
-        ('news', 'Item', None),
-        ('news', 'Resource', None),
-    )
-) 
+urlpatterns += api.urls()
+#urlpatterns += api.urls(
+    #(
+        #('bmabru', 'Project', ({'published':True},)),
+        #('media', 'Page', ({'published':True},)),
+        #('news', 'Item', None),
+        #('news', 'Resource', None),
+    #)
+#) 
 

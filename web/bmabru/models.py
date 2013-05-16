@@ -195,6 +195,7 @@ class Mission(models.Model):
         
 
         
+@serializer()
 class ProjectStatus(models.Model):
     """
     Etat d'avancement du projet
@@ -202,12 +203,12 @@ class ProjectStatus(models.Model):
     class Meta:
         verbose_name = _("Project status")
         verbose_name_plural = _("Project status")
-        ordering = ['name']
+        ordering = ['order']
         
     name = models.CharField(max_length=128, verbose_name=_('Name'))
     description = models.TextField(blank=True, verbose_name=_('Description'))
-    
     order = models.IntegerField()
+    
     def natural_key(self):
         return (self.id, self.name)
     def __unicode__(self):
@@ -226,12 +227,13 @@ class Action(models.Model):
     sentence = models.TextField(verbose_name=_('Sentence'))
     project_status = models.ForeignKey('ProjectStatus', verbose_name=_('Project status'))
     
+    
     def natural_key(self):
         return (self.id, self.sentence)
     def __unicode__(self):
         return '%s: %s'%(self.project_status.name, self.sentence)
 
-@serializer()
+#@serializer()
 class Step(models.Model):
     """
     Etapes
@@ -244,6 +246,7 @@ class Step(models.Model):
     name = models.CharField(max_length=512, verbose_name=_('Name'))
     description = models.TextField(blank=True, verbose_name=_('Description'))
     date = models.DateField(blank=True, null=True, verbose_name=_('Date'))
+    
     
     def __unicode__(self):
         return self.name
@@ -320,8 +323,10 @@ class SurfaceRange(models.Model):
             return u'< %s m²'%(localize(self.ceiling), )
         
         
-@serializer(property_list = ('centroid', 'geojson', 'partnerships'), 
-            exclude=('mpoly','parent', 'published','activity_start', 'activity_end', 'steps'))
+@serializer(property_list = ('centroid', 'geojson', 'partnerships', 'actions'), 
+            exclude=('mpoly','parent', 'published','activity_start', 'activity_end', 'steps'),
+            filter=({'published':True},),
+            depth=3)
 class Project(models.Model):
     """
     A project is the main item to present on the website,

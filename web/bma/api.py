@@ -15,6 +15,7 @@ from django.conf.urls import  url
 
 
 REGISTERED_MODELS = []
+REGISTERED_RESOURCES = []
 
 @api_view(('GET',))
 @permission_classes((IsAuthenticated, ))
@@ -25,9 +26,10 @@ def api_root(request, format=None):
     return Response(r)
 
 # class decorator
-def serializer(property_list = tuple(), exclude=tuple(), depth=3, serializer='ModelSerializer'):
+def serializer(property_list = tuple(), exclude=tuple(), depth=3, filter=None, serializer='ModelSerializer'):
     def decorator(cls):
         name = cls.__name__
+        REGISTERED_RESOURCES.append((cls.__module__.split('.')[0], name, filter))
         #print('Decorating [%s] with a serializer'%(name,))
         meta = type('Meta', (object, ), {'model':cls, 'depth':depth, 'exclude':exclude})
         srl = type(''.join([name,'Serializer']), (getattr(serializers, serializer),), {'Meta':meta} )
@@ -37,8 +39,13 @@ def serializer(property_list = tuple(), exclude=tuple(), depth=3, serializer='Mo
             is_fk = issubclass(type(getattr(cls, prop)), 
                             django.db.models.related.ForeignRelatedObjectsDescriptor)
                             
+            is_many = issubclass(type(getattr(cls, prop)),
+                            django.db.models.fields.related.ReverseManyRelatedObjectsDescriptor)
+                            
             if is_fk:
                 sfield = getattr(cls, prop).related.model.serializer_class(many=True)
+            elif is_many:
+                sfield = getattr(cls, prop).field.rel.to.serializer_class(many=True)
             else:
                 sfield = serializers.Field(source=prop)
                 
@@ -96,13 +103,15 @@ def view_detail(request, app, model, pk):
     #return view(request, pk=pk)
     return view_cls.as_view()(request, pk=pk)
     
-def urls(resources):
+#def urls(resources):
+def urls():
     """
         resources is an iterable containing tuples of the form:
         (app_name, model_name, filters )
     """
     ret = []
-    for r in resources:
+    #for r in resources:
+    for r in REGISTERED_RESOURCES:
         app = r[0]
         m = r[1]
         f = r[2]
