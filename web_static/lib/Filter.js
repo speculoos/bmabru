@@ -27,6 +27,8 @@ window.bMa.Filter = function(container, map){
             {
                 var project = bMa.Projects[p];
                 var city_data = project.get('city');
+                if(!city_data)
+                    continue;
                 var city = city_data.zipcode + ' ' + city_data.name;
                 if(this.cities[city] === undefined)
                 {
@@ -95,8 +97,7 @@ window.bMa.Filter = function(container, map){
             }
             
         },
-        reset:function(show){
-            var bounds = undefined;
+        resetVisibity:function(show){
             for(var p in bMa.Projects)
             {
                 var project = bMa.Projects[p];
@@ -104,6 +105,13 @@ window.bMa.Filter = function(container, map){
                     project.show_layer();
                 else
                     project.hide_layer();
+            }
+        },
+        resetBounds:function(){
+            var bounds = undefined;
+            for(var p in bMa.Projects)
+            {
+                var project = bMa.Projects[p];
                 if(bounds === undefined)
                 {
                     if(project.bounds().isValid())
@@ -119,7 +127,7 @@ window.bMa.Filter = function(container, map){
                 this.map.map.fitBounds(bounds);
         },
         filter_city:function(city){
-            this.reset(false);
+            this.resetVisibity(false);
             var ps = this.cities[city].projects;
             var bounds = undefined;
             for(var i=0; i<ps.length; i++)
@@ -138,9 +146,12 @@ window.bMa.Filter = function(container, map){
             }
             if(bounds !== undefined)
                 this.map.map.fitBounds(bounds);
+            else
+                this.resetBounds();
         },
         filter_function:function(fn){
-            this.reset(false);
+            this.resetVisibity(false);
+            this.resetBounds();
             var ps = this.functions[fn].projects;
             for(var i=0; i<ps.length; i++)
             {
