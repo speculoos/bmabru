@@ -18,7 +18,6 @@ REGISTERED_MODELS = []
 REGISTERED_RESOURCES = []
 
 @api_view(('GET',))
-@permission_classes((IsAuthenticated, ))
 def api_root(request, format=None):
     r = {}
     for M in REGISTERED_MODELS:
@@ -26,7 +25,7 @@ def api_root(request, format=None):
     return Response(r)
 
 # class decorator
-def serializer(property_list = tuple(), exclude=tuple(), depth=3, filter=None, serializer='ModelSerializer'):
+def serializer(property_list = tuple(), exclude=tuple(), depth=0, filter=None, serializer='ModelSerializer'):
     def decorator(cls):
         name = cls.__name__
         REGISTERED_RESOURCES.append((cls.__module__.split('.')[0], name, filter))
@@ -36,16 +35,21 @@ def serializer(property_list = tuple(), exclude=tuple(), depth=3, filter=None, s
 
         fields = {}
         for prop in property_list:
-            is_fk = issubclass(type(getattr(cls, prop)), 
+            is_rel = issubclass(type(getattr(cls, prop)), 
                             django.db.models.related.ForeignRelatedObjectsDescriptor)
                             
             is_many = issubclass(type(getattr(cls, prop)),
                             django.db.models.fields.related.ReverseManyRelatedObjectsDescriptor)
                             
-            if is_fk:
+            is_fk = issubclass(type(getattr(cls,prop)),
+                            django.db.models.fields.related.ReverseSingleRelatedObjectDescriptor)
+                            
+            if is_rel:
                 sfield = getattr(cls, prop).related.model.serializer_class(many=True)
             elif is_many:
                 sfield = getattr(cls, prop).field.rel.to.serializer_class(many=True)
+            elif is_fk:
+                sfield = getattr(cls, prop).field.rel.to.serializer_class(many=False)
             else:
                 sfield = serializers.Field(source=prop)
                 

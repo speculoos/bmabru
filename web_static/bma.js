@@ -42,8 +42,16 @@ function InitMap()
     
     $.getJSON(bmabru_json_url, function( projects_data ){
         var cur_p = undefined;
+        
+//         for(var key in WMS_CONFIG)
+//         {
+//             var wms = WMS_CONFIG[key];
+//             map.add_layer(key, wms.url, wms.options);
+//         }
+//         
         for(var idx = 0; idx < projects_data.length; idx++)
         {
+            
             var pdata = projects_data[idx];
             var p = bMa.Project(pdata);
 //             console.log('Add ['+p.id+'] => '+p.get('slug'))

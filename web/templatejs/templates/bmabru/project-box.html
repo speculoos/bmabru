@@ -24,13 +24,13 @@
       <div class="project-info-box">
       <%- data.address %>
       </div>
-      </div>
-      <% } %>
+    </div>
+    <% } %>
 
     <% if(data.city){ %>
     <div class="project-city">
       <div class="project-info-box">
-        <%- data.city.zipcode %> <% data.city.name %>
+      <%- data.city.zipcode %> <span class="filter-city" data-filter="<%= data.city.zipcode %> <%= data.city.name %>" ><%= data.city.name %></span>
       </div>
     </div>
     <% } %>
@@ -82,7 +82,7 @@
 
       <div class="project-info-box">
       <% var sep = ''; _.each(data.functions, function(f){ %>
-        <%- f.name %>
+      <span class="filter-function" data-filter="<%= f.name %>" ><%- f.name %></span>
       <% sep = ', ';}); %>
       </div>
     </div>
@@ -102,7 +102,7 @@
     </div>
     <% } %>
     
-    <% if(data.trade_object){ %>
+    <% if(data.trade_object && data.trade_object.length > 0){ %>
     <div class="project-tradeobject">
         <div class="project-info-label">
         {% trans "Trade Objects" %}

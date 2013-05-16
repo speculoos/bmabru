@@ -11,6 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.formats import localize
 
 from bma.api import serializer
+from easy_thumbnails.files import get_thumbnailer
 
 @serializer()
 class PartnerType(models.Model):
@@ -70,7 +71,7 @@ class PartnershipType(models.Model):
     def __unicode__(self):
         return self.name
         
-@serializer(exclude=('project',))
+@serializer(property_list=('ptype','partner',),exclude=('project',))
 class Partnership(models.Model):
     """
     Represent how a partner is involved in a project
@@ -140,7 +141,7 @@ class Procedure(models.Model):
     def __unicode__(self):
         return self.name
         
-        
+@serializer(property_list=('thumbnail','url', 'large'))
 class ProjectImage(models.Model):
     """
     An illustration for a project
@@ -153,6 +154,22 @@ class ProjectImage(models.Model):
     width = models.IntegerField(blank=True)
     height = models.IntegerField(blank=True)
     zoom_level = models.IntegerField(blank=True)
+    
+    @property
+    def thumbnail(self):
+        from easy_thumbnails.files import get_thumbnailer
+        options = {'size': (360 /2, 240 /2), 'crop': True}
+        return get_thumbnailer(self.image).get_thumbnail(options).url
+        
+    @property
+    def large(self):
+        from easy_thumbnails.files import get_thumbnailer
+        options = {'size': (360 *2.5, 240 *2.5), 'crop': 'smart'}
+        return get_thumbnailer(self.image).get_thumbnail(options).url
+        
+    @property
+    def url(self):
+        return self.image.url
     
 
 @serializer(exclude=('description',))
@@ -214,7 +231,7 @@ class ProjectStatus(models.Model):
     def __unicode__(self):
         return self.name
         
-@serializer()
+@serializer(property_list=('project_status',))
 class Action(models.Model):
     """
     ???
@@ -323,10 +340,26 @@ class SurfaceRange(models.Model):
             return u'< %s m²'%(localize(self.ceiling), )
         
         
-@serializer(property_list = ('centroid', 'geojson', 'partnerships', 'actions'), 
+@serializer(property_list = (
+                            'centroid', 
+                            'geojson', 
+                            'partnerships', 
+                            'image',
+                            'city',
+                            'surface_range',
+                            'budget_range',
+                            'procedure',
+                            'mission',
+                            'trade_object',
+                            'programs',
+                            'image',
+                            'functions',
+                            'actions', 
+                            'worth',
+                            ), 
             exclude=('mpoly','parent', 'published','activity_start', 'activity_end', 'steps'),
             filter=({'published':True},),
-            depth=3)
+            depth=0)
 class Project(models.Model):
     """
     A project is the main item to present on the website,

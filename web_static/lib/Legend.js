@@ -26,8 +26,17 @@ window.bMa.Legend = function(container, map)
             
             Template.render('bmabru/project-box', this , function(t){
                 this.container.html(t(_.extend({}, project.data) ));
+                var images = project.get('image'); 
+                if(images)
+                {
+                    var t = bMa.Thumbnailer();
+                    t.setImages(images);
+                    t.render();
+                    t.$el.appendTo(this.container);
+                }
             });
             this.container.parent().show();
+            
         },
         hide:function(){
             this.container.parent().hide();

@@ -245,6 +245,7 @@ body{height: 100%; }
 #bma-overlay-2{z-index:90;}
 #console{z-index:70;}
 #map{z-index:50;}
+@maxZIndex:1000;
 
 /* elements */
 #top {
@@ -1049,5 +1050,25 @@ div.console_item{
 }
 
 
+
+/************************
+ *  Project Carousel
+ * 
+ ************************/
+
+.image-box{
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    z-index:@maxZIndex;
+    background-color:white;
+    .container{
+        margin-top: 32px;
+        border: 1px solid;
+        padding: 20px;
+    }
+}
 
 

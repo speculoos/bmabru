@@ -68,7 +68,6 @@ window.bMa.Filter = function(container, map){
             this.selector.add_label('Communes');
             for(var k in cties_a)
             {
-                console.log(cties_a[k]);
                 this.selector.add_item(cties_a[k], {
                     click:{
                         callback:function(evt){
@@ -95,6 +94,15 @@ window.bMa.Filter = function(container, map){
                     }
                 });
             }
+            
+            $('body').on('click', '.filter-city', function(evt){
+                event.preventDefault();
+                that.filter_city($(this).attr('data-filter'));
+            });
+            $('body').on('click', '.filter-function', function(evt){
+                event.preventDefault();
+                that.filter_function($(this).attr('data-filter'));
+            });
             
         },
         resetVisibity:function(show){

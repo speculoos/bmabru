@@ -22,6 +22,7 @@ class Resource(models.Model):
     width = models.IntegerField(editable=False)
     height = models.IntegerField(editable=False)
     
+    
     @property
     def url(self):
         return self.image.url
@@ -29,7 +30,7 @@ class Resource(models.Model):
     @property
     def thumbnail(self):
         from easy_thumbnails.files import get_thumbnailer
-        options = {'size': (256, 256), 'crop': True}
+        options = {'size': (200,200), 'crop': true}
         return get_thumbnailer(self.image).get_thumbnail(options).url
         
     def save(self, force_insert=False, force_update=False, *args, **kwargs):

@@ -29,8 +29,9 @@
 	{% endblock %}
 	
 	{% block script_map %}
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}news/bootstrap/css/bootstrap.min.css">
+	<script src="{{STATIC_URL}}news/bootstrap/js/bootstrap.min.js"></script>
 	<script src="{{STATIC_URL}}leaflet/dist/leaflet-src.js"></script>
-	
 	<script src="{{STATIC_URL}}news/template.js"></script>
     <script src="{{STATIC_URL}}lib/Article.js"></script>
     <script src="{{STATIC_URL}}lib/Config.js"></script>
@@ -44,6 +45,8 @@
     <script src="{{STATIC_URL}}lib/Scale.js"></script>
     <script src="{{STATIC_URL}}lib/Selector.js"></script>
     <script src="{{STATIC_URL}}lib/ZoomControl.js"></script>
+    <script src="{{STATIC_URL}}lib/Thumbnailer.js"></script>
+    <script src="{{STATIC_URL}}lib/Image.js"></script>
     
     <script src="{{STATIC_URL}}wms.config.js"></script>
     <script src="{{STATIC_URL}}bma.js"></script>
