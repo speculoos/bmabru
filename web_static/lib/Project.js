@@ -49,7 +49,7 @@ window.bMa.Project = function(args){
         },
         bounds:function(){
             if(this.layer === undefined 
-                || this.data.geojson.coordinates === undefined
+                || !this.data.geojson
                 || this.data.geojson.coordinates.length === 0)
             {
                 var llb = new L.LatLngBounds();

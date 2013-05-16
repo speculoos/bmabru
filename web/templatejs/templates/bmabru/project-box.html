@@ -1,0 +1,162 @@
+{% load i18n %}
+  <div class="project-box">
+    <div class="project-title">
+      <div class="project-info-box">
+        <a class="project-link" href=
+        "/project/<%= data.slug %>"><%- data.name %></a>
+      </div>
+    </div>
+
+    <% if(data.description){ %>
+    <div class="project-description">
+      <div class="project-info-box">
+        <%- data.description %>
+      </div>
+    </div>
+    <% } %>
+
+    <% if(data.address){ %>
+    <div class="project-address">
+      <div class="project-info-label">
+      {% trans "Address" %}
+      </div>
+
+      <div class="project-info-box">
+      <%- data.address %>
+      </div>
+      </div>
+      <% } %>
+
+    <% if(data.city){ %>
+    <div class="project-city">
+      <div class="project-info-box">
+        <%- data.city.zipcode %> <% data.city.name %>
+      </div>
+    </div>
+    <% } %>
+    
+    <% if(data.surface_range){ %>
+    <div class="project-surface">
+        <div class="project-info-label">
+        {% trans "Surface" %}
+        </div>
+        <div class="project-info-box">
+        <%- data.surface_range.floor  %>m² - <%- data.surface_range.ceiling  %>m²
+        </div>
+    </div>
+    <% } %>
+    
+    <% if(data.budget_range){ %>
+    <div class="project-surface">
+    <div class="project-info-label">
+    {% trans "Budget" %}
+    </div>
+    <div class="project-info-box">
+    <%- data.budget_range.floor  %>€ - <%- data.budget_range.ceiling  %>€
+    </div>
+    </div>
+    <% } %>
+
+    <% if(data.partnerships){ %>
+    <div class="project-partnership">
+        <div class="project-info-label">
+        {% trans "Partnerships" %}
+        </div>
+
+        <div class="project-info-box">
+            <%  for(var i=0; i < data.partnerships.length; i++){ var p = data.partnerships[i]; %>
+            <div class="partneship-item">
+                <span class="project-partnership-type"><%- p.ptype.name %></span> 
+                <span class= "project-partnership-partner"><%- p.partner.name %></span> 
+            </div>
+            <% } %>
+        </div>
+    </div>
+    <% } %>
+
+    <% if(data.functions){ %>
+    <div class="project-function">
+      <div class="project-info-label">
+      {% trans "Functions" %}
+      </div>
+
+      <div class="project-info-box">
+      <% var sep = ''; _.each(data.functions, function(f){ %>
+        <%- f.name %>
+      <% sep = ', ';}); %>
+      </div>
+    </div>
+    <% } %>
+    
+    <% if(data.programs){ %>
+    <div class="project-program">
+      <div class="project-info-label">
+        {% trans "Programs" %}
+      </div>
+
+      <div class="project-info-box">
+      <% var sep = ''; _.each(data.programs, function(f){ %>
+      <%- f.name %>
+      <% sep = ', ';}); %>
+      </div>
+    </div>
+    <% } %>
+    
+    <% if(data.trade_object){ %>
+    <div class="project-tradeobject">
+        <div class="project-info-label">
+        {% trans "Trade Objects" %}
+        </div>
+        <div class="project-info-box">
+        <% var sep = ''; _.each(data.trade_object, function(f){ %>
+        <%- f.name %>
+        <% sep = ', ';}); %>
+        </div>
+    </div>
+    <% } %>
+
+    <% if(data.procedure){ %>
+    <div class="project-procedure">
+        <div class="project-info-label">
+        {% trans "Procedure" %}
+        </div>
+        <div class="project-info-box">
+        <%- data.procedure.name %>
+        </div>
+    </div>
+    <% } %>
+
+    <% if(data.mission){ %>
+    <div class="project-mission">
+        <div class="project-info-label">
+        {% trans "Mission" %}
+        </div>
+        <div class="project-info-box">
+        <%- data.mission.name %>
+        </div>
+    </div>
+    <% } %>
+
+    <% if(data.actions){ %>
+    <div class="project-actions">
+        <div class="project-info-label">
+        {% trans "Actions" %}
+        </div>
+        <div class="project-info-box">
+        <% var actions = _.reduce(data.actions, function(memo, action, idx, list ){%>
+        <% if(memo[action.project_status.name] === undefined){memo[action.project_status.name] = [];} %>
+        <% memo[action.project_status.name].push(action.sentence); %>
+        <% return memo; %>
+        <%}, {});%>
+        <% _.each(actions,function(val, k){ %>
+<!--         <div class="action-title"><%- k %></div> -->
+        <div class="action"><% print(val.join(', ')) %></div>
+        <% }); %>
+        </div>
+    </div>
+    <% } %>
+
+    <div class="project-worth"></div>
+  </div>
+</body>
+

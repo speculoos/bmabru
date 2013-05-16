@@ -11,16 +11,6 @@ window.bMa.Legend = function(container, map)
             this.container = container;
             this.map = map;
             this.container.parent().hide();
-            this.wrapper = $('<div class="project-box"></div>');
-            var elems = 'title description address city partnership function surface budget program tradeobject prcedure missions actions worth'.split(' ');
-            this.elements = {};
-            for(var i=0; i < elems.length; i++)
-            {
-                var ename = elems[i];
-                this.elements[ename] = $('<div class="project-'+ename+'" />');
-                this.wrapper.append(this.elements[ename]);
-            }
-            this.container.append(this.wrapper);
         },
         add_box:function(elem, label, content)
         {
@@ -34,80 +24,9 @@ window.bMa.Legend = function(container, map)
             if(pbounds.isValid())
                 this.map.map.fitBounds(pbounds);
             
-            this.add_box(this.elements.title, 
-                         null, 
-                         '<a class="project-link" href="/project/'+project.get('slug')+'">'+project.get('name')+'</a>');
-            
-            this.add_box(this.elements.description, 
-                         null, 
-                         project.get('description'));
-            
-            if(project.get('address'))
-            {
-            this.add_box(this.elements.address, 
-                         'Adresse', 
-                         project.get('address'));
-            }
-            
-            if(project.get('city').zipcode)
-            {
-            this.add_box(this.elements.city,
-                        null,
-                         project.get('city').zipcode + ' ' + project.get('city').name);
-            }
-            
-            if(project.get('function').name)
-            {
-                this.add_box(this.elements.function,
-                             'Fonction',
-                             project.get('function').name);
-            }
-            
-            
-            
-            if(project.get('surface').floor)
-            {
-                this.add_box(this.elements.surface,
-                             'Surface',
-                             project.get('surface').floor + ' - ' + project.get('surface').ceiling);
-            }
-            
-            if(project.get('budget').floor)
-            {
-                this.add_box(this.elements.budget,
-                             'Budget',
-                             project.get('budget').floor + ' - ' + project.get('budget').ceiling);
-            }
-            
-            
-            var partnerships = project.get('partnerships');
-            var pstring = '';
-            for(var i=0; i < partnerships.length; i++)
-            {
-                partner = partnerships[i].partner;
-                ptype = partnerships[i].ptype;
-                pstring += '<div class="partneship-item"> <span class="project-partnership-type">'+ptype.name+'</span> '
-                + '<span class="project-partnership-type">'+partner.name+'</span> </div>';
-            }
-            
-            this.add_box(this.elements.partnership,
-                         'Interventions',
-                         pstring);
-            
-            if(project.get('programs').length > 0)
-            {
-                this.add_box(this.elements.program,
-                             'Cadre de programmation',
-                             project.get('programs')[0].name );
-            }
-            
-            if(project.get('trade_name'))
-            {
-                this.add_box(this.elements.program,
-                             'Nom du marché attribué',
-                             project.get('trade_name').name );
-            }
-            
+            Template.render('bmabru/project-box', this , function(t){
+                this.container.html(t(_.extend({}, project.data) ));
+            });
             this.container.parent().show();
         },
         hide:function(){

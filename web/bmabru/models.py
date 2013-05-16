@@ -222,7 +222,7 @@ class Action(models.Model):
     class Meta:
         verbose_name = _("Action")
         verbose_name_plural = _("Actions")
-        ordering = ['project_status__name', 'sentence']
+        ordering = ['project_status__order', 'sentence']
         
     sentence = models.TextField(verbose_name=_('Sentence'))
     project_status = models.ForeignKey('ProjectStatus', verbose_name=_('Project status'))
