@@ -1,4 +1,5 @@
 <div class="container">
+
     <div id="the_carousel" class="carousel" data-interval="0">
     <ol class="carousel-indicators">
     <% for(var i = 0; i < data.images.length; i++){ %>
@@ -9,6 +10,7 @@
     <div class="carousel-inner">
     <% for(var i = 0; i < data.images.length; i++){ %>
         <div class="<%if(i === 0){print('active');}%> item">
+        <div class="close">close</div>
         <img src="<% print(data.images[i].large); %>" />
         </div>
     <% } %>

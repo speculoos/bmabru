@@ -37,6 +37,10 @@ window.bMa.Thumbnailer = function(){
                 var T = evt.data.T;
                 $('body').append(T.I.setImages(T.images).el);
             });
+            this.I.$el.on('click','.close', {T:this}, function(evt){
+                var T = evt.data.T;
+                T.I.$el.detach();
+            });
         },
         
     };
