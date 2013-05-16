@@ -30,7 +30,7 @@ class Resource(models.Model):
     @property
     def thumbnail(self):
         from easy_thumbnails.files import get_thumbnailer
-        options = {'size': (200,200), 'crop': true}
+        options = {'size': (200,200), 'crop': True}
         return get_thumbnailer(self.image).get_thumbnail(options).url
         
     def save(self, force_insert=False, force_update=False, *args, **kwargs):

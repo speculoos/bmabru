@@ -18,6 +18,7 @@ REGISTERED_MODELS = []
 REGISTERED_RESOURCES = []
 
 @api_view(('GET',))
+@permission_classes([])
 def api_root(request, format=None):
     r = {}
     for M in REGISTERED_MODELS:
@@ -67,6 +68,13 @@ def get_queryset(self):
         if self._filters != None:
             for f in self._filters:
                 qs = qs.filter(**f)
+                
+        #try:
+            #qs = qs.filter(self.request.QUERY_PARAMS)
+        #except Exception as e:
+            #print '%s \n %s'%(e, self.request.QUERY_PARAMS)
+            #pass
+            
         return qs
 
 def get_list_view(app, model, filters=None):

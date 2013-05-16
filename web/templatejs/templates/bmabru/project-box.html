@@ -57,7 +57,7 @@
     </div>
     <% } %>
 
-    <% if(data.partnerships){ %>
+    <% if(data.partnerships && data.partnerships.length > 0){ %>
     <div class="project-partnership">
         <div class="project-info-label">
         {% trans "Partnerships" %}
@@ -74,7 +74,7 @@
     </div>
     <% } %>
 
-    <% if(data.functions){ %>
+    <% if(data.functions && data.functions.length > 0){ %>
     <div class="project-function">
       <div class="project-info-label">
       {% trans "Functions" %}
@@ -88,7 +88,7 @@
     </div>
     <% } %>
     
-    <% if(data.programs){ %>
+    <% if(data.programs && data.programs.length > 0){ %>
     <div class="project-program">
       <div class="project-info-label">
         {% trans "Programs" %}
@@ -115,7 +115,7 @@
     </div>
     <% } %>
 
-    <% if(data.procedure){ %>
+    <% if(data.procedure && data.procedure.name){ %>
     <div class="project-procedure">
         <div class="project-info-label">
         {% trans "Procedure" %}
