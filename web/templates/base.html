@@ -68,16 +68,18 @@
 	        </li>
         {% block menu %}
 	      {% for cat in category %}
-            <li>
-                <a>{{cat.name}}</a>
-            <ul>
-            {% for page in cat.page_set.all %}
-                <li class="page-ref" id="page_ref_{{page.id}}">
-                    <span>{{page.title}}</span>
+            {% if cat.pages|length > 0 %}
+                <li>
+                    <a>{{cat.name}}</a>
+                <ul>
+                {% for page in cat.pages %}
+                    <li class="page-ref" id="page_ref_{{page.id}}">
+                        <span>{{page.title}}</span>
+                    </li>
+                {% endfor %}
+                </ul>
                 </li>
-            {% endfor %}
-            </ul>
-            </li>
+            {% endif %}
 	      {% endfor %}
           
           </ul>

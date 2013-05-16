@@ -149,8 +149,10 @@
         <% return memo; %>
         <%}, {});%>
         <% _.each(actions,function(val, k){ %>
-        <div class="action-title"><%- k %></div>
-        <div class="action"><% print(val.join(', ')) %></div>
+        <div class="action">
+            <div class="action-title"><%- k %></div>
+            <div class="action-body"><% print(val.join(', ')) %></div>
+        </div>
         <% }); %>
         </div>
     </div>

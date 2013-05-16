@@ -30,6 +30,9 @@ class Category(Sortable):
         
     name = models.CharField(max_length=128)
     
+    def pages(self):
+        return self.page_set.filter(published=True)
+    
     def __unicode__(self):
         return self.name
         
