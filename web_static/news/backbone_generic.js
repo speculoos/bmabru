@@ -7,14 +7,13 @@
     window[namespace] = window[namespace] || {};
     var ns = window[namespace] ;
     ns.Modeler = function(callback, object){
-        ns.Models = {};
-        ns.Collections = {};
-        ns.Views = {};
+        ns.Models = ns.Models || {};
+        ns.Collections = ns.Collections || {};
+        ns.Views = ns.Views || {};
         $.getJSON(ns.Config.API_URL, function(data){
             _.each(data, function(mdata, model)
             {
                 var api_url = data[model];
-                console.log(model, ns.Config.API_URL, api_url);
                 ns.Models[model] = Backbone.Model.extend({
                     urlRoot: api_url,
                     idAttribute: 'id',

@@ -31,6 +31,7 @@
         },
         image:function(){
             app.setComponents(['images']);
+            this.navigate("", {trigger: false, replace: true});
         },
         newImage:function(){
             app.setComponent('new_image');

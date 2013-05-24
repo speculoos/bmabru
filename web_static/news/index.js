@@ -5,6 +5,12 @@
  * 
  */
 
+Number.prototype.pad = function(size){
+    if(typeof(size) !== "number"){size = 2;}
+    var s = String(this);
+    while (s.length < size) s = "0" + s;
+       return s;
+    }
 
 $(document).ready(function(){
     $('body').on('click', '.link', function(evt){
@@ -12,6 +18,7 @@ $(document).ready(function(){
         that.addClass('visited');
         window.router.navigate(that.attr('data-route'));
     });
+    
     
     window.app = new NEWS.App;
     

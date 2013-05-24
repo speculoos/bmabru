@@ -1,10 +1,24 @@
 <div class="well span8">
 
+        
+        <legend> 
+        
+        <div class="pull-right">
+        <input type="text" 
+        value="<% if(data.pub_date && data.pub_date !== ''){  print(data.pub_date); } else {  var d = new Date();  var now = [d.getFullYear(), (d.getMonth()+1).pad(), d.getDate().pad()].join('-'); print(now); } %>" 
+                data-date-format="yyyy-mm-dd" 
+                class="datepicker input-small"
+                name="pub_date" />
+        </div>
         <% if(data.id){ %>
-        <legend>News #<%= data.id %></legend>
+        News #<%= data.id %> 
         <% }else{ %>
-        <legend>New Post</legend>
+        New Post
         <% } %>
+        </legend>
+        
+           
+        
         <div class="input-append">
         <input  class="span12"  type="text" name="parse_url" placeholder="Enter an URL to populate the news" />
         <button class="btn btn-success parser" type="button"  data-loading-text="Parsing...">Parse it!</button>
@@ -24,19 +38,31 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="tabFR">
+                
                 <label>Title</label>
                 <input class="input-block-level" type="text" placeholder="title" name="title_fr" value="<%- data.title_fr %>" />
                 
                 
                 <label>Body</label>
+                
+                
                 <% if(data.image_url){ %>
-                <div class="span6 pull-right image">
-                <img src="<%= data.image_url %>" />
+                <div class="row-fluid">
+                    <div class="span6">
+                        <textarea class="input-block-level body-with-image" name="body_fr"><%- data.body_fr %></textarea>
+                    </div>
+                    <div class="span6 img-container">
+                        <img src="<%= data.image_url %>" alt="" class="img-polaroid">
+                        <div class="img-remove-box">
+                        <button class="image-delete btn btn-link" type="button"> 
+                            <strong>remove</strong> <em><% print(data.image_url.split('/').pop()); %></em>
+                        </button >
+                        </div>
+                    </div>
                 </div>
+                <% } else { %>
+                <textarea class="input-block-level" rows="12" name="body_fr"><%- data.body_fr %></textarea>
                 <% } %>
-                    <textarea class="<% if(data.image_url){print('span6');}else{print('input-block-level');} %>" 
-                                rows="12" 
-                                name="body_fr"><%- data.body_fr %></textarea>
                             
             </div> <!-- end of FR -->
             
@@ -79,6 +105,9 @@
         <%}%>
         
         <div class="pull-right">
+        <% if(data.id){ %>
+        <button class="btn btn-danger delete" data-pid="<%= data.id %>">Delete</button>
+        <%}%>
         <button class="btn btn-primary submit" data-loading-text="Saving...">Save</button>
         </div>
 </div>

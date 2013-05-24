@@ -50,7 +50,7 @@ class Item(models.Model):
     slug = models.SlugField(max_length=255, editable=False)
     title = models.CharField(max_length=512, verbose_name=_('Title'))
     body = models.TextField(verbose_name=_('Body'))
-    pub_date = models.DateField(auto_now_add=True)
+    pub_date = models.DateField(verbose_name=_('Date'))
     project = models.ForeignKey(Project, related_name='+', blank=True, null=True, default=None)
     #resource = models.ForeignKey(Resource, blank=True, null=True, default=None)
     image_url = models.URLField(max_length=1024, blank=True, null=True, default=None)
