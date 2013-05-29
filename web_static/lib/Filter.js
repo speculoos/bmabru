@@ -17,7 +17,7 @@ window.bMa.Filter = function(container, map){
             this.selector = bMa.Selector(container, 'Filtre Projets');
             this.selector.add_item('Tout les projets',{
                 click:function(evt){
-                    that.reset(true);
+                    that.resetBounds();
                 }},
                 'filter-reset');
 

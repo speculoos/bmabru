@@ -155,6 +155,16 @@
                 this.$el.html(t({
                     ready:this.projects_ready,
                 }));
+                if(this.projects_ready)
+                {
+                    var complete_source = [];
+                    for(var i; i < this.projects.length; i++){
+                        complete_source.push(this.projects.at(i).get('name'));
+                    };
+                    this.$el.find('.search-q').typeahead({
+                        source:complete_source,
+                    });
+                }
             }, this);
             return this;
         },

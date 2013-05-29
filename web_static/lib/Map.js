@@ -9,7 +9,7 @@ window.bMa.Map = function(container){
         init:function(container){
             this.map = L.map(container,{
                 center: [50.854075572144815, 4.38629150390625],
-                zoom: 12,
+                zoom: 13,
                 crs: L.CRS.EPSG900913,
                 zoomControl: false,
                 attributionControl: false
