@@ -7,10 +7,9 @@
 	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}news/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="{{STATIC_URL}}leaflet/dist/leaflet.css" />
 	<link rel="stylesheet" href="{{STATIC_URL}}leaflet/dist/leaflet.ie.css" />
-	{% if debug %}
-	<link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}debug.less">
-	{% endif %}
+	
 	<link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}styles.less">
+<!-- 	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}styles.css"> -->
 	{% endblock %}
 	<script>
 	if ( ! window.console ) {
@@ -49,7 +48,7 @@
 	{% block script_map %}
 	<script src="{{STATIC_URL}}jquery/jquery.ajax-progress.js"></script>
 	<script src="{{STATIC_URL}}news/bootstrap/js/bootstrap.min.js"></script>
-	<script src="{{STATIC_URL}}leaflet/dist/leaflet.js"></script>
+	<script src="{{STATIC_URL}}leaflet/dist/leaflet-src.js"></script>
 	<script src="{{STATIC_URL}}news/template.js"></script>
     <script src="{{STATIC_URL}}lib/Article.js"></script>
     <script src="{{STATIC_URL}}lib/Config.js"></script>
@@ -119,7 +118,7 @@
     </div>
     {% block map %}
     <div id="map-wrapper">
-        <div id="map-wrapper-2">
+<!--         <div id="map-wrapper-2"> -->
             <div id="bma-overlay-0">
                 <div id="zoom-control-box"></div>
                 <div id="layer-selector"></div>
@@ -132,7 +131,7 @@
                 <div id="page-box"></div>
             </div>
             <div id="map"></div>
-        </div>
+<!--         </div> -->
     </div>
 <!--	To reactivate when submited to bMa
 	<div id="console"></div>

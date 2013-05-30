@@ -24,7 +24,6 @@ $('document').ready(function(){
 
 {% block map %}
 <div id="map-wrapper">
-<div id="map-wrapper-2">
 <div id="projects_table_wrapper">
 <table id="projects_table">
 <thead>
@@ -39,14 +38,13 @@ $('document').ready(function(){
 {% for project in projects %}
 <tr>
 <td><a href="{% url 'project' project.slug %}">{{ project.name }}</a></td>
-<td>{{ project.address }}</td>
-<td>{{ project.city.zipcode }} {{ project.city.name }}</td>
+<td>{% if project.address %}{{ project.address }}{% endif %}</td>
+<td>{% if project.city %}{{ project.city.zipcode }} {{ project.city.name }}{% endif %}</td>
 <td>{%for f in project.functions.all %}{{ f.name }}{% if not forloop.last %}, {% endif %}{%endfor%}</td>
 </tr>
 {% endfor %}
 </tbody>
 </table>
-</div>
 </div>
 </div>
 {% endblock %}

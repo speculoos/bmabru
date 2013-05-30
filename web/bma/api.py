@@ -9,7 +9,7 @@ from rest_framework import generics
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
 
 from django.conf.urls import  url
 
@@ -24,7 +24,15 @@ def api_root(request, format=None):
     for M in REGISTERED_MODELS:
         r[M+'s'] = reverse('%s-list'%(M,), request=request, format=format)
     return Response(r)
-
+    
+    
+class DjangoModelPermissionsOrAnonReadOnly(DjangoModelPermissions):
+    """
+    Similar to DjangoModelPermissions, except that anonymous users are
+    allowed read-only access.
+    """
+    authenticated_users_only = False
+    
 # class decorator
 def serializer(property_list = tuple(), exclude=tuple(), depth=0, filter=None, serializer='ModelSerializer'):
     def decorator(cls):
@@ -84,6 +92,7 @@ def get_list_view(app, model, filters=None):
     setattr(cls, '_filters', filters)
     setattr(cls, 'model', m)
     setattr(cls, 'serializer_class', m.serializer_class)
+    setattr(cls, 'permission_classes', (DjangoModelPermissionsOrAnonReadOnly,))
     setattr(cls, 'get_queryset', get_queryset)
     
     return cls
@@ -94,6 +103,7 @@ def get_detail_view(app, model):
     cls = type(''.join([app,model,'Detail']), (generics.RetrieveUpdateDestroyAPIView,), {})
     setattr(cls, 'model', m)
     setattr(cls, 'serializer_class', m.serializer_class)
+    setattr(cls, 'permission_classes', (DjangoModelPermissionsOrAnonReadOnly,))
     
     return cls
     

@@ -4,7 +4,7 @@ function InitMap()
 {
     var bmabru_json_url = '/api/projects/';
     
-    var map = bMa.Map('map');
+    var map = bMa.Map($('#map')[0]);
 //     var csl = bMa.Console($('#console'), map);
     var legend = bMa.Legend($('#legend-box'), map);
     var selector = bMa.LayerSelector($('#layer-selector'), map);
@@ -92,7 +92,10 @@ function InitMap()
             }
             
             var filter = bMa.Filter($('#filter-box'), map);
-    });
+    })
+.fail(function(xhr, ts, et){
+console.log(ts);
+});
     
 //     var gallery = bMa.Gallery($('#gallery-wrapper'));
 }
