@@ -5,16 +5,16 @@
 var WMS_CONFIG = 
 {
 //     http://www.cirb.irisnet.be/catalogue-de-services/urbis/services-urbis-1/urbis-wms-et-wmts
-    'Urbis':{
-        url: 'http://geoserver.gis.irisnet.be/geoserver/wms',
-        options:{
-            layers: 'urbis:urbisFR',
-            format: 'image/png',
-            transparent: true,
-            attribution: "Brugis GeoWebCache"
-        }
-    },
-    
+//     'Urbis':{
+//         url: 'http://geoserver.gis.irisnet.be/geoserver/wms',
+//         options:{
+//             layers: 'urbis:urbisFR',
+//             format: 'image/png',
+//             transparent: true,
+//             attribution: "Brugis GeoWebCache"
+//         }
+//     },
+//     
     'Urbis bâtiments':{
         url: 'http://geoserver.gis.irisnet.be/geoserver/wms',
         options:{
@@ -35,16 +35,16 @@ var WMS_CONFIG =
         }
     },
   
-    'Urbis topo lines':{
-        url: 'http://geoserver.gis.irisnet.be/geoserver/wms',
-        options:{
-            layers: 'urbis:URB_T_LINE',
-            format: 'image/png',
-                transparent: true,
-                attribution: "Brugis GeoWebCache"
-        }
-    },
-    
+//     'Urbis topo lines':{
+//         url: 'http://geoserver.gis.irisnet.be/geoserver/wms',
+//         options:{
+//             layers: 'urbis:URB_T_LINE',
+//             format: 'image/png',
+//                 transparent: true,
+//                 attribution: "Brugis GeoWebCache"
+//         }
+//     },
+//     
     'bMa (OSM)':{
         url: 'http://bmawms.specgis.be/service',
         options:{
