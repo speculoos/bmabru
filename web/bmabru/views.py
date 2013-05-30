@@ -71,9 +71,9 @@ class GeoSerial(serializers.get_serializer("json")):
 
 def index(request):
     data = {'category':Category.objects.all()}
+    data['projects'] = Project.objects.filter(published=True)
     data['featured'] = Featured.objects.filter(published=True)
     rc = RequestContext(request)
-    print rc
     return render_to_response("index.html", data, context_instance = rc)
     
 def projects(request):

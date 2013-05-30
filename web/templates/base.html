@@ -3,146 +3,51 @@
 <html lang="{{LANGUAGE_CODE}}">
 <head>
 	<title>{% block title %}bMa - Bouwmeester Maître Architecte{% endblock %}</title>
-	{% block style %}
-	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}news/bootstrap/css/bootstrap.min.css">
+	
 	<link rel="stylesheet" href="{{STATIC_URL}}leaflet/dist/leaflet.css" />
 	<link rel="stylesheet" href="{{STATIC_URL}}leaflet/dist/leaflet.ie.css" />
-	{% if debug %}
-	<link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}debug.less">
-	{% endif %}
 	<link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}styles.less">
-	{% endblock %}
+	
 	<script>
-	if ( ! window.console ) {
-        
-        (function() {
-            var names = ["log", "debug", "info", "warn", "error",
-         "assert", "dir", "dirxml", "group", "groupEnd", "time",
-         "timeEnd", "count", "trace", "profile", "profileEnd"],
-         i, l = names.length;
-         
-         window.console = {};
-         
-         for ( i = 0; i < l; i++ ) {
-             window.console[ names[i] ] = function() {};
-         }
-        }());
-        
-    }
+	if(!window.console){(function(){varnames=["log","debug","info","warn","error","assert","dir","dirxml","group","groupEnd","time","timeEnd","count","trace","profile","profileEnd"],i,l=names.length;window.console={};for(i=0;i<l;i++){window.console[names[i]]=function(){};}}());}
+
+    // DATA
+    window.bMa = {};
     
-	var bma_medias = {};
-	{% for cat in category %}
-    bma_medias['{{cat.name}}'] = {};
-    {% for page in cat.page_set.all %}bma_medias['{{cat.name}}'][{{page.id}}] = '{{page.title}}';{% endfor %}
-	{% endfor %}
-	{% block script_data %}
-	{% endblock %}
-	
+    (function(undefined){
+        'strict';
+        window.bMa.Data = {
+            Medias:{},
+            Projects:{},
+            Geometries:{},
+        };
+        {% for cat in category %}
+            window.bMa.Data.Medias['{{cat.name}}'] = {};
+            {% for page in cat.page_set.all %}window.bMa.Data.Medias['{{cat.name}}'][{{page.id}}] = '{{page.title}}';{% endfor %}
+        {% endfor %}
+        
+        {% for p in projects %} 
+        window.bMa.Data.Projects[{{p.id}}] = '{{p.slug}}'; {% endfor %}
+        {% for p in projects %} 
+        {% if p.mpoly %}window.bMa.Data.Geometries[{{p.id}}] = {{ p.mpoly.geojson|safe }}; {% endif %}{% endfor %}
+    })();
+    
 	</script>
-	{% block script %}
-<!-- 	<script src="{% url 'django.views.i18n.javascript_catalog' %}"></script> -->
-    <script src="{{STATIC_URL}}jquery/jquery-1.9.1.min.js"></script>
-	<script src="{{STATIC_URL}}news/underscore-min.js"></script>
-	<script src="{{STATIC_URL}}lessjs/dist/less-1.4.0-alpha.min.js"></script>
-	{% endblock %}
-	
-	{% block script_map %}
-	<script src="{{STATIC_URL}}jquery/jquery.ajax-progress.js"></script>
-	<script src="{{STATIC_URL}}news/bootstrap/js/bootstrap.min.js"></script>
-	<script src="{{STATIC_URL}}leaflet/dist/leaflet.js"></script>
-	<script src="{{STATIC_URL}}news/template.js"></script>
-    <script src="{{STATIC_URL}}lib/Article.js"></script>
-    <script src="{{STATIC_URL}}lib/Config.js"></script>
-    <script src="{{STATIC_URL}}lib/Console.js"></script>
-    <script src="{{STATIC_URL}}lib/Filter.js"></script>
-    <script src="{{STATIC_URL}}lib/Gallery.js"></script>
-    <script src="{{STATIC_URL}}lib/LayerSelector.js"></script>
-    <script src="{{STATIC_URL}}lib/Legend.js"></script>
-    <script src="{{STATIC_URL}}lib/Map.js"></script>
-    <script src="{{STATIC_URL}}lib/Project.js"></script>
-    <script src="{{STATIC_URL}}lib/Scale.js"></script>
-    <script src="{{STATIC_URL}}lib/Selector.js"></script>
-    <script src="{{STATIC_URL}}lib/ZoomControl.js"></script>
-    <script src="{{STATIC_URL}}lib/Thumbnailer.js"></script>
-    <script src="{{STATIC_URL}}lib/Image.js"></script>
-    
-    <script src="{{STATIC_URL}}wms.config.js"></script>
-    <script src="{{STATIC_URL}}bma.js"></script>
-    {% endblock %}
-    {% block script_extra %}
-    {% endblock %}
 </head>
 <body>
 
-  <div id="container">
-    <div id="top">
-      <div id="navigation">
-        <ul>
-		  <li> 
-		  <a href="{% url "index" %}">
-	          <img src="{{STATIC_URL}}logo.png" alt="bMa" />
-	        </a>
-	        </li>
-        {% block menu %}
-	      {% for cat in category %}
-            {% if cat.pages|length > 0 %}
-                <li>
-                    <a>{{cat.name}}</a>
-                <ul>
-                {% for page in cat.pages %}
-                    <li class="page-ref" id="page_ref_{{page.id}}">
-                        <span>{{page.title}}</span>
-                    </li>
-                {% endfor %}
-                </ul>
-                </li>
-            {% endif %}
-	      {% endfor %}
-          
-          </ul>
-          {% endblock %}
-      </div>
-      {% block site_tools %}
-      <div id="site_tools">
-        <div id="projetcs-link" class="{% if projects %}selected{% endif %}"><a href="{% url 'projects' %}">{% trans "Projects list" %}</a></div>
-        <div id="language_switcher">
-        {% for l in LANGUAGES %}
-        <form class="language-switcher-item {% if  l.0 == LANGUAGE_CODE %}language-current{% endif %}" action="/i18n/setlang/" method="post">
-            {% csrf_token %}
-            <input name="language" value="{{l.0}}" type="hidden" />
-            <input type="submit" value="{% trans l.1 %}" />
-            </form>
-        {% endfor %}
-        </div>
-      </div>
-      {% endblock %}
-    </div>
-    {% block map %}
-    <div id="map-wrapper">
-        <div id="map-wrapper-2">
-            <div id="bma-overlay-0">
-                <div id="zoom-control-box"></div>
-                <div id="layer-selector"></div>
-                <div id="filter-box"></div>
-            </div>
-            <div id="bma-overlay-1">
-                <div id="legend-box"></div>
-            </div>
-            <div id="bma-overlay-2">
-                <div id="page-box"></div>
-            </div>
-            <div id="map"></div>
-        </div>
-    </div>
-<!--	To reactivate when submited to bMa
-	<div id="console"></div>
-  </div>
--->
-    {% endblock %}
-    
-    {% block popup %}
-    {% endblock %}
-    
-<!--     <div id="gallery-wrapper" /> -->
+<script src="{{STATIC_URL}}javascript/lib/less.js"></script>
+<script src="{{STATIC_URL}}javascript/lib/jquery/jquery-1.9.1.min.js"></script>
+<script src="{{STATIC_URL}}javascript/lib/leaflet/leaflet.js"></script>
+<script src="{{STATIC_URL}}javascript/lib/underscore-min.js"></script>
+<script src="{{STATIC_URL}}javascript/lib/backbone-min.js"></script>
+<script src="{{STATIC_URL}}javascript/lib/template.js"></script>
+
+<script src="{{STATIC_URL}}javascript/routers.js"></script>
+<script src="{{STATIC_URL}}javascript/models.js"></script>
+<script src="{{STATIC_URL}}javascript/collections.js"></script>
+<script src="{{STATIC_URL}}javascript/views.js"></script>
+<script src="{{STATIC_URL}}javascript/app.js"></script>
+<script src="{{STATIC_URL}}javascript/index.js"></script>
 </body>
 </html>
