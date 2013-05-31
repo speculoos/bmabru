@@ -19,4 +19,6 @@ $(document).ready(function(){
         window.router.navigate(that.attr('data-route'));
     });
     
+    app.render();
+    
 });

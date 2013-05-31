@@ -10,11 +10,14 @@
     var Backbone = window.Backbone;
     
     var app = Backbone.View.extend({
-        el:'body',
+        id:'body',
         initialize:function(){
             this.components = {};
             
             this.registerComponent('main_map', new bMa.Views.Map);
+            this.registerComponent('navigation', new bMa.Views.Navigation);
+            this.registerComponent('project', new bMa.Views.ProjectViewer);
+            this.registerComponent('page', new bMa.Views.PageViewer);
             
             this.trigger('ready');
         },
@@ -29,6 +32,11 @@
                 rendered: false,
             }
         },
+        getComponent:function(comp){
+            if(this.components[comp] === undefined)
+                return null;
+            return this.components[comp].view;
+        },
         render:function(){
             for(var k in this.components){
                 var c = this.components[k];
@@ -40,6 +48,11 @@
                         c.view.render();
                         c.rendered = true;
                     }
+                    if(c.view.refresh)
+                    {
+                        c.view.refresh();
+                    }
+                    console.log('RENDERED',k);
                 }
                 else
                 {

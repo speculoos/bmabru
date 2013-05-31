@@ -1,0 +1,17 @@
+{# page #}
+<div class="menu-box">
+{# TODO #}
+</div>
+<div class="article-box">
+    <div class="article-title">
+    <span class="route" data-route="page/<%= data.slug %>"><%- data.title %></span>
+    </div>
+    <div class="article-body">
+        <%- data.body %>
+    </div>
+    <div class="article-image">
+        <% if(data.image){ %>
+        <image src="{{MEDIA_URL}}<%= data.image %>" width="<%= data.width %>" height="<%= data.height %>" />
+        <% } %>
+    </div>
+</div>

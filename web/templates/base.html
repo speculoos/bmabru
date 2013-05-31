@@ -8,6 +8,9 @@
 	<link rel="stylesheet" href="{{STATIC_URL}}leaflet/dist/leaflet.ie.css" />
 	<link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}styles.less">
 	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="{{STATIC_URL}}javascript/lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+	
 	<script>
 	if(!window.console){(function(){varnames=["log","debug","info","warn","error","assert","dir","dirxml","group","groupEnd","time","timeEnd","count","trace","profile","profileEnd"],i,l=names.length;window.console={};for(i=0;i<l;i++){window.console[names[i]]=function(){};}}());}
 
@@ -23,13 +26,13 @@
         };
         {% for cat in category %}
             window.bMa.Data.Medias['{{cat.name}}'] = {};
-            {% for page in cat.page_set.all %}window.bMa.Data.Medias['{{cat.name}}'][{{page.id}}] = '{{page.title}}';{% endfor %}
+            {% for page in cat.page_set.all %}window.bMa.Data.Medias['{{cat.name}}'][{{page.id}}] = {id:{{page.id}},title:'{{page.title}}', slug:'{{page.slug}}'};{% endfor %}
         {% endfor %}
         
         {% for p in projects %} 
-        window.bMa.Data.Projects[{{p.id}}] = '{{p.slug}}'; {% endfor %}
+        window.bMa.Data.Projects['{{p.slug}}'] = {{p.id}}; {% endfor %}
         {% for p in projects %} 
-        {% if p.mpoly %}window.bMa.Data.Geometries[{{p.id}}] = {{ p.mpoly.geojson|safe }}; {% endif %}{% endfor %}
+        {% if p.mpoly %}window.bMa.Data.Geometries['{{p.slug}}'] = {{ p.mpoly.geojson|safe }}; {% endif %}{% endfor %}
     })();
     
 	</script>
@@ -42,6 +45,9 @@
 <script src="{{STATIC_URL}}javascript/lib/underscore-min.js"></script>
 <script src="{{STATIC_URL}}javascript/lib/backbone-min.js"></script>
 <script src="{{STATIC_URL}}javascript/lib/template.js"></script>
+<script src="{{STATIC_URL}}javascript/lib/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="{{STATIC_URL}}wms.config.js"></script>
 
 <script src="{{STATIC_URL}}javascript/routers.js"></script>
 <script src="{{STATIC_URL}}javascript/models.js"></script>

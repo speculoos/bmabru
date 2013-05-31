@@ -24,5 +24,10 @@
         Project : project,
     };
     
+    bMa.Data.collections = {
+        pages: new page,
+        projects: new project,
+    };
+    
 })();
 

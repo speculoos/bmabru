@@ -1,0 +1,23 @@
+{# navigation #}
+
+<div id="navigation">
+    <ul>
+        <li> 
+            <a href="{% url "index" %}">
+                <img src="{{STATIC_URL}}logo.png" alt="bMa" />
+            </a>
+        </li>
+        <% for(var cat in data){ %>
+        <li>
+            <a class="section"><%- cat %></a>
+            <ul>
+                <% for(var p in data[cat]){ page = data[cat][p]; %>
+                <li class="route" data-route="page/<%= page.slug %>">
+                <span><%- page.title %></span>
+                </li>
+                <% } %>
+            </ul>
+        </li>
+        <% } %>
+    </ul>
+</div>
