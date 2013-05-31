@@ -105,13 +105,16 @@
       <div id="site_tools">
         <div id="projetcs-link" class="{% if projects %}selected{% endif %}"><a href="{% url 'projects' %}">{% trans "Projects list" %}</a></div>
         <div id="language_switcher">
-        {% for l in LANGUAGES %}
-        <form class="language-switcher-item {% if  l.0 == LANGUAGE_CODE %}language-current{% endif %}" action="/i18n/setlang/" method="post">
+        <form class="language-switcher-item {% if  'fr' == LANGUAGE_CODE %}language-current{% endif %}" action="/i18n/setlang/" method="post">
             {% csrf_token %}
-            <input name="language" value="{{l.0}}" type="hidden" />
-            <input type="submit" value="{% trans l.1 %}" />
+            <input name="language" value="fr" type="hidden" />
+            <input type="submit" value="Français" />
             </form>
-        {% endfor %}
+        <form class="language-switcher-item {% if  'nl' == LANGUAGE_CODE %}language-current{% endif %}" action="/i18n/setlang/" method="post">
+            {% csrf_token %}
+            <input name="language" value="nl" type="hidden" />
+            <input type="submit" value="Nederlands" />
+            </form>
         </div>
       </div>
       {% endblock %}
