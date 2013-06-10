@@ -170,6 +170,9 @@ class ProjectImage(models.Model):
     @property
     def url(self):
         return self.image.url
+        
+    def __unicode__(self):
+        return '%s' % (self.image, )
     
 
 @serializer(exclude=('description',))
