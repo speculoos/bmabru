@@ -19,10 +19,12 @@
             this.setupLayout();
             
             this.registerComponent('navigation', new bMa.Views.Navigation, 'header', 6);
+            this.registerComponent('sitetools', new bMa.Views.SiteTools, 'header', 1);
+            
             this.registerComponent('project', new bMa.Views.ProjectViewer, 'viewport', 4);
             this.registerComponent('page', new bMa.Views.PageViewer, 'viewport', 12);
             this.registerComponent('main_map', new bMa.Views.Map, 'viewport', 12-4);
-            this.registerComponent('maptools', new bMa.Views.MapTools, 'footer', 1);
+            this.registerComponent('maptools', new bMa.Views.MapTools, 'viewport', 1);
             
             this.trigger('ready');
             this.$el.appendTo('body');
@@ -30,27 +32,19 @@
         },
         setupLayout:function(){
             this.layouts = {
-                header:new HL,
-                viewport:new HL,
-                footer:new HL,
-                _boxed: new (VL.extend({reset:function(){}}))(),
+                header:$('<div />'),
+                viewport:$('<div />'),
             };
-            
-            
-//             var boxed = new VL;
-            this.layouts._boxed
-            .add(this.layouts.viewport, 10)
-            .add(this.layouts.footer, 2);
             
             for(var l in this.layouts)
             {
-                this.layouts[l].$el.attr('id',l).appendTo(this.el);
+                this.layouts[l].attr('id',l).appendTo(this.el);
             }
             
             
         },
         adjustViewport:function(){
-//             return;
+            return;
             var top =  this.layouts.header.$el.outerHeight(true);
             var bottom = this.layouts.footer.$el.outerHeight(true);
             var total = this.$el.height();
@@ -74,38 +68,47 @@
                 size:size,
             }
         },
+        send:function(comp, method, args){
+            if(!Array.isArray(args))
+                args = [args];
+            var view = this.getComponent(comp);
+            if(view && view.deliver)
+                view.deliver(method, args);
+                
+        },
         getComponent:function(comp){
             if(this.components[comp] === undefined)
                 return null;
             return this.components[comp].view;
         },
         render:function(){
-            for(var l in this.layouts)
-            {
-                this.layouts[l].reset();
-            }
             for(var k in this.components){
                 var c = this.components[k];
                 if(c.visible)
                 {
-                    this.layouts[c.layout].add(c.view, c.size);
+                    this.layouts[c.layout].append(c.view.el);
+//                     this.layouts[c.layout].add(c.view, c.size);
+//                     this.$el.append(c.view.el);
                     if(!c.rendered)
                     {
                         c.view.render();
                         c.rendered = true;
                     }
+                    
+                    // at least we have a method which is always called
+                    // when a view is made visible
                     if(c.view.refresh)
                     {
                         c.view.refresh();
                     }
                 }
             }
-            for(var l in this.layouts)
-            {
-                this.layouts[l].render();
-            }
-            
-            this.adjustViewport();
+//             for(var l in this.layouts)
+//             {
+//                 this.layouts[l].render();
+//             }
+//             
+//             this.adjustViewport();
         },
         resetViews:function(comps){
             for(var i=0; i<comps.length; i++)
@@ -125,7 +128,7 @@
             for(var k in this.components){
                 var c = this.components[k];
                 c.visible = false;
-//                 c.view.$el.detach();
+                c.view.$el.detach();
             }
             
             for(var i=0; i<comps.length; i++)

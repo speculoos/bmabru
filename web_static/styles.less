@@ -179,7 +179,7 @@
 /* reset */
 *, p, div, ul, li, h1, h2, h3, h4, h5, h6{padding:0; margin:0;}
 body{font-family:Helvetica, Arial; text-align:left; margin:0px; font-size: 10pt;}
-a, .link{cursor:pointer;}
+a, .link, .route{cursor:pointer;}
 
 /************************
  *  Project description
@@ -209,27 +209,27 @@ body{height: 100%; }
 #container{
     position:absolute;
     top:0;right:0;bottom:0;left:0;
-    
     z-index:0;
 }
 
 #header{
+    position:absolute;
+    top:0;
+    right:@marginEXT;
+    left:@marginEXT;
     height:@topH;
-    margin-bottom:@marginINT;
-}
-
-#_boxed{
-    margin:@marginEXT;
-    border:@border;
 }
 
 #viewport{
-margin:0 @marginINT;
+    position:absolute;
+    top:@topH;
+    right:@marginEXT;
+    bottom:@marginEXT;
+    left:@marginEXT;
+    border:@border;
+    overflow:hidden;
 }
 
-#footer{
-    height:@topH;
-}
 /* elements */
 #navigation {
 	font-size:11px; 
@@ -302,58 +302,57 @@ margin:0 @marginINT;
     }
 }
 	
-#site_tools {
+.site-tools {
+    position: absolute;
+    top:0;
+    right:0;
+    text-align:right;
+    color: #aaa;
     font-size: 8pt;
-    a{
-        color: #aaa;
+    font-family: 'FjallaOne-Regular';
+    
+    div, form{
+        display:inline-block;
+        height:@topH;
+        line-height:@topH;
     }
     
-    #projetcs-link {
-        position: absolute;
-        right: 120px;
-        bottom: 6px;  
-        
+    .projetcs-link {
         &.selected a{
             color: @blue;
         }   	
     }
         	
-    #language_switcher {
-        position: absolute;
-        width: 120px;
-        right: 0px;
-        bottom: 6px;
-        form{
-            margin:0;
-        }
-        
+    .language_switcher {
         .language-switcher-item input[type="submit"] {
-        -webkit-appearance: none;
-        border: 0px;
-        background-color: transparent;
-        white-space: pre;
-        margin-left: 6px;
-        float: right;
-        color: #aaa;
-        font-size: 8pt;
-        font-family: 'FreeSans';
-        
-        &:hover {
+            -webkit-appearance: none;
+            border: 0px;
+            background-color: transparent;
+/*             white-space: pre; */
+            margin-left: 6px;
+            font-family: 'FjallaOne-Regular';
+            font-size: 8pt;
+            color: #aaa;
             cursor: pointer;
-            }
         }
-        
+            
         .language-current input[type="submit"] {
             color: @blue;
         }
     }
-}  
+}
 
 /* } */
 
 
 #project-box{
 /*     padding:0px @marginINT 0px 0px ; */
+    position:absolute;
+    top:@marginINT;
+    right:;
+    bottom:@marginEXT;
+    left:@marginINT;
+    width:50%;
     
     .project-title{
         .redtitle;
@@ -387,6 +386,20 @@ margin:0 @marginINT;
  *  Map & borders map
  * 
  ************************/
+
+
+#map{
+    position:absolute;
+    top:@marginINT;
+    right:@marginINT;
+    bottom:@topH;
+    left:@marginINT;
+
+    &.partial{
+        left:52%;
+    }
+}
+
 
 #index_popup_box {
   width: @Wpopup;
@@ -468,12 +481,6 @@ margin:0 @marginINT;
 }
 
 
-#map{
-/*     width:100%; */
-    height: 100%;
-/*     margin:0 @marginINT; */
-}
-
 
 /************************
  *  Tools Map
@@ -483,6 +490,8 @@ margin:0 @marginINT;
 #maptools{
     position:absolute;
     z-index:100;
+    height:@topH;
+    right:@marginINT;
     bottom:0;
 }
 

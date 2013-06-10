@@ -1,0 +1,19 @@
+{% load i18n %}
+{# site tools #}
+
+<div class="projetcs-link route" data-route="projects">
+{% trans "Projects list" %}
+</div>
+
+<div class="language_switcher">
+    <form class="language-switcher-item {% if  'fr' == LANGUAGE_CODE %}language-current{% endif %}" action="/i18n/setlang/" method="post">
+        {% csrf_token %}
+        <input name="language" value="fr" type="hidden" />
+        <input type="submit" value="Français" />
+    </form>
+    <form class="language-switcher-item {% if  'nl' == LANGUAGE_CODE %}language-current{% endif %}" action="/i18n/setlang/" method="post">
+        {% csrf_token %}
+        <input name="language" value="nl" type="hidden" />
+        <input type="submit" value="Nederlands" />
+    </form>
+</div>

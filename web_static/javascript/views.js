@@ -12,19 +12,37 @@
     var Backbone = window.Backbone;
     var T = window.Template;
     
+    var View = Backbone.View.extend({
+//         constructor: function() {
+//             Backbone.View.apply(this, arguments);
+//             this.on('message:in', this._deliver.bind(this));
+//         },
+        deliver:function(targetMethod, args){
+            if(_.isFunction(this[targetMethod]))
+            {
+                this[targetMethod].apply(this, args);
+            }
+        },
+        addClass:function(klass){
+            this.$el.addClass(klass);
+        },
+        removeClass:function(klass){
+            this.$el.removeClass(klass);
+        },
+    });
+    
     var tname = function(name){
         var prefix = 'v2';
         return [prefix,name].join('/');
     };
     
-    var navigation = Backbone.View.extend({
-        className:'row',
+    var navigation = View.extend({
+        className:'navigation',
         initialize:function(){
             this.medias = bMa.Data.Medias;
         },
         render:function(){
             var $el = this.$el;
-            $el.empty();
             var data = _.extend({},this.medias);
             T.render(tname('navigation'), this, function(t){
                 $el.html(t(data));
@@ -41,7 +59,22 @@
         },
     });
     
-    var tools = Backbone.View.extend({
+    var siteTools = View.extend({
+        className:'site-tools',
+        initialize:function(){
+            
+        },
+        render:function(){
+            var $el = this.$el;
+            var data = {};
+            T.render(tname('sitetools'), this, function(t){
+                $el.html(t(data));
+            });
+            return this;
+        },
+    });
+    
+    var tools = View.extend({
         className:'container-fluid',
         initialize:function(){
         },
@@ -56,7 +89,7 @@
         },
     });
     
-    var page = Backbone.View.extend({
+    var page = View.extend({
         className:'page',
         initialize:function(){
             this.model.on('change', this.render, this);
@@ -73,7 +106,7 @@
         },
     });
     
-    var pageViewer =  Backbone.View.extend({
+    var pageViewer =  View.extend({
         id:'page-box',
         initialize:function(){
             
@@ -94,7 +127,7 @@
     
     
     
-    var project =  Backbone.View.extend({
+    var project =  View.extend({
         className:'project',
         initialize:function(){
             this.model.on('change', this.render, this);
@@ -116,7 +149,7 @@
     });
 
     
-    var projectViewer = Backbone.View.extend({
+    var projectViewer = View.extend({
         id:'project-box',
         className:'span4',
         initialize:function(){
@@ -135,7 +168,7 @@
         },
     }); 
     
-    var mapTools = Backbone.View.extend({
+    var mapTools = View.extend({
         id:'maptools',
         initialize:function(){
             
@@ -180,9 +213,8 @@
         },
     });
     
-    var map = Backbone.View.extend({
+    var map = View.extend({
         id:'map',
-        className:'span12',
         initialize:function(){
             
             //             var s = bMa.Scale()
@@ -288,6 +320,7 @@
         Map: map,
         MapTools: mapTools,
         Navigation: navigation,
+        SiteTools: siteTools,
     };
     
 })();
