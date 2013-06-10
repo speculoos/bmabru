@@ -13,7 +13,31 @@
 	if(!window.console){(function(){varnames=["log","debug","info","warn","error","assert","dir","dirxml","group","groupEnd","time","timeEnd","count","trace","profile","profileEnd"],i,l=names.length;window.console={};for(i=0;i<l;i++){window.console[names[i]]=function(){};}}());}
 
     // DATA
-    window.bMa = {};
+    window.bMa = {
+        Style:{
+            featureNormal:{
+                stroke:true,
+                color: '#d43b2d',
+                weight:1,
+                opacity:1,
+                fill:true,
+                fillColor: '#d43b2d',
+                fillOpacity:0.75,
+                clickable:true
+            },
+            featureHighlight:{
+                stroke:true,
+                color: '#d43b2d',
+                weight:1,
+                opacity:1,
+                fill:true,
+                fillColor: '#FF1600',
+                fillOpacity:1,
+                clickable:true
+            },
+        },
+    };
+    
     
     (function(undefined){
         'strict';
@@ -42,7 +66,8 @@
 
 <script src="{{STATIC_URL}}javascript/lib/less.js"></script>
 <script src="{{STATIC_URL}}javascript/lib/jquery/jquery-1.9.1.min.js"></script>
-<script src="{{STATIC_URL}}javascript/lib/leaflet/leaflet.js"></script>
+<!-- <script src="{{STATIC_URL}}javascript/lib/leaflet/leaflet.js"></script> -->
+<script src="{{STATIC_URL}}leaflet/dist/leaflet-src.js"></script>
 <script src="{{STATIC_URL}}javascript/lib/underscore-min.js"></script>
 <script src="{{STATIC_URL}}javascript/lib/backbone-min.js"></script>
 <script src="{{STATIC_URL}}javascript/lib/template.js"></script>

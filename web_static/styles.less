@@ -493,152 +493,154 @@ body{height: 100%; }
     height:@topH;
     right:@marginINT;
     bottom:0;
-}
 
-#zoom-control-box {
-    position: absolute;
-    width: 50px;
-    right: 0;
-    bottom: 8px;
 
-        .zoom-control-out {
-            float: left;
-            margin-right: 5px;
-            .zoomCTRL;
-            
-                &:hover {
-                    cursor: pointer;
-                }
-        }
-    
-        .zoom-control-scale-scale{
-            width:148px;
-            float: left;
-            opacity: @printopacity;
-    
-            .zoom-control-scale-part{
-                display:inline-block;
+    #zoom-control-box {
+        position: absolute;
+        width: 50px;
+        right: 0;
+        bottom: 8px;
+
+            .zoom-control-out {
+                float: left;
+                margin-right: 5px;
+                .zoomCTRL;
                 
-                &.zoom-control-scale-part-light{
-                    background-color: white;
-                }
-                &.zoom-control-scale-part-dark{
-                    background-color: @red;
-                }
+                    &:hover {
+                        cursor: pointer;
+                    }
             }
-        }  
-        .zoom-control-in {
-            float: left;
-            clear: none;
-            margin-left: 5px;    
-            .zoomCTRL;
+        
+            .zoom-control-scale-scale{
+                width:148px;
+                float: left;
+                opacity: @printopacity;
+        
+                .zoom-control-scale-part{
+                    display:inline-block;
+                    
+                    &.zoom-control-scale-part-light{
+                        background-color: white;
+                    }
+                    &.zoom-control-scale-part-dark{
+                        background-color: @red;
+                    }
+                }
+            }  
+            .zoom-control-in {
+                float: left;
+                clear: none;
+                margin-left: 5px;    
+                .zoomCTRL;
+                
+                    &:hover {
+                        cursor: pointer;
+                    }
+            }   
+    }
+        
+    .selector-root {
+        .map-controls;
+        position: absolute;
+        bottom: 8px;
+        width: 150px; 
+        cursor: pointer;
+        .selector-items-open {
+            padding-bottom: 6px;
+        }
+        .selector-item-selected {
+            text-decoration: underline;
+        }    
+    }
+        
+    #layers{
+        right: 60px; 
+    }
+    
+    #cities{
+        right: 235px;
+    }
+        
+    #filter-box {
+        .map-controls;
+        right: 235px;
+        width: 150px;
+        
+        
+            &:hover {
+            cursor: pointer;
+            }
             
-                &:hover {
-                    cursor: pointer;
-                }
-        }   
-}
-    
-#layer-selector {
-    .map-controls;
-    position: absolute;
-    bottom: 8px;
-    right: 60px;
-    width: 150px; 
-    
-        &:hover {
-        cursor: pointer;
-        }
-
-        .selector-items-open {
-          padding-bottom: 6px;
-        }    
+            .selector-items-open {
+            padding-bottom: 6px;
+            }
         
-        .selector-item-selected {
-          text-decoration: underline;
-        }    
-}
-    
-#filter-box {
-    .map-controls;
-    right: 235px;
-    width: 150px;
-    
-    
-        &:hover {
-        cursor: pointer;
-        }
-        
-        .selector-items-open {
-          padding-bottom: 6px;
-        }
-    
-        .filter-reset {
-          text-align: right;
-          padding-top: 6px;
-        }
-        
-        .selector-item-label {
-     font-weight: bold;
-          margin-top: 6px;
-        }
-        
-        .selector-item {
-          padding-left: 6px;
-        }
-        
-        .selector-item-selected {
-          text-decoration: underline;
-        }
-} 
+            .filter-reset {
+            text-align: right;
+            padding-top: 6px;
+            }
+            
+            .selector-item-label {
+        font-weight: bold;
+            margin-top: 6px;
+            }
+            
+            .selector-item {
+            padding-left: 6px;
+            }
+            
+            .selector-item-selected {
+            text-decoration: underline;
+            }
+    } 
 
 
-.control-scale-box{
-    height: @scale-height;
-    background-color:transparent;
-    margin:2px;
-    border:0px solid black;
-    padding:2px;
-    .control-scale-metrics-box{
-        position:relative;
-        height: (@scale-height / 2);
-        .control-scale-metrics-start{
-            position:absolute;
-            left:0;
-            bottom:-10px;
-            -webkit-text-stroke: 0.3px white;
-    	 font-weight: bold;
-            font-size: 10pt;
-        }
-        .control-scale-metrics-end{
-            position:absolute;
-            right:0;
-            bottom:-10px;            
-            -webkit-text-stroke: 0.3px white;
+    .control-scale-box{
+        height: @scale-height;
+        background-color:transparent;
+        margin:2px;
+        border:0px solid black;
+        padding:2px;
+        .control-scale-metrics-box{
+            position:relative;
+            height: (@scale-height / 2);
+            .control-scale-metrics-start{
+                position:absolute;
+                left:0;
+                bottom:-10px;
+                -webkit-text-stroke: 0.3px white;
             font-weight: bold;
-            font-size: 10pt;
+                font-size: 10pt;
+            }
+            .control-scale-metrics-end{
+                position:absolute;
+                right:0;
+                bottom:-10px;            
+                -webkit-text-stroke: 0.3px white;
+                font-weight: bold;
+                font-size: 10pt;
+            }
         }
-    }
 
-    .control-scale-scale{
-  /*      position:absolute;
-        bottom:0;*/
-        .control-scale-row{
-            height:4px;
-            .control-scale-part{
-                display:inline-block;
+        .control-scale-scale{
+    /*      position:absolute;
+            bottom:0;*/
+            .control-scale-row{
                 height:4px;
-                &.control-scale-part-light{
-                    background-color:white;
-                }
-                &.control-scale-part-dark{
-                    background-color:@red;
+                .control-scale-part{
+                    display:inline-block;
+                    height:4px;
+                    &.control-scale-part-light{
+                        background-color:white;
+                    }
+                    &.control-scale-part-dark{
+                        background-color:@red;
+                    }
                 }
             }
         }
     }
 }
-
 
 /************************
  *  Articles and Menu

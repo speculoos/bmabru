@@ -18,6 +18,10 @@
             
             this.setupLayout();
             
+            
+//             $(window).on('resize', this.adjustViewport.bind(this));
+        },
+        start:function(){
             this.registerComponent('navigation', new bMa.Views.Navigation, 'header', 6);
             this.registerComponent('sitetools', new bMa.Views.SiteTools, 'header', 1);
             
@@ -26,9 +30,13 @@
             this.registerComponent('main_map', new bMa.Views.Map, 'viewport', 12-4);
             this.registerComponent('maptools', new bMa.Views.MapTools, 'viewport', 1);
             
-            this.trigger('ready');
+            this.getComponent('main_map').on('ready',
+                                             function(){
+                                                 this.trigger('ready');
+                                             },this);
+            
             this.$el.appendTo('body');
-            $(window).on('resize', this.adjustViewport.bind(this));
+            this.getComponent('main_map').getMap();
         },
         setupLayout:function(){
             this.layouts = {
@@ -45,12 +53,12 @@
         },
         adjustViewport:function(){
             return;
-            var top =  this.layouts.header.$el.outerHeight(true);
-            var bottom = this.layouts.footer.$el.outerHeight(true);
-            var total = this.$el.height();
-            var newHeight = total - (bottom + top);
-            console.log(total, newHeight);
-            this.layouts.viewport.$el.height(newHeight);
+//             var top =  this.layouts.header.$el.outerHeight(true);
+//             var bottom = this.layouts.footer.$el.outerHeight(true);
+//             var total = this.$el.height();
+//             var newHeight = total - (bottom + top);
+//             console.log(total, newHeight);
+//             this.layouts.viewport.$el.height(newHeight);
         },
         events:{
             'resize':'adjustViewport',

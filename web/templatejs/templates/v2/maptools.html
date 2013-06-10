@@ -1,0 +1,25 @@
+{% load i18n %}
+{# map tools #}
+
+<div id="zoom-control-box">
+    <div class="zoom-control-out"> − </div>
+    <div class="zoom-control-in"> + </div>
+</div>
+<div id="layers" class="selector-root">
+    <div class="selector-items" style="display: none;">
+        <% for(var layer in data.layers){ %>
+        <div class="selector-item layer-selector" data-layer="<%= layer %>"><%= layer %></div>
+        <% } %>
+    </div>
+    <div class="selector-button">{% trans "Layers" %}</div>
+</div>
+
+<div  id="cities" class="selector-root">
+    <div class="selector-items" style="display: none;">
+        <% for(var cidx in data.cities){ var city = data.cities[cidx]; if(city){ %>
+        <div class="selector-item route" data-route="city/<%= city %>"><%= city %></div>
+        <% } } %>
+    </div>
+    <div class="selector-button">{% trans "Cities" %}</div>
+</div>
+    

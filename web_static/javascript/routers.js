@@ -37,6 +37,9 @@
             'index': 'index',
             'page/:slug' :'page',
             'project/:slug':'project',
+            'city/:city':'city',
+            'function/:func':'func',
+            'projects':'projects',
         },
         
         index:function(){
@@ -83,6 +86,19 @@
             {
                 this.navigate('index');
             }
+        },
+        city:function(city){
+            window.app.send('main_map', 'removeClass', 'partial');
+            window.app.setComponents('navigation sitetools main_map maptools'.split(' '));
+            window.app.send('main_map', 'filterCity', city);
+        },
+        func:function(func){
+            window.app.send('main_map', 'removeClass', 'partial');
+            window.app.setComponents('navigation sitetools main_map maptools'.split(' '));
+            window.app.send('main_map', 'filterFunction', func);
+        },
+        projects:function(){
+            
         },
     });
     
