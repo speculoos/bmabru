@@ -172,7 +172,7 @@ class ProjectImage(models.Model):
         return self.image.url
         
     def __unicode__(self):
-        return '%s' % (self.image.split('/').pop(), )
+        return ('%s' % (self.image, )).split('/').pop()
     
 
 @serializer(exclude=('description',))
