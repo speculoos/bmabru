@@ -111,6 +111,58 @@
         },
     });
     
+    var projectListRow = View.extend({
+        tagName:'tr',
+        initialize:function(){
+            this.model.on('change', this.render.bind(this));
+        },
+        render:function(){
+            
+            console.log('RENDER ROW', this.cid);
+            var $el = this.$el;
+            var data = this.model.toJSON();
+            T.render(tname('projectrow'), this, function(t){
+                $el.html(t(data));
+            });
+            return this;
+        },
+    });
+    
+    var projectList = View.extend({
+        id:'projects_table_wrapper',
+        initialize:function(){
+//             this.projects = bMa.Data.collections.projects;
+//             this.projects.on('add', this.renderOne.bind(this));
+        },
+        renderOne:function(item){
+            if(this.items)
+            {
+                if(this.items[item.cid] === undefined)
+                {
+                    this.items[item.cid] = new projectListRow({model:item});
+                    this.items[item.cid].render().$el.appendTo(this.$tbody);
+                }
+            }
+        },
+        render:function(){
+            var $el = this.$el;
+            this.items = {};
+            var data = {};
+            T.render(tname('projectlist'), this, function(t){
+                $el.html(t(data));
+                this.$tbody = this.$el.find('.table-body');
+                _.each(bMa.Data.Projects, function(p){
+                    var m = new bMa.Models.Project({id:p.id});
+                    this.renderOne(m);
+                    m.fetch();
+                }, this);
+            });
+            return this;
+        },
+        refresh:function(){
+//             this.projects.fetch();
+        },
+    });
     
     
     var project =  View.extend({
@@ -121,14 +173,9 @@
         },
         render: function() {
             var $el = this.$el;
-            $el.empty();
             var data = this.model.toJSON();
             T.render(tname('project'), this, function(t){
                 $el.html(t(data));
-                if(this.postRender)
-                {
-                    this.postRender(data);
-                }
             });
             return this;
         },
@@ -366,6 +413,7 @@
         Page: page,
         PageViewer: pageViewer,
         Project: project,
+        ProjectList: projectList,
         ProjectViewer: projectViewer,
         Map: map,
         MapTools: mapTools,

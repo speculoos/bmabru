@@ -161,5 +161,19 @@
 
 <div class="project-worth"></div>
 
+<% if(data.image && data.image.length > 0){ %>
+<div class="thumbnails-box">
+    <ul class="thumbnails">
+    <% for(var i in data.image){ var img = data.image[i]; %>
+        <li class="span2">
+            <div class="thumbnail route" data-route="image/<%= data.slug %>/<%= img.id %>">
+                <img src="<%= img.thumbnail %>" alt="" />
+            </div>
+        </li>
+    <% } %>
+    </ul>
+</div>
+<% } %>
+
 
 

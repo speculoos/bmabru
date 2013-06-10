@@ -34,6 +34,7 @@
             this.registerComponent('page', new bMa.Views.PageViewer, 'viewport', 12);
             this.registerComponent('main_map', new bMa.Views.Map, 'viewport', 12-4);
             this.registerComponent('maptools', new bMa.Views.MapTools, 'viewport', 1);
+            this.registerComponent('projectlist', new bMa.Views.ProjectList, 'viewport', 1);
             
             this.getComponent('main_map').on('ready',
                                              function(){

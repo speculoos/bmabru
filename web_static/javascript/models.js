@@ -19,6 +19,9 @@
     var project = Backbone.Model.extend({
         urlRoot:'/api/projects/',
         idAttribute:'id',
+//         initialize:function(){
+//             this.on('change:functions', this.populateFunctions.bind(this));
+//         },
     });
     
     bMa.Models = {

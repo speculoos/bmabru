@@ -1,0 +1,14 @@
+
+{# project row #}
+<td><span class="route" data-route="project/<%= data.slug %>"><%- data.name %></span></td>
+<td><%- data.address %></td>
+<td>
+<% if(data.city) { %>
+    <%- data.city.zipcode %> <%- data.city.name %>
+<% } %>
+</td>
+<td>
+    <%for(var f in data.functions){ %>
+        <span><%- data.functions[f].name %></span>
+    <% } %>
+</td>

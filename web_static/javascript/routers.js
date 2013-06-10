@@ -102,7 +102,7 @@
             window.app.send('main_map', 'filterFunction', func);
         },
         projects:function(){
-            
+            window.app.setComponents('navigation sitetools projectlist'.split(' '));
         },
     });
     

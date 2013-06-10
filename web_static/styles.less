@@ -790,58 +790,65 @@ body{height: 100%; }
 }
 
 
-table#projects_table {
-    width:100%;
-	border-width: 1px;
-	border-color: #666666;
-	border-collapse: collapse;
-    
-    thead {
-          
-        tr {                   
-          font-size:10pt;
-          font-family: 'URWGothicL', Arial;
-          height: 30px;
-          
-            th {
-              border-bottom: 1px solid #000;
-              margin-bottom: 30px;
-              cursor: pointer;
-              
-              &:hover {
-              color: @blue;
-              }
-
-
-              &.sorting-asc {
-              }
-              
-              &.sorting-desc {
-              }
-            }
-      }     
-       
-    }    
-
-    tbody {
-          
-        td {   
-        border-bottom: 1px solid #ccc;
-        padding: 6px 0px;
-        font-size: 8pt;   
+#projects_table_wrapper{
+    position:absolute;
+    top:@marginINT;
+    right:@marginINT;
+    bottom:@marginINT;
+    left:@marginINT;
+    overflow-y:auto;
+    table#projects_table {
+        width:100%;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
         
-         a {
-          color: #000;
-          text-decoration: none;
-          &:hover {
-          color: @blue;
-          cursor: pointer
-          }
-         }             
-        }
-              
-    }    
-    
+        thead {
+            
+            tr {                   
+            font-size:10pt;
+            font-family: 'URWGothicL', Arial;
+            height: 30px;
+            
+                th {
+                border-bottom: 1px solid #000;
+                margin-bottom: 30px;
+                cursor: pointer;
+                
+                &:hover {
+                color: @blue;
+                }
+
+
+                &.sorting-asc {
+                }
+                
+                &.sorting-desc {
+                }
+                }
+        }     
+        
+        }    
+
+        tbody {
+            
+            td {   
+            border-bottom: 1px solid #ccc;
+            padding: 6px 0px;
+            font-size: 8pt;   
+            
+            a {
+            color: #000;
+            text-decoration: none;
+            &:hover {
+            color: @blue;
+            cursor: pointer
+            }
+            }             
+            }
+                
+        }    
+    }
 }
 
 
