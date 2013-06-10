@@ -1,88 +1,27 @@
-/*
-font-family:'NotCourierSans';
-font-family:'NotCourierSans-Bold';
-font-family:'Futura-Bold';
-font-family:'PLRU-UltraLight';
-font-family:'PLRR-Regular';
-font-family:'PLRB-SemiBold';
-font-family:'OSP_helvetica_serif';
-*/
 
 @font-face {
     font-family: 'URWGothicL';
     src: url('fonts/urwgothicldemi.eot');
     src: url('fonts/urwgothicldemi.eot?#iefix') format('embedded-opentype'),
-                                                          url('fonts/urwgothicldemi.woff') format('woff'),
-                                                          url('fonts/urwgothicldemi.ttf') format('truetype'),
-                                                          url('fonts/urwgothicldemi.svg#urwgothicldemi') format('svg');
-                                                          font-weight: normal;
-                                                          font-style: normal;
+        url('fonts/urwgothicldemi.woff') format('woff'),
+        url('fonts/urwgothicldemi.ttf') format('truetype'),
+        url('fonts/urwgothicldemi.svg#urwgothicldemi') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
-
-/* 
-
-@font-face {
-    font-family: 'FreeSans';
-    src: url('fonts/FreeSans.eot');
-    src: url('fonts/FreeSans.eot?#iefix') format('embedded-opentype'),
-                                                          url('fonts/FreeSans.woff') format('woff'),
-                                                          url('fonts/FreeSans.ttf') format('truetype'),
-                                                          url('fonts/FreeSans.svg#FreeSans') format('svg');
-                                                          font-weight: normal;
-                                                          font-style: normal;
-}
-
-@font-face {
-    font-family: 'FreeSansBold';
-    src: url('fonts/FreeSansBold.eot');
-    src: url('fonts/FreeSansBold.eot?#iefix') format('embedded-opentype'),
-                                                          url('fonts/FreeSansBold.woff') format('woff'),
-                                                          url('fonts/FreeSansBold.ttf') format('truetype'),
-                                                          url('fonts/FreeSansBold.svg#FreeSansBold') format('svg');
-                                                          font-weight: normal;
-                                                          font-style: normal;
-}
-
-@font-face {
-    font-family: 'FreeSansBoldOblique';
-    src: url('fonts/FreeSansBoldOblique.eot');
-    src: url('fonts/FreeSansBoldOblique.eot?#iefix') format('embedded-opentype'),
-                                                          url('fonts/FreeSansBoldOblique.woff') format('woff'),
-                                                          url('fonts/FreeSansBoldOblique.ttf') format('truetype'),
-                                                          url('fonts/FreeSansBoldOblique.svg#FreeSansBoldOblique') format('svg');
-                                                          font-weight: normal;
-                                                          font-style: normal;
-}
-
-@font-face {
-    font-family: 'FreeSansOblique';
-    src: url('fonts/FreeSansOblique.eot');
-    src: url('fonts/FreeSansOblique.eot?#iefix') format('embedded-opentype'),
-                                                          url('fonts/FreeSansOblique.woff') format('woff'),
-                                                          url('fonts/FreeSansOblique.ttf') format('truetype'),
-                                                          url('fonts/FreeSansOblique.svg#FreeSansOblique') format('svg');
-                                                          font-weight: normal;
-                                                          font-style: normal;
-}  
-
-*/
 
 @font-face {
     font-family: 'FjallaOne-Regular';
     src: url('fonts/FjallaOne-Regular.eot');
     src: url('fonts/FjallaOne-Regular.eot?#iefix') format('embedded-opentype'),
-                                                          url('fonts/FjallaOne-Regular.woff') format('woff'),
-                                                          url('fonts/FjallaOne-Regular.ttf') format('truetype'),
-                                                          url('fonts/FjallaOne-Regular.svg#FjallaOne-Regular') format('svg');
-                                                          font-weight: normal;
-                                                          font-style: normal;
+        url('fonts/FjallaOne-Regular.woff') format('woff'),
+        url('fonts/FjallaOne-Regular.ttf') format('truetype'),
+        url('fonts/FjallaOne-Regular.svg#FjallaOne-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
 
-/* debug */
-#map{background:white;}
-#debug{position:fixed; top:0; left:0; background:#ccc; width:200px; font-size:6px; }
-/* #console{background:yellow;} */
 
 /* vars */
 @saumon:#FFE3DE;
@@ -132,6 +71,7 @@ font-family:'OSP_helvetica_serif';
 }
 
 .zoomCTRL {
+    .zoomrounded;
     width: 18px;
     height: 18px;
     background-color: white;
@@ -141,17 +81,14 @@ font-family:'OSP_helvetica_serif';
     line-height: 16px;
     font-family: 'FreeSans';
     border: 1px solid @red;
-    .zoomrounded;
     }
     
 .map-controls {
-    position:absolute;
+    .zoomrounded(3px);
     font-size: 8pt;
     background-color: white;
     padding: 0px 6px;
-    color: #000;
-    bottom: 2px;    
-    .zoomrounded (3px);
+    color: #000; 
     border: 1px solid @red;
     } 
     
@@ -249,54 +186,14 @@ a, .link{cursor:pointer;}
  * 
  ************************/
 
-#bma-overlay-1 {
-    .overlays;
-    
-/*     left: (@marginEXT + @marginINT + @bordermap); */
-    padding:(@marginEXT + @marginINT + @bordermap);
-    width: 400px;    
-    
-    #legend-box{
-      display: block;
-
-          .project-box{
-                padding:0px @marginINT 0px 0px ;
-              
-              .project-title{
-                  .redtitle;
-                  
-                  .project-link{
-                  color: white;
-                  text-decoration: none;}
-              }
-
-              .project-description{
-              padding:6px 6px 10px 0px;
-	      .infofield;
-              }
-	       .project-info-label{
-	      .infolabel;
-              .infofield;
-              }
-	       .project-info-box{
-              .infofield;
-              }
-	      .action-title {
-               padding:0px 0px 0px 10px ;
-	      .infolabel;
-              .infofield;
-              }
-          }
-      }
-}
 
 
 /* position and dimensions */
 html {width: 100%; height: 100%;}
 body{height: 100%; }
-#container{width:100%; height:100%; }
-#container>*{top:0; }
-#navigation{position: absolute; width:100%; height:@topH;}
+/*#container{width:100%; height:100%; }
+#container>*{top:0; }*/
+/* #navigation{position: absolute; width:100%; height:@topH;} */
 /* #content{width:35%; min-width:400px; left:40px; top:40px;} */
 
 /* z-index */
@@ -308,15 +205,35 @@ body{height: 100%; }
 #map{z-index:50;}
 @maxZIndex:1000;
 
+
+#container{
+    position:absolute;
+    top:0;right:0;bottom:0;left:0;
+    
+    z-index:0;
+}
+
+#header{
+    height:@topH;
+    margin-bottom:@marginINT;
+}
+
+#_boxed{
+    margin:@marginEXT;
+    border:@border;
+}
+
+#viewport{
+margin:0 @marginINT;
+}
+
+#footer{
+    height:@topH;
+}
 /* elements */
 #navigation {
 	font-size:11px; 
 	letter-spacing:0.05em;
-    width: -calc(@Wtop); 
-    width: -webkit-calc(@Wtop) ; 
-    width: -moz-calc(@Wtop); 
-    width: -o-calc(@Wtop); 
-    margin-left: -3px;
     
 	ul{ list-style:none; 
 	    -webkit-margin: 0px;
@@ -347,6 +264,7 @@ body{height: 100%; }
 				display:none;
 				position:absolute;
 				top:@topH;
+                z-index:@maxZIndex;
 				left:1px;
 				text-align:left;
 				width: 100px;
@@ -381,59 +299,88 @@ body{height: 100%; }
 	color:#000; 
 	padding:2px 4px 1px; 
 	text-decoration:none;
-	}
+    }
+}
 	
-	#site_tools {	    
-	    font-size: 8pt;
-	    
-	    a {color: #aaa;}
-	    
-
-     	#projetcs-link{
-          position: absolute;
-          right: 120px;
-          bottom: 6px;  
-          
-             &.selected a{
-             color: @blue;
-            }   	
-          }
-        	
-        	#language_switcher {
-          position: absolute;
-          width: 120px;
-          right: 0px;
-          bottom: 6px;
-		form{
-			margin:0;
-		}
-        
-            .language-switcher-item input[type="submit"] {
-            -webkit-appearance: none;
-            border: 0px;
-            background-color: transparent;
-            white-space: pre;
-            margin-left: 6px;
-            float: right;
-            color: #aaa;
-            font-size: 8pt;
-            font-family: 'FreeSans';
-
-            
-              &:hover {
-              cursor: pointer;
-              }
-            }
-            
+#site_tools {
+    font-size: 8pt;
+    a{
+        color: #aaa;
+    }
     
-            
-            .language-current input[type="submit"] {
+    #projetcs-link {
+        position: absolute;
+        right: 120px;
+        bottom: 6px;  
+        
+        &.selected a{
             color: @blue;
+        }   	
+    }
+        	
+    #language_switcher {
+        position: absolute;
+        width: 120px;
+        right: 0px;
+        bottom: 6px;
+        form{
+            margin:0;
+        }
+        
+        .language-switcher-item input[type="submit"] {
+        -webkit-appearance: none;
+        border: 0px;
+        background-color: transparent;
+        white-space: pre;
+        margin-left: 6px;
+        float: right;
+        color: #aaa;
+        font-size: 8pt;
+        font-family: 'FreeSans';
+        
+        &:hover {
+            cursor: pointer;
             }
         }
-  }  
-}
+        
+        .language-current input[type="submit"] {
+            color: @blue;
+        }
+    }
+}  
+
 /* } */
+
+
+#project-box{
+/*     padding:0px @marginINT 0px 0px ; */
+    
+    .project-title{
+        .redtitle;
+        
+        .project-link{
+            color: white;
+            text-decoration: none;}
+    }
+    
+    .project-description{
+        padding:6px 6px 10px 0px;
+        .infofield;
+    }
+    .project-info-label{
+        .infolabel;
+        .infofield;
+    }
+    .project-info-box{
+        .infofield;
+    }
+    .action-title {
+        padding:0px 0px 0px 10px ;
+        .infolabel;
+        .infofield;
+    }
+}
+
 
 
 /************************
@@ -520,25 +467,11 @@ body{height: 100%; }
    } 
 }
 
-#map-wrapper {
-    .full_panel;
-    padding: @marginINT @marginINT @topH @marginINT;
-    border: @border;
-    
-    #map{
-        width:100%; 
-        min-height:100%; 
-        height: 100%;
-        left:0;
-    }
-    
-    #projects_table_wrapper{
-        width:100%; 
-        min-height:100%; 
-        height: 100%;
-        left:0;
-        overflow:auto;
-    }
+
+#map{
+/*     width:100%; */
+    height: 100%;
+/*     margin:0 @marginINT; */
 }
 
 
@@ -547,60 +480,60 @@ body{height: 100%; }
  * 
  ************************/
 
-#bma-overlay-0 {
-    opacity: @printopacity;
+#maptools{
     position:absolute;
-    width:500px; 
-    right: (@marginEXT + @marginINT + @bordermap); 
-    bottom: (@marginINT / 2);
-    
-    #zoom-control-box {
-        position: absolute;
-        width: 50px;
-        right: 0px;
-        bottom: 0px;
-        height: @Hzoomcontrol;
+    z-index:100;
+    bottom:0;
+}
 
-            .zoom-control-out {
-                float: left;
-                margin-right: 5px;
-                .zoomCTRL;
-                
-                    &:hover {
-                      cursor: pointer;
-                    }
-            }
-        
-            .zoom-control-scale-scale{
-                width:148px;
-                float: left;
-                opacity: @printopacity;
-        
-                .zoom-control-scale-part{
-                    display:inline-block;
-                    
-                    &.zoom-control-scale-part-light{
-                        background-color: white;
-                    }
-                    &.zoom-control-scale-part-dark{
-                        background-color: @red;
-                    }
+#zoom-control-box {
+    position: absolute;
+    width: 50px;
+    right: 0;
+    bottom: 8px;
+
+        .zoom-control-out {
+            float: left;
+            margin-right: 5px;
+            .zoomCTRL;
+            
+                &:hover {
+                    cursor: pointer;
                 }
-            }  
-            .zoom-control-in {
-                float: left;
-                clear: none;
-                margin-left: 5px;    
-                .zoomCTRL;
-                
-                    &:hover {
-                      cursor: pointer;
-                    }
-            }   
-    }
+        }
     
-    #layer-selector {
+        .zoom-control-scale-scale{
+            width:148px;
+            float: left;
+            opacity: @printopacity;
+    
+            .zoom-control-scale-part{
+                display:inline-block;
+                
+                &.zoom-control-scale-part-light{
+                    background-color: white;
+                }
+                &.zoom-control-scale-part-dark{
+                    background-color: @red;
+                }
+            }
+        }  
+        .zoom-control-in {
+            float: left;
+            clear: none;
+            margin-left: 5px;    
+            .zoomCTRL;
+            
+                &:hover {
+                    cursor: pointer;
+                }
+        }   
+}
+    
+#layer-selector {
     .map-controls;
+    position: absolute;
+    bottom: 8px;
     right: 60px;
     width: 150px; 
     
@@ -615,9 +548,9 @@ body{height: 100%; }
         .selector-item-selected {
           text-decoration: underline;
         }    
-    }
+}
     
-    #filter-box {
+#filter-box {
     .map-controls;
     right: 235px;
     width: 150px;
@@ -648,8 +581,8 @@ body{height: 100%; }
         .selector-item-selected {
           text-decoration: underline;
         }
-    } 
-}
+} 
+
 
 .control-scale-box{
     height: @scale-height;
@@ -705,8 +638,7 @@ body{height: 100%; }
 
 
 #page-box {
-    .full_panel;
-    border:@border;
+    height:100%;
     .page{
         position: absolute;
         top:@marginINT;right:@marginINT;bottom:@marginINT;left:@marginINT;
@@ -899,118 +831,6 @@ table#projects_table {
               
     }    
     
-}
-
-/************************
- *  Gallery
- * 
- ************************/
-#gallery-wrapper {
- height: 100%;
- width: 10px;
- border-left: 2px dashed #33CC00;
- position: absolute;
- left: 1px;
- 
- &:hover {
-   cursor: pointer;
- }
- 
-    .gallery-container{
-        width:100%;
-        height:100%;
-        overflow:hidden;
-        .gallery-image{
-            background-color:black;
-            img{
-                width:100%;
-            }
-        }
-        .gallery-control{
-            position:absolute;
-            top:0;
-            font-size:92pt;
-            height:100%;
-            line-height:100%;
-            width:5%;
-            cursor: pointer;
-            color:white;
-            &.gallery-back{
-                left:0;
-            }
-            &.gallery-next{
-                right:0;
-            }
-            &:hover {
-/*                 background-color:white; */
-            }
-        }
-    }
-}
-
-
-
-#console{
-    top:@topH; 
-    right:0px; 
-    width:@consoleW; 
-    position:absolute;
-    background-color:white;
-}
-
-
-
-div.console_item{
-    position:absolute;
-    width:80%;
-    min-height:3px;
-/*     border:1px solid @red; */
-    font-size:8pt;
-    padding-left:10%;
-    
-    .item-project-name{
-        display:none;
-    }
-    
-    .builder{
-	    text-decoration:none;
-	    font-weight: 300;
-	    color:black;
-	    font-size:13pt;
-	    font-family:'PLRB-SemiBold';
-	    line-height:70%;
-/*	    background-color:white;*/
-/*	    padding: 0 10% 10% 10%;*/
-        a{
-		text-decoration:none;
-		font-weight: 300;
-		color:black;
-		font-size:13pt;
-		font-family:'PLRR-Regular';
-		line-height:70%;
-        }
-    }
-    
-    &.feature-visible{
-/*        font-weight:bold;*/
-        z-index:20;
-    }
-    &.feature-hidden{
-        display:none;
-/*        color:#aaa;
-        z-index:10;*/
-    }
-    &.clicked-feature{
-/*        color:@hred;*/
-        z-index:30;
-        font-size:10pt;
-        background-color:white;
-        padding: 10px 10px 5px 10px;
-        
-        .item-project-name{
-            display:block;
-        }
-    }
 }
 
 

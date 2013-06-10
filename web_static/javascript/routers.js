@@ -40,7 +40,7 @@
         },
         
         index:function(){
-            window.app.setComponents('navigation main_map'.split(' '));
+            window.app.setComponents('navigation main_map maptools'.split(' '));
         },
         page:function(slug){
             if(bMa.Data.collections.pages.findWhere({slug:slug}))
@@ -67,15 +67,15 @@
             {
                 window.app.getComponent('project')
                     .setModel(bMa.Data.collections.projects.findWhere({slug:slug}));
-                window.app.setComponents('navigation main_map project'.split(' '));
+                window.app.setComponents('navigation main_map maptools project'.split(' '));
             }
             else if(bMa.Data.Projects[slug])
             {
-                var project = new bMa.Models.Project({id:bMa.Data.Projects[slug]});
+                var project = new bMa.Models.Project({id:bMa.Data.Projects[slug].id});
                 bMa.Data.collections.projects.add(project);
                 project.fetch();
                 window.app.getComponent('project').setModel(project);
-                window.app.setComponents('navigation main_map project'.split(' '));
+                window.app.setComponents('navigation main_map maptools project'.split(' '));
             }
             else
             {

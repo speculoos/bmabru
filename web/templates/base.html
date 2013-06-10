@@ -8,8 +8,6 @@
 	<link rel="stylesheet" href="{{STATIC_URL}}leaflet/dist/leaflet.ie.css" />
 	<link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}styles.less">
 	
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="{{STATIC_URL}}javascript/lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 	
 	<script>
 	if(!window.console){(function(){varnames=["log","debug","info","warn","error","assert","dir","dirxml","group","groupEnd","time","timeEnd","count","trace","profile","profileEnd"],i,l=names.length;window.console={};for(i=0;i<l;i++){window.console[names[i]]=function(){};}}());}
@@ -30,9 +28,12 @@
         {% endfor %}
         
         {% for p in projects %} 
-        window.bMa.Data.Projects['{{p.slug}}'] = {{p.id}}; {% endfor %}
-        {% for p in projects %} 
-        {% if p.mpoly %}window.bMa.Data.Geometries['{{p.slug}}'] = {{ p.mpoly.geojson|safe }}; {% endif %}{% endfor %}
+        window.bMa.Data.Projects['{{p.slug}}'] = {
+            id:{{p.id}},
+     {% if p.mpoly %}geometry:{{ p.mpoly.geojson|safe }},{% endif %}
+     {% if p.mpoly %}city:'{{ p.city }}',{% endif %}
+        }; 
+        {% endfor %}
     })();
     
 	</script>
@@ -45,7 +46,7 @@
 <script src="{{STATIC_URL}}javascript/lib/underscore-min.js"></script>
 <script src="{{STATIC_URL}}javascript/lib/backbone-min.js"></script>
 <script src="{{STATIC_URL}}javascript/lib/template.js"></script>
-<script src="{{STATIC_URL}}javascript/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="{{STATIC_URL}}javascript/lib/layout.js"></script>
 
 <script src="{{STATIC_URL}}wms.config.js"></script>
 

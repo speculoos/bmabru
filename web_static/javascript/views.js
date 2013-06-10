@@ -18,7 +18,7 @@
     };
     
     var navigation = Backbone.View.extend({
-        className:'container-fluid',
+        className:'row',
         initialize:function(){
             this.medias = bMa.Data.Medias;
         },
@@ -114,9 +114,11 @@
             return this;
         },
     });
+
     
     var projectViewer = Backbone.View.extend({
-        className:'project-box',
+        id:'project-box',
+        className:'span4',
         initialize:function(){
         },
         render:function(){
@@ -133,8 +135,54 @@
         },
     }); 
     
+    var mapTools = Backbone.View.extend({
+        id:'maptools',
+        initialize:function(){
+            
+        },
+        render:function(){
+            var $el = this.$el;
+            $el.empty();
+            var data = { 
+                cities: _.pluck(bMa.Data.Projects, 'city'),
+                layers: window.WMS_CONFIG,
+            };
+            T.render(tname('maptools'), this, function(t){
+                $el.html(t(data));
+            });
+            return this;
+        },
+        events:{
+            'click .zoom-control-out':'zoomOut',
+            'click .zoom-control-in':'zoomIn',
+            'click .selector-button':'toggleSelector',
+            'click .selector-item':'selectItem',
+        },
+        zoomOut:function(){
+            var map = window.app.getComponent('main_map').getMap();
+            map.zoomOut();
+        },
+        zoomIn:function(){
+            var map = window.app.getComponent('main_map').getMap();
+            map.zoomIn();
+        },
+        toggleASelector:function(parent){
+            var items = parent.find('.selector-items');
+            items.toggle();
+        },
+        toggleSelector:function(evt){
+            var t = $(evt.target);
+            this.toggleASelector(t.parent());
+        },
+        selectItem:function(evt){
+            var t = $(evt.target);
+            
+        },
+    });
+    
     var map = Backbone.View.extend({
-        id:'map-wrapper',
+        id:'map',
+        className:'span12',
         initialize:function(){
             
             //             var s = bMa.Scale()
@@ -143,17 +191,26 @@
             this.observers = [];
             this.layers = {};
             this.overlays = {};
+            this.map_rendered = false;
+            this.polys = {};
         },
         render:function(){
-            this.$el.append(this.getMap(true));
+            if(!this.map_rendered)
+            {
+                this.getMap();
+                this.map_rendered = true;
+            }
             return this;
         },
         insertFeatures:function(){
             var group = L.layerGroup();
             this.map.addLayer(group);
-            for(var slug in bMa.Data.Geometries)
+            for(var slug in bMa.Data.Projects)
             {
-                var geo = bMa.Data.Geometries[slug];
+                var geo = bMa.Data.Projects[slug].geometry;
+                if(geo === undefined)
+                    continue;
+                
                 var ovl = new L.GeoJSON(geo, {
                     style:function(f){ 
                         return {
@@ -169,41 +226,56 @@
                     }
                 });
                 group.addLayer(ovl);
-                
+                this.polys[slug] = ovl;
+                ovl.project_ref = 'project/'+slug;
                 ovl.on('click', function(evt){
-                    window.router.navigate('project/'+slug);
+                    window.router.navigate(this.project_ref);
                 });
             }
         },
         getMap:function(element){
             if(this.map === undefined)
             {
-                this.$map = $('<div>').attr('id', 'map');
-                this.map = L.map(this.$map[0],{
+                this.map = L.map(this.$el[0],{
                     center: [50.854075572144815, 4.38629150390625],
                     zoom: 13,
                     crs: L.CRS.EPSG900913,
                     zoomControl: false,
                     attributionControl: false
                 });
-                this.map.on('whenReady', this.refresh.bind(this));
+//                 this.map.on('whenReady', this.refresh.bind(this));
                 this.insertFeatures();
                 for(var key in window.WMS_CONFIG)
                 {
                     var wms = WMS_CONFIG[key];
                     var layer = L.tileLayer.wms(wms.url, wms.options);
                     this.map.addLayer(layer);
+                    this.layers[key] = layer;
                 }
             }
-            return element ? this.$map : this.map;
+            return element ? this.$el : this.map;
         },
         refresh:function(){
-            console.log('REFRESH MAP');
             var self = this;
             window.setTimeout(function(){
                 self.map.invalidateSize();
-                console.log('CENTER MAP');
-            }, 1000);
+            }, 200);
+        },
+        selectLayer:function(name){
+            for(var lid in this.layers)
+            {
+                var l = this.layers[lid];
+                if(l.selected)
+                {
+                    this.getMap.removeLayer(l.layer);
+                }
+                l.selected = false;
+                if(lid === name)
+                {
+                    l.selected = true;
+                    this.getMap.addLayer(l.layer);
+                }
+            }
         },
     });
     
@@ -214,6 +286,7 @@
         Project: project,
         ProjectViewer: projectViewer,
         Map: map,
+        MapTools: mapTools,
         Navigation: navigation,
     };
     
