@@ -275,6 +275,7 @@
                     }
                     this.layers[key] = layer;
                 }
+                
                 this.map.whenReady(function(){
                     this.trigger('ready');
                 }, this);
@@ -282,10 +283,25 @@
             return element ? this.$map : this.map;
         },
         refresh:function(){
+            this._refreshing = true;
             var self = this;
             window.setTimeout(function(){
                 self.map.invalidateSize();
+                _.each(self.layers, function(l){
+                    l._update();
+                });
+                self._refreshing = false;
+                self.trigger('refreshed');
             }, 200);
+            
+        },
+        _whenReady:function(c){
+            if(!this._refreshing)
+                c.apply(this, []);
+            else
+            {
+                this.once('refreshed', c.bind(this));
+            }
         },
         selectLayer:function(name){
             var map = this.getMap();
@@ -304,8 +320,15 @@
                 }
             }
         },
+        showProject:function(slug){
+            var map = this.getMap();
+            var p = this.polys[slug];
+            if(p)
+            {
+                this._whenReady(function(){map.fitBounds(p);});
+            }
+        },
         filterCity:function(city){
-            console.log('Filer City', city);
             var map = this.getMap();
             var bounds = undefined;
             for(var slug in bMa.Data.Projects)
@@ -328,12 +351,13 @@
                     console.log(slug, bounds);
                 }
             }
-            if(bounds !== undefined)
-                map.fitBounds(bounds);
-            else{
-                map.setView(window.MAP_CONFIG.CENTER, window.MAP_CONFIG.ZOOM);
-            }
-            this.refresh();
+            this._whenReady(function(){
+                if(bounds !== undefined)
+                    map.fitBounds(bounds);
+                else{
+                    map.setView(window.MAP_CONFIG.CENTER, window.MAP_CONFIG.ZOOM);
+                }
+            });
         },
     });
     

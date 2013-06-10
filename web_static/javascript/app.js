@@ -11,6 +11,11 @@
     var HL = window.HorizontalLayout;
     var VL = window.VerticalLayout;
     
+    var delayedReturn = {
+        done:function(c){
+            c.apply({}, []);
+        },
+    };
 
     var app = Backbone.View.extend({
         id:'container',
@@ -117,6 +122,7 @@
 //             }
 //             
 //             this.adjustViewport();
+            return this;
         },
         resetViews:function(comps){
             for(var i=0; i<comps.length; i++)
@@ -150,6 +156,7 @@
                 }
             }
             this.render();
+            return delayedReturn;
         },
         unsetComponent:function(comp){
             if(this.components[comp] === undefined)

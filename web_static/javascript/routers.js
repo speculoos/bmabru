@@ -31,7 +31,9 @@
             options = _.extend({trigger: true}, options);
             Backbone.Router.prototype.navigate.apply(this, [route, options]);
         },
-        
+        back:function(){
+            Backbone.history.history.back();
+        },
         routes:{
             '': 'index',
             'index': 'index',
@@ -73,6 +75,7 @@
                 window.app.getComponent('project')
                     .setModel(bMa.Data.collections.projects.findWhere({slug:slug}));
                 window.app.setComponents('navigation sitetools main_map maptools project'.split(' '));
+                window.app.send('main_map', 'showProject', slug);
             }
             else if(bMa.Data.Projects[slug])
             {
@@ -81,6 +84,7 @@
                 project.fetch();
                 window.app.getComponent('project').setModel(project);
                 window.app.setComponents('navigation sitetools main_map maptools project'.split(' '));
+                window.app.send('main_map', 'showProject', slug);
             }
             else
             {

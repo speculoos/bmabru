@@ -17,7 +17,7 @@ $(document).ready(function(){
     
     
     window.app = new bMa.App;
-    app.on('ready', function(){
+    app.once('ready', function(){
         window.router = new bMa.Routers.Main;
         window.Backbone.history.start({pushState: false});
         app.render();
