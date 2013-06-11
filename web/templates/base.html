@@ -48,8 +48,10 @@
             Geometries:{},
         };
         {% for cat in category %}
+            {% if cat.pages %}
             window.bMa.Data.Medias['{{cat.name}}'] = {};
-            {% for page in cat.page_set.all %}window.bMa.Data.Medias['{{cat.name}}'][{{page.id}}] = {id:{{page.id}},title:'{{page.title}}', slug:'{{page.slug}}'};{% endfor %}
+            {% for page in cat.pages %}window.bMa.Data.Medias['{{cat.name}}'][{{page.id}}] = {id:{{page.id}},title:'{{page.title}}', slug:'{{page.slug}}'};{% endfor %}
+            {% endif %}
         {% endfor %}
         
         {% for p in projects %} 

@@ -56,12 +56,10 @@
                         this.model.on('change', this.render, this);
                     },
                     render: function() {
-                        console.log('View['+model+'].render', this.model.id);
                         var $el = this.$el;
                         var data = this.model.toJSON();
                         Template.render(model, this, function(t){
                             $el.html(t(data));
-                            console.log('View['+model+'].rendered', this.model.id);
                             if(this.postRender)
                             {
                                 this.postRender(data);
