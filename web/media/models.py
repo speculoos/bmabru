@@ -11,7 +11,7 @@ from bmabru.models import Project
 
 from bma.api import serializer
 
-
+@serializer()
 class Resource(models.Model):
     class Meta:
         verbose_name = _("Resource")
@@ -76,7 +76,7 @@ class SubjectiveImage(Sortable):
         excerpt = ' '.join(words[0:8])
         return '[%s] %s'%(self.image, excerpt)
         
-@serializer()
+@serializer(property_list=('resources',))
 class Page(Sortable):
     class Meta(Sortable.Meta):
         verbose_name = _("Page")
