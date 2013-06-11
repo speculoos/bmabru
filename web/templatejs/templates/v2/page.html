@@ -11,10 +11,10 @@
 </div>
 <div class="article-box">
     <div class="article-title">
-    <span class="route" data-route="page/<%= data.slug %>"><%- data.title %></span>
+    <span class="route" data-route="page/<%= data.slug %>"><%= data.title %></span>
     </div>
     <div class="article-body">
-        <%- data.body %>
+        <%= data.format_body %>
         
         <% if(data.resources && data.resources.length > 0){ %>
         <h3 class="">{% trans "Documents" %}</h3>
