@@ -299,6 +299,7 @@ body{height: 100%; }
         				height:auto;
         				line-height: 100%;
         				font-size: 11px;
+        				letter-spacing: 0.02em;
         				
           				&:first-child {
                  			left: auto;
@@ -346,6 +347,7 @@ body{height: 100%; }
     }
     
     .projetcs-link {
+      margin-left: 10px;
         &.selected a{
             color: @blue;
         }   	
@@ -428,7 +430,6 @@ body{height: 100%; }
                     padding:3px @marginINT 0px 0px;
                     font-size: 8pt;
                     color: #aaa;
-                    height: 20px;
                     vertical-align: top;
                     display: block;
                     float: left;
@@ -487,7 +488,13 @@ body{height: 100%; }
     &.partial{
         left:(@Warticle + 4 * @marginINT);
     }
-}
+    
+    &.partial-blog {
+         left:(@Warticle + 2 * @Wmenu + 6 * @marginINT);
+         
+         z-index: 120;  
+    }
+  }
 
 
 #index_popup_box {
