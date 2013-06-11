@@ -36,6 +36,28 @@
         return [prefix,name].join('/');
     };
     
+    var splashscreen = View.extend({
+        className:'splashscreen',
+        id:'index_popup_box',
+        initialize:function(){
+            this._display = true;
+        },
+        render:function(){
+            var data = _.extend({}, {news: bMa.Data.HotNews});
+            T.render(tname('splashscreen'), this, function(t){
+                this.$el.html(t(data));
+            });
+            return this;
+        },
+        events:{
+            'click .close':'close',
+        },
+        close:function(){
+            this._display = false;
+            this.$el.detach();
+        },
+    });
+    
     var navigation = View.extend({
         className:'navigation',
         initialize:function(){
@@ -435,6 +457,7 @@
         MapTools: mapTools,
         Navigation: navigation,
         SiteTools: siteTools,
+        Splash: splashscreen,
     };
     
 })();

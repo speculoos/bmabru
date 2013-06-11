@@ -19,14 +19,21 @@
         model: bMa.Models.Project,
     });
     
+    var blog = Backbone.Collection.extend({
+        url:'/api/items/',
+        model: bMa.Models.BlogPost,
+    });
+    
     bMa.Collections = {
         Page: page,
         Project : project,
+        Blog : blog,
     };
     
     bMa.Data.collections = {
         pages: new page,
         projects: new project,
+        blog: new blog,
     };
     
 })();

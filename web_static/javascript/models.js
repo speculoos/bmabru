@@ -24,9 +24,15 @@
 //         },
     });
     
+    var blogPost = Backbone.Model.extend({
+        urlRoot:'/api/items/',
+        idAttribute:'id',
+    });
+    
     bMa.Models = {
         Page: page,
         Project : project,
+        BlogPost : blogPost,
     };
     
 })();

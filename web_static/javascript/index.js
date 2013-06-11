@@ -15,6 +15,10 @@ $(document).ready(function(){
         window.router.navigate(that.attr('data-route'));
     });
     
+    $('body').on('click', '.back', function(evt){
+        window.router.back();
+    });
+    
     
     window.app = new bMa.App;
     app.once('ready', function(){
@@ -23,4 +27,5 @@ $(document).ready(function(){
         app.render();
     });
     window.app.start();
+    
 });

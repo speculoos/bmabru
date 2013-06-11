@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load md %}
 <!DOCTYPE html>
 <html lang="{{LANGUAGE_CODE}}">
 <head>
@@ -9,7 +10,7 @@
 	<link rel="stylesheet" href="{{STATIC_URL}}javascript/lib/bootstrap/css/bootstrap.css" />
 	<link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}styles.less">
 	
-	
+	{% spaceless %}
 	<script>
 	if(!window.console){(function(){varnames=["log","debug","info","warn","error","assert","dir","dirxml","group","groupEnd","time","timeEnd","count","trace","profile","profileEnd"],i,l=names.length;window.console={};for(i=0;i<l;i++){window.console[names[i]]=function(){};}}());}
 
@@ -46,6 +47,7 @@
             Medias:{},
             Projects:{},
             Geometries:{},
+            HotNews:[],
         };
         {% for cat in category %}
             {% if cat.pages %}
@@ -61,9 +63,20 @@
      {% if p.mpoly %}city:'{{ p.city }}',{% endif %}
         }; 
         {% endfor %}
+        
+        {% for b in blog %}
+        window.bMa.Data.HotNews.push({
+            id:{{b.id}},
+            slug:'{{b.slug}}',
+            title:'{{b.title}}',
+            body:'{{ b.body|md|truncatewords_html:30|escapejs }}',
+            pub_date : '{{b.pub_date}}',
+        });
+        {% endfor %}
     })();
     
 	</script>
+	{% endspaceless %}
 </head>
 <body>
 

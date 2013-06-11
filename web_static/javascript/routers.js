@@ -46,7 +46,7 @@
         
         index:function(){
             window.app.send('main_map', 'removeClass', 'partial');
-            window.app.setComponents('navigation sitetools main_map maptools'.split(' '));
+            window.app.setComponents('navigation sitetools main_map maptools splash'.split(' '));
         },
         page:function(slug){
             if(bMa.Data.collections.pages.findWhere({slug:slug}))

@@ -1,0 +1,14 @@
+{# splashscreen #}
+<div id="index_popup_left">
+    <img src="{{STATIC_URL}}popup.png" title="popup image" />
+</div>
+
+<div id="index_popup_right">
+<button class="close pull-right">&times;</button>
+<% for(var bid in data.news ){ var b = data.news[bid]; %>
+    <div class="featured-title featured-project">
+        <span class="route" data-route="news/<%= b.slug %>"><%- b.title %></span>
+    </div>
+    <div class="featured-body"><%= b.body %></div>
+<% } %>
+</div>
