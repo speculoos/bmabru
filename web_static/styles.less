@@ -855,36 +855,44 @@ body{height: 100%; }
                 }
                     
                 .article-body {
-                width: (@Warticle);
-                float: left;
-                clear: left;
-                    
-                    h1 {
-                        font-family: 'URWGothicL', Arial, Helvetica, sans-serif;
-                        font-size: 12pt;
-                        text-transform: uppercase;
-                        margin-top: 10px;
-                    }
+                    width: (@Warticle);
+                    float: left;
+                    clear: left;
+                      
+                      h1 {
+                         font-family: 'URWGothicL';
+                         font-size: 12pt;
+                         text-transform: uppercase;
+                         margin-top: 10px;
+                         line-height: 13pt;
+                      }
+                      
+                      h2 {
+                         font-family: 'URWGothicL';
+                         font-size: 10pt;
+                         margin-top: 15px;
+                         line-height: 11pt;
+                      }
 
-                    p {
-                        margin-top: 7px;
-                        margin-bottom: 7px;
-                    }
-                    
-                    strong {
-                font-weight: bold;
-                    }
-                    
-                    ul {
-                    list-style-type: circle;
-                    margin-left: 30px;
-                
-                    li{
-                    margin-bottom: 5px;
-                    }
-                    }
-                }
-                
+                      p {
+                         margin-top: 7px;
+                         margin-bottom: 7px;
+                     }
+                     
+                     strong {
+                   font-weight: bold;
+                     }
+                     
+                     ul {
+                     list-style-type: circle;
+                     margin-left: 30px;
+                  
+                        li{
+                        margin-bottom: 5px;
+                        }
+                     }
+                 }
+                                 
                 .article-image{
                     width: -calc(@Wimage-box); 
                     width: -webkit-calc(@Wimage-box); 
