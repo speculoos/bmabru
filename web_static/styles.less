@@ -127,6 +127,7 @@
      .Title;
      background-color: @blue;
      color: white;
+     width: (@Warticle - 30px + @marginINT);     
 }
 
 .featured-bluetitle {   
@@ -143,28 +144,27 @@
  }
  
 .featured-whitetitle {
-    background-color: white;
-    font-size:12pt;    
-    display:inline-block;      
-    padding:2px 6px 0px 6px;
-    font-family: 'URWGothicL', Arial, Helvetica;  
-    text-transform:uppercase;
-    letter-spacing:2px;
-    color: #000;
+     .Title;
+     background-color: white;
+     color: #000;
+     font-size:12pt;    
+     display:inline-block;
 }
 
 .redtitle {
      .Title;
      background-color: @red;
      color: white;
+     width: (@Warticle - 30px + @marginINT); 
+     margin-bottom: @marginINT;    
 }
 
 .featured-redtitle {
-     background-color: @red;
-     font-size:18pt;
-     line-height:19pt;
-     display:inline-block;
      .Title;
+     background-color: @red;
+     color: white;
+     font-size:12pt;    
+     display:inline-block;
 }
 
 .infofield {
@@ -234,8 +234,8 @@ body{height: 100%; }
 
 /* elements */
 #navigation {
-	font-size:11px; 
-	letter-spacing:0.05em;
+	font-size:14px; 
+	letter-spacing:0.08em;
     
 	ul{ list-style:none; 
 	    -webkit-margin: 0px;
@@ -298,6 +298,7 @@ body{height: 100%; }
         				float:none; 
         				height:auto;
         				line-height: 100%;
+        				font-size: 11px;
         				
           				&:first-child {
                  			left: auto;
@@ -334,7 +335,8 @@ body{height: 100%; }
     right:0;
     text-align:right;
     color: #aaa;
-    font-size: 8pt;
+    font-size: 14px;
+    letter-spacing: 0.08em;
     font-family: 'FjallaOne-Regular',Arial, Helvetica, sans-serif;
     
     div, form{
@@ -357,7 +359,8 @@ body{height: 100%; }
 /*             white-space: pre; */
             margin-left: 6px;
             font-family: 'FjallaOne-Regular',Arial, Helvetica, sans-serif;
-            font-size: 8pt;
+            font-size: 14px;
+            letter-spacing: 0.08em;
             color: #aaa;
             cursor: pointer;
         }
@@ -376,7 +379,7 @@ body{height: 100%; }
     top:@marginINT;
     bottom:@topH;
     left: (-@marginINT);
-    width: (@Warticle + @marginINT);
+    width: (@Warticle + 2 * @marginINT);
     overflow: auto;
     padding-right: @marginINT;
     
@@ -390,7 +393,6 @@ body{height: 100%; }
     }
     
     .project-description{
-        padding:6px 6px 10px 0px;
         .infofield;
     }
     .project-info-label{
@@ -399,10 +401,40 @@ body{height: 100%; }
     }
     .project-info-box{
     }
-    .action-title {
-        padding:0px 0px 0px 10px ;
-        .infolabel;
-        .infofield;
+    
+    .project-actions {
+        table {
+          width: 100%;
+          
+            tr {
+            border-bottom: 1px solid #000;
+            
+                &:first-child {
+                border-top: 1px solid #000;
+                }
+            
+            
+                td {
+                text-align: left;
+                vertical-align: top;
+                width: auto;
+        
+                    .action-title {
+                    .infolabel;
+                    .infofield;
+                    padding:3px @marginINT 0px 0px;
+                    font-size: 8pt;
+                    color: #aaa;
+                    height: 20px;
+                    vertical-align: top;
+                    display: block;
+                    float: left;
+                    clear: left;
+                    margin: 0px;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -422,7 +454,7 @@ body{height: 100%; }
     left:@marginINT;
 
     &.partial{
-        left:(@Warticle + 3 * @marginINT);
+        left:(@Warticle + 4 * @marginINT);
     }
 }
 
@@ -448,35 +480,41 @@ body{height: 100%; }
       background-color: white;
       border: 1px solid #000;    
       padding: 10px;  
-        
+
+         .close {
+           position: absolute;
+           top: 0px;
+           right: (@marginINT + 4px);
+         }         
+
         .featured-title {
-         margin-bottom: 10px;
+         margin-bottom: 0px;
          float: none;
          clear: both;
          
-           &.featured-page a {
+           &.featured-page {
               .featured-bluetitle;
               text-decoration: none;
-              padding: 5px 7px;
+              padding: 5px 5px 3px 5px;
            
               &:hover {
                 .featured-whitetitle;
                 border: 1px solid #000;
-                padding: 4px 6px;
+                padding: 4px 4px 2px 4px;
               }
            }            
 
-           &.featured-project a {
+           &.featured-project {
               .featured-redtitle;
               text-decoration: none;
-              padding: 5px 7px;
+              padding: 5px 5px 3px 5px;
            
               &:hover {
                 .featured-whitetitle;
                 border: 1px solid #000;
-                padding: 4px 6px;
+                padding: 4px 4px 2px 4px;
               }
-           }          
+           }         
         }
         
         h1 {
@@ -578,13 +616,18 @@ body{height: 100%; }
         }
         
         .selector-items {
-            &:first-element {
-            padding-top: 20px;
+            &:first-child {
+            padding-top: 5px;
             }        
-        }
+          }
         
         .selector-item {
             line-height: 120%;
+            
+          &:hover {
+            color: @blue;
+            }
+            
         }
         .selector-item-selected {
             text-decoration: underline;

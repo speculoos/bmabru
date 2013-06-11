@@ -149,12 +149,16 @@
     <% memo[action.project_status.name].push(action.sentence); %>
     <% return memo; %>
     <%}, {});%>
+        <div class="action">
+            <table>
     <% _.each(actions,function(val, k){ %>
-    <div class="action">
-        <div class="action-title"><%- k %></div>
-        <div class="action-body"><% print(val.join(', ')) %></div>
-    </div>
+                <tr>
+                    <td><div class="action-title"><%- k %></div></td>
+                    <td><div class="action-body"><% print(val.join(', ')) %></div></td>
+                </tr>
     <% }); %>
+            </table>
+        </div>    
     </div>
 </div>
 <% } %>
