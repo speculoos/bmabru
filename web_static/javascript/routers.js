@@ -43,6 +43,7 @@
             'function/:func':'func',
             'projects':'projects',
             'news(/:slug)':'news',
+            'image/:slug(/:image)':'image',
         },
         
         index:function(){
@@ -93,7 +94,8 @@
             }
         },
         news:function(slug){
-            window.app.setComponents('navigation sitetools blog'.split(' '));
+            window.app.send('main_map', 'addClass', 'partial-blog');
+            window.app.setComponents('navigation sitetools blog main_map'.split(' '));
             if(slug)
             {
                 window.app.send('blog', 'selectItem', slug);
@@ -112,6 +114,30 @@
         },
         projects:function(){
             window.app.setComponents('navigation sitetools projectlist'.split(' '));
+        },
+        image:function(slug, image){
+            if(bMa.Data.collections.projects.findWhere({slug:slug}))
+            {
+                var project = bMa.Data.collections.projects.findWhere({slug:slug});
+                window.app.send('project', 'setModel', project);
+                window.app.send('carousel','setModel', project);
+                window.app.setComponents('navigation sitetools project carousel'.split(' '));
+            }
+            else if(bMa.Data.Projects[slug])
+            {
+                var project = new bMa.Models.Project({id:bMa.Data.Projects[slug].id});
+                bMa.Data.collections.projects.add(project);
+                project.fetch();
+                window.app.send('project', 'setModel', project);
+                window.app.send('carousel', 'setModel', project);
+                window.app.setComponents('navigation sitetools project carousel'.split(' '));
+            }
+            else
+            {
+                return this.navigate('index');
+            }
+            if(image)
+                window.app.send('carousel','selectImage', image);
         },
     });
     

@@ -296,6 +296,38 @@
         },
     }); 
     
+    var carousel = View.extend({
+        className:'carousel-box',
+        initialize:function(){
+        },
+        render:function(){
+            if(this.model)
+            {
+                var $el = this.$el;
+                var data = {images:this.model.toJSON().image};
+                console.log(data);
+                T.render(tname('carousel'), this, function(t){
+                    $el.html(t(data));
+                });
+            }
+            return this;
+        },
+        setModel:function(model){
+            this.model = model;
+            this.model.on('change:image', this.render.bind(this));
+//             this.render();
+        },
+        selectImage:function(image){
+            // TODO
+        },
+        events:{
+            'click .close':'close',
+        },
+        close:function(){
+            window.router.navigate('project/'+this.model.get('slug'));
+        },
+    });
+    
     var mapTools = View.extend({
         id:'maptools',
         initialize:function(){
@@ -516,6 +548,7 @@
         SiteTools: siteTools,
         Splash: splashscreen,
         Blog: blog,
+        Carousel: carousel,
     };
     
 })();
