@@ -112,12 +112,15 @@
 }
 
 .Title {
-     padding:6px 6px 3px 6px;
-     font-family: 'FjallaOne-Regular', 'URWGothicL', Arial, Helvetica;  
+
+     cursor:pointer;
+     padding: 10px 15px;
+     font-family: 'FjallaOne-Regular', Arial, Helvetica, sans-serif;  
      text-transform:uppercase;
      font-size:16pt;    
      letter-spacing:1px;
-     display:inline-block;   
+     display:inline-block;  
+     line-height: 110%; 
 }
 
 .bluetitle {      
@@ -151,11 +154,9 @@
 }
 
 .redtitle {
-     background-color: @red;
-     font-size:18pt;
-     line-height:19pt;
-     display:inline-block;
      .Title;
+     background-color: @red;
+     color: white;
 }
 
 .featured-redtitle {
@@ -172,8 +173,10 @@
      line-height:12pt;
 }
 .infolabel {
-     color: @gray;
-     padding: 4px 0px 0px 0px;
+        font-family: 'URWGothicL';
+        font-size: 10pt;
+        text-transform: uppercase;
+        margin-top: 10px;
 }
 
 /* reset */
@@ -227,7 +230,6 @@ body{height: 100%; }
     bottom:@marginEXT;
     left:@marginEXT;
     border:@border;
-    overflow:hidden;
 }
 
 /* elements */
@@ -237,6 +239,9 @@ body{height: 100%; }
     
 	ul{ list-style:none; 
 	    -webkit-margin: 0px;
+	    position: absolute;
+         display: block;
+         left: (@Wmenu + @marginEXT - 3px); 
 	    
 	    h2 {
 	    .Title;
@@ -253,18 +258,32 @@ body{height: 100%; }
 			padding:0px 10px;
 			text-align: left;
 
+     			&:first-child {
+     			position: absolute;
+                  left: (-@Wmenu - @marginINT - @marginEXT + 2px); 
+     			}
+
 
 			a{
                	text-transform:uppercase; 
+               	font-family: 'FjallaOne-Regular',Arial, Helvetica, sans-serif;
                	position:relative; 
-               	top:15px;
+               	top:9px;
+               	
+                   	&.active {
+                   	color: @blue;
+                   	}
+                   	
+                   	&:hover {
+                   	color: @blue;
+                   	}                   	
                }
-
+               
 			ul{
 				display:none;
 				position:absolute;
 				top:@topH;
-                z-index:@maxZIndex;
+                   z-index:@maxZIndex;
 				left:1px;
 				text-align:left;
 				width: 100px;
@@ -275,9 +294,16 @@ body{height: 100%; }
 
 				li{
         				padding:0 6px; 
-        				margin-bottom:2px; 
+        				margin-bottom:5px; 
         				float:none; 
         				height:auto;
+        				line-height: 100%;
+        				
+          				&:first-child {
+                 			left: auto;
+                 			position: relative;
+                 			}
+          			
         				
           				&:hover {
           				cursor: pointer;
@@ -309,7 +335,7 @@ body{height: 100%; }
     text-align:right;
     color: #aaa;
     font-size: 8pt;
-    font-family: 'FjallaOne-Regular';
+    font-family: 'FjallaOne-Regular',Arial, Helvetica, sans-serif;
     
     div, form{
         display:inline-block;
@@ -330,7 +356,7 @@ body{height: 100%; }
             background-color: transparent;
 /*             white-space: pre; */
             margin-left: 6px;
-            font-family: 'FjallaOne-Regular';
+            font-family: 'FjallaOne-Regular',Arial, Helvetica, sans-serif;
             font-size: 8pt;
             color: #aaa;
             cursor: pointer;
@@ -346,20 +372,21 @@ body{height: 100%; }
 
 
 #project-box{
-/*     padding:0px @marginINT 0px 0px ; */
     position:absolute;
     top:@marginINT;
-    right:;
-    bottom:@marginEXT;
-    left:@marginINT;
-    width:50%;
+    bottom:@topH;
+    left: (-@marginINT);
+    width: (@Warticle + @marginINT);
+    overflow: auto;
+    padding-right: @marginINT;
     
     .project-title{
         .redtitle;
         
         .project-link{
             color: white;
-            text-decoration: none;}
+            text-decoration: none;
+}
     }
     
     .project-description{
@@ -371,7 +398,6 @@ body{height: 100%; }
         .infofield;
     }
     .project-info-box{
-        .infofield;
     }
     .action-title {
         padding:0px 0px 0px 10px ;
@@ -396,7 +422,7 @@ body{height: 100%; }
     left:@marginINT;
 
     &.partial{
-        left:52%;
+        left:(@Warticle + 3 * @marginINT);
     }
 }
 
@@ -454,7 +480,7 @@ body{height: 100%; }
         }
         
         h1 {
-         font-family: 'URWGothicL';
+         font-family: 'URWGothicL',Arial, Helvetica, sans-serif;
          font-size: 10pt;
          text-transform: uppercase;
          margin-top: 10px;
@@ -545,8 +571,20 @@ body{height: 100%; }
         bottom: 8px;
         width: 150px; 
         cursor: pointer;
+        
         .selector-items-open {
             padding-bottom: 6px;
+            
+        }
+        
+        .selector-items {
+            &:first-element {
+            padding-top: 20px;
+            }        
+        }
+        
+        .selector-item {
+            line-height: 120%;
         }
         .selector-item-selected {
             text-decoration: underline;
@@ -652,7 +690,11 @@ body{height: 100%; }
     height:100%;
     .page{
         position: absolute;
-        top:@marginINT;right:@marginINT;bottom:@marginINT;left:@marginINT;
+        top:@marginINT;
+        right:@marginINT;
+        bottom:@marginINT;
+        left:0px;
+        
         .menu-box {
         position: absolute;
         display: block;
@@ -665,8 +707,8 @@ body{height: 100%; }
             .menu_item {                
             margin-bottom: 5px;
             text-align: left;
-            padding-bottom: 2px;
-            line-height: 16px;
+            padding: 2px 0px 1px 0px;
+            line-height: 14px;
             border-top: 1px solid #000;
             border-bottom: 1px solid #000;
             border-left: 1px solid white;
@@ -719,7 +761,9 @@ body{height: 100%; }
             position: absolute;
             display: block;
             left: (@Wmenu + @marginINT + @marginEXT); 
-            top:@marginINT;right:@marginINT;bottom:@marginINT;
+            top:@marginINT;
+            right:@marginINT;
+            bottom: (@topH - @marginINT);
             overflow: auto;
             
                 .article-title{
@@ -727,16 +771,10 @@ body{height: 100%; }
                     margin-bottom: 10px;
                     float: left;
                     clear: right;
+                    
                     .route{
                         .bluetitle;
-                        cursor:pointer;
-                        padding: 10px 15px;
-                        &:hover {
-                            .whitetitle;
-                            border: 1px solid #000;
-                            padding: 9px 14px;
                         }
-                    }
                 }
                     
                 .article-body {
@@ -745,7 +783,7 @@ body{height: 100%; }
                 clear: left;
                     
                     h1 {
-                        font-family: 'URWGothicL';
+                        font-family: 'URWGothicL', Arial, Helvetica, sans-serif;
                         font-size: 12pt;
                         text-transform: uppercase;
                         margin-top: 10px;
@@ -776,7 +814,7 @@ body{height: 100%; }
                     width: -moz-calc(@Wimage-box); 
                     width: -o-calc(@Wimage-box); 
                     float: left;
-                    margin-left: @marginINT;
+                    margin-left: (2 * @marginINT);
                 
                 img {
                 display: block;
@@ -794,7 +832,7 @@ body{height: 100%; }
     position:absolute;
     top:@marginINT;
     right:@marginINT;
-    bottom:@marginINT;
+    bottom: (@topH);
     left:@marginINT;
     overflow-y:auto;
     table#projects_table {
@@ -803,52 +841,78 @@ body{height: 100%; }
         border-color: #666666;
         border-collapse: collapse;
         
-        thead {
-            
-            tr {                   
-            font-size:10pt;
-            font-family: 'URWGothicL', Arial;
-            height: 30px;
-            
-                th {
-                border-bottom: 1px solid #000;
-                margin-bottom: 30px;
-                cursor: pointer;
-                
-                &:hover {
-                color: @blue;
-                }
+thead {
+          
+        tr {                   
+          font-size:10pt;
+          font-family: 'URWGothicL', Arial, sans-serif;
+          height: 30px;
+          
+            th {
+              border-bottom: 1px solid #000;
+              margin-bottom: 30px;
+              cursor: pointer;
+              padding-right: @marginINT;
+              
+              .icon-chevron-down,
+              .icon-chevron-up {
+                color: #ccc;
+                opacity: 0.3
+              }
+              
+              &:hover {
+              color: @blue;
+              }
 
 
-                &.sorting-asc {
-                }
-                
-                &.sorting-desc {
-                }
-                }
-        }     
+              &.sorting-asc {
+                    
+                    .icon-chevron-down {
+                    display: none
+                    }
+                    .icon-chevron-up {
+                    opacity: 1;
+                    }
+              }
+              
+              &.sorting-desc {
+                    
+                    .icon-chevron-up {
+                    display: none
+                    }
+                    
+                    .icon-chevron-down {
+                    opacity: 1;
+                    }
+             }
+             
+             i {
+             float: right;
+             }             
+            }
+      }     
+       
+    }    
+
+    tbody {
+         line-height: 110%;
+ 
+        td {   
+        border-bottom: 1px solid #ccc;
+        padding: 6px @marginINT 6px 0px;
+        font-size: 8pt;   
         
-        }    
-
-        tbody {
-            
-            td {   
-            border-bottom: 1px solid #ccc;
-            padding: 6px 0px;
-            font-size: 8pt;   
-            
-            a {
-            color: #000;
-            text-decoration: none;
-            &:hover {
-            color: @blue;
-            cursor: pointer
-            }
-            }             
-            }
-                
-        }    
-    }
+         a {
+          color: #000;
+          text-decoration: none;
+          &:hover {
+          color: @blue;
+          cursor: pointer
+          }
+         }             
+        }
+      }        
+    }    
 }
 
 
