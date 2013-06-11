@@ -442,6 +442,34 @@ body{height: 100%; }
 }
 
 
+.carousel-box {
+  width: -calc(@Wimage-box - 2 * @marginINT); 
+  width: -webkit-calc(@Wimage-box - 2 * @marginINT);
+  width: -moz-calc(@Wimage-box - 2 * @marginINT); 
+  width: -o-calc(@Wimage-box - 2 * @marginINT); 
+  margin-left: (@Warticle + 5 * @marginINT); 
+  margin-top: @marginINT;
+  text-align: center;
+
+    .item {
+      text-align: center;
+      
+        img{
+        }
+    }
+    
+    .close {
+      text-transform:uppercase; 
+      font-family: 'FjallaOne-Regular',Arial, Helvetica, sans-serif;
+      position:absolute;
+      bottom: (@marginINT);
+      right:(@marginINT);   
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      color: #000;  
+      opacity: 1;
+    }
+}
 
 /************************
  *  Map & borders map
@@ -966,25 +994,6 @@ thead {
 
 
 
-/************************
- *  Project Carousel
- * 
- ************************/
-
-.image-box{
-    position:absolute;
-    top:0;
-    right:0;
-    bottom:0;
-    left:0;
-    z-index:@maxZIndex;
-    background-color:white;
-    .container{
-        margin-top: 32px;
-        border: 1px solid;
-        padding: 20px;
-    }
-}
 
 /************************
  *  Blog
@@ -1018,6 +1027,7 @@ thead {
     .image{
         max-width: (@Warticle + @Wmenu);
         margin-left: (@Wmenu + @marginINT);
+        margin-bottom: @marginINT;
       }
     .body{
     width: (@Warticle + @Wmenu);
