@@ -84,11 +84,27 @@
             var $el = this.$el;
             $el.empty();
             var data = this.model.toJSON();
+            _.extend(data, {pages:this.lookupCategory()});
             T.render(tname('page'), this, function(t){
                 var html = t(data);
                 $el.html(html);
             });
             return this;
+        },
+        lookupCategory:function(){
+            var spid = ''+this.model.id
+            for(var catname in bMa.Data.Medias)
+            {
+                var cat = bMa.Data.Medias[catname];
+                for(var pid in cat)
+                {
+                    if(pid === spid)
+                    {
+                        return _.clone(cat);
+                    }
+                }
+            }
+            return {};
         },
     });
     

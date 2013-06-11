@@ -1,6 +1,12 @@
 {# page #}
 <div class="menu-box">
-{# TODO #}
+    <% for(var pid in data.pages){ var page = data.pages[pid]; %>
+    <div class="menu_item" id="menu_item_Introductie">
+        <span>
+            <span class="route" data-route="page/<%= page.slug %>" ><%- page.title %></span>
+        </span>
+    </div>
+    <% } %>
 </div>
 <div class="article-box">
     <div class="article-title">
