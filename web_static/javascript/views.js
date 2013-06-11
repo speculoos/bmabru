@@ -83,6 +83,24 @@
             var list = section.next('ul');
             list.toggle();
         },
+        setCurrentCat:function(slug){
+            var theCat = undefined;
+            for(var catname in bMa.Data.Medias)
+            {
+                var cat = bMa.Data.Medias[catname];
+                for(var pid in cat)
+                {
+                    var pslug = cat[pid].slug;
+                    if(slug === pslug)
+                    {
+                        theCat = catname;
+                    }
+                }
+            }
+            this.$el.find('.section').removeClass('current');
+            if(theCat)
+                this.$el.find('[data-cat="'+theCat+'"]').addClass('current');
+        }
     });
     
     var siteTools = View.extend({

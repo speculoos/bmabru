@@ -2,7 +2,7 @@
 {# page #}
 <div class="menu-box">
     <% for(var pid in data.pages){ var page = data.pages[pid]; %>
-    <div class="menu_item" id="menu_item_Introductie">
+        <div class="menu_item <% if(page.slug === data.slug){ print('menu_item_current');} %>" id="menu_item_Introductie">
         <span>
             <span class="route" data-route="page/<%= page.slug %>" ><%- page.title %></span>
         </span>

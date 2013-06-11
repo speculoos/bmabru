@@ -47,7 +47,7 @@
         },
         
         index:function(){
-            window.app.send('main_map', 'removeClass', 'partial');
+            window.app.send('main_map', 'removeClass', 'partial partial-blog');
             window.app.setComponents('navigation sitetools main_map maptools splash'.split(' '));
         },
         page:function(slug){
@@ -67,10 +67,12 @@
             }
             else
             {
-                this.navigate('index');
+                return this.navigate('index');
             }
+            window.app.send('navigation','setCurrentCat',slug);
         },
         project:function(slug){
+            window.app.send('main_map', 'removeClass', 'partial-blog');
             window.app.send('main_map', 'addClass', 'partial');
             if(bMa.Data.collections.projects.findWhere({slug:slug}))
             {
@@ -103,7 +105,7 @@
             bMa.Data.collections.blog.fetch();
         },
         city:function(city){
-            window.app.send('main_map', 'removeClass', 'partial');
+            window.app.send('main_map', 'removeClass', 'partial partial-blog');
             window.app.setComponents('navigation sitetools main_map maptools'.split(' '));
             window.app.send('main_map', 'filterCity', city);
         },

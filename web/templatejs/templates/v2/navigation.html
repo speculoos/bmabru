@@ -9,7 +9,7 @@
         </li>
         <% for(var cat in data){ %>
         <li>
-            <a class="section"><%- cat %></a>
+            <a class="section" data-cat="<%- cat %>"><%- cat %></a>
             <ul>
                 <% for(var p in data[cat]){ page = data[cat][p]; %>
                 <li class="route" data-route="page/<%= page.slug %>">
