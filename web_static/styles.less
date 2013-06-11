@@ -488,7 +488,13 @@ body{height: 100%; }
     &.partial{
         left:(@Warticle + 4 * @marginINT);
     }
-}
+    
+    &.partial-blog {
+         left:(@Warticle + 2 * @Wmenu + 6 * @marginINT);
+         
+         z-index: 120;  
+    }
+  }
 
 
 #index_popup_box {
