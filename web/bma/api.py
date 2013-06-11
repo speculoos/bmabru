@@ -9,13 +9,21 @@ from rest_framework import generics
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
 
 from django.conf.urls import  url
 
 
 REGISTERED_MODELS = []
 REGISTERED_RESOURCES = []
+
+class DjangoModelPermissionsOrAnonReadOnly(DjangoModelPermissions):
+    """
+    Similar to DjangoModelPermissions, except that anonymous users are
+    allowed read-only access.
+    """
+    authenticated_users_only = False
+
 
 @api_view(('GET',))
 @permission_classes([])
@@ -84,6 +92,7 @@ def get_list_view(app, model, filters=None):
     setattr(cls, '_filters', filters)
     setattr(cls, 'model', m)
     setattr(cls, 'serializer_class', m.serializer_class)
+    setattr(cls, 'permission_classes', (DjangoModelPermissionsOrAnonReadOnly,))
     setattr(cls, 'get_queryset', get_queryset)
     
     return cls
@@ -94,6 +103,7 @@ def get_detail_view(app, model):
     cls = type(''.join([app,model,'Detail']), (generics.RetrieveUpdateDestroyAPIView,), {})
     setattr(cls, 'model', m)
     setattr(cls, 'serializer_class', m.serializer_class)
+    setattr(cls, 'permission_classes', (DjangoModelPermissionsOrAnonReadOnly,))
     
     return cls
     

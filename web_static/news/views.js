@@ -68,17 +68,13 @@
             
             this._ready = false;
             this.newsItems.on('reset', function(){
-                if(!this._ready)
-                {
-                    this._ready = true;
-                    this.trigger('ready');
-                }
+                this.render();
             }, this);
             
             this.newsItems.fetch({reset:true});
         },
         renderOne: function(item){
-            console.log('ItemsView.renderOne',item.id);
+//             console.log('ItemsView.renderOne',item.id, this._ready);
             if(!this._ready)
             {
                 var self = this;
@@ -91,10 +87,10 @@
                 item.set({
                     visited:false,
                     current:false,
-                });
+                }, {silent:true});
                 var i = new NEWS.Views.items({model:item});
-                var el = i.render().el;
-                this.$el.append(el);
+                this.$el.append(i.render().$el);
+                console.log('Appended',this.el, i.el);
                 this.items[item.cid] = i;
                 var self = this;
                 item.on('change:pub_date', function(){
@@ -104,10 +100,10 @@
             return this;
         },
         render: function(){
-            this.$el.empty();
             this.items = {};
             Template.render('item-list', this, function(t){
                 this.$el.html(t({}));
+                this._ready = true;
                 this.newsItems.each(function(item){
                     this.renderOne(item);
                 }, this);

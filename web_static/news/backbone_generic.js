@@ -54,18 +54,14 @@
                     className: model,
                     initialize: function() {
                         this.model.on('change', this.render, this);
-                        if(!this.model.isNew())
-                        {
-                            this.render();
-                        }
                     },
                     render: function() {
+                        console.log('View['+model+'].render', this.model.id);
                         var $el = this.$el;
-                        $el.attr('id', model + '_' + this.model.id)
-                        $el.empty();
                         var data = this.model.toJSON();
                         Template.render(model, this, function(t){
                             $el.html(t(data));
+                            console.log('View['+model+'].rendered', this.model.id);
                             if(this.postRender)
                             {
                                 this.postRender(data);
