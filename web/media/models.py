@@ -6,6 +6,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 from adminsortable.models import Sortable
+from markdown2 import markdown
 
 from bmabru.models import Project
 
@@ -76,7 +77,7 @@ class SubjectiveImage(Sortable):
         excerpt = ' '.join(words[0:8])
         return '[%s] %s'%(self.image, excerpt)
         
-@serializer(property_list=('resources',))
+@serializer(property_list=('resources','format_body',))
 class Page(Sortable):
     class Meta(Sortable.Meta):
         verbose_name = _("Page")
@@ -91,6 +92,10 @@ class Page(Sortable):
     image = models.ImageField(upload_to='media_page', height_field='image_height', width_field='image_width', blank=True, null=True)
     image_width = models.IntegerField(blank=True, null=True, default=0)
     image_height = models.IntegerField(blank=True, null=True, default=0)
+    
+    @property
+    def format_body(self):
+        return markdown(self.body)
     
     def __unicode__(self):
         return self.title

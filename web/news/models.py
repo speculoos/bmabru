@@ -6,6 +6,8 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 
+from markdown2 import markdown
+
 from bmabru.models import Project
 from bma.api import serializer
 
@@ -40,7 +42,7 @@ class Resource(models.Model):
     def __unicode__(self):
         return self.slug
     
-@serializer(depth=0)
+@serializer(property_list=('format_body',), depth=0)
 class Item(models.Model):
     class Meta:
         verbose_name = _("News Item")
@@ -55,7 +57,9 @@ class Item(models.Model):
     #resource = models.ForeignKey(Resource, blank=True, null=True, default=None)
     image_url = models.URLField(max_length=1024, blank=True, null=True, default=None)
     
-    
+    @property
+    def format_body(self):
+        return markdown(self.body)
     
     def __unicode__(self):
         return self.title
