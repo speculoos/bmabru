@@ -71,6 +71,7 @@
             title:'{{b.title}}',
             body:'{{ b.body|md|truncatewords_html:30|escapejs }}',
             pub_date : '{{b.pub_date}}',
+            {% if b.image_url %}image_url :'{{b.image_url}}',{% endif %} 
         });
         {% endfor %}
     })();

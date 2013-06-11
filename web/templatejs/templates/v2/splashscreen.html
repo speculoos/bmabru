@@ -9,6 +9,9 @@
     <div class="featured-title featured-project">
         <span class="route" data-route="news/<%= b.slug %>"><%- b.title %></span>
     </div>
+    <% if(b.image_url){ %>
+        <div class="image"><img src="<%= b.image_url %>" /></div>
+    <% } %>
     <div class="featured-body"><%= b.body %></div>
 <% } %>
 </div>

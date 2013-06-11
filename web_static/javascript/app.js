@@ -36,6 +36,7 @@
             this.registerComponent('maptools', new bMa.Views.MapTools, 'viewport', 1);
             this.registerComponent('projectlist', new bMa.Views.ProjectList, 'viewport', 1);
             this.registerComponent('splash', new bMa.Views.Splash, 'viewport', 1);
+            this.registerComponent('blog', new bMa.Views.Blog, 'viewport', 1);
             
             this.getComponent('main_map').on('ready',
                                              function(){

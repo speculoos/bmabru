@@ -43,18 +43,22 @@
             this._display = true;
         },
         render:function(){
-            var data = _.extend({}, {news: bMa.Data.HotNews});
-            T.render(tname('splashscreen'), this, function(t){
-                this.$el.html(t(data));
-            });
+            if(this._display)
+            {
+                var data = _.extend({}, {news: bMa.Data.HotNews});
+                T.render(tname('splashscreen'), this, function(t){
+                    this.$el.html(t(data));
+                });
+            }
             return this;
         },
         events:{
+            'click .route':'close',
             'click .close':'close',
         },
         close:function(){
             this._display = false;
-            this.$el.detach();
+            this.$el.hide();
         },
     });
     
@@ -146,6 +150,59 @@
         setModel:function(model){
             this.page = new page({model:model});
             return this.render();
+        },
+    });
+    
+    var blogPost = View.extend({
+        className:'post',
+        initialize:function(){
+            this.model.on('change', this.render.bind(this));
+        },
+        render:function(){
+            var data = this.model.toJSON();
+            T.render(tname('blog-post'), this, function(t){
+                this.$el.html(t(data));
+            });
+            return this;
+        },
+    });
+    
+    var blog = View.extend({
+        className:'blog',
+        initialize:function(){
+            bMa.Data.collections.blog.on('add', this.renderOne.bind(this));
+            bMa.Data.collections.blog.on('reset', this.render.bind(this));
+        },
+        renderOne:function(item){
+            if(this.items && !this.items[item.cid])
+            {
+                this.items[item.cid] = new blogPost({model:item});
+                this.$el.append(this.items[item.cid].render().el);
+            }
+        },
+        render:function(){
+            var data = {};
+            T.render(tname('blog'), this, function(t){
+                this.items = {};
+                this.$el.html(t(data));
+                bMa.Data.collections.blog.each(this.renderOne.bind(this));
+            });
+            return this;
+        },
+        selectItem:function(slug){
+            for(var k in this.items)
+            {
+                var ms = this.items[k].model.get('slug');
+                console.log('selectItem',ms,slug);
+                if( ms && ms === slug)
+                {
+                    this.items[k].model.set({selected:true})
+                    return;
+                }
+            }
+            bMa.Data.collections.blog.once('add',function(){
+                this.selectItem(slug);
+            }, this);
         },
     });
     
@@ -458,6 +515,7 @@
         Navigation: navigation,
         SiteTools: siteTools,
         Splash: splashscreen,
+        Blog: blog,
     };
     
 })();

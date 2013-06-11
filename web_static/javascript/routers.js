@@ -42,6 +42,7 @@
             'city/:city':'city',
             'function/:func':'func',
             'projects':'projects',
+            'news(/:slug)':'news',
         },
         
         index:function(){
@@ -90,6 +91,14 @@
             {
                 this.navigate('index');
             }
+        },
+        news:function(slug){
+            window.app.setComponents('navigation sitetools blog'.split(' '));
+            if(slug)
+            {
+                window.app.send('blog', 'selectItem', slug);
+            }
+            bMa.Data.collections.blog.fetch();
         },
         city:function(city){
             window.app.send('main_map', 'removeClass', 'partial');

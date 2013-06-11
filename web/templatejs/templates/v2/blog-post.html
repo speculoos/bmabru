@@ -1,0 +1,12 @@
+{% load i18n %}
+{# blog post #}
+<div class="title"><%= data.title %></div>
+<div class="date"><%= data.pub_date %></div>
+<% if(data.image_url){ %>
+    <div class="image">
+        <img src="<%= data.image_url %>" />
+    </div>
+<% } %>
+<div class="body"><%= data.body %></div>
+
+
