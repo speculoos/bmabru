@@ -19,6 +19,7 @@ from rest_framework.response import Response
 
 from bmabru.models import *
 from media.models import *
+from news.models import Item as BlogItem
 
 from bma.api import get_list_view
 
@@ -72,7 +73,8 @@ class GeoSerial(serializers.get_serializer("json")):
 def index(request):
     data = {'category':Category.objects.all()}
     data['projects'] = Project.objects.filter(published=True)
-    data['featured'] = Featured.objects.filter(published=True)
+    #data['featured'] = Featured.objects.filter(published=True)
+    data['blog'] = BlogItem.objects.order_by('pub_date')[:3]
     rc = RequestContext(request)
     return render_to_response("index.html", data, context_instance = rc)
     
