@@ -168,9 +168,9 @@
 }
 
 .infofield {
-     padding: 0px 0px 4px 0px;
+     padding: 0px 0px 2px 0px;
      font-size:10pt;
-     line-height:12pt;
+     line-height:10pt;
 }
 .infolabel {
         font-family: 'URWGothicL';
@@ -394,12 +394,14 @@ body{height: 100%; }
     
     .project-description{
         .infofield;
+        padding: 0px;
     }
     .project-info-label{
         .infolabel;
         .infofield;
     }
     .project-info-box{
+    line-height: 110%;
     }
     
     .project-actions {
@@ -418,6 +420,7 @@ body{height: 100%; }
                 text-align: left;
                 vertical-align: top;
                 width: auto;
+                padding: 4px 0px 3px 0px;
         
                     .action-title {
                     .infolabel;
@@ -484,38 +487,40 @@ body{height: 100%; }
          .close {
            position: absolute;
            top: 0px;
-           right: (@marginINT + 4px);
+           right: -20px;
+           width: 20px;
+           height: 20px;
+           border: 1px solid #000;
+           background-color: #fff;
+           opacity: 1;
+          .zoomrounded;
+           text-align: center;
+           font-size: 12pt;
+           line-height: 16px;
+           padding: 0px 1px 2px 1px;
          }         
+        
 
         .featured-title {
          margin-bottom: 0px;
          float: none;
-         clear: both;
+         clear: right;
+         width: (400px - @marginINT);
+         .featured-bluetitle;
+         padding: 5px 5px 3px 5px;
          
-           &.featured-page {
-              .featured-bluetitle;
-              text-decoration: none;
-              padding: 5px 5px 3px 5px;
-           
-              &:hover {
-                .featured-whitetitle;
-                border: 1px solid #000;
-                padding: 4px 4px 2px 4px;
-              }
-           }            
-
-           &.featured-project {
-              .featured-redtitle;
-              text-decoration: none;
-              padding: 5px 5px 3px 5px;
-           
-              &:hover {
-                .featured-whitetitle;
-                border: 1px solid #000;
-                padding: 4px 4px 2px 4px;
-              }
-           }         
-        }
+                  &:hover {
+                  .featured-whitetitle;
+                  border: 1px solid #000;
+                  padding: 4px 4px 2px 4px;
+                  }
+          }
+        
+          .image {
+           width: 150px;
+           float: left;
+           padding: 5px 5px 5px 0px;
+         }
         
         h1 {
          font-family: 'URWGothicL',Arial, Helvetica, sans-serif;
@@ -527,6 +532,7 @@ body{height: 100%; }
       p {
          margin-top: 7px;
          margin-bottom: 7px;
+         line-height: 100%;
      }
      
      strong {
@@ -980,4 +986,44 @@ thead {
     }
 }
 
+/************************
+ *  Blog
+ * 
+ ************************/
+
+.blog {
+    position:absolute;
+    top:@marginINT;
+    right:@marginINT;
+    bottom:@topH;
+    left:@marginINT;
+    overflow: auto;
+
+    .date{
+    .bluetitle;
+    width: (@Wmenu - 2 * @marginINT);
+    background-color: #eee;
+    color: #000;
+    margin: 0px;
+    text-align: center;
+    
+    }    
+    .title {
+        .bluetitle;
+        width: (@Warticle + @Wmenu);
+        margin-left: -5px;
+        margin-bottom: @marginINT;
+    }
+
+    .image{
+        max-width: (@Warticle + @Wmenu);
+        margin-left: (@Wmenu + @marginINT);
+      }
+    .body{
+    width: (@Warticle + @Wmenu);
+    margin-left: (@Wmenu + @marginINT) ;
+    margin-bottom: @topH;
+    line-height: 110%;
+    }
+}
 
