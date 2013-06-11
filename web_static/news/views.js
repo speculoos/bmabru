@@ -90,7 +90,6 @@
                 }, {silent:true});
                 var i = new NEWS.Views.items({model:item});
                 this.$el.append(i.render().$el);
-                console.log('Appended',this.el, i.el);
                 this.items[item.cid] = i;
                 var self = this;
                 item.on('change:pub_date', function(){
@@ -100,8 +99,8 @@
             return this;
         },
         render: function(){
-            this.items = {};
             Template.render('item-list', this, function(t){
+                this.items = {};
                 this.$el.html(t({}));
                 this._ready = true;
                 this.newsItems.each(function(item){
