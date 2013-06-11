@@ -1,3 +1,4 @@
+{% load i18n %}
 {# page #}
 <div class="menu-box">
     <% for(var pid in data.pages){ var page = data.pages[pid]; %>
@@ -14,6 +15,15 @@
     </div>
     <div class="article-body">
         <%- data.body %>
+        
+        <% if(data.resources && data.resources.length > 0){ %>
+        <h3 class="">{% trans "Documents" %}</h3>
+        <% for(var ridx in data.resources){ var res = data.resources[ridx]; %>
+            <div class="resource">
+                <a href="{{MEDIA_URL}}<%= res.path %>"><%= res.name %></a>
+            </div>
+        <% }} %>
+        
     </div>
     <div class="article-image">
         <% if(data.image){ %>
