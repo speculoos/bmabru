@@ -517,7 +517,9 @@
             var p = this.polys[slug];
             if(p)
             {
-                this._whenReady(function(){map.fitBounds(p);});
+                this._whenReady(function(){
+                    map.fitBounds(p);
+                });
             }
         },
         filterCity:function(city){

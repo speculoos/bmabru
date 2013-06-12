@@ -31,7 +31,9 @@
 <% if(data.city){ %>
 <div class="project-city">
     <div class="project-info-box">
-    <%- data.city.zipcode %> <span class="filter-city" data-filter="<%= data.city.zipcode %> <%= data.city.name %>" ><%= data.city.name %></span>
+        <span class="route" data-route="city/<%= data.city.zipcode %> <%= data.city.name %>" >
+        <%- data.city.zipcode %> <%= data.city.name %>
+        </span>
     </div>
 </div>
 <% } %>
