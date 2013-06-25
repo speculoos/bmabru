@@ -156,6 +156,8 @@ class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
     list_filter = (ProjectCityListFilter, 'published')
     search_fields = ['name',]
     inlines = [PartnershipInline]
+    save_on_top = True
+    list_per_page = 1000
     
     def __init__(self, model, admin_site):
         super(GeoAdmin, self).__init__(model, admin_site)
