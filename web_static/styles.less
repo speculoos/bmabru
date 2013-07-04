@@ -361,11 +361,25 @@ body{height: 100%; }
 /*             white-space: pre; */
             margin-left: 6px;
             font-family: 'FjallaOne-Regular',Arial, Helvetica, sans-serif;
-            font-size: 14px;
-            letter-spacing: 0.08em;
+            font-size: 9px;
+            letter-spacing: 0.13em;
+            line-height: 10px;
             color: #aaa;
             cursor: pointer;
+            width: 65px;
+            text-align: right;
+            text-transform: uppercase;
+        }    
+
+        .language-switcher-item input[value='Français'] {
+            margin-top: -15px;
+            margin-right: -75px;
         }
+
+        .language-switcher-item input[value='Nederlands'] {
+            margin-top: 15px;
+        }
+
             
         .language-current input[type="submit"] {
             color: @blue;
@@ -456,6 +470,24 @@ body{height: 100%; }
       text-align: center;
       
         img{
+        }
+    }
+
+    .carrousel-control {
+        position: absolute;
+        top: 40%;
+        left: 15px;
+        width: 40px;
+        height: 73px;
+        margin-top: -20px;
+        font-size: 0px;
+
+        &.left {
+                    background: url("http://bma.local/web_static/images/arrowleft.png") no-repeat scroll 0 0 transparent;
+        }
+
+        &.right {
+                    background: url("http://bma.local/web_static/images/arrowright.png") no-repeat scroll 0 0 transparent;
         }
     }
     
@@ -846,8 +878,8 @@ body{height: 100%; }
             display: block;
             left: (@Wmenu + @marginINT + @marginEXT); 
             top:@marginINT;
-            right:@marginINT;
-            bottom: (@topH - @marginINT);
+            right:(0px - @marginINT);
+            bottom: (0px - @marginINT);
             overflow: auto;
             
                 .article-title{
