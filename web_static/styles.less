@@ -21,6 +21,17 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'MavenPro-Bold';
+    src: url('fonts/MavenPro-Bold.eot');
+    src: url('fonts/MavenPro-Bold.eot?#iefix') format('embedded-opentype'),
+        url('fonts/MavenPro-Bold.woff') format('woff'),
+        url('fonts/MavenPro-Bold.ttf') format('truetype'),
+        url('fonts/MavenPro-Bold.svg#MavenPro-Bold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 
 
 /* vars */
@@ -59,6 +70,8 @@
 @Wmenu: 167px;
 @printopacity : 1;
 @scale-height: 26px;
+
+@fontMaven: 'MavenPro-Bold', @fontH;
 
 /* ruleset */
 
@@ -333,17 +346,19 @@ body{height: 100%; }
 .site-tools {
     position: absolute;
     top:0;
-    right:0;
+    right:-5px;
     text-align:right;
-    color: #aaa;
-    font-size: 14px;
-    letter-spacing: 0.08em;
-    font-family: 'FjallaOne-Regular',Arial, Helvetica, sans-serif;
-    
+    color: #000;
+    font-size: 7pt;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    font-family: @fontMaven;
+    line-height: 7pt;
+
     div, form{
         display:inline-block;
-        height:@topH;
-        line-height:@topH;
+        height:29px;
+        /*line-height:@topH;*/
     }
     
     .projetcs-link {
@@ -356,6 +371,7 @@ body{height: 100%; }
     .language_switcher {
         .language-switcher-item input[type="submit"] {
             -webkit-appearance: none;
+            position: absolute;
             border: 0px;
             background-color: transparent;
 /*             white-space: pre; */
@@ -363,24 +379,22 @@ body{height: 100%; }
             font-family: 'FjallaOne-Regular',Arial, Helvetica, sans-serif;
             font-size: 9px;
             letter-spacing: 0.13em;
-            line-height: 10px;
             color: #aaa;
             cursor: pointer;
-            width: 65px;
             text-align: right;
             text-transform: uppercase;
+            top: 2px;
+            right: 5px;
+            width: 60px;
         }    
 
-        .language-switcher-item input[value='Français'] {
-            margin-top: -15px;
-            margin-right: -75px;
+       .language-switcher-item input[value='Français'] {
+        right: 65px;
         }
 
         .language-switcher-item input[value='Nederlands'] {
-            margin-top: 15px;
         }
-
-            
+       
         .language-current input[type="submit"] {
             color: @blue;
         }
