@@ -76,6 +76,8 @@
         {% endfor %}
     })();
     
+    
+
 	</script>
 	{% endspaceless %}
 </head>
@@ -98,5 +100,17 @@
 <script src="{{STATIC_URL}}javascript/views.js"></script>
 <script src="{{STATIC_URL}}javascript/app.js"></script>
 <script src="{{STATIC_URL}}javascript/index.js"></script>
+
+<script>
+function csrfSafeMethod(method) { return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method)); }
+$.ajaxSetup({
+    crossDomain: false,
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type)) {
+            xhr.setRequestHeader("X-CSRFToken", '{{ csrf_token }}');
+        }
+    }
+});
+</script>
 </body>
 </html>

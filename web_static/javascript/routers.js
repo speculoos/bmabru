@@ -37,6 +37,7 @@
         routes:{
             '': 'index',
             'index': 'index',
+            'contact': 'contact',
             'page/:slug' :'page',
             'project/:slug':'project',
             'city/:city':'city',
@@ -140,6 +141,10 @@
             }
             if(image)
                 window.app.send('carousel','selectImage', image);
+        },
+        
+        contact: function(){
+            window.app.setComponents('navigation sitetools contact'.split(' '));
         },
     });
     

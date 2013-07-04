@@ -38,6 +38,7 @@
             this.registerComponent('splash', new bMa.Views.Splash, 'viewport', 1);
             this.registerComponent('blog', new bMa.Views.Blog, 'viewport', 1);
             this.registerComponent('carousel', new bMa.Views.Carousel, 'viewport', 1);
+            this.registerComponent('contact', new bMa.Views.ContactForm, 'viewport', 1);
             
             this.getComponent('main_map').on('ready',
                                              function(){

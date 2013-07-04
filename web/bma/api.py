@@ -24,6 +24,17 @@ class DjangoModelPermissionsOrAnonReadOnly(DjangoModelPermissions):
     """
     authenticated_users_only = False
 
+class WriteOnlyField(serializers.ModelField):
+    def __init__(self, *args, **kwargs):
+        model_field_name = kwargs.pop('model_field_name')
+        model = kwargs.pop('model')
+        kwargs.update({
+            'model_field': model()._meta.get_field(model_field_name)
+            })
+        super(WriteOnlyField, self).__init__(*args, **kwargs)
+        
+    def field_to_native(self, obj, fn):
+        return None
 
 @api_view(('GET',))
 @permission_classes([])
@@ -34,13 +45,18 @@ def api_root(request, format=None):
     return Response(r)
 
 # class decorator
-def serializer(property_list = tuple(), exclude=tuple(), depth=0, filter=None, serializer='ModelSerializer'):
+def serializer(property_list = tuple(), exclude=tuple(), depth=0, 
+               filter=None, serializer='ModelSerializer', 
+               perms=None, write_only=tuple()):
     def decorator(cls):
         name = cls.__name__
         REGISTERED_RESOURCES.append((cls.__module__.split('.')[0], name, filter))
         #print('Decorating [%s] with a serializer'%(name,))
         meta = type('Meta', (object, ), {'model':cls, 'depth':depth, 'exclude':exclude})
         srl = type(''.join([name,'Serializer']), (getattr(serializers, serializer),), {'Meta':meta} )
+        
+        if perms is not None:
+            setattr(cls, 'serializer_permissions', perms)
 
         fields = {}
         for prop in property_list:
@@ -64,7 +80,15 @@ def serializer(property_list = tuple(), exclude=tuple(), depth=0, filter=None, s
                 
             setattr(srl, prop, sfield)
             fields[prop] = sfield
-        if property_list:
+        #if property_list:
+            #setattr(srl, 'base_fields', fields)
+            
+        for field_name in write_only:
+            sfield = WriteOnlyField(model=cls, model_field_name=field_name)
+            fields[field_name] = sfield
+            setattr(srl, field_name, sfield)
+            
+        if fields:
             setattr(srl, 'base_fields', fields)
             
         setattr(cls, 'serializer_class', srl)
@@ -92,7 +116,14 @@ def get_list_view(app, model, filters=None):
     setattr(cls, '_filters', filters)
     setattr(cls, 'model', m)
     setattr(cls, 'serializer_class', m.serializer_class)
-    setattr(cls, 'permission_classes', (DjangoModelPermissionsOrAnonReadOnly,))
+    if hasattr(m ,'serializer_permissions') :
+        import rest_framework.permissions as rfp
+        perms = tuple()
+        for sp in m.serializer_permissions:
+            perms += (getattr(rfp, sp),)
+        setattr(cls, 'permission_classes', perms)
+    else:
+        setattr(cls, 'permission_classes', (DjangoModelPermissionsOrAnonReadOnly,))
     setattr(cls, 'get_queryset', get_queryset)
     
     return cls
@@ -103,7 +134,14 @@ def get_detail_view(app, model):
     cls = type(''.join([app,model,'Detail']), (generics.RetrieveUpdateDestroyAPIView,), {})
     setattr(cls, 'model', m)
     setattr(cls, 'serializer_class', m.serializer_class)
-    setattr(cls, 'permission_classes', (DjangoModelPermissionsOrAnonReadOnly,))
+    if hasattr(m ,'serializer_permissions') :
+        import rest_framework.permissions as rfp
+        perms = tuple()
+        for sp in m.serializer_permissions:
+            perms += (getattr(rfp, sp),)
+        setattr(cls, 'permission_classes', perms)
+    else:
+        setattr(cls, 'permission_classes', (DjangoModelPermissionsOrAnonReadOnly,))
     
     return cls
     

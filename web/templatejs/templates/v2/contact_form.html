@@ -1,0 +1,13 @@
+{% load i18n %}
+{# contact form #}
+
+<label>{% trans "Name" %}</label>
+<input type="text" name="name"></input>
+
+<label>{% trans "Email" %}</label>
+<input type="email" name="from"></input>
+
+<label>{% trans "Message" %}</label>
+<textarea name="message"></textarea>
+
+<button class="send-message">{% trans "Send" %}</button>

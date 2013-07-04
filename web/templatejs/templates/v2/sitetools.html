@@ -10,6 +10,12 @@
 {% trans "Projects list" %}
 </div>
 
+
+<div class="projetcs-link route" data-route="contact">
+{% trans "Contact" %}
+</div>
+
+
 <div class="language_switcher">
     <form class="language-switcher-item {% if  'fr' == LANGUAGE_CODE %}language-current{% endif %}" action="/i18n/setlang/" method="post">
         {% csrf_token %}

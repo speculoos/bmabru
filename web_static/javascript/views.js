@@ -395,6 +395,40 @@
         },
     });
     
+    var contactForm = View.extend({
+        className:'contact-form',
+        initialize:function(){
+            this.errors = undefined;
+        },
+        render:function(){
+            T.render(tname('contact_form'), this, function(t){
+                this.$el.html(t({}));
+            });
+            return this;
+        },
+        
+        events:{
+            'click .send-message':'submit',
+        },
+        
+        submit:function(){
+            var name = this.$('[name=name]').val();
+            var from = this.$('[name=from]').val();
+            var message = this.$('[name=message]').val();
+            var csrf = this.$('[name=csrfmiddlewaretoken]').val();
+            
+            var m = new bMa.Models.Message({
+                name:name,
+                email:from,
+                message:message,
+            });
+            
+            m.save();
+            window.router.navigate('index');
+        },
+        
+    });
+    
     var map = View.extend({
         id:'map',
         initialize:function(){
@@ -569,6 +603,7 @@
         Splash: splashscreen,
         Blog: blog,
         Carousel: carousel,
+        ContactForm: contactForm,
     };
     
 })();

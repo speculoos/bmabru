@@ -29,10 +29,16 @@
         idAttribute:'id',
     });
     
+    var message = Backbone.Model.extend({
+        urlRoot:'/api/messages/',
+        idAttribute:'id',
+    });
+    
     bMa.Models = {
         Page: page,
         Project : project,
         BlogPost : blogPost,
+        Message : message,
     };
     
 })();

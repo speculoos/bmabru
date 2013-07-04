@@ -3,10 +3,13 @@ media.models
 """
 
 from django.db import models
+from django.core.mail import mail_managers
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 from adminsortable.models import Sortable
+
 from markdown2 import markdown
+from textwrap import wrap
 
 from bmabru.models import Project
 
@@ -103,3 +106,39 @@ class Page(Sortable):
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Page, self).save(force_insert, force_update)
+        
+        
+        
+@serializer(write_only=('name','email','message'), 
+            perms=('AllowAny',))
+class Message(models.Model):
+    
+    name = models.CharField(max_length=255)
+    email = models.EmailField(max_length=128)
+    message = models.TextField()
+    
+    def __unicode__(self):
+        return self.name
+    
+    def body(self):
+        ret = []
+        ret.append(u'%s <%s> %s:\n' % (self.name, self.email,_('sent')))
+        for line in wrap(self.message):
+            ret.append(line)
+            
+        return u'\n'.join(ret)
+        
+    
+
+def message_sent(sender, **kwargs):
+    message = kwargs['instance']
+    print message.name
+    print message.email
+    
+    body = message.body()
+    mail_managers(_('New Message'), body)
+    
+    
+models.signals.post_save.connect(message_sent, sender=Message, weak=False)
+    
+        
