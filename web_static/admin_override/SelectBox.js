@@ -49,7 +49,7 @@ var SelectBox = {
             for(var k = 0; k < gr.length; k++) {
                 gr[k].displayed = 1;
                 for(var j = 0; j < tokens.length; j++) {
-                    if(gr[k].text.toLowerCase.indexOf(tokens[j]) < 0) {
+                    if(gr[k].text.toLowerCase().indexOf(tokens[j]) < 0) {
                         gr[k].displayed = 0;
                         break;
                     }
