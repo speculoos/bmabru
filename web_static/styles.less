@@ -286,7 +286,7 @@ body{height: 100%; }
      			}
 
 
-			a{
+			span{
                	text-transform:uppercase; 
                	font-family: 'FjallaOne-Regular',Arial, Helvetica, sans-serif;
                	position:relative; 
@@ -298,7 +298,11 @@ body{height: 100%; }
                    	
                    	&:hover {
                    	color: @blue;
-                   	}                   	
+                   	}  
+
+                    &.current{
+                     color: @blue;
+                    }                 	
                }
                
 			ul{

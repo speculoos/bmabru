@@ -1,3 +1,4 @@
+{% load i18n %}
 {# navigation #}
 
 <div id="navigation">
@@ -8,16 +9,23 @@
             </a>
         </li>
         <% for(var cat in data){ %>
+        <% var page = _.reduce(data[cat], function(memo, key){if(!memo)return key;else return memo;}, 0); %>
         <li>
-            <a class="section" data-cat="<%- cat %>"><%- cat %></a>
-            <ul>
-                <% for(var p in data[cat]){ page = data[cat][p]; %>
-                <li class="route" data-route="page/<%= page.slug %>">
-                <span><%- page.title %></span>
-                </li>
-                <% } %>
-            </ul>
+            <span  class="section route" 
+                    data-cat="<%= cat %>"
+                    data-route="page/<%= page.slug %>" >
+                        <%= cat %>
+            </span>
+
         </li>
         <% } %>
+        <li>
+            <span 
+                class="projetcs-link route" 
+                data-route="projects" >
+                    {% trans "Projects list" %}
+            </span>
+        </li>   
+
     </ul>
 </div>

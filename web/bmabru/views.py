@@ -120,49 +120,60 @@ def bind_geometry(request):
     rc = RequestContext(request)
     if request.method == 'GET':
         return render_to_response("bind_geometry.html", dict(projects=projects), context_instance = rc)
-    import fiona
+    #import fiona
     from shapely.geometry import shape, MultiPolygon
     import tempfile
     import zipfile
     
     pid = request.POST.get('pid')
+    geojson_file = request.FILES.get('geo')
     sid = request.POST.get('sid')
-    posted_file = request.FILES.get('zip')
     project = Project.objects.get(pk=int(pid))
     
-    local_name = 'geometry_'+pid+'.zip'
-    local_path = os.path.join(settings.MEDIA_ROOT,local_name)
+    geostr = []
+    for chunk in geojson_file.chunks():
+        geostr.append(chunk)
+        
+    geo = json.loads(''.join(geostr))
+        
+        
+    simport = shape(geo['features'][0]['geometry'])
+    if simport.geom_type == 'Polygon':
+        simport = [simport]
     
-    archive = open(local_path, 'wb+')
-    for chunk in posted_file.chunks():
-        archive.write(chunk)
-    archive.close()
+    #local_name = 'geometry_'+pid+'.zip'
+    #local_path = os.path.join(settings.MEDIA_ROOT,local_name)
     
-    z = zipfile.ZipFile(local_path)
-    root = z.namelist()[0].split('/')[0]
-    vfs = 'zip://'+local_path
-    source = fiona.open('/'+root, vfs=vfs)
+    #archive = open(local_path, 'wb+')
+    #for chunk in posted_file.chunks():
+        #archive.write(chunk)
+    #archive.close()
     
-    simport = None
-    if sid is None:
-        for r in source:
-            sh = shape(r['geometry'])
-            if sh.geom_type == 'Polygon':
-                sh = [sh]
-            simport = sh
-            break # we just take the first one
-    else:
-        for r in source:
-            if sid == r['id']:
-                sh = shape(r['geometry'])
-                if sh.geom_type == 'Polygon':
-                    sh = [sh]
-                simport = sh
-                break
-    if simport:
-        mpoly = MultiPolygon(sh)
-        project.mpoly = mpoly.wkt
-        project.save()
+    #z = zipfile.ZipFile(local_path)
+    #root = z.namelist()[0].split('/')[0]
+    #vfs = 'zip://'+local_path
+    #source = fiona.open('/'+root, vfs=vfs)
+    
+    #simport = None
+    #if sid is None:
+        #for r in source:
+            #sh = shape(r['geometry'])
+            #if sh.geom_type == 'Polygon':
+                #sh = [sh]
+            #simport = sh
+            #break # we just take the first one
+    #else:
+        #for r in source:
+            #if sid == r['id']:
+                #sh = shape(r['geometry'])
+                #if sh.geom_type == 'Polygon':
+                    #sh = [sh]
+                #simport = sh
+                #break
+    
+    mpoly = MultiPolygon(simport)
+    project.mpoly = mpoly.wkt
+    project.save()
     
     return render_to_response("bind_geometry.html", dict(projects=projects), context_instance = rc)
     
