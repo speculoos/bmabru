@@ -591,6 +591,16 @@
         },
     });
     
+    var backToMap = View.extend({
+        className:'back-to-map',
+        render:function(){
+            T.render(tname('back_to_map'), this, function(t){
+                this.$el.html(t({}));
+            });
+            return this;
+        },
+    });
+    
     
     bMa.Views = {
         Page: page,
@@ -606,6 +616,7 @@
         Blog: blog,
         Carousel: carousel,
         ContactForm: contactForm,
+        BackToMap: backToMap,
     };
     
 })();
