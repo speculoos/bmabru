@@ -103,7 +103,7 @@
             {
                 window.app.send('blog', 'selectItem', slug);
             }
-            bMa.Data.collections.blog.fetch();
+            
         },
         city:function(city){
             window.app.send('main_map', 'removeClass', 'partial partial-blog');

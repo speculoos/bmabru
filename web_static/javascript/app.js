@@ -48,6 +48,9 @@
             this.$el.appendTo('body');
             this.getComponent('main_map').getMap();
             
+            
+            bMa.Data.collections.blog.fetch({reset:true});
+            
         },
         setupLayout:function(){
             this.layouts = {

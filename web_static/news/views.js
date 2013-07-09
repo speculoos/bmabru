@@ -302,7 +302,6 @@
     
     Views.PostView = Backbone.View.extend({
         className:'news-form',
-        comparator:'pub_date',
         initialize:function(){
             this.resetModel(this.model);
             this._initial = true;
