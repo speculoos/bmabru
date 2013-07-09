@@ -263,12 +263,13 @@
             var data = {};
             T.render(tname('projectlist'), this, function(t){
                 $el.html(t(data));
-                this.$tbody = this.$el.find('.table-body');
+                this.$tbody = this.$('.table-body');
                 _.each(bMa.Data.Projects, function(p){
                     var m = new bMa.Models.Project({id:p.id});
                     this.renderOne(m);
                     m.fetch();
                 }, this);
+                this.$('#projects_table').stupidtable();
             });
             return this;
         },
