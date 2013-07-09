@@ -114,6 +114,8 @@ class ProjectForm(ModelForm):
                 
         self.fields['actions'].choices = choices
 
+class ProjectImageAdmin(admin.ModelAdmin):
+    exclude = ('width', 'height', 'zoom_level')
 
 class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
     
@@ -191,7 +193,7 @@ admin.site.register(ProjectStatus, ProjectStatusAdmin)
 admin.site.register(Action, ActionAdmin)
 admin.site.register(Step, StepAdmin)
 admin.site.register(City, CityAdmin)
-admin.site.register(ProjectImage)
+admin.site.register(ProjectImage, ProjectImageAdmin)
 admin.site.register(ProjectWorth, ProjectWorthAdmin)
 admin.site.register(SurfaceRange)
 admin.site.register(BudgetRange)

@@ -153,7 +153,7 @@ class ProjectImage(models.Model):
     image = models.ImageField(upload_to='project_trigo', height_field='height', width_field='width', verbose_name=_('Image'))
     width = models.IntegerField(blank=True)
     height = models.IntegerField(blank=True)
-    zoom_level = models.IntegerField(blank=True)
+    zoom_level = models.IntegerField(blank=True, default=1)
     
     @property
     def thumbnail(self):
@@ -170,6 +170,9 @@ class ProjectImage(models.Model):
     @property
     def url(self):
         return self.image.url
+    
+    def __unicode__(self):
+        return ('%s' % (self.image, )).split('/').pop()
     
 
 @serializer(exclude=('description',))
