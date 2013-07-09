@@ -192,6 +192,15 @@
         margin-top: 10px;
 }
 
+.contact-txt {
+    border: 1px solid #000;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    width:(@Warticle - 15px) ;
+
+}
+
 /* reset */
 *, p, div, ul, li, h1, h2, h3, h4, h5, h6{padding:0; margin:0;}
 body{font-family:Helvetica, Arial; text-align:left; margin:0px; font-size: 10pt;}
@@ -353,11 +362,13 @@ body{height: 100%; }
     text-transform: uppercase;
     letter-spacing: 0.01em;
     font-family: @fontMaven;
-    line-height: 7pt;
+    line-height: 8pt;
+    height:@topH;
+
 
     div, form{
         display:inline-block;
-        height:29px;
+        margin-top: 4px;
         /*line-height:@topH;*/
     }
     
@@ -375,21 +386,20 @@ body{height: 100%; }
             border: 0px;
             background-color: transparent;
 /*             white-space: pre; */
-            margin-left: 6px;
-            font-family: 'FjallaOne-Regular',Arial, Helvetica, sans-serif;
-            font-size: 9px;
-            letter-spacing: 0.13em;
+            font-size: 7pt;
+            font-family: @fontMaven;
+            line-height: 8pt;
             color: #aaa;
             cursor: pointer;
             text-align: right;
             text-transform: uppercase;
-            top: 2px;
+            margin-top: -1px;
             right: 5px;
-            width: 60px;
+            width: 65px;
         }    
 
        .language-switcher-item input[value='Français'] {
-        right: 65px;
+        right: 70px;
         }
 
         .language-switcher-item input[value='Nederlands'] {
@@ -547,7 +557,7 @@ body{height: 100%; }
   width: @Wpopup;
     background-color: transparent;
     position: absolute;
-    top: 25%;
+    top: 12.25%;
     left:25%;
       
    #index_popup_left {
@@ -1099,4 +1109,65 @@ thead {
     line-height: 110%;
     }
 }
+
+/************************
+ *  Contact form
+ * 
+ ************************/
+
+.contact-form {
+    width:(@Warticle) ;
+    margin-left: (@Wmenu + 2 * @marginINT);
+    margin-top: (2 * @marginINT);
+    font-size: 9pt;
+    line-height: 110%;
+
+    &.contact-form label {
+        font-size: 9pt;
+        line-height: 110%;
+        margin-bottom: 0px;
+    }
+
+    &.contact-form input {
+    .contact-txt
+        }    
+    &.contact-form textarea {
+    .contact-txt;
+    height: 100px;
+        }  
+
+    &.contact-form button {
+    font-size: 8pt;
+    padding: 0px 5px;    
+    }
+
+    .title {
+        .bluetitle;
+        width:(@Warticle - 3 * @marginINT) ;
+        margin-bottom: 20px;
+    }
+
+    .infos {
+
+        .infos-left {
+            width: (@Warticle / 2 - 10px);
+            float: left;
+            border-right: 1px solid #000;
+            margin-right: 20px;
+        }
+        .infos-right {
+            width: (@Warticle / 2) - 10px;
+            float: none;
+            clear: right;
+        }
+    }
+
+    .form {
+        position: relative;
+        padding-top: 20px;
+        float: none;
+        clear: both;
+    }
+}
+
 
