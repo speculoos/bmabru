@@ -162,7 +162,7 @@ class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
     def __init__(self, model, admin_site):
         super(GeoAdmin, self).__init__(model, admin_site)
         #self.wms_url = 'http://bmawms.specgis.be/service'
-        self.wms_url = 'http://geoserver.gis.irisnet.be/geoserver/wms'
+        self.wms_url = 'http://geoserver.gis.irisnet.be/urbis/wms'
         self.wms_layer = 'urbisFR'
         self.wms_name = 'urbisFR'
         self.wms_options = {'format': 'image/png'}
@@ -173,7 +173,7 @@ class GeoAdmin(geo_admin.GeoModelAdmin, TranslationAdmin):
         self.map_srid = 31370
         self.units = 'm'
         self.num_zoom = 20
-        self.openlayers_url = '/'.join([settings.STATIC_URL, 'lib/OpenLayers-2.12/OpenLayers.js'])
+        self.openlayers_url = ''.join([settings.STATIC_URL, 'lib/OpenLayers-2.12/OpenLayers.js'])
         self.map_width = 800
         self.map_height = 600
         
