@@ -143,6 +143,14 @@
      width: (@Warticle - 30px + @marginINT);     
 }
 
+.small-txt {
+    font-size: 7pt;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    font-family: @fontMaven;
+    line-height: 8pt;
+}
+
 .featured-bluetitle {   
      .Title;
      background-color: @blue;
@@ -199,6 +207,29 @@
     border-radius: 0px;
     width:(@Warticle - 15px) ;
 
+}
+
+.back-to-map {
+    position: absolute;
+    bottom: (-@marginINT - 1px);
+    right: (-@marginINT - 1px);
+    text-align: right;
+
+    .txt-back-to-map {
+        display:none;
+    }
+    &:hover {
+
+       .txt-back-to-map {
+        .small-txt;
+        display: block;
+        position: absolute;
+        right: 65px;
+        bottom: 5px;
+        width: 100px;
+
+       } 
+    };
 }
 
 /* reset */
@@ -302,7 +333,11 @@ body{height: 100%; }
 
                     &.current{
                      color: @blue;
-                    }                 	
+                    }  
+
+                    &.logo-bma {
+                      top: 7px;  
+                    }               	
                }
                
 			ul{
@@ -357,16 +392,12 @@ body{height: 100%; }
 }
 	
 .site-tools {
+    .small-txt;
     position: absolute;
     top:0;
     right:-5px;
     text-align:right;
     color: #000;
-    font-size: 7pt;
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
-    font-family: @fontMaven;
-    line-height: 8pt;
     height:@topH;
 
 
@@ -907,8 +938,9 @@ body{height: 100%; }
             left: (@Wmenu + @marginINT + @marginEXT); 
             top:@marginINT;
             right:(0px - @marginINT);
-            bottom: (0px - @marginINT);
+            bottom: (@topH - @marginINT);
             overflow: auto;
+            border-bottom: 1px solid #ccc;
             
                 .article-title{
                     width: (@Warticle);                     

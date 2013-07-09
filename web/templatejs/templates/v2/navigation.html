@@ -4,9 +4,9 @@
 <div id="navigation">
     <ul>
         <li> 
-            <a href="{% url "index" %}">
+            <span class="logo-bma"><a href="{% url "index" %}">
                 <img src="{{STATIC_URL}}logo.png" alt="bMa" />
-            </a>
+            </a></span>
         </li>
         <% for(var cat in data){ %>
         <% var page = _.reduce(data[cat], function(memo, key){if(!memo)return key;else return memo;}, 0); %>
