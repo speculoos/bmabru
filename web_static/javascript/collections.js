@@ -22,6 +22,12 @@
     var blog = Backbone.Collection.extend({
         url:'/api/items/',
         model: bMa.Models.BlogPost,
+        comparator:function(a,b){
+            var da = new Date(a.get('pub_date')).getTime();
+            var db = new Date(b.get('pub_date')).getTime();
+            var ret = db - da;
+            return ret;
+        },
     });
     
     bMa.Collections = {

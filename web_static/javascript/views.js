@@ -187,6 +187,7 @@
     
     var blog = View.extend({
         className:'blog',
+        comparator:'pub_date',
         initialize:function(){
             bMa.Data.collections.blog.on('add', this.renderOne.bind(this));
             bMa.Data.collections.blog.on('reset', this.render.bind(this));
