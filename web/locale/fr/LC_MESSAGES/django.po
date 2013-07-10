@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-25 01:43-0500\n"
+"POT-Creation-Date: 2013-07-10 01:31-0500\n"
 "PO-Revision-Date: 2013-04-05 09:30-0500\n"
 "Last-Translator: Pierre Huyghebaert <pierre@speculoos.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,32 +18,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 "X-Translated-Using: django-rosetta 0.7.1\n"
 
-#: bma/example_settings.py:35 bma/settings.py:37 bma/settings_bmabru.py:37
+#: bma/example_settings.py:35 bma/settings.py:41 bma/settings_bmabru.py:37
 msgid "French"
 msgstr "Français"
 
-#: bma/example_settings.py:36 bma/settings.py:38 bma/settings_bmabru.py:38
+#: bma/example_settings.py:36 bma/settings.py:42 bma/settings_bmabru.py:38
 msgid "Dutch"
 msgstr "Néerlandais"
 
-#: bmabru/admin.py:77 bmabru/models.py:274 bmabru/models.py:383
+#: bmabru/admin.py:77 bmabru/models.py:277 bmabru/models.py:386
 #: templatejs/templates/v2/projectlist.html:15
 #: templates/projects_table.html:34
 msgid "City"
 msgstr "Commune"
 
-#: bmabru/admin.py:123 bmabru/models.py:47 bmabru/models.py:69
+#: bmabru/admin.py:125 bmabru/models.py:47 bmabru/models.py:69
 #: bmabru/models.py:100 bmabru/models.py:118 bmabru/models.py:137
-#: bmabru/models.py:186 bmabru/models.py:205 bmabru/models.py:226
-#: bmabru/models.py:264 bmabru/models.py:298 bmabru/models.py:375
+#: bmabru/models.py:189 bmabru/models.py:208 bmabru/models.py:229
+#: bmabru/models.py:267 bmabru/models.py:301 bmabru/models.py:378
 msgid "Description"
 msgstr "Description"
 
-#: bmabru/admin.py:135
+#: bmabru/admin.py:137
 msgid "bMa"
 msgstr "bMa"
 
-#: bmabru/admin.py:145 bmabru/models.py:85 bmabru/models.py:369
+#: bmabru/admin.py:147 bmabru/models.py:85 bmabru/models.py:372
 msgid "Project"
 msgstr "Projet"
 
@@ -57,14 +57,14 @@ msgstr "Catégorie d'intervenant"
 
 #: bmabru/models.py:26 bmabru/models.py:44 bmabru/models.py:68
 #: bmabru/models.py:99 bmabru/models.py:117 bmabru/models.py:136
-#: bmabru/models.py:185 bmabru/models.py:204 bmabru/models.py:225
-#: bmabru/models.py:263 bmabru/models.py:279 bmabru/models.py:297
-#: bmabru/models.py:374 templatejs/templates/v2/projectlist.html:9
-#: templates/projects_table.html:32
+#: bmabru/models.py:188 bmabru/models.py:207 bmabru/models.py:228
+#: bmabru/models.py:266 bmabru/models.py:282 bmabru/models.py:300
+#: bmabru/models.py:377 templatejs/templates/v2/contact_form.html:20
+#: templatejs/templates/v2/projectlist.html:9 templates/projects_table.html:32
 msgid "Name"
 msgstr "Nom"
 
-#: bmabru/models.py:27 bmabru/models.py:401
+#: bmabru/models.py:27 bmabru/models.py:404
 msgid "Parent"
 msgstr "Parent"
 
@@ -105,7 +105,7 @@ msgstr "Intervention"
 msgid "Partnerships"
 msgstr "Interventions"
 
-#: bmabru/models.py:95 bmabru/models.py:389
+#: bmabru/models.py:95 bmabru/models.py:392
 msgid "Trade object"
 msgstr "Objet de marché"
 
@@ -117,13 +117,13 @@ msgstr "Objets de marché"
 msgid "Program"
 msgstr "Programme"
 
-#: bmabru/models.py:114 bmabru/models.py:390
+#: bmabru/models.py:114 bmabru/models.py:393
 #: templatejs/templates/bmabru/project-box.html:94
 #: templatejs/templates/v2/project.html:97
 msgid "Programs"
 msgstr "Programmes"
 
-#: bmabru/models.py:132 bmabru/models.py:386
+#: bmabru/models.py:132 bmabru/models.py:389
 #: templatejs/templates/bmabru/project-box.html:121
 #: templatejs/templates/v2/project.html:124
 msgid "Procedure"
@@ -145,143 +145,143 @@ msgstr "Images du projet"
 msgid "Image"
 msgstr "Image"
 
-#: bmabru/models.py:181 templatejs/templates/v2/projectlist.html:18
+#: bmabru/models.py:184 templatejs/templates/v2/projectlist.html:18
 #: templates/projects_table.html:35
 msgid "Function"
 msgstr "Fonction"
 
-#: bmabru/models.py:182 bmabru/models.py:392
+#: bmabru/models.py:185 bmabru/models.py:395
 #: templatejs/templates/bmabru/project-box.html:80
 #: templatejs/templates/v2/project.html:83
 msgid "Functions"
 msgstr "Fonctions"
 
-#: bmabru/models.py:200 bmabru/models.py:387
+#: bmabru/models.py:203 bmabru/models.py:390
 #: templatejs/templates/bmabru/project-box.html:132
 #: templatejs/templates/v2/project.html:135
 msgid "Mission"
 msgstr "Mission"
 
-#: bmabru/models.py:201
+#: bmabru/models.py:204
 msgid "Missions"
 msgstr "Missions"
 
-#: bmabru/models.py:221 bmabru/models.py:222 bmabru/models.py:245
+#: bmabru/models.py:224 bmabru/models.py:225 bmabru/models.py:248
 msgid "Project status"
 msgstr "Statut du projet"
 
-#: bmabru/models.py:240
+#: bmabru/models.py:243
 msgid "Action"
 msgstr "Action"
 
-#: bmabru/models.py:241 bmabru/models.py:394
+#: bmabru/models.py:244 bmabru/models.py:397
 #: templatejs/templates/bmabru/project-box.html:143
 #: templatejs/templates/v2/project.html:146
 msgid "Actions"
 msgstr "Actions"
 
-#: bmabru/models.py:244
+#: bmabru/models.py:247
 msgid "Sentence"
 msgstr "Phrase"
 
-#: bmabru/models.py:259
+#: bmabru/models.py:262
 msgid "Step"
 msgstr "Étape"
 
-#: bmabru/models.py:260
+#: bmabru/models.py:263
 msgid "Steps"
 msgstr "Étapes"
 
-#: bmabru/models.py:265 news/models.py:55
+#: bmabru/models.py:268 news/models.py:55
 msgid "Date"
 msgstr "Date"
 
-#: bmabru/models.py:275 templatejs/templates/v2/maptools.html:23
+#: bmabru/models.py:278 templatejs/templates/v2/maptools.html:23
 msgid "Cities"
 msgstr "Communes"
 
-#: bmabru/models.py:278
+#: bmabru/models.py:281
 msgid "zip code"
 msgstr "Code postal"
 
-#: bmabru/models.py:293 bmabru/models.py:294
+#: bmabru/models.py:296 bmabru/models.py:297
 msgid "Project worth"
 msgstr "Plus-value"
 
-#: bmabru/models.py:309
+#: bmabru/models.py:312
 msgid "Budget range"
 msgstr "Budget"
 
-#: bmabru/models.py:310
+#: bmabru/models.py:313
 msgid "Budget ranges"
 msgstr "Budgets"
 
-#: bmabru/models.py:313 bmabru/models.py:331
+#: bmabru/models.py:316 bmabru/models.py:334
 msgid "Floor"
 msgstr "Seuil"
 
-#: bmabru/models.py:314 bmabru/models.py:332
+#: bmabru/models.py:317 bmabru/models.py:335
 msgid "Ceiling"
 msgstr "Plafond"
 
-#: bmabru/models.py:327
+#: bmabru/models.py:330
 msgid "Surface range"
 msgstr "Surface"
 
-#: bmabru/models.py:328
+#: bmabru/models.py:331
 msgid "Surface ranges"
 msgstr "Surface"
 
-#: bmabru/models.py:370
+#: bmabru/models.py:373 templatejs/templates/v2/navigation.html:37
 msgid "Projects"
 msgstr "Projets"
 
-#: bmabru/models.py:373
+#: bmabru/models.py:376
 msgid "Published"
 msgstr "Publié"
 
-#: bmabru/models.py:376 templatejs/templates/bmabru/project-box.html:21
+#: bmabru/models.py:379 templatejs/templates/bmabru/project-box.html:21
 #: templatejs/templates/v2/project.html:22
 #: templatejs/templates/v2/projectlist.html:12
 #: templates/projects_table.html:33
 msgid "Address"
 msgstr "Adresse"
 
-#: bmabru/models.py:377
+#: bmabru/models.py:380
 msgid "Trade name"
 msgstr "Marché attribué à"
 
-#: bmabru/models.py:378
+#: bmabru/models.py:381
 msgid "Attribution"
 msgstr "Attribution (année)"
 
-#: bmabru/models.py:380
+#: bmabru/models.py:383
 msgid "Activity start"
 msgstr "Début d'activité"
 
-#: bmabru/models.py:381
+#: bmabru/models.py:384
 msgid "Activity end"
 msgstr "Fin d'activité"
 
-#: bmabru/models.py:384 templatejs/templates/bmabru/project-box.html:41
+#: bmabru/models.py:387 templatejs/templates/bmabru/project-box.html:41
 #: templatejs/templates/v2/project.html:44
 msgid "Surface"
 msgstr "Surface"
 
-#: bmabru/models.py:385 templatejs/templates/bmabru/project-box.html:52
+#: bmabru/models.py:388 templatejs/templates/bmabru/project-box.html:52
 #: templatejs/templates/v2/project.html:55
 msgid "Budget"
 msgstr "Budget"
 
-#: bmabru/models.py:391
+#: bmabru/models.py:394
 msgid "Project Images"
 msgstr "Images du projet"
 
-#: bmabru/models.py:395
+#: bmabru/models.py:398
 msgid "Project worths"
 msgstr "Plus-values"
 
-#: bmabru/models.py:398
+#: bmabru/models.py:401
 msgid "Perimeter"
 msgstr "Périmètre"
 
@@ -293,83 +293,130 @@ msgstr "Contenu"
 msgid "Extra"
 msgstr "Extra"
 
-#: media/models.py:18 news/models.py:19
+#: media/models.py:21 news/models.py:19
 msgid "Resource"
 msgstr "Ressource"
 
-#: media/models.py:19 news/models.py:20
+#: media/models.py:22 news/models.py:20
 msgid "Resources"
 msgstr "Ressources"
 
-#: media/models.py:29
+#: media/models.py:32
 msgid "Category"
 msgstr "Catégorie"
 
-#: media/models.py:30
+#: media/models.py:33
 msgid "Categories"
 msgstr "Catégories"
 
-#: media/models.py:42 media/models.py:43
+#: media/models.py:45 media/models.py:46
 msgid "Featured"
 msgstr "Sélectionné"
 
-#: media/models.py:67
+#: media/models.py:70
 msgid "Subjective Image"
 msgstr "Image subjective"
 
-#: media/models.py:68
+#: media/models.py:71
 msgid "Subjective Images"
 msgstr "Images subjectives"
 
-#: media/models.py:83
+#: media/models.py:86
 msgid "Page"
 msgstr "Page"
 
-#: media/models.py:84
+#: media/models.py:87
 msgid "Pages"
 msgstr "Pages"
 
+#: media/models.py:128
+msgid "sent"
+msgstr "envoyé"
+
+#: media/models.py:142
+msgid "New Message"
+msgstr "Nouveau message"
+
 #: news/models.py:48
 msgid "News Item"
-msgstr ""
+msgstr "Billet"
 
 #: news/models.py:49
 msgid "News Items"
-msgstr ""
+msgstr "Billets"
 
 #: news/models.py:53
 msgid "Title"
-msgstr ""
+msgstr "Titre"
 
 #: news/models.py:54
 msgid "Body"
-msgstr ""
+msgstr "Corps de texte"
 
 #: templatejs/templates/bmabru/project-box.html:108
 #: templatejs/templates/v2/project.html:111
 msgid "Trade Objects"
 msgstr "Objets de marché"
 
+#: templatejs/templates/v2/back_to_map.html:6
+msgid "Back"
+msgstr "Retour "
+
+#: templatejs/templates/v2/back_to_map.html:7
+msgid "to map"
+msgstr "à la carte"
+
 #: templatejs/templates/v2/carousel.html:27
 msgid "Retour à la carte"
-msgstr ""
+msgstr "Retour à la carte"
+
+#: templatejs/templates/v2/contact_form.html:3
+msgid "Contactez-nous"
+msgstr "Contactez-nous"
+
+#: templatejs/templates/v2/contact_form.html:8
+msgid "7ème étage"
+msgstr "7ème étage"
+
+#: templatejs/templates/v2/contact_form.html:9
+msgid "80 rue du Progrès"
+msgstr "80 rue du Progrès"
+
+#: templatejs/templates/v2/contact_form.html:10
+msgid "B-1035 Bruxelles"
+msgstr "B-1035 Bruxelles"
+
+#: templatejs/templates/v2/contact_form.html:23
+msgid "Email"
+msgstr "Adresse électronique"
+
+#: templatejs/templates/v2/contact_form.html:26
+msgid "Message"
+msgstr "Message"
+
+#: templatejs/templates/v2/contact_form.html:29
+msgid "Send"
+msgstr "Envoyer"
 
 #: templatejs/templates/v2/maptools.html:14
 msgid "Layers"
-msgstr ""
+msgstr "Couches"
+
+#: templatejs/templates/v2/navigation.html:16
+msgid "Subjective vision"
+msgstr "Vision subjective"
 
 #: templatejs/templates/v2/page.html:20
-#, fuzzy
 msgid "Documents"
-msgstr "Documentation"
+msgstr "Documents"
 
 #: templatejs/templates/v2/sitetools.html:6
 msgid "News"
-msgstr ""
+msgstr "News"
 
 #: templatejs/templates/v2/sitetools.html:10
-msgid "Projects list"
-msgstr "Liste des projets"
+msgid "Contact"
+msgstr "Contact"
 
 #: templates/projects_table.html:17
 msgid "Projects List"
@@ -419,6 +466,9 @@ msgstr "Ajouter un ou des %(verbose_name)s"
 #: templates/admin/bmabru/project/tabular.html:78
 msgid "Remove"
 msgstr "Enlever"
+
+#~ msgid "Projects list"
+#~ msgstr "Liste des projets"
 
 #~ msgid "bMa qualification"
 #~ msgstr "Qualification par le bMa"
