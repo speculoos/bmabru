@@ -104,7 +104,10 @@ class Page(Sortable):
         return self.title
     
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
-        self.slug = slugify(self.title)
+        cat = '~'
+        if self.category:
+            cat = self.category.name
+        self.slug = slugify('-'.join([cat,self.title]))
         super(Page, self).save(force_insert, force_update)
         
         

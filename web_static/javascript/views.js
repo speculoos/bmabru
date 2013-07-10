@@ -76,31 +76,17 @@
             return this;
         },
         events:{
-//             'click .section':'toggleNav',
+            'click .section':'setCurrentHandler',
         },
-        toggleNav:function(evt){
+        setCurrentHandler:function(evt){
             var section = $(evt.target);
-            var list = section.next('ul');
-            list.toggle();
+            this.setCurrent(section.attr('data-cat'));
         },
-        setCurrentCat:function(slug){
-            var theCat = undefined;
-            for(var catname in bMa.Data.Medias)
-            {
-                var cat = bMa.Data.Medias[catname];
-                for(var pid in cat)
-                {
-                    var pslug = cat[pid].slug;
-                    if(slug === pslug)
-                    {
-                        theCat = catname;
-                    }
-                }
-            }
-            this.$el.find('.section').removeClass('current');
-            if(theCat)
-                this.$el.find('[data-cat="'+theCat+'"]').addClass('current');
-        }
+        setCurrent:function(cat){
+            this.$('.section').removeClass('current');
+            var section = this.$('[data-cat="'+cat+'"]')
+            section.addClass('current');
+        },
     });
     
     var siteTools = View.extend({

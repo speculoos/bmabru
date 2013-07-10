@@ -70,7 +70,7 @@
             {
                 return this.navigate('index');
             }
-            window.app.send('navigation','setCurrentCat',slug);
+            window.app.send('navigation','setCurrentCat', slug);
         },
         project:function(slug){
             window.app.send('main_map', 'removeClass', 'partial-blog');
