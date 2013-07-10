@@ -96,12 +96,18 @@
         },
         render:function(){
             var $el = this.$el;
-            var data = {};
+            var data = {
+                next: Backbone.history.location.href,
+            };
             T.render(tname('sitetools'), this, function(t){
                 $el.html(t(data));
             });
             return this;
         },
+        refresh:function()
+        {
+            this.render();
+        }
     });
     
     
