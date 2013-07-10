@@ -12,8 +12,11 @@
 	
 	{% spaceless %}
 	<script>
+	// missing console
 	if(!window.console){(function(){varnames=["log","debug","info","warn","error","assert","dir","dirxml","group","groupEnd","time","timeEnd","count","trace","profile","profileEnd"],i,l=names.length;window.console={};for(i=0;i<l;i++){window.console[names[i]]=function(){};}}());}
 
+        // missing Function.bind - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
+	if (!Function.prototype.bind) { Function.prototype.bind = function (oThis) { if (typeof this !== "function") { throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable"); } var aArgs = Array.prototype.slice.call(arguments, 1), fToBind = this, fNOP = function () {}, fBound = function () { return fToBind.apply(this instanceof fNOP && oThis ? this : oThis, aArgs.concat(Array.prototype.slice.call(arguments))); }; fNOP.prototype = this.prototype; fBound.prototype = new fNOP(); return fBound; }; }
     // DATA
     window.bMa = {
         Style:{
@@ -80,7 +83,6 @@
 
 	</script>
 	{% endspaceless %}
-</head>
 
 <script src="{{STATIC_URL}}javascript/lib/less.js"></script>
 <script src="{{STATIC_URL}}javascript/lib/jquery/jquery-1.9.1.min.js"></script>
@@ -113,6 +115,7 @@ $.ajaxSetup({
 });
 </script>
 
+</head>
 <body>
 </body>
 </html>
