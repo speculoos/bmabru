@@ -38,6 +38,7 @@
             '': 'index',
             'index': 'index',
             'contact': 'contact',
+            'subjective' : 'vision',
             'page/:slug' :'page',
             'project/:slug':'project',
             'city/:city':'city',
@@ -145,6 +146,10 @@
         
         contact: function(){
             window.app.setComponents('navigation sitetools contact tomap'.split(' '));
+        },
+        
+        vision:function(){
+            window.app.setComponents('navigation sitetools vision tomap'.split(' '));
         },
     });
     

@@ -75,6 +75,15 @@
 
 /* ruleset */
 
+.absPos(@top, @right, @bottom, @left){
+    position:absolute;
+    top:@top;
+    right:@right;
+    bottom:@bottom;
+    left:@left;
+}
+
+
 .zoomrounded (@radius: 10px) {
   -webkit-border-radius: @radius;
   -moz-border-radius: @radius;
@@ -1229,5 +1238,59 @@ thead {
         clear: both;
     }
 }
+
+
+/************************
+ * Vision
+ * 
+ ************************/
+
+.vision{
+    .absPos(@marginINT, @marginINT, @topH, @marginINT);
+    overflow: hidden;
+    z-index: 100;
+    background-color: #fff;
+    
+    .carousel{
+        
+        .carousel-indicators{
+            
+            li{
+            }
+        }
+        
+        .carousel-inner{
+            
+            div{
+                &.active{
+                    
+                }
+                
+                img{
+                    margin:auto;
+                    max-height:100%;
+                    max-width:100%;
+                    width:auto;
+                }
+            }
+        }
+        
+        
+        a.left{
+            display:block;
+            .absPos(0,70%,0,0);
+/*             background-color:rgba(0,0,200,.5); */
+        }
+        a.right{
+            display:block;
+            .absPos(0,0,0,30%);
+/*             background-color:rgba(200,0,0,.5); */
+        }
+    }
+}
+ 
+ 
+ 
+ 
 
 

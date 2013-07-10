@@ -34,11 +34,18 @@
         idAttribute:'id',
     });
     
+    var vision = Backbone.Model.extend({
+        urlRoot:'/api/subjectiveimages/',
+        idAttribute:'id',
+    });
+    
+    
     bMa.Models = {
         Page: page,
         Project : project,
         BlogPost : blogPost,
         Message : message,
+        Vision: vision,
     };
     
 })();

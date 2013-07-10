@@ -30,16 +30,25 @@
         },
     });
     
+    var vision = Backbone.Collection.extend({
+        url:'/api/subjectiveimages/',
+        model: bMa.Models.Vision,
+        comparator:'order',
+    });
+    
+    
     bMa.Collections = {
         Page: page,
         Project : project,
         Blog : blog,
+        Vision : vision,
     };
     
     bMa.Data.collections = {
         pages: new page,
         projects: new project,
         blog: new blog,
+        vision : new vision,
     };
     
 })();

@@ -621,6 +621,25 @@
         },
     });
     
+    var vision = View.extend({
+        className:'vision',
+        initialize:function(){
+            this.collection = bMa.Data.collections.vision;
+            this.collection.on('add', this.render, this);
+            this.collection.on('reset', this.render, this);
+            
+            this.current = 0;
+        },
+        render:function(){
+            var data = {images:this.collection.toJSON()};
+            console.log(data);
+            T.render(tname('vision'), this, function(t){
+                this.$el.html(t(data));
+            });
+            return this;
+        },
+    }); 
+    
     
     bMa.Views = {
         Page: page,
@@ -637,6 +656,7 @@
         Carousel: carousel,
         ContactForm: contactForm,
         BackToMap: backToMap,
+        Vision: vision,
     };
     
 })();

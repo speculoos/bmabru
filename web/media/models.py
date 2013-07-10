@@ -10,6 +10,7 @@ from adminsortable.models import Sortable
 
 from markdown2 import markdown
 from textwrap import wrap
+from easy_thumbnails.files import get_thumbnailer
 
 from bmabru.models import Project
 
@@ -65,6 +66,8 @@ class Featured(Sortable):
             self.ftype = 'PR'
         super(Featured, self).save(force_insert, force_update)
         
+
+@serializer(property_list=('thumbnail','url', 'large'))
 class SubjectiveImage(Sortable):
     class Meta(Sortable.Meta):
         verbose_name = _("Subjective Image")
@@ -75,10 +78,29 @@ class SubjectiveImage(Sortable):
     image_height = models.IntegerField(blank=True, null=True, default=0)
     note = models.TextField(blank=True)
     
+        
+    @property
+    def thumbnail(self):
+        from easy_thumbnails.files import get_thumbnailer
+        options = {'size': (360 /2, 240 /2), 'crop': True}
+        return get_thumbnailer(self.image).get_thumbnail(options).url
+        
+    @property
+    def large(self):
+        from easy_thumbnails.files import get_thumbnailer
+        options = {'size': (360 *3, 240 *3), 'crop': 'smart'}
+        return get_thumbnailer(self.image).get_thumbnail(options).url
+        
+    @property
+    def url(self):
+        return self.image.url
+    
     def __unicode__(self):
         words = self.note.split(' ')
         excerpt = ' '.join(words[0:8])
         return '[%s] %s'%(self.image, excerpt)
+        
+        
         
 @serializer(property_list=('resources','format_body',))
 class Page(Sortable):
