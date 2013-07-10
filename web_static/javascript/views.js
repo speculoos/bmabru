@@ -161,11 +161,15 @@
         className:'post',
         initialize:function(){
             this.model.on('change', this.render.bind(this));
+            this.rendered = false;
         },
         render:function(){
+            this.rendered = false;
             var data = this.model.toJSON();
             T.render(tname('blog-post'), this, function(t){
                 this.$el.html(t(data));
+                this.rendered = true;
+                this.trigger('rendered');
             });
             return this;
         },
@@ -191,20 +195,50 @@
                 this.items = {};
                 this.$el.html(t(data));
                 bMa.Data.collections.blog.each(this.renderOne.bind(this));
+                if(this.currentItem)
+                {
+                    this.selectItem(this.currentItem);
+                }
             });
             return this;
         },
+        
+        refresh:function(){
+            if(this.currentItem)
+            {
+                this.selectItem(this.currentItem);
+            }
+        },
+                           
         selectItem:function(slug){
+            this.currentItem = slug;
+            console.log('selectItem',slug);
             for(var k in this.items)
             {
                 var ms = this.items[k].model.get('slug');
-                console.log('selectItem',ms,slug);
                 if( ms && ms === slug)
                 {
-                    this.items[k].model.set({selected:true})
+                    var item = this.items[k];
+                    if(!item.rendered)
+                    {
+                        item.on('rendered',function(){
+                            this.selectItem(slug);
+                        }, this);
+                        return;
+                    }
+                    var $el = item.$el;
+                    item.model.set({selected:true})
+                    var st = this.$el.scrollTop();
+                    var pt = $el.position().top;
+                    if(pt > st)
+                    {
+                        this.$el.scrollTop(pt);
+                    }
+                    this.currentItem = undefined;
                     return;
                 }
             }
+            
             bMa.Data.collections.blog.once('add',function(){
                 this.selectItem(slug);
             }, this);

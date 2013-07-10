@@ -1,7 +1,10 @@
 {% load i18n %}
 {# blog post #}
 <div class="date"><%= data.pub_date %></div>
-<div class="title"><%= data.title %></div>
+<div class="title route"
+    data-route="news/<%= data.slug %>" >
+    <%= data.title %>
+</div>
 <% if(data.image_url){ %>
     <div class="image">
         <img src="<%= data.image_url %>" />

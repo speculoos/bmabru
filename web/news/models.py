@@ -47,7 +47,7 @@ class Item(models.Model):
     class Meta:
         verbose_name = _("News Item")
         verbose_name_plural = _("News Items")
-        ordering = ['pub_date']
+        ordering = ['-pub_date']
         
     slug = models.SlugField(max_length=255, editable=False)
     title = models.CharField(max_length=512, verbose_name=_('Title'))
