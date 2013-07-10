@@ -56,7 +56,7 @@
             {
                 window.app.getComponent('page')
                 .setModel(bMa.Data.collections.pages.findWhere({slug:slug}));
-                window.app.setComponents('navigation sitetools page'.split(' '));
+                window.app.setComponents('navigation sitetools page tomap'.split(' '));
             }
             else if(findMedia(slug))
             {
@@ -64,7 +64,7 @@
                 bMa.Data.collections.pages.add(page);
                 page.fetch();
                 window.app.getComponent('page').setModel(page);
-                window.app.setComponents('navigation sitetools page'.split(' '));
+                window.app.setComponents('navigation sitetools page tomap'.split(' '));
             }
             else
             {
@@ -98,12 +98,12 @@
         },
         news:function(slug){
             window.app.send('main_map', 'addClass', 'partial-blog');
-            window.app.setComponents('navigation sitetools blog main_map'.split(' '));
+            window.app.setComponents('navigation sitetools blog main_map tomap'.split(' '));
             if(slug)
             {
                 window.app.send('blog', 'selectItem', slug);
             }
-            bMa.Data.collections.blog.fetch();
+            
         },
         city:function(city){
             window.app.send('main_map', 'removeClass', 'partial partial-blog');
@@ -116,7 +116,7 @@
             window.app.send('main_map', 'filterFunction', func);
         },
         projects:function(){
-            window.app.setComponents('navigation sitetools projectlist'.split(' '));
+            window.app.setComponents('navigation sitetools projectlist tomap'.split(' '));
         },
         image:function(slug, image){
             if(bMa.Data.collections.projects.findWhere({slug:slug}))
@@ -144,7 +144,7 @@
         },
         
         contact: function(){
-            window.app.setComponents('navigation sitetools contact'.split(' '));
+            window.app.setComponents('navigation sitetools contact tomap'.split(' '));
         },
     });
     

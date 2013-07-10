@@ -187,6 +187,7 @@
     
     var blog = View.extend({
         className:'blog',
+        comparator:'pub_date',
         initialize:function(){
             bMa.Data.collections.blog.on('add', this.renderOne.bind(this));
             bMa.Data.collections.blog.on('reset', this.render.bind(this));
@@ -590,6 +591,16 @@
         },
     });
     
+    var backToMap = View.extend({
+        className:'back-to-map',
+        render:function(){
+            T.render(tname('back_to_map'), this, function(t){
+                this.$el.html(t({}));
+            });
+            return this;
+        },
+    });
+    
     
     bMa.Views = {
         Page: page,
@@ -605,6 +616,7 @@
         Blog: blog,
         Carousel: carousel,
         ContactForm: contactForm,
+        BackToMap: backToMap,
     };
     
 })();

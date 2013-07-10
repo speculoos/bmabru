@@ -4,10 +4,20 @@
 <div id="navigation">
     <ul>
         <li> 
-            <span class="logo-bma"><a href="{% url "index" %}">
+            <span class="logo-bma">
+                <a href="{% url "index" %}">
                 <img src="{{STATIC_URL}}logo.png" alt="bMa" />
-            </a></span>
+                </a>
+            </span>
+            <span class="glasses">
+                <span class="route" data-route="subjective">
+                    <img src="{{STATIC_URL}}images/glasses.png" alt="glasses" />
+                </span>
+                <span class="txt-glasses">{% trans "Subjective vision" %}</span>
+            </span>
+
         </li>
+
         <% for(var cat in data){ %>
         <% var page = _.reduce(data[cat], function(memo, key){if(!memo)return key;else return memo;}, 0); %>
         <li>
@@ -23,7 +33,7 @@
             <span 
                 class="projetcs-link route" 
                 data-route="projects" >
-                    {% trans "Projects list" %}
+                    {% trans "Projects" %}
             </span>
         </li>   
 
