@@ -124,6 +124,12 @@
             T.render(tname('page'), this, function(t){
                 var html = t(data);
                 $el.html(html);
+                var $ab = this.$('.article-box');
+                $ab.perfectScrollbar({
+                    wheelSpeed: 20,
+                    minScrollbarLength: 20,
+                })
+                $ab.perfectScrollbar('update');
             });
             return this;
         },
@@ -142,6 +148,7 @@
             }
             return {};
         },
+        
     });
     
     var pageViewer =  View.extend({
@@ -199,12 +206,18 @@
             var data = {};
             T.render(tname('blog'), this, function(t){
                 this.items = {};
+                this.$el.perfectScrollbar('destroy');
                 this.$el.html(t(data));
                 bMa.Data.collections.blog.each(this.renderOne.bind(this));
                 if(this.currentItem)
                 {
                     this.selectItem(this.currentItem);
                 }
+                this.$el.perfectScrollbar({
+                    wheelSpeed: 20,
+                    minScrollbarLength: 20,
+                })
+                this.$el.perfectScrollbar('update');
             });
             return this;
         },
@@ -218,7 +231,6 @@
                            
         selectItem:function(slug){
             this.currentItem = slug;
-            console.log('selectItem',slug);
             for(var k in this.items)
             {
                 var ms = this.items[k].model.get('slug');
@@ -257,12 +269,11 @@
             this.model.on('change', this.render.bind(this));
         },
         render:function(){
-            
-            console.log('RENDER ROW', this.cid);
             var $el = this.$el;
             var data = this.model.toJSON();
             T.render(tname('projectrow'), this, function(t){
                 $el.html(t(data));
+                $el.trigger('rendered');
             });
             return this;
         },
@@ -297,11 +308,24 @@
                     m.fetch();
                 }, this);
                 this.$('#projects_table').stupidtable();
+                $el.perfectScrollbar({
+                    wheelSpeed: 20,
+                    minScrollbarLength: 20,
+                })
+                $el.perfectScrollbar('update');
             });
             return this;
         },
         refresh:function(){
 //             this.projects.fetch();
+        },
+        
+        events:{
+            'rendered tr':'updateScrollbar',
+        },
+        
+        updateScrollbar:function(){
+            this.$el.perfectScrollbar('update');
         },
     });
     
@@ -317,6 +341,7 @@
             var data = this.model.toJSON();
             T.render(tname('project'), this, function(t){
                 $el.html(t(data));
+                $el.trigger('resize');
             });
             return this;
         },
@@ -327,15 +352,33 @@
         id:'project-box',
         className:'span4',
         initialize:function(){
+            
         },
         render:function(){
             var $el = this.$el;
             $el.empty();
             if(this.project){
+                $el.perfectScrollbar('destroy');
                 $el.append(this.project.render().el);
+                
+                $el.perfectScrollbar({
+                    wheelSpeed: 20,
+                    minScrollbarLength: 20,
+                })
+                $el.perfectScrollbar('update');
+                
             };
             return this;
         },
+        
+        events:{
+            'resize .project':'updateScrollbar',
+        },
+        
+        updateScrollbar:function(){
+            this.$el.perfectScrollbar('update');
+        },
+        
         setModel:function(model){
             this.project = new project({model:model});
             return this.render();

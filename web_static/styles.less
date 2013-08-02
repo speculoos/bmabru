@@ -462,7 +462,7 @@ body{height: 100%; }
     bottom:@topH;
     left: (-@marginINT);
     width: (@Warticle + 2 * @marginINT);
-    overflow: auto;
+    overflow: hidden;
     padding-right: @marginINT;
     
     .project-title{
@@ -972,7 +972,7 @@ body{height: 100%; }
             top:@marginINT;
             right:(0px - @marginINT);
             bottom: (@topH - @marginINT);
-            overflow: auto;
+            overflow: hidden;
             border-bottom: 1px solid #ccc;
             
                 .article-title{
@@ -1051,9 +1051,9 @@ body{height: 100%; }
     right:@marginINT;
     bottom: (@topH);
     left:@marginINT;
-    overflow-y:auto;
+    overflow-y:hidden;
     table#projects_table {
-        width:100%;
+        width:99%;
         border-width: 1px;
         border-color: #666666;
         border-collapse: collapse;
@@ -1143,12 +1143,14 @@ thead {
 .blog {
     position:absolute;
     top:@marginINT;
-    right:@marginINT;
+/*     right:@marginINT; */
     bottom:@topH;
     left:@marginINT;
-    overflow: auto;
+    overflow: hidden;
     z-index: 100;
     background-color: #fff;
+    
+    width:(@Warticle + 2 * @Wmenu + 5 * @marginINT);
 
     .date{
     .bluetitle;
@@ -1292,5 +1294,50 @@ thead {
  
  
  
+/**********************
+*  
+*  scrollbar
+* 
+***********************/
+
+@scrollbarwidth: 8px;
+@scrollbarradius:2px;
+
+.ps-scrollbar-x{
+    display:none;
+}
+.ps-container .ps-scrollbar-y {
+    position: absolute; /* please don't change 'position' */
+    right: 3px; /* there must be 'right' for ps-scrollbar-y */
+    width: @scrollbarwidth;
+    background-color: #aaa;
+    -webkit-border-radius: @scrollbarradius;
+    -moz-border-radius: @scrollbarradius;
+    border-radius: @scrollbarradius;
+    opacity: 0;
+    -o-transition: opacity .2s linear;
+    -webkit-transition: opacity.2s linear;
+    -moz-transition: opacity .2s linear;
+    transition: opacity .2s linear;
+}
+
+.ps-container.ie .ps-scrollbar-y {
+    font-size: 0; /* fixed scrollbar height in xp sp3 ie6 */
+}
+
+.ps-container:hover .ps-scrollbar-y,
+.ps-container.hover .ps-scrollbar-y {
+    opacity: 0.6;
+}
+
+.ps-container .ps-scrollbar-y:hover,
+.ps-container .ps-scrollbar-y.hover {
+    opacity: 0.9;
+    cursor: default;
+}
+
+.ps-container .ps-scrollbar-y.in-scrolling {
+    opacity: 0.9;
+}
 
 
