@@ -36,6 +36,7 @@
         return [prefix,name].join('/');
     };
     
+    
     var blogPostTeaser = View.extend({
         className:'bpt',
         initialize:function(options){
@@ -52,7 +53,7 @@
     
     var splashscreen = View.extend({
         className:'splashscreen',
-        id:'index_popup_box',
+        id:'index_popup_box_wrapper',
         initialize:function(){
             this._display = true;
             this.news = bMa.Data.HotNews;
@@ -79,6 +80,7 @@
             return this;
         },
         events:{
+            'click':'close',
             'click .route':'close',
             'click .close':'close',
             'rendered .bpt':'mayLoadMore',
