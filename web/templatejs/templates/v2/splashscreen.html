@@ -4,14 +4,10 @@
 </div>
 
 <div id="index_popup_right">
-<button class="close pull-right">&times;</button>
-<% for(var bid in data.news ){ var b = data.news[bid]; %>
-    <div class="featured-title featured-project">
-        <span class="route" data-route="news/<%= b.slug %>"><%- b.title %></span>
+    <button class="close pull-right">&times;</button>
+    
+    <div class="teasers-box">
+        <div class="teasers"></div>
+        <div class="expander clearfix">load more</div>
     </div>
-    <% if(b.image_url){ %>
-        <div class="image"><img src="<%= b.image_url %>" /></div>
-    <% } %>
-    <div class="featured-body"><%= b.body %></div>
-<% } %>
 </div>

@@ -36,18 +36,44 @@
         return [prefix,name].join('/');
     };
     
+    var blogPostTeaser = View.extend({
+        className:'bpt',
+        initialize:function(options){
+            this.data = options.data;
+        },
+        render:function(){
+            T.render(tname('blog-teaser'), this, function(t){
+                this.$el.html(t(this.data));
+                this.$el.trigger('rendered');
+            });
+            return this;
+        },
+    });
+    
     var splashscreen = View.extend({
         className:'splashscreen',
         id:'index_popup_box',
         initialize:function(){
             this._display = true;
+            this.news = bMa.Data.HotNews;
         },
         render:function(){
             if(this._display)
             {
-                var data = _.extend({}, {news: bMa.Data.HotNews});
+                this.newsItems = [];
+                var data = {};
                 T.render(tname('splashscreen'), this, function(t){
                     this.$el.html(t(data));
+                    this.$container = this.$('.teasers');
+                    this.$expander = this.$('.expander');
+                    this.$right = this.$('.teasers-box');
+                    this.mayLoadMore();
+                    this.$right.perfectScrollbar({
+                        wheelSpeed: 20,
+                        minScrollbarLength: 20,
+                    })
+                    this.$right.perfectScrollbar('update');
+                    this.$right.on('scroll', this.mayLoadMore.bind(this));
                 });
             }
             return this;
@@ -55,7 +81,29 @@
         events:{
             'click .route':'close',
             'click .close':'close',
+            'rendered .bpt':'mayLoadMore',
+            'scroll #index_popup_right':'mayLoadMore',
         },
+        
+        mayLoadMore:function(){
+            this.$right.perfectScrollbar('update');
+            if(this.$expander.filter(':visible').length > 0)
+            {
+                var nidx = this.newsItems.length;
+                if(nidx >= this.news.length)
+                {
+                    this.$expander.remove();
+                }
+                else
+                {
+                    var ni = new blogPostTeaser({data:this.news[nidx]});
+                    this.newsItems.push(ni);
+                    ni.render().$el.appendTo(this.$container);
+                    this.$right.perfectScrollbar('update');
+                }
+            }
+        },
+        
         close:function(){
             this._display = false;
             this.$el.hide();
