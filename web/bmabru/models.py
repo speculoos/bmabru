@@ -281,6 +281,9 @@ class City(models.Model):
     zipcode = models.CharField(max_length=32, verbose_name=_('zip code'))
     name = models.CharField(max_length=256, verbose_name=_('Name'))
     
+    objects = models.GeoManager()
+    geom = models.MultiPolygonField(srid=4326, blank=True, null=True, default=None)
+    
     def natural_key(self):
         return (self.id, self.zipcode, self.name)
         
