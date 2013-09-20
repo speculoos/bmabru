@@ -43,6 +43,7 @@ def api_root(request, format=None):
     for M in REGISTERED_MODELS:
         r[M+'s'] = reverse('%s-list'%(M,), request=request, format=format)
     return Response(r)
+    
 
 # class decorator
 def serializer(property_list = tuple(), exclude=tuple(), depth=0, 
@@ -163,33 +164,56 @@ def view_detail(request, app, model, pk):
     #return view(request, pk=pk)
     return view_cls.as_view()(request, pk=pk)
     
-#def urls(resources):
+@api_view(('GET',))
+@permission_classes([])
+def view_app(request, app):
+    ret = {}
+    for r in REGISTERED_RESOURCES:
+        if r[0] == app:
+            model = r[1].lower()
+            murl = '/api/'+app+'/'+model+'s/'
+            ret[model + 's'] = murl
+    return Response(ret)
+    
 def urls():
     """
         resources is an iterable containing tuples of the form:
         (app_name, model_name, filters )
     """
     ret = []
-    #for r in resources:
+    roots = {}
+    
     for r in REGISTERED_RESOURCES:
         app = r[0]
         m = r[1]
         f = r[2]
         mn = m.lower() 
         ret.append(url(
-            r''.join(['^api/', mn + 's' ,'/$']),
+            r''.join(['^api/', app, '/', mn + 's' ,'/$']),
             'bma.api.view_list',
             {'app': app, 'model':m, 'filters':f},
             name= mn + '-list'
             ),
         )
         ret.append(url(
-            r''.join(['^api/', mn + 's' ,'/(?P<pk>\d+)$']),
+            r''.join(['^api/', app, '/', mn + 's' ,'/(?P<pk>\d+)$']),
             'bma.api.view_detail',
             {'app': app, 'model':m},
             name= mn + '-detail'
             )
         )
+        
+        if app not in roots:
+            roots[app] = []
+        roots[app].append(mn)
         REGISTERED_MODELS.append(mn)
         
+    for app in roots:
+        ret.append(url(
+            r''.join(['^api/', app, '/$']),
+            'bma.api.view_app',
+            {'app':app}
+            ))
+        
     return tuple(ret)
+

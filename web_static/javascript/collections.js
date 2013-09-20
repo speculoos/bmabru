@@ -10,17 +10,17 @@
     var Backbone = window.Backbone;
     
     var page = Backbone.Collection.extend({
-        url:'/api/pages/',
+        url:'/api/media/pages/',
         model: bMa.Models.Page,
     });
     
     var project = Backbone.Collection.extend({
-        url:'/api/projects/',
+        url:'/api/bmabru/projects/',
         model: bMa.Models.Project,
     });
     
     var blog = Backbone.Collection.extend({
-        url:'/api/items/',
+        url:'/api/news/items/',
         model: bMa.Models.BlogPost,
         comparator:function(a,b){
             var da = new Date(a.get('pub_date')).getTime();
@@ -31,7 +31,7 @@
     });
     
     var vision = Backbone.Collection.extend({
-        url:'/api/subjectiveimages/',
+        url:'/api/media/subjectiveimages/',
         model: bMa.Models.Vision,
         comparator:'order',
     });

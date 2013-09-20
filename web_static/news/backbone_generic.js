@@ -10,7 +10,8 @@
         ns.Models = ns.Models || {};
         ns.Collections = ns.Collections || {};
         ns.Views = ns.Views || {};
-        $.getJSON(ns.Config.API_URL, function(data){
+        
+        function parse_models(data){
             _.each(data, function(mdata, model)
             {
                 var api_url = data[model];
@@ -76,6 +77,9 @@
                 callback.apply(obj, []);
             }
             
-        });
+        };
+        
+        $.getJSON(ns.Config.API_URL, parse_models);
+        $.getJSON(ns.Config.API_URL_BMABRU, parse_models);
     }
 })('NEWS');

@@ -12,12 +12,12 @@
     var Backbone = window.Backbone;
     
     var page = Backbone.Model.extend({
-        urlRoot:'/api/pages/',
+        urlRoot:'/api/media/pages/',
         idAttribute:'id',
     });
     
     var project = Backbone.Model.extend({
-        urlRoot:'/api/projects/',
+        urlRoot:'/api/bmabru/projects/',
         idAttribute:'id',
 //         initialize:function(){
 //             this.on('change:functions', this.populateFunctions.bind(this));
@@ -25,17 +25,17 @@
     });
     
     var blogPost = Backbone.Model.extend({
-        urlRoot:'/api/items/',
+        urlRoot:'/api/news/items/',
         idAttribute:'id',
     });
     
     var message = Backbone.Model.extend({
-        urlRoot:'/api/messages/',
+        urlRoot:'/api/media/messages/',
         idAttribute:'id',
     });
     
     var vision = Backbone.Model.extend({
-        urlRoot:'/api/subjectiveimages/',
+        urlRoot:'/api/media/subjectiveimages/',
         idAttribute:'id',
     });
     
