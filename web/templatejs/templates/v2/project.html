@@ -140,6 +140,17 @@
 </div>
 <% } %>
 
+<% if(data.trade_name){ %>
+<div class="project-trade_name">
+    <div class="project-info-label">
+    {% trans "Trade name" %}
+    </div>
+    <div class="project-info-box">
+    <%- data.trade_name %>
+    </div>
+</div>
+<% } %>
+
 <% if(data.actions){ %>
 <div class="project-actions">
     <div class="project-info-label">
