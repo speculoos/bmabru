@@ -106,6 +106,10 @@
             }
         },
         
+        activate:function(){
+            this.mayLoadMore();
+        },
+        
         close:function(){
             this._display = false;
             this.$el.hide();
