@@ -68,12 +68,12 @@
                     this.$container = this.$('.teasers');
                     this.$expander = this.$('.expander');
                     this.$right = this.$('.teasers-box');
-                    this.mayLoadMore();
                     this.$right.perfectScrollbar({
                         wheelSpeed: 20,
                         minScrollbarLength: 20,
                     })
-                    this.$right.perfectScrollbar('update');
+                    this.mayLoadMore();
+//                     this.$right.perfectScrollbar('update');
                     this.$right.on('scroll', this.mayLoadMore.bind(this));
                 });
             }
