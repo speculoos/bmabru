@@ -7,25 +7,15 @@ window.bMa = window.bMa || {}
 window.bMa.Selector = function(container, label){
     
     var proto = {
-        ICON_UP: '▵',
-        ICON_DOWN: '▿',
         init : function(container, label){
             this.root_label = label;
             this.container = container;
             this.selected = undefined;
             this.container.addClass('selector-root');
             
-            this.button = $('<div />').addClass('selector-button');
-            
-            this.button_text = $('<span />').addClass('selector-button-text');
-            this.button_text.text(label);
-            
-            this.button_icon = $('<span />').addClass('selector-button-text');
-            this.button_icon.text(this.ICON_UP);
-            this.button_icon.css({float:'right'});
-            
-            this.button.append(this.button_text);
-            this.button.append(this.button_icon);
+            this.button = $('<div />');
+            this.button.addClass('selector-button');
+            this.button.text(label);
             
             this.items = $('<div />');
             this.items.addClass('selector-items');
@@ -96,13 +86,11 @@ window.bMa.Selector = function(container, label){
             {
                 this.items.removeClass(sio);
                 this.items.hide(500);
-                this.button_icon.text(this.ICON_UP);
             }
             else
             {
                 this.items.addClass(sio);
                 this.items.show(500);
-                this.button_icon.text(this.ICON_DOWN);
             }
         },
         set_current:function(item, label){
@@ -111,7 +99,7 @@ window.bMa.Selector = function(container, label){
             {
                 return false;
             }
-            this.button_text.text(label);
+            this.button.text(label);
             if(this.selected !== undefined)
             {
                 this.selected.removeClass(sk);

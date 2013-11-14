@@ -10,6 +10,8 @@ from django.template import RequestContext
 from django.core import serializers
 from django.utils import six
 from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
 import json
 
 from rest_framework import generics
@@ -19,8 +21,11 @@ from rest_framework.response import Response
 
 from bmabru.models import *
 from media.models import *
+from news.models import Item as BlogItem
 
 from bma.api import get_list_view
+
+import os
 
 
 
@@ -71,9 +76,10 @@ class GeoSerial(serializers.get_serializer("json")):
 
 def index(request):
     data = {'category':Category.objects.all()}
-    data['featured'] = Featured.objects.filter(published=True)
+    data['projects'] = Project.objects.filter(published=True)
+    #data['featured'] = Featured.objects.filter(published=True)
+    data['blog'] = BlogItem.objects.order_by('-pub_date')
     rc = RequestContext(request)
-    print rc
     return render_to_response("index.html", data, context_instance = rc)
     
 def projects(request):
@@ -107,7 +113,69 @@ def api_root(request, format=None):
 def api_view_list(request, model, filters):
     view = get_list_view('bmabru', model, filters)
     return view(request)
+
+@login_required
+def bind_geometry(request):
+    projects = Project.objects.all()
+    rc = RequestContext(request)
+    if request.method == 'GET':
+        return render_to_response("bind_geometry.html", dict(projects=projects), context_instance = rc)
+    #import fiona
+    from shapely.geometry import shape, MultiPolygon
+    import tempfile
+    import zipfile
     
+    pid = request.POST.get('pid')
+    geojson_file = request.FILES.get('geo')
+    sid = request.POST.get('sid')
+    project = Project.objects.get(pk=int(pid))
+    
+    geostr = []
+    for chunk in geojson_file.chunks():
+        geostr.append(chunk)
+        
+    geo = json.loads(''.join(geostr))
+        
+        
+    simport = shape(geo['features'][0]['geometry'])
+    if simport.geom_type == 'Polygon':
+        simport = [simport]
+    
+    #local_name = 'geometry_'+pid+'.zip'
+    #local_path = os.path.join(settings.MEDIA_ROOT,local_name)
+    
+    #archive = open(local_path, 'wb+')
+    #for chunk in posted_file.chunks():
+        #archive.write(chunk)
+    #archive.close()
+    
+    #z = zipfile.ZipFile(local_path)
+    #root = z.namelist()[0].split('/')[0]
+    #vfs = 'zip://'+local_path
+    #source = fiona.open('/'+root, vfs=vfs)
+    
+    #simport = None
+    #if sid is None:
+        #for r in source:
+            #sh = shape(r['geometry'])
+            #if sh.geom_type == 'Polygon':
+                #sh = [sh]
+            #simport = sh
+            #break # we just take the first one
+    #else:
+        #for r in source:
+            #if sid == r['id']:
+                #sh = shape(r['geometry'])
+                #if sh.geom_type == 'Polygon':
+                    #sh = [sh]
+                #simport = sh
+                #break
+    
+    mpoly = MultiPolygon(simport)
+    project.mpoly = mpoly.wkt
+    project.save()
+    
+    return render_to_response("bind_geometry.html", dict(projects=projects), context_instance = rc)
     
 def expose_structure(req):
     from bmabru.admin import GeoAdmin
@@ -157,4 +225,6 @@ def expose_structure(req):
                         unfold_rel(inline.model, html)
                     
     return HttpResponse('\n'.join(html))
+    
+    
     

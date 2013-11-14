@@ -3,15 +3,20 @@ media.models
 """
 
 from django.db import models
+from django.core.mail import mail_managers
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 from adminsortable.models import Sortable
+
+from markdown2 import markdown
+from textwrap import wrap
+from easy_thumbnails.files import get_thumbnailer
 
 from bmabru.models import Project
 
 from bma.api import serializer
 
-
+@serializer()
 class Resource(models.Model):
     class Meta:
         verbose_name = _("Resource")
@@ -61,6 +66,8 @@ class Featured(Sortable):
             self.ftype = 'PR'
         super(Featured, self).save(force_insert, force_update)
         
+
+@serializer(property_list=('thumbnail','url', 'large'))
 class SubjectiveImage(Sortable):
     class Meta(Sortable.Meta):
         verbose_name = _("Subjective Image")
@@ -71,12 +78,31 @@ class SubjectiveImage(Sortable):
     image_height = models.IntegerField(blank=True, null=True, default=0)
     note = models.TextField(blank=True)
     
+        
+    @property
+    def thumbnail(self):
+        from easy_thumbnails.files import get_thumbnailer
+        options = {'size': (360 /2, 240 /2), 'crop': True}
+        return get_thumbnailer(self.image).get_thumbnail(options).url
+        
+    @property
+    def large(self):
+        from easy_thumbnails.files import get_thumbnailer
+        options = {'size': (360 *3, 240 *3), 'crop': 'smart'}
+        return get_thumbnailer(self.image).get_thumbnail(options).url
+        
+    @property
+    def url(self):
+        return self.image.url
+    
     def __unicode__(self):
         words = self.note.split(' ')
         excerpt = ' '.join(words[0:8])
         return '[%s] %s'%(self.image, excerpt)
         
-@serializer()
+        
+        
+@serializer(property_list=('resources','format_body',))
 class Page(Sortable):
     class Meta(Sortable.Meta):
         verbose_name = _("Page")
@@ -92,9 +118,52 @@ class Page(Sortable):
     image_width = models.IntegerField(blank=True, null=True, default=0)
     image_height = models.IntegerField(blank=True, null=True, default=0)
     
+    @property
+    def format_body(self):
+        return markdown(self.body)
+    
     def __unicode__(self):
         return self.title
     
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
-        self.slug = slugify(self.title)
+        cat = '~'
+        if self.category:
+            cat = self.category.name
+        self.slug = slugify('-'.join([cat,self.title]))
         super(Page, self).save(force_insert, force_update)
+        
+        
+        
+@serializer(write_only=('name','email','message'), 
+            perms=('AllowAny',))
+class Message(models.Model):
+    
+    name = models.CharField(max_length=255)
+    email = models.EmailField(max_length=128)
+    message = models.TextField()
+    
+    def __unicode__(self):
+        return self.name
+    
+    def body(self):
+        ret = []
+        ret.append(u'%s <%s> %s:\n' % (self.name, self.email,_('sent')))
+        for line in wrap(self.message):
+            ret.append(line)
+            
+        return u'\n'.join(ret)
+        
+    
+
+def message_sent(sender, **kwargs):
+    message = kwargs['instance']
+    print message.name
+    print message.email
+    
+    body = message.body()
+    mail_managers(_('New Message'), body)
+    
+    
+models.signals.post_save.connect(message_sent, sender=Message, weak=False)
+    
+        

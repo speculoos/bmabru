@@ -10,7 +10,8 @@
         ns.Models = ns.Models || {};
         ns.Collections = ns.Collections || {};
         ns.Views = ns.Views || {};
-        $.getJSON(ns.Config.API_URL, function(data){
+        
+        function parse_models(data){
             _.each(data, function(mdata, model)
             {
                 var api_url = data[model];
@@ -54,15 +55,9 @@
                     className: model,
                     initialize: function() {
                         this.model.on('change', this.render, this);
-                        if(!this.model.isNew())
-                        {
-                            this.render();
-                        }
                     },
                     render: function() {
                         var $el = this.$el;
-                        $el.attr('id', model + '_' + this.model.id)
-                        $el.empty();
                         var data = this.model.toJSON();
                         Template.render(model, this, function(t){
                             $el.html(t(data));
@@ -82,6 +77,9 @@
                 callback.apply(obj, []);
             }
             
-        });
+        };
+        
+        $.getJSON(ns.Config.API_URL, parse_models);
+        $.getJSON(ns.Config.API_URL_BMABRU, parse_models);
     }
 })('NEWS');

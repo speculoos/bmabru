@@ -68,17 +68,13 @@
             
             this._ready = false;
             this.newsItems.on('reset', function(){
-                if(!this._ready)
-                {
-                    this._ready = true;
-                    this.trigger('ready');
-                }
+                this.render();
             }, this);
             
             this.newsItems.fetch({reset:true});
         },
         renderOne: function(item){
-            console.log('ItemsView.renderOne',item.id);
+//             console.log('ItemsView.renderOne',item.id, this._ready);
             if(!this._ready)
             {
                 var self = this;
@@ -91,10 +87,9 @@
                 item.set({
                     visited:false,
                     current:false,
-                });
+                }, {silent:true});
                 var i = new NEWS.Views.items({model:item});
-                var el = i.render().el;
-                this.$el.append(el);
+                this.$el.append(i.render().$el);
                 this.items[item.cid] = i;
                 var self = this;
                 item.on('change:pub_date', function(){
@@ -104,10 +99,10 @@
             return this;
         },
         render: function(){
-            this.$el.empty();
-            this.items = {};
             Template.render('item-list', this, function(t){
+                this.items = {};
                 this.$el.html(t({}));
+                this._ready = true;
                 this.newsItems.each(function(item){
                     this.renderOne(item);
                 }, this);
@@ -273,11 +268,11 @@
                 var i = new NEWS.Views.resources({model:item});
                 var el = i.render().el;
                 var $root = this.$el.find('.thumbnails');
-        if($root.length > 0)
-        {
-            $root.append(el);
-            this.items[item.cid] = i;
-        }
+                if($root.length > 0)
+                {
+                    $root.append(el);
+                    this.items[item.cid] = i;
+                }
             }
             return this;
         },
@@ -307,7 +302,6 @@
     
     Views.PostView = Backbone.View.extend({
         className:'news-form',
-        comparator:'pub_date',
         initialize:function(){
             this.resetModel(this.model);
             this._initial = true;
@@ -362,13 +356,26 @@
             'click .delete':'delete_news',
             'click .parser':'parser',
             'click .reset-project':'resetProject',
-            'change input, textarea': 'setChangeState',
+            'keyup input, textarea': 'setChangeState',
             'click .image-delete':'removeImage',
         },
-        setChangeState:function(){
+        setChangeState:function(evt){
+            var body_fr = this.$el.find('[name=body_fr]').val();
+            var title_nl = this.$el.find('[name=title_nl]').val();
+            var title_fr = this.$el.find('[name=title_fr]').val();
+            var body_nl = this.$el.find('[name=body_nl]').val();
+            
+            this.model.set({
+                body_fr:body_fr,
+                body_nl:body_nl,
+                title_fr:title_fr,
+                title_nl:title_nl,
+            },{silent:true});
             this._changed = true;
+            return true;
         },
         resetChangeState:function(){
+            
             this._changed = false;
         },
         resetProject:function(){

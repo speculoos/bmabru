@@ -24,27 +24,29 @@ $('document').ready(function(){
 
 {% block map %}
 <div id="map-wrapper">
+<div id="map-wrapper-2">
 <div id="projects_table_wrapper">
 <table id="projects_table">
 <thead>
 <tr>
-<th data-sort="string">{% trans "Name" %}<i class="icon-chevron-up"></i><i class="icon-chevron-down"></i></th>
-<th data-sort="string">{% trans "Address" %}<i class="icon-chevron-up"></i><i class="icon-chevron-down"></i></th>
-<th data-sort="string">{% trans "City" %}<i class="icon-chevron-up"></i><i class="icon-chevron-down"></i></th>
-<th data-sort="string">{% trans "Function" %}<i class="icon-chevron-up"></i><i class="icon-chevron-down"></i></th>
+<th data-sort="string">{% trans "Name" %}</th>
+<th data-sort="string">{% trans "Address" %}</th>
+<th data-sort="string">{% trans "City" %}</th>
+<th data-sort="string">{% trans "Function" %}</th>
 </tr>
 </thead>
 <tbody>
 {% for project in projects %}
 <tr>
 <td><a href="{% url 'project' project.slug %}">{{ project.name }}</a></td>
-<td>{% if project.address %}{{ project.address }}{% endif %}</td>
-<td>{% if project.city %}{{ project.city.zipcode }} {{ project.city.name }}{% endif %}</td>
+<td>{{ project.address }}</td>
+<td>{{ project.city.zipcode }} {{ project.city.name }}</td>
 <td>{%for f in project.functions.all %}{{ f.name }}{% if not forloop.last %}, {% endif %}{%endfor%}</td>
 </tr>
 {% endfor %}
 </tbody>
 </table>
+</div>
 </div>
 </div>
 {% endblock %}

@@ -1,0 +1,9 @@
+{# blog teaser #}
+
+<div class="featured-title featured-project">
+    <span class="route" data-route="news/<%= data.slug %>"><%- data.title %></span>
+</div>
+<% if(data.image_url){ %>
+    <div class="image"><img src="<%= data.image_url %>" /></div>
+<% } %>
+<div class="featured-body clearfix"><%= data.body %></div>

@@ -6,4 +6,5 @@ urlpatterns = patterns('bmabru.views',
     url(r'^projects/$', 'projects', name='projects'),
     url(r'^projects/json/$', 'projects_json'),
     url(r'^structure$', 'expose_structure'),
+    url(r'^bind_geometry', 'bind_geometry'),
 )

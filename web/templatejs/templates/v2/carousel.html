@@ -1,0 +1,28 @@
+{% load i18n %}
+{# carousel #}
+
+<% if(data.images && data.images.length > 0){ %>
+
+<div id="the_carousel" class="carousel" data-interval="0">
+<ol class="carousel-indicators">
+<% for(var i = 0; i < data.images.length; i++){ %>
+    <li data-target="#the_carousel" data-slide-to="<%= i %>" class="<%if(i === 0){print('active');}%>"></li>
+    <% } %>
+    </ol>
+    
+    <div class="carousel-inner">
+    <% for(var i = 0; i < data.images.length; i++){ %>
+        <div class="<%if(i === 0){print('active');}%> item">
+        <img src="<% print(data.images[i].large); %>" />
+        </div>
+        <% } %>
+        </div>
+        <% if(data.images.length > 1){ %>
+            <a class="carousel-control left" href="#the_carousel" data-slide="prev">&lsaquo;</a>
+            <a class="carousel-control right" href="#the_carousel" data-slide="next">&rsaquo;</a>
+            <% } %>
+            </div>
+            
+            
+            
+<% } %>

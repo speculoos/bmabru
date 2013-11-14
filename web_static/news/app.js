@@ -71,10 +71,10 @@
                 
                 this.titleBar = new NEWS.Views.TitleView;
                 this.items = new NEWS.Views.ItemsView;
-                this.items.on('ready', function(){
-                    this.trigger('ready');
-                },this);
-                
+//                 this.items.on('ready', function(){
+//                     
+//                 },this);
+                this.trigger('ready');
                 this.r0.append(this.titleBar.render().el);
                 this.navBox.append(this.items.render().el);
 //                 this.workSpace
@@ -197,6 +197,10 @@
         },
         editForm:function(id){
             var item = this.items.newsItems.get(id);
+            if(!item)
+            {
+                item = this.items.newsItems.add({id:id});
+            }
             var self = this;
             this.components.form.view.confirmLeave(function(){
                 self.components.form.view.resetModel(item);

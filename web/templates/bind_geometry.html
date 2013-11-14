@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+Bind Geometry Form
+</title>
+<link rel="stylesheet" href="{{STATIC_URL}}javascript/lib/bootstrap/css/bootstrap.css" />
+</head>
+
+<body>
+
+<form method="POST" enctype="multipart/form-data" action="{% url 'bmabru.views.bind_geometry' %}">
+{% csrf_token %}
+  <fieldset>
+    <legend>Bind a geometry to a project</legend>
+    <label>Select Project</label>
+    <select name="pid">
+    {% for p in projects %}
+        <option value="{{p.id}}">{{ p.name }}</option>
+    {% endfor %}
+    </select>
+    <span class="help-block"></span>
+    
+ <!--   <label>Select a ZIP file enclosing geographic data</label>
+    <input type="file" name="zip" />-->
+    <label>Upload GEOJson</label>
+    <input type="file" name="geo" />
+<!--     <textarea name="geo"></textarea> -->
+    
+    <button type="submit" class="btn">Submit</button>
+  </fieldset>
+</form>
+
+
+</body>
+
+<html>
