@@ -88,6 +88,7 @@
         },
         
         mayLoadMore:function(){
+            if(!this.$right)return;
             this.$right.perfectScrollbar('update');
             if(this.$expander.filter(':visible').length > 0)
             {
@@ -101,7 +102,7 @@
                     var ni = new blogPostTeaser({data:this.news[nidx]});
                     this.newsItems.push(ni);
                     ni.render().$el.appendTo(this.$container);
-                    this.$right.perfectScrollbar('update');
+                    this.mayLoadMore();
                 }
             }
         },
