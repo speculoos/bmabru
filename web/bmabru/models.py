@@ -165,7 +165,7 @@ class ProjectImage(models.Model):
     @property
     def large(self):
         from easy_thumbnails.files import get_thumbnailer
-        options = {'size': (360 *2.5, 240 *2.5), 'crop': 'smart'}
+        options = {'size': (360 *2.5, 240 *2.5), 'crop': 'smart', 'upscale': True}
         return get_thumbnailer(self.image).get_thumbnail(options).url
         
     @property
