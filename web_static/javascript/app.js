@@ -113,8 +113,7 @@
                 if(c.visible)
                 {
                     this.layouts[c.layout].append(c.view.el);
-//                     this.layouts[c.layout].add(c.view, c.size);
-//                     this.$el.append(c.view.el);
+
                     if(!c.rendered)
                     {
                         c.view.render();
@@ -123,18 +122,12 @@
                     
                     // at least we have a method which is always called
                     // when a view is made visible
-                    if(c.view.refresh)
+                    if(c.view.activate)
                     {
-                        c.view.refresh();
+                        c.view.activate();
                     }
                 }
             }
-//             for(var l in this.layouts)
-//             {
-//                 this.layouts[l].render();
-//             }
-//             
-//             this.adjustViewport();
             return this;
         },
         resetViews:function(comps){
@@ -155,6 +148,10 @@
             for(var k in this.components){
                 var c = this.components[k];
                 c.visible = false;
+                if(c.view.deactivate)
+                {
+                    c.view.deactivate();
+                }
                 c.view.$el.detach();
             }
             

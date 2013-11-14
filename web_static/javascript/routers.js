@@ -141,7 +141,7 @@
                 return this.navigate('index');
             }
             if(image)
-                window.app.send('carousel','selectImage', image);
+                window.app.send('carousel','selectImage', parseInt(image));
         },
         
         contact: function(){

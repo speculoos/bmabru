@@ -154,7 +154,7 @@
             });
             return this;
         },
-        refresh:function()
+        activate:function()
         {
             this.render();
         }
@@ -272,7 +272,7 @@
             return this;
         },
         
-        refresh:function(){
+        activate:function(){
             if(this.currentItem)
             {
                 this.selectItem(this.currentItem);
@@ -366,7 +366,7 @@
             });
             return this;
         },
-        refresh:function(){
+        activate:function(){
 //             this.projects.fetch();
         },
         
@@ -404,7 +404,9 @@
         initialize:function(){
             
         },
-        render:function(){
+        
+        render: function(){
+            this.offset = 0;
             var $el = this.$el;
             $el.empty();
             if(this.project){
@@ -421,47 +423,129 @@
             return this;
         },
         
-        events:{
+        activate: function(){
+            this.$el.scrollTop(this.offset);
+        },
+        
+        deactivate: function(){
+            this.offset = this.$el.scrollTop();
+        },
+        
+        events: {
             'resize .project':'updateScrollbar',
         },
         
-        updateScrollbar:function(){
+        updateScrollbar: function(){
             this.$el.perfectScrollbar('update');
         },
         
         setModel:function(model){
+            if(this.project
+                && this.project.model
+                && this.project.model.id
+                && (this.project.model.id == model.id) ){
+                return;
+                }
             this.project = new project({model:model});
             return this.render();
         },
     }); 
     
+    var carouselItem = View.extend({
+        className: 'item',
+        
+        initialize:function(){
+            
+        },
+        
+        render: function(){
+            var $el = this.$el;
+            var data = {image:this.model};
+            T.render(tname('carousel-item'), this, function(t){
+                $el.html(t(data));
+            });
+            return this;
+        },
+    });
+    
     var carousel = View.extend({
         className:'carousel-box',
+        
         initialize:function(){
         },
+        
         render:function(){
+            this.items = {};
             if(this.model)
             {
                 var $el = this.$el;
-                var data = {images:this.model.toJSON().image};
+                var data = {};
                 console.log(data);
                 T.render(tname('carousel'), this, function(t){
                     $el.html(t(data));
+                    var images = this.model.get('image');
+                    if(images){
+                        _.each(images, function(image){
+                            this.renderOne(image);
+                        }, this);
+                    }
                 });
             }
             return this;
         },
+        
         setModel:function(model){
+            if( this.model
+                && this.model.id
+                && (this.model.id == model.id) ){
+                return;
+            }
+            if(this.model){
+                this.model.off('change:image');
+            }
+            this.pendingSelectedImage = null;
             this.model = model;
-            this.model.on('change:image', this.render.bind(this));
-//             this.render();
+            this.render();
+            
+            this.model.on('change:image', function(model){
+                var images = this.model.get('image');
+                if(images){
+                    for(var idx = 0; idx < images.length; idx++){
+                        if(!(images[idx].id in this.items)){
+                            this.renderOne(images[idx]);
+                        }
+                    }
+                }
+            }, this);
         },
+        
+        renderOne: function(image){
+            var item = new carouselItem({model:image});
+            this.items[image.id] = item.render();
+            this.$('.carousel-inner').append(item.el);
+            if(this.pendingSelectedImage 
+                && this.pendingSelectedImage === image.id){
+                _.each(this.items, function(it){
+                    it.removeClass('active');
+                }, this);
+                item.addClass('active');
+            }
+        },
+        
         selectImage:function(image){
-            // TODO
+            if(image in this.items){
+                _.each(this.items, function(item){
+                    item.removeClass('active');
+                }, this);
+                this.items[image].addClass('active');
+            }
+            this.pendingSelectedImage = image;
         },
+        
         events:{
             'click .close':'close',
         },
+        
         close:function(){
             window.router.navigate('project/'+this.model.get('slug'));
         },
@@ -605,7 +689,7 @@
                     zoomControl: false,
                     attributionControl: false
                 });
-//                 this.map.on('whenReady', this.refresh.bind(this));
+//                 this.map.on('whenReady', this.activate.bind(this));
                 this.insertFeatures();
                 for(var key in window.MAP_CONFIG.WMS)
                 {
@@ -629,7 +713,7 @@
             }
             return element ? this.$map : this.map;
         },
-        refresh:function(){
+        activate:function(){
             this._refreshing = true;
             var self = this;
             window.setTimeout(function(){
