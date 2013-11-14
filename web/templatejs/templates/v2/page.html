@@ -17,10 +17,10 @@
         <%= data.format_body %>
         
         <% if(data.resources && data.resources.length > 0){ %>
-        <h3 class="">{% trans "Documents" %}</h3>
+        <h3 class="docs">{% trans "Documents à télécharger" %}</h3>
         <% for(var ridx in data.resources){ var res = data.resources[ridx]; %>
             <div class="resource">
-                <a href="{{MEDIA_URL}}<%= res.path %>"><%= res.name %></a>
+                <a href="{{MEDIA_URL}}<%= res.path %>">– <%= res.name %></a>
             </div>
         <% }} %>
         
