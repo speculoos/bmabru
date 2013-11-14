@@ -154,6 +154,7 @@ class ProjectImage(models.Model):
     width = models.IntegerField(blank=True)
     height = models.IntegerField(blank=True)
     zoom_level = models.IntegerField(blank=True, default=1)
+    notice = models.TextField(blank=True, verbose_name=_('Notice'))
     
     @property
     def thumbnail(self):
