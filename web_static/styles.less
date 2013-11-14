@@ -709,12 +709,19 @@ body{height: 100%; }
 #index_popup_box_wrapper {
     .fullViewport;
     z-index: 100;
+
     #index_popup_box{
-    width: @Wpopup;
+        width: @Wpopup;
+        height: -webkit-calc(75% - @topH / 2);
         background-color: transparent;
         position: absolute;
         top: 12.25%;
-        left:25%;
+        margin-left: -calc(50% - @Wpopup / 2);
+        margin-left: -webkit-calc(50% - @Wpopup / 2);
+        margin-left: -moz-calc(50% - @Wpopup / 2);
+        margin-left: -o-calc(50% - @Wpopup / 2);
+
+        /*margin-right: auto;*/
         
     #index_popup_left {
         float: left;
@@ -730,7 +737,8 @@ body{height: 100%; }
         background-color: white;
         border: 1px solid #000;    
         padding: 10px;  
-        height:225px;
+        max-height: 100%;
+        overflow-y: auto;
         
 
             .close {
