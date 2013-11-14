@@ -3,4 +3,9 @@
 
 <% if(data.image){ %>
         <img src="<% print(data.image.large); %>" />
+        <% if(data.image.notice){ %>
+        <div class="carousel-caption">
+            <p><%= data.image.notice %></p>
+        </div>
+        <% } %>
 <% } %>
